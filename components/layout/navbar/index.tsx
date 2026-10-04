@@ -3,7 +3,6 @@ import LogoSquare from 'components/logo-square';
 import { BRAND_CONFIG } from 'lib/brand-config';
 import { getCollections } from 'lib/fourthwall';
 import Link from 'next/link';
-import { CurrencySelector } from './currency';
 
 export async function Navbar({currency}: {currency: string}) {
   const collections = await getCollections()
@@ -46,19 +45,9 @@ export async function Navbar({currency}: {currency: string}) {
         <div className="hidden justify-center md:flex md:w-1/3">
         </div>
         <div className="flex justify-end items-center md:w-1/3 gap-3">
-          <Link
-            href="/docs"
-            className="hidden sm:inline-block text-xs font-semibold text-neutral-600 hover:text-black dark:text-neutral-400 dark:hover:text-white"
-          >
-            Docs
-          </Link>
-          <Link
-            href="/docs/dev"
-            className="hidden sm:inline-block text-xs font-semibold text-emerald-600 hover:text-emerald-500 dark:text-emerald-400"
-          >
-            Dev/Build
-          </Link>
-          <CurrencySelector currency={currency} />
+          {/* Docs moved to the footer. The internal /docs/dev link was removed from the
+              customer-facing navigation entirely — it is a build tool, not a shopper surface,
+              and stays reachable at /docs/dev by URL. */}
           <CartModal />
         </div>
       </div>

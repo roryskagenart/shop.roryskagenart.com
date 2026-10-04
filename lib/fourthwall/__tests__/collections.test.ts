@@ -30,6 +30,53 @@ const FOURTHWALL_BUILTINS = {
   ],
 };
 
+/**
+ * A Fourthwall product, minimal but shaped like the real response.
+ *
+ * `state.type` / `access.type` are what make a product purchasable, so a fixture without them
+ * asserts nothing — which is why `getCollections` treats an absent field as "not asserted".
+ */
+function fwProduct(slug: string, extra: Record<string, unknown> = {}) {
+  return {
+    id: `p_${slug}`,
+    name: slug,
+    slug,
+    description: '',
+    images: [],
+    variants: [],
+    state: { type: 'AVAILABLE' },
+    access: { type: 'PUBLIC' },
+    updatedAt: '',
+    ...extra,
+  };
+}
+
+/**
+ * Routes the stub by request path, because `getCollections` now makes TWO kinds of call:
+ * `/collections` (the menu) and `/collections/<slug>/products` (does it have stock?). A stub
+ * that answers every URL with one payload would feed collection records into the stock probe.
+ */
+function stubFourthwall(routes: {
+  collections: unknown;
+  products?: Record<string, unknown[]>;
+}) {
+  vi.stubGlobal(
+    'fetch',
+    vi.fn(async (input: RequestInfo | URL) => {
+      const url = new URL(String(input));
+      const productsMatch = url.pathname.match(/\/collections\/([^/]+)\/products$/);
+      if (productsMatch) {
+        const slug = decodeURIComponent(productsMatch[1] as string);
+        return new Response(
+          JSON.stringify({ results: routes.products?.[slug] ?? [] }),
+          { status: 200 }
+        );
+      }
+      return new Response(JSON.stringify(routes.collections), { status: 200 });
+    })
+  );
+}
+
 function stubFetch(payload: unknown): void {
   vi.stubGlobal(
     'fetch',
@@ -42,24 +89,50 @@ afterEach(() => {
 });
 
 describe('getCollections', () => {
-  it('keeps the curated taxonomy even when Fourthwall returns collections', async () => {
-    stubFetch(FOURTHWALL_BUILTINS);
+  it('lists a curated collection only once Fourthwall actually stocks it', async () => {
+    // Measured live 2026-10-03: Fourthwall has three collections, and none of them is a
+    // curated taxonomy handle. The nav must therefore be built from the stocked set, not
+    // from `PRODUCT_COLLECTIONS`.
+    stubFourthwall({
+      collections: FOURTHWALL_BUILTINS,
+      products: { all: [fwProduct('anything')] },
+    });
     const { getCollections } = await import('../index');
 
     const handles = (await getCollections()).map((c) => c.handle);
 
-    // The bug: Fourthwall answering at all replaced the whole taxonomy with its two built-ins.
+    // `all` is always offered; nothing else qualifies when only `all` has stock.
+    expect(handles).toContain('all');
+    // A collection with no purchasable product is not advertised — a shopper who follows a
+    // nav link to an empty page is a worse outcome than a shorter menu.
     for (const handle of TAXONOMY_HANDLES) {
-      expect(handles).toContain(handle);
+      expect(handles).not.toContain(handle);
     }
+  });
+
+  it('keeps a stocked curated handle, and only that one', async () => {
+    stubFourthwall({
+      collections: FOURTHWALL_BUILTINS,
+      products: { 'kitsch-cpg': [fwProduct('a-mug')], apparel: [fwProduct('a-tee')] },
+    });
+    const { getCollections } = await import('../index');
+
+    const handles = (await getCollections()).map((c) => c.handle);
+
+    expect(handles).toContain('kitsch-cpg');
+    expect(handles).toContain('apparel');
+    expect(handles).not.toContain('metal-litho');
     expect(handles).toContain('all');
   });
 
   it('prefers the taxonomy title over a colliding Fourthwall collection', async () => {
-    stubFetch({
-      results: [
-        { id: 'col_3', name: 'Kitsch CPG', slug: 'kitsch-cpg', description: 'Remote copy', updatedAt: '' },
-      ],
+    stubFourthwall({
+      collections: {
+        results: [
+          { id: 'col_3', name: 'Kitsch CPG', slug: 'kitsch-cpg', description: 'Remote copy', updatedAt: '' },
+        ],
+      },
+      products: { 'kitsch-cpg': [fwProduct('a-mug')] },
     });
     const { getCollections } = await import('../index');
 
@@ -71,17 +144,56 @@ describe('getCollections', () => {
     expect(kitsch[0]?.title).toBe('Kitsch, CPG & Austin Pop Living');
   });
 
-  it('still surfaces a collection that only exists in Fourthwall', async () => {
-    stubFetch({
-      results: [
-        { id: 'col_4', name: 'Winter Drop', slug: 'winter-drop', description: '', updatedAt: '' },
-      ],
+  it('still surfaces a stocked collection that only exists in Fourthwall', async () => {
+    stubFourthwall({
+      collections: {
+        results: [
+          { id: 'col_4', name: 'Winter Drop', slug: 'winter-drop', description: '', updatedAt: '' },
+        ],
+      },
+      products: { 'winter-drop': [fwProduct('a-scarf')] },
     });
     const { getCollections } = await import('../index');
 
     const handles = (await getCollections()).map((c) => c.handle);
 
     expect(handles).toContain('winter-drop');
+  });
+
+  it('hides a Fourthwall collection whose only product is sold out or archived', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (input: RequestInfo | URL) => {
+        const url = new URL(String(input));
+        const productSlug = url.pathname.match(/\/collections\/([^/]+)\/products$/);
+        if (productSlug) {
+          const slug = decodeURIComponent(productSlug[1] as string);
+          const products =
+            slug === 'winter-drop'
+              ? [fwProduct('a-scarf', { state: { type: 'SOLD_OUT' } })]
+              : slug === 'private-drop'
+                ? [fwProduct('a-ring', { access: { type: 'ARCHIVED' } })]
+                : [];
+          return new Response(JSON.stringify({ results: products }), { status: 200 });
+        }
+        return new Response(
+          JSON.stringify({
+            results: [
+              { id: 'c1', name: 'Winter Drop', slug: 'winter-drop', description: '', updatedAt: '' },
+              { id: 'c2', name: 'Private Drop', slug: 'private-drop', description: '', updatedAt: '' },
+            ],
+          }),
+          { status: 200 }
+        );
+      })
+    );
+
+    const { getCollections } = await import('../index');
+    const handles = (await getCollections()).map((c) => c.handle);
+
+    // Not advertised: a sold-out and an archived product are not something to send a shopper to.
+    expect(handles).not.toContain('winter-drop');
+    expect(handles).not.toContain('private-drop');
   });
 
   it('returns the full taxonomy when Fourthwall is unreachable', async () => {
@@ -95,6 +207,8 @@ describe('getCollections', () => {
 
     const handles = (await getCollections()).map((c) => c.handle);
 
+    // Losing the storefront must not empty the navigation — the taxonomy still carries the
+    // designed categories, badges and copy.
     for (const handle of TAXONOMY_HANDLES) {
       expect(handles).toContain(handle);
     }

@@ -20,6 +20,15 @@ export type FourthwallProduct = {
   images: FourthwallProductImage[];
   variants: FourthwallProductVariant[];
 
+  /**
+   * Sellability, as returned by the storefront API. Verified live 2026-10-03:
+   * `state.type` is `AVAILABLE` / `SOLD_OUT`, `access.type` is `PUBLIC` / `ARCHIVED`.
+   * Optional because the type predates these fields and several fixtures omit them —
+   * so every read treats an absent value as "not asserted" rather than "bad".
+   */
+  state?: { type: string };
+  access?: { type: string };
+
   updatedAt: string;
 };
 
