@@ -319,6 +319,58 @@ const inMemoryCarts = new Map<string, FourthwallCart>();
  * Fourthwall is now a SUPPLEMENT rather than a replacement: its collections are appended when they
  * are not already part of the taxonomy, so a collection created in the dashboard still surfaces.
  */
+/**
+ * Which collections carry live, publicly purchasable stock.
+ *
+ * Measured 2026-10-03 against the live storefront API: Fourthwall holds exactly three
+ * collections (`coffeemugs`, `original`, `all`) and 15 products, every one
+ * `state: AVAILABLE` / `access: PUBLIC`. The seven curated taxonomy entries
+ * (`metal-litho`, `canvas-prints`, `desk-art`, `kitsch-cpg`, `apparel`,
+ * `b2b-corporate-gifts`, `fine-art-originals`) have **no** Fourthwall product behind them —
+ * their pages render the local-JSON fallback or a "Collection in Production" state, not
+ * buyable stock.
+ *
+ * The navigation therefore reflects what can actually be bought. `all` is always kept as the
+ * catch-all. The curated taxonomy is still the design source for badges, price ranges and hero
+ * copy, and is still returned in full when the storefront is unreachable — see
+ * [`getCollections`].
+ *
+ * @param candidates the collections to probe. Every candidate is checked, not only the ones
+ *   Fourthwall listed: a curated handle can be stocked under a collection the menu endpoint
+ *   paginates away, and skipping it would hide real stock.
+ * @returns the stocked subset, or `null` when the storefront could not be read at all.
+ */
+async function getStorefrontStockedHandles(candidates: string[]): Promise<Set<string> | null> {
+  // `limit: 1` is enough: we only need to know whether the collection has any product at all.
+  const stockedResults = await Promise.all(
+    candidates.map(async (slug) => {
+      try {
+        const res = await fourthwallGet<{ results: FourthwallProduct[] }>(
+          `${API_URL}/collections/${slug}/products`,
+          { limit: 1 },
+          { next: { revalidate: 3600, tags: [`collection-${slug}`] } }
+        );
+        const first = res.body?.results?.[0];
+        if (!first) return null;
+        // An archived or private product is not something to advertise in the navigation.
+        if (first.access?.type && first.access.type !== 'PUBLIC') return null;
+        if (first.state?.type && first.state.type !== 'AVAILABLE') return null;
+        return slug;
+      } catch {
+        // A single unreadable collection must not empty the menu.
+        return null;
+      }
+    })
+  );
+
+  const stocked = new Set<string>();
+  for (const slug of stockedResults) {
+    if (slug) stocked.add(slug);
+  }
+
+  return stocked;
+}
+
 export async function getCollections(): Promise<Collection[]> {
   const curated: Collection[] = PRODUCT_COLLECTIONS.map((collection) => ({
     handle: collection.handle,
@@ -340,20 +392,31 @@ export async function getCollections(): Promise<Collection[]> {
       { next: { revalidate: 3600 } }
     );
 
-    remote = (res.body?.results ?? []).map((collection) => ({
-      handle: collection.slug,
-      title: collection.name,
-      description: collection.description,
-    }));
+    remote = (res.body?.results ?? [])
+      .filter((collection) => collection.slug)
+      .map((collection) => ({
+        handle: collection.slug,
+        title: collection.name,
+        description: collection.description,
+      }));
   } catch {
     // Fourthwall unreachable — the curated taxonomy is still a complete navigation on its own,
     // which is precisely why it must not be treated as a fallback.
+    return [...curated, allProducts];
   }
 
   const known = new Set<string>([...curated.map((c) => c.handle), allProducts.handle]);
-  const extras = remote.filter((collection) => collection.handle && !known.has(collection.handle));
+  const extras = remote.filter((collection) => !known.has(collection.handle));
 
-  return [...curated, allProducts, ...extras];
+  // Probe every candidate — curated handles and Fourthwall's own — in one batch.
+  const candidates = [...new Set([...curated.map((c) => c.handle), ...extras.map((c) => c.handle)])];
+  const stocked = await getStorefrontStockedHandles(candidates);
+
+  // Top level = the collection names Fourthwall actually has purchasable stock in. A curated
+  // handle keeps its taxonomy title (T04: the taxonomy title wins over a colliding name).
+  const curatedStocked = stocked ? curated.filter((c) => stocked.has(c.handle)) : curated;
+
+  return [...curatedStocked, allProducts, ...extras.filter((c) => stocked?.has(c.handle))];
 }
 
 export async function getCollectionProducts({

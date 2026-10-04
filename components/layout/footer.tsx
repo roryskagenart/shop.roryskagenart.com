@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import LogoSquare from 'components/logo-square';
 import { BRAND_CONFIG } from 'lib/brand-config';
+import { FooterCurrencySelector } from './footer-currency';
 
 export default async function Footer() {
   const currentYear = new Date().getFullYear();
@@ -33,6 +34,7 @@ export default async function Footer() {
             <span>roryskagenart.com Portfolio</span>
             <span className="text-[10px] text-neutral-400">↗</span>
           </a>
+          <FooterCurrencySelector />
         </div>
       </div>
       <div className="border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
