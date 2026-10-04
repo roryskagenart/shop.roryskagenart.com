@@ -17,7 +17,7 @@ collections do **not** appear, which is the correct behaviour for hidden product
 
 | # | Product | productId | Template | Region | Variants | Price | State |
 | :-- | :-- | :-- | :-- | :-- | --: | --: | :-- |
-| 1 | Today (Atomic Sunrise) — Enhanced Matte Paper Poster | `f2cf7bc0-80be-4708-8141-1d2421bb18df` | `pro_15bc29bc8a324d449d` | `default` | 12 | $11.00–$94.76 | HIDDEN / AVAILABLE |
+| 1 | Today (Atomic Sunrise) — Enhanced Matte Paper Poster | `f2cf7bc0-80be-4708-8141-1d2421bb18df` | `pro_15bc29bc8a324d449d` | `default` | 12 | $12.50–$23.50 | HIDDEN / AVAILABLE |
 | 2 | Today (Atomic Sunrise) — Poker Playing Cards | `1b4dc40e-f3c8-42e9-ab69-4a53eca3c53a` | `pro_ZUOYt-04ToOgL7V03qNIYg` | `front` | 1 | $27.38 | HIDDEN / AVAILABLE |
 | 3 | Today (Atomic Sunrise) — Framed Matte Poster | `4645e044-53e3-4622-a4ce-dd1f93c6150b` | `pro_kRSsoYjwSoyyTEmWko5o0A` | `default` | 12 | $40.70–$94.76 | HIDDEN / AVAILABLE |
 | 4 | Gondoleu — Soy Wax Candle | `0925beec-5e64-4147-bf1c-4d1ad2cdd125` | `pro_N__f9U5XQJqcP_oCvwk2rw` | `default` | 1 | $25.90 | HIDDEN / AVAILABLE |
@@ -55,14 +55,18 @@ i.e. a flat **~50% margin**, which clears Fourthwall's minimums (20% and $10 pro
 
 | Template | Base | Margin | Lowest variant | Highest variant |
 | :-- | ---: | ---: | ---: | ---: |
-| Enhanced Matte Paper Poster | $5.50 | $5.50 | $11.00 | $94.76 |
+| Enhanced Matte Paper Poster | $7.00 (lowest size) | $5.50 | $12.50 | $23.50 |
 | Poker Playing Cards | $13.69 | $13.69 | $27.38 | $27.38 |
 | Framed Matte Poster | $20.35 | $20.35 | $40.70 | $94.76 |
 | Soy Wax Candle | $12.95 | $12.95 | $25.90 | $25.90 |
 
 Poster prices span a range because **the margin is per product, not per variant** — the same $20.35 sits
-on top of every size's differing base cost. A 5×7 and a 24×36 therefore carry very different margins
+on top of every size's differing base cost. An 8×10 and a 24×36 therefore carry very different margins
 despite identical `profitMargin`. This is the same issue recorded as OQ6 in the v0.2.0 draft.
+
+> Verified against the live Platform API on 2026-10-04 (independent re-GET, not the seeder log): the
+> Enhanced Matte row's price span in an earlier revision of this ledger said $11.00–$94.76, which was a
+> dry-run estimation error — every live variant is exactly `base cost + $5.50`, spanning $12.50–$23.50.
 
 ## Scope: why only 6 products
 
