@@ -45,6 +45,7 @@
  *   npx tsx lib/fw-seeder/probe-templates.ts
  *   npx tsx lib/fw-seeder/probe-templates.ts --areas
  *   npx tsx lib/fw-seeder/probe-templates.ts --out docs/releases/templates/verified-templates.json
+ *   npx tsx lib/fw-seeder/probe-templates.ts --out <path> --check   # exits 1 on drift
  */
 
 import { readFile, writeFile } from 'fs/promises';
@@ -137,6 +138,7 @@ async function main(): Promise<void> {
   const seedIndex = argv.indexOf('--seed');
   const seedPath = seedIndex >= 0 ? argv[seedIndex + 1] : DEFAULT_SEED;
   const wantAreas = argv.includes('--areas');
+  const check = argv.includes('--check');
 
   const creds = credsFromEnv();
   const authMode = creds.accessToken ? 'bearer' : creds.apiUsername ? 'basic' : 'none';
@@ -328,35 +330,62 @@ async function main(): Promise<void> {
   );
 
   if (outPath) {
-    await writeFile(
-      outPath,
-      `${JSON.stringify(
-        {
-          _source: 'Fourthwall Platform API, GET /open-api/v1.0/product-templates/{productId}',
-          _probedAt: new Date().toISOString(),
-          _warning:
-            'Generated file — regenerate with `npx tsx lib/fw-seeder/probe-templates.ts --out <path>`. ' +
-            'Identifiers are opaque productId values, NOT dashboard labels. The list endpoint is ' +
-            'capped at 25 and ignores ?page/?size, so the catalogue was enumerated by verifying a ' +
-            'seed of real ids — never by trusting list length. → T34',
-          seedPath,
-          listEndpointReturns: raw.length,
-          seedIds: seedIds.length,
-          resolvedByDirectLookup: byId.size,
-          seedIdsAbsent404: notFound,
-          seedIdsUnresolvedTransient: transient,
-          backendRenderable: backendYes.length,
-          favouritedTotal: FAVOURITED.length,
-          favouritedResolved: resolved.length,
-          favouritedUnresolved: unresolved,
-          templates: records
-        },
-        null,
-        2
-      )}\n`,
-      'utf8'
-    );
-    console.log(`\nWrote ${records.length} template records to ${outPath}`);
+    const payload = {
+      _source: 'Fourthwall Platform API, GET /open-api/v1.0/product-templates/{productId}',
+      _probedAt: new Date().toISOString(),
+      _warning:
+        'Generated file — regenerate with `npx tsx lib/fw-seeder/probe-templates.ts --out <path>`. ' +
+        'Identifiers are opaque productId values, NOT dashboard labels. The list endpoint is ' +
+        'capped at 25 and ignores ?page/?size, so the catalogue was enumerated by verifying a ' +
+        'seed of real ids — never by trusting list length. → T34',
+      _scope: wantAreas
+        ? `customizableAreas recorded for all ${records.length} resolved templates (--areas).`
+        : `Detail records for the ${FAVOURITED.length} favourited templates only. The full ` +
+          'catalogue is not duplicated here — it ships as ' +
+          'docs/agentic/skills/fourthwall-product-catalog/references/catalog_full.csv.',
+      seedPath,
+      listEndpointReturns: raw.length,
+      seedIds: seedIds.length,
+      resolvedByDirectLookup: byId.size,
+      seedIdsAbsent404: notFound,
+      seedIdsUnresolvedTransient: transient,
+      backendRenderable: backendYes.length,
+      favouritedTotal: FAVOURITED.length,
+      favouritedResolved: resolved.length,
+      favouritedUnresolved: unresolved,
+      templates: records
+    };
+    const serialized = `${JSON.stringify(payload, null, 2)}\n`;
+
+    if (check) {
+      // A check mode that cannot fail is not a check mode (AGENTS.md §5). Compare the
+      // data, not the bytes: _probedAt changes on every run by design, so a naive
+      // string diff would always fail and teach everyone to ignore it.
+      let existing: { templates?: TemplateRecord[] } | undefined;
+      try {
+        existing = JSON.parse(await readFile(outPath, 'utf8')) as { templates?: TemplateRecord[] };
+      } catch {
+        console.error(`\nCHECK FAILED: ${outPath} is missing or unreadable.`);
+        process.exitCode = 1;
+        return;
+      }
+      const same =
+        JSON.stringify(existing?.templates ?? []) === JSON.stringify(records) &&
+        byId.size === payload.resolvedByDirectLookup &&
+        backendYes.length === payload.backendRenderable;
+      if (same) {
+        console.log(`\nCHECK ok: ${records.length} template records match ${outPath}.`);
+      } else {
+        console.error(
+          `\nCHECK FAILED: ${outPath} is stale — regenerate with --out. ` +
+            `(on disk: ${existing?.templates?.length ?? 0} records; live: ${records.length})`
+        );
+        process.exitCode = 1;
+      }
+    } else {
+      await writeFile(outPath, serialized, 'utf8');
+      console.log(`\nWrote ${records.length} template records to ${outPath}`);
+    }
   }
 
   // An unresolved favourited template is a real finding, not a script failure.

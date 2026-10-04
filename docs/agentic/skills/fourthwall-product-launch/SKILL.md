@@ -1,6 +1,6 @@
 ---
 name: fourthwall-product-launch
-description: "Use when creating, publishing, pricing, or taking down Fourthwall products via the Platform API — seeding a merch catalogue from artwork, choosing templates, setting profitMargin, verifying a create, or diagnosing why a created product will not appear on the storefront. Covers the 605-template catalogue and the 274 that can actually render, the non-transparency subset that JPEG artwork can satisfy, print-fit gating by aspect ratio, and the hard limits: no publish-after-create, no rename, no tags, no private collections, promotions cannot substitute. Also use when a product created hidden cannot be made public by API, or when a launch looks complete but the storefront is unchanged."
+description: 'Use when creating, publishing, pricing, or taking down Fourthwall products via the Platform API — seeding a merch catalogue from artwork, choosing templates, setting profitMargin, verifying a create, or diagnosing why a created product will not appear on the storefront. Covers the 605-template catalogue and the 274 that can actually render, the non-transparency subset that JPEG artwork can satisfy, print-fit gating by aspect ratio, and the hard limits: no publish-after-create, no rename, no tags, no private collections, promotions cannot substitute. Also use when a product created hidden cannot be made public by API, or when a launch looks complete but the storefront is unchanged.'
 version: 1.0.0
 x-origin: shop.roryskagenart.com
 x-created: 2026-10-04
@@ -21,12 +21,12 @@ reasoning survives; read the trap, not just the rule.
 
 Answer all four, in writing, before any `POST`. Each one is expensive to get wrong later.
 
-| # | Question | If unanswered |
-| :-- | :-- | :-- |
-| 1 | **Which templates, and are they in the 274?** | A config full of 404 ids → **T07**, **T34** |
-| 2 | **Does the artwork satisfy the transparency rule?** | 229 of 274 rejects → **T36** |
-| 3 | **Does the artwork fit the print area?** | Bad crops that ship → §4 |
-| 4 | **`publishOnCreate`: true or false?** | **No API path to publish later** → **T37** |
+| #   | Question                                            | If unanswered                               |
+| :-- | :-------------------------------------------------- | :------------------------------------------ |
+| 1   | **Which templates, and are they in the 274?**       | A config full of 404 ids → **T07**, **T34** |
+| 2   | **Does the artwork satisfy the transparency rule?** | 229 of 274 rejects → **T36**                |
+| 3   | **Does the artwork fit the print area?**            | Bad crops that ship → §4                    |
+| 4   | **`publishOnCreate`: true or false?**               | **No API path to publish later** → **T37**  |
 
 ---
 
@@ -36,7 +36,7 @@ Answer all four, in writing, before any `POST`. Each one is expensive to get wro
 
 ⚠️ **Do not try to paginate this.** Query params (`?page=`, `?size=`) are **silently ignored** — page 7
 returns byte-identical ids to page 1, so a naive walk collects 25 unique ids and then confidently
-reports having walked 605. The undocumented path form `/product-templates/page/{n}` returns *different*
+reports having walked 605. The undocumented path form `/product-templates/page/{n}` returns _different_
 ids per page, but it is not a documented shape and its end-of-catalogue behaviour is unverified. **Do not
 build a denominator on it.**
 
@@ -55,16 +55,16 @@ Filter on `supportsBackendRendering: true` — that is what the design pipeline 
 
 ### The non-transparency subset — this is the real gate
 
-| Method | Buildable | Transparency |
-| :-- | --: | :-- |
-| `DTG` | 135 | **required** |
-| `DTFX` | 94 | **required** |
-| `UV` | 18 | not needed |
-| `SUBLIMATION` | 15 | not needed |
-| `PRINTED` | 6 | not needed |
-| `ALL_OVER_PRINT` | 2 | not needed |
-| `STICKER` | 2 | not needed |
-| `LASER_ETCHED` | 2 | not needed |
+| Method           | Buildable | Transparency |
+| :--------------- | --------: | :----------- |
+| `DTG`            |       135 | **required** |
+| `DTFX`           |        94 | **required** |
+| `UV`             |        18 | not needed   |
+| `SUBLIMATION`    |        15 | not needed   |
+| `PRINTED`        |         6 | not needed   |
+| `ALL_OVER_PRINT` |         2 | not needed   |
+| `STICKER`        |         2 | not needed   |
+| `LASER_ETCHED`   |         2 | not needed   |
 
 **45 templates** need no transparency. If the source art is JPEG, **45 is your ceiling** — not 274.
 `DTG`/`DTFX`/`EMBROIDERY` require transparent PNG, and JPEG cannot yield it.
@@ -128,7 +128,7 @@ accept   = retained >= 0.85 and covers >= 1.0
 ```
 
 **A realistic launch is small.** In the measured case, **6 of 240** candidate pairs passed. The other 39
-non-transparency templates failed on *resolution*, not preference. **Do not relax the gate to
+non-transparency templates failed on _resolution_, not preference. **Do not relax the gate to
 manufacture volume** — that is padding a catalogue with crops that print badly. A short launch that
 prints well beats a long one that does not.
 
@@ -137,7 +137,8 @@ prints well beats a long one that does not.
 ## 5. Pricing — `profitMargin` is USD, not a percentage
 
 ```jsonc
-{ "profitMargin": 10 }   // +$10.00 on top of base cost
+{ "profitMargin": 10 }
+ // +$10.00 on top of base cost
 ```
 
 A **margin** is a USD amount; a **margin %** is a fraction of the retail price. Fourthwall's guidance:
@@ -164,7 +165,7 @@ offers a full size ladder produced a product with 1.
 content: null}`) and a `minimumOrdersNumber` scalar. So "does this size exist on that template?" is not
 answerable from `GET /product-templates/{id}`. Take the size strings from the **Fourthwall dashboard
 product page** and record where each came from; do not copy a list between templates on the assumption
-that they are the same. Numbers sourced from the MCP *browse* catalogue are a different surface and are
+that they are the same. Numbers sourced from the MCP _browse_ catalogue are a different surface and are
 **unverified against the API the seeder writes to** → **T13**.
 
 - **Single-product CLI mode has no `--sizes` flag** → it cannot produce a correct multi-size product at
@@ -195,15 +196,15 @@ makes a partial batch recoverable.
 
 All measured 2026-10-04 against a live hidden product.
 
-| Attempt | Result |
-| :-- | :-- |
-| `PATCH /products/{id}` → `PUBLIC` | **405** |
-| `POST` / `PUT /products/{id}` (rename) | **405** |
-| `PUT /products/{id}/access` | **404** |
-| `POST /products/{id}/publish` | **404** |
+| Attempt                                | Result                                |
+| :------------------------------------- | :------------------------------------ |
+| `PATCH /products/{id}` → `PUBLIC`      | **405**                               |
+| `POST` / `PUT /products/{id}` (rename) | **405**                               |
+| `PUT /products/{id}/access`            | **404**                               |
+| `POST /products/{id}/publish`          | **404**                               |
 | `GET /tags`, `GET /products/{id}/tags` | **404** — tags are not an API concept |
-| `POST /products/{id}/collections` | **404** |
-| `PUT /products/{id}/availability` | **200 — but does NOT publish** |
+| `POST /products/{id}/collections`      | **404**                               |
+| `PUT /products/{id}/availability`      | **200 — but does NOT publish**        |
 
 **Consequences:**
 
