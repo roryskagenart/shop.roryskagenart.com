@@ -145,9 +145,12 @@ A **margin** is a USD amount; a **margin %** is a fraction of the retail price. 
 minimum **20% margin AND $10 profit** per sale, healthy band **40–60%**. Use the larger floor so both
 constraints hold.
 
-⚠️ **The margin is per PRODUCT, not per variant.** One `profitMargin` across a size ladder means a 5×7 and
-a 24×36 carry wildly different real margins. Measured: a poster ran **$11.00 → $94.76** on one
-$5.50 margin. Expect a price spread you did not choose.
+⚠️ **The margin is per PRODUCT, not per variant.** One `profitMargin` across a size ladder means an 8×10 and
+a 24×36 carry different real margins. Measured live 2026-10-04: the Framed Matte Poster spanned
+**$40.70 → $94.76** on a single $20.35 margin (base $20.35 → $74.41), and the Enhanced Matte poster
+**$12.50 → $23.50** on a $5.50 margin. Expect a price spread you did not choose. (An earlier note here
+claimed "$11.00 → $94.76 on one $5.50 margin" — that was a dry-run estimation error, corrected after
+re-GETting every live variant: each prices at exactly `base + margin`.)
 
 Convert from a retail target with `profitMarginForTarget(target, base)` — it returns `null` rather than
 building an unsellable product. A missing margin returns **406 `PRICING_CALCULATION_NOT_SUPPORTED`**.
@@ -189,6 +192,16 @@ CDN caches per exact URL → **T11**.
 
 Write a **ledger** of every created `productId` with its verification result. It is the only thing that
 makes a partial batch recoverable.
+
+Two wire-format facts measured during the v0.2.0 verification (2026-10-04), both of which make a correct
+apply look broken if you do not know them:
+
+- **`GET /collections` (Platform, list) omits `offerIds`.** Every collection reads `offerIds: []` in the
+  list response; the count comes back only on the per-collection `GET /collections/{id}`. A verifier that
+  reads the list and asserts on `offerIds.length` will report healthy collections as empty. Re-`GET` each
+  collection individually before concluding a population write failed.
+- **`unitPrice.value` is a plain dollar amount, not cents.** A $22 mug serialises as `{"value": 22}` on
+  both the Platform and Storefront APIs. Dividing by 100 turns a correct price into a false failure.
 
 ---
 
