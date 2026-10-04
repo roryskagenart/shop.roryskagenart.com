@@ -1,0 +1,149 @@
+{
+  "credentials": {},
+  "artworks": [
+    {
+      "id": "art-today",
+      "name": "Today (Atomic Sunrise)",
+      "description": "Original fine artwork \"Today (Atomic Sunrise)\" by Rory Skagen (2019). Rendered in Enamel (3.5ft x 5ft). Features Skagen's signature retro-futuristic palette, hyper-graphic linework, and evocative mid-century American pop surrealism.",
+      "imageUrl": "https://res.cloudinary.com/xjilp2pq/image/upload/v1787076989/2019today-copy.jpg",
+      "imageWidth": 2697,
+      "imageHeight": 3851,
+      "imageContentType": "image/jpeg"
+    },
+    {
+      "id": "art-gondoleu",
+      "name": "Gondoleu",
+      "description": "Original fine artwork \"Gondoleu\" by Rory Skagen (2019). Rendered in Enamel (3.5ft x 5ft). Features Skagen's signature retro-futuristic palette, hyper-graphic linework, and evocative mid-century American pop surrealism.",
+      "imageUrl": "https://res.cloudinary.com/xjilp2pq/image/upload/v1787076996/gondeoleu.jpg",
+      "imageWidth": 2100,
+      "imageHeight": 1476,
+      "imageContentType": "image/jpeg"
+    },
+    {
+      "id": "art-gianondor",
+      "name": "Gianondor",
+      "description": "Original masterwork by Rory Skagen created on 2019-07-12. Rendered in Enamel (3.5ft x 5ft) exploring themes of pop surrealism & mid-century neo-retro. Features Skagen's distinctive saturated palette, hyper-graphic linework, and evocative mid-century Americana pop-surrealism.",
+      "imageUrl": "https://res.cloudinary.com/xjilp2pq/image/upload/v1787076996/gianondor.jpg",
+      "imageWidth": 2100,
+      "imageHeight": 1469,
+      "imageContentType": "image/jpeg"
+    },
+    {
+      "id": "art-austin-2019",
+      "name": "Austin Skyline 2019",
+      "description": "Original fine artwork \"Austin Skyline 2019\" by Rory Skagen (2019). Rendered in Enamel (3.5ft x 5ft). Features Skagen's signature retro-futuristic palette, hyper-graphic linework, and evocative mid-century American pop surrealism.",
+      "imageUrl": "https://res.cloudinary.com/xjilp2pq/image/upload/v1787076990/austin2019-copy.jpg",
+      "imageWidth": 2100,
+      "imageHeight": 1467,
+      "imageContentType": "image/jpeg"
+    }
+  ],
+  "templates": [
+    {
+      "templateId": "pro_15bc29bc8a324d449d",
+      "templateName": "Enhanced Matte Paper Poster",
+      "region": "default",
+      "profitMargin": 5.5,
+      "targetPrice": 11.0,
+      "sizes": [
+        "8\" x 10\"",
+        "10\" x 10\"",
+        "11\" x 14\"",
+        "12\" x 12\"",
+        "12\" x 16\"",
+        "12\" x 18\"",
+        "14\" x 14\"",
+        "16\" x 16\"",
+        "16\" x 20\"",
+        "18\" x 18\"",
+        "18\" x 24\"",
+        "24\" x 36\""
+      ],
+      "publishOnCreate": false
+    },
+    {
+      "templateId": "pro_ZUOYt-04ToOgL7V03qNIYg",
+      "templateName": "Poker Playing Cards",
+      "region": "front",
+      "profitMargin": 13.69,
+      "targetPrice": 27.38,
+      "sizes": [
+        "2.5\" x 3.5\""
+      ],
+      "publishOnCreate": false
+    },
+    {
+      "templateId": "pro_kRSsoYjwSoyyTEmWko5o0A",
+      "templateName": "Framed Matte Poster",
+      "region": "default",
+      "profitMargin": 20.35,
+      "targetPrice": 40.7,
+      "sizes": [
+        "8\" x 10\"",
+        "10\" x 10\"",
+        "11\" x 14\"",
+        "12\" x 12\"",
+        "12\" x 16\"",
+        "12\" x 18\"",
+        "14\" x 14\"",
+        "16\" x 16\"",
+        "16\" x 20\"",
+        "18\" x 18\"",
+        "18\" x 24\"",
+        "24\" x 36\""
+      ],
+      "publishOnCreate": false
+    },
+    {
+      "templateId": "pro_N__f9U5XQJqcP_oCvwk2rw",
+      "templateName": "Soy Wax Candle",
+      "region": "default",
+      "profitMargin": 12.95,
+      "targetPrice": 25.9,
+      "sizes": [
+        "Unscented"
+      ],
+      "publishOnCreate": false
+    }
+  ],
+  "collections": [
+    {
+      "handle": "canvas-prints",
+      "name": "Museum Canvas & Archival Prints",
+      "description": "Fine art prints on archival paper.",
+      "pairs": [
+        {
+          "artworkId": "art-today",
+          "templateId": "pro_15bc29bc8a324d449d"
+        },
+        {
+          "artworkId": "art-today",
+          "templateId": "pro_ZUOYt-04ToOgL7V03qNIYg"
+        },
+        {
+          "artworkId": "art-today",
+          "templateId": "pro_kRSsoYjwSoyyTEmWko5o0A"
+        }
+      ]
+    },
+    {
+      "handle": "kitsch-cpg",
+      "name": "Kitsch, CPG & Austin Pop Living",
+      "description": "Everyday objects carrying Rory Skagen art.",
+      "pairs": [
+        {
+          "artworkId": "art-gondoleu",
+          "templateId": "pro_N__f9U5XQJqcP_oCvwk2rw"
+        },
+        {
+          "artworkId": "art-gianondor",
+          "templateId": "pro_N__f9U5XQJqcP_oCvwk2rw"
+        },
+        {
+          "artworkId": "art-austin-2019",
+          "templateId": "pro_N__f9U5XQJqcP_oCvwk2rw"
+        }
+      ]
+    }
+  ]
+}

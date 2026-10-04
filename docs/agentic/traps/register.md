@@ -144,13 +144,35 @@ was fixed by deletion rather than repair.
 
 <a id="t13"></a>
 ### T13 — There is no wall-art template
-**Status:** OPEN (structural)
-**Bites:** `canvas-prints` and `metal-litho` are **structurally unfulfillable** through this API.
-**Evidence:** The 25 templates in `.workbuddy-ai/memory/DETAIL.md` contain no poster, canvas or metal print
-entry.
-**Do instead:** Treat these two taxonomy handles as marketing surface, not shippable collections — or
-source a different fulfilment route.
-**Source:** 2026-10-01.
+**Status:** **RESOLVED — the conclusion held, the stated cause was wrong.** Reworded 2026-10-04.
+**Bites:** **Wall art IS available.** The original claim generalised from a 25-template page-1 read. The
+real catalogue is 605, and it contains **two buildable wall-art templates**. Planning that
+`canvas-prints` was structurally unfulfillable would have removed a revenue line that works.
+**Evidence (original):** the 25-template list contained no poster, canvas or metal entry. **Corrected:**
+`GET /product-templates` returns 25 rows against `total: 605`, and `?page=` is ignored → **T34**. Live
+`GET /product-templates/{productId}`, 2026-10-04, both `supportsBackendRendering: true` with real
+regions:
+- `pro_15bc29bc8a324d449d` **Enhanced Matte Paper Poster** — `regionId: "default"`, 1500×2100 @300 DPI, $5.50
+- `pro_kRSsoYjwSoyyTEmWko5o0A` **Framed High-Quality Matte Poster** — `regionId: "default"`, 2400×3000 @300 DPI, $20.35
+
+Plus buildable `Desk Mat 12"x18"` / `15.5"x31.5"` / mouse pads, `All-Over Print Basic Pillow`, and
+`Soy Wax Candle`. A measured launch shipped products on the first two.
+
+**Correction to this entry, 2026-10-04:** the size counts previously quoted here ("14 sizes",
+"36 sizes") are **not readable from the Platform API** — the detail document exposes no `sizes` or
+`sizeVariants` array on any of the 605 templates, only `sizeGuide` (`{url: null, content: null}`)
+and `minimumOrdersNumber`. Those figures came from the MCP *browse* catalogue, a different surface,
+and are **unverified against the API the seeder writes to**. Do not treat them as measured; and note
+the risk they create → **T06**. A third, sharper correction: `Home & Living/Wall Art` has **five**
+templates, not two — the other three (`Canvas (in)`, `Thin Canvas (in)`, `Matte Paper Framed Poster
+With Mat`) are real and resolvable but have `supportsBackendRendering: false`. So "no wall art" is
+wrong twice over: the category exists, and the failure mode for 3 of its 5 members is *not
+backend-renderable* rather than *absent*.
+**Do instead:** **Never infer a capability from a partial read** → **T34**. Before declaring a category
+impossible, enumerate the whole catalogue by direct `productId` lookup and probe the specific
+templates. And when a figure comes from a surface the writer does not use, label it unverified
+instead of folding it into a measurement.
+**Source:** 2026-10-01; corrected 2026-10-04.
 
 <a id="t14"></a>
 ### T14 — The password gate blocks discovery, not purchase
@@ -393,3 +415,161 @@ installed"* rather than *"no CLI is installed"*. When the assertion is a **negat
 probe the category (loop over candidate names), and prefer a byte-level check on a known artifact
 (`grep -c` on the binary) over a PATH lookup when the question is *what does this tool read*.
 **Source:** 2026-10-02.
+
+<a id="t34"></a>
+### T34 — the catalogue list endpoint is capped and cannot be paginated
+**Status:** OPEN — **evidence corrected 2026-10-04, see below**
+**Bites:** An agent concluded the merch release could only ever use 14 templates, told the owner the
+other 11 were unavailable, and built a margin proposal on that false premise. **The real catalogue is
+605, of which 274 are backend-renderable.** A whole product line was scoped out of existence by an
+unread `total` field. The same defect then reappeared in the *fix*: a probe that counted every
+thrown request as "template gone" reported 426/605 on one run and 605/605 on the next, with nothing
+changing server-side.
+**Evidence:** `GET /open-api/v1.0/product-templates` returns **`results: 25, total: 605`**. The
+pagination parameter is honoured in **neither** the query string nor the path in a usable way.
+Measured live 2026-10-04:
+
+| call | result |
+| :-- | :-- |
+| `/product-templates` | `results: 25, total: 605` |
+| `/product-templates?page=7` | `results: 25, total: 605` — **byte-identical ids to page 1** |
+| `/product-templates?size=1000` | `results: 25, total: 605` |
+| `/product-templates?page=1&size=100` | `results: 25, total: 605` |
+| `/product-templates/page/2` | `results: 25` — *different* ids, but undocumented |
+| `/product-templates/page/25` | `results: 25` — **not the 5 rows an earlier draft of this entry claimed** |
+
+Page-overlap check: `p1∩p2 = 25`, `p1∩p3 = 25`, and `p1` is `===`-identical to `p2` and `p3`. So a
+`?page=N` walk collects 25 unique ids and then confidently reports having walked 605.
+
+**The only working enumeration is a seed of real `productId` values plus
+`GET /product-templates/{productId}` per id.** Verified 2026-10-04: all **605** ids in
+`references/catalog_full.csv` resolved, **0 absent (404), 0 transient**. `lib/fw-seeder/probe-templates.ts`
+implements exactly this and reports `seedIdsAbsent404` and `seedIdsUnresolvedTransient` separately.
+The full catalog pull and artifacts already exist in-repo at
+[`../skills/fourthwall-product-catalog/`](../skills/fourthwall-product-catalog/) — including
+`references/catalog_full.csv`, which was **already integrated** before this trap was recorded.
+**Do instead:** **Read `total`, and never treat a list endpoint's length as the size of the set.**
+When you must enumerate, seed from known ids and verify each one, and **distinguish a real `404`
+from a `429`/timeout** — a failed request is not a missing resource. This is the same class of error
+as T33: a measurement of *one page* reported as a measurement of *the set*.
+**Source:** 2026-10-04.
+
+<a id="t35"></a>
+### T35 — a vendored project in `lib/` can hold the answer you are missing
+**Status:** OPEN — **evidence NOT reproducible 2026-10-04, see below**
+**Bites:** Reported: `lib/fw-revops/` held a complete, measured API profile (605-template catalog,
+create-payload schema, Postman collections, rate limits) plus its own `.git` and a `.env.local` with
+live credentials — **untracked by the parent repo, and therefore invisible to `git status`, to every
+KB search, and to review.** An agent reported "the API exposes 25 templates" while the answer sat in
+the repo it was working in.
+**Evidence — and its limit:** the *lesson* reproduces; the *cited tree* does not. Re-checked live
+2026-10-04 in `shop.roryskagenart.com`:
+
+```
+$ du -sh lib/*
+  lib/analytics.ts 4.0K   lib/brand-config.ts 4.0K   lib/constants.ts 4.0K
+  lib/docs-content.ts 52K  lib/fourthwall 364K  lib/fw-seeder 108K
+  lib/taxonomy.ts 12K  lib/types.ts 4.0K  lib/utils.ts 4.0K
+
+$ find . -maxdepth 4 -name .git -not -path './node_modules/*'
+./.git
+```
+
+**There is no `lib/fw-revops/`, and no nested `.git` anywhere but the root.** So the 13M tree and
+its 17-key `.env.local` were either removed since the entry was written or were never in this
+checkout; `git ls-files lib/fw-revops` returning empty is equally consistent with "does not
+exist". Do not cite this entry as proof that a credential-bearing nested repo is present.
+What *is* verifiable and is the real point: `docs/agentic/skills/fourthwall-product-catalog/`
+holds the material, and its `references/catalog_full.csv` (605 ids) was already integrated and
+answering T34 — while an agent asserted 25 templates from the API. The duplication concern is real;
+the specific tree is not.
+**Do instead:** **Inventory untracked and nested-repo directories before asserting that something is
+unavailable.** `git status --ignored`, `find . -name .git -maxdepth 4`, and a plain `du -sh lib/*` cost
+seconds. If a nested project is kept, its credentials must never travel with it — and a vendored tree
+that duplicates an integrated skill is a deletion, not a dependency. **And when re-checking an
+existing trap entry, run the cited command before restating the evidence:** a trap whose evidence
+does not reproduce is worse than a missing trap, because it teaches the next agent to trust a
+measurement nobody took.
+**Source:** 2026-10-04; evidence re-checked 2026-10-04.
+
+<a id="t36"></a>
+### T36 — Upscaling and background-removal cannot manufacture what JPEG destroyed
+**Status:** OPEN
+**Bites:** The merch release needs 300 DPI masters and transparent PNGs. It is tempting to read
+"Cloudinary has `super_resolution` and `background_removal`, and ffmpeg and PIL are installed" as
+"the missing masters can be generated." **They cannot.** Upscaling adds no detail, and background
+removal on a full-bleed painting produces an opaque image with an alpha channel that is 99.8% `255`.
+Either path produces a file that *looks* processed and fails at the printer.
+**Evidence:** Measured 2026-10-04 on `today` (2697×3851 JPEG, Cloudinary `xjilp2pq`):
+- `e_background_removal/f_png` on `trisaurusmouth-lg` → HTTP 200, **colortype 6 (RGBA)**, but a full
+  histogram of all 3,677,184 pixels gives **0 fully transparent pixels; 99.8% at alpha 224–255.** The
+  alpha channel exists and carries no cutout.
+- PIL `LANCZOS` 2× → 5394×7702 with identical information; `convert('RGBA')` on the JPEG yields alpha
+  extrema **(255, 255)** — fully opaque, as every JPEG does.
+- Colour-keying is also out: the four corner pixels of `today` are **(114,132,108), (142,172,164),
+  (163,168,148), (172,165,155)** — mid-tone green-grey. There is no flat background to key against,
+  so a white/green key would eat the painting.
+- `ffmpeg` 9.0.1, Ghostscript 10.02.1 and PIL 12.3.0 (webp: yes) are installed. None of them infer
+  detail or alpha that is not in the file.
+**Do instead:** **Only 45 of the 274 backend-renderable templates avoid the transparency requirement**
+(UV 18, SUBLIMATION 15, PRINTED 6, ALL_OVER_PRINT 2, STICKER 2, LASER_ETCHED 2). Scope merchandise to
+those, or get real 300 DPI PNG masters from Rory. Treat AI upscaling and matting as **preview tools for
+mockups only**, never as a production asset path — and say so when the release is scoped.
+**Source:** 2026-10-04.
+
+<a id="t37"></a>
+### T37 — Publishing, renaming and tagging are dashboard-only; only `publishOnCreate` exists
+**Status:** OPEN
+**Bites:** A release that created products hidden has **no API path to publish them.** The obvious
+assumption — that you can PATCH a product to make it public — is wrong, and so is renaming or tagging
+one. Measured 2026-10-04 against a live hidden product
+(`f2cf7bc0-80be-4708-8141-1d2421bb18df`):
+
+| Attempt | Result |
+| :-- | :-- |
+| `PATCH /products/{id}` `{"access":{"type":"PUBLIC"}}` | **405** Method Not Allowed |
+| `POST /products/{id}` / `PUT /products/{id}` (rename) | **405** Method Not Allowed |
+| `PUT /products/{id}/access` | **404** no such endpoint |
+| `POST /products/{id}/publish` | **404** no such endpoint |
+| `GET /products/{id}/tags`, `POST /products/{id}/collections` | **404** |
+| `GET /tags` | **404** — tags are not an API concept at all |
+| `PUT /products/{id}/availability` `{"available":true}` | **200 but does NOT publish** — `access` stayed `HIDDEN` |
+
+`publishOnCreate` is a **create-time-only** boolean (docs: *"Publish the product immediately on
+creation. Defaults to false"*). There is no post-hoc publish, no rename, no retag, and no per-product
+collection assignment on the Platform API.
+
+⚠️ **`PUT /availability` has a side effect: it rewrites the slug.** Calling it on the product above
+changed `…-enhanced-matte-paper-poster` → `…-enhanced-matte-paper-poster-2` while leaving `access`
+`HIDDEN`. Both slugs still resolve on the storefront (verified 200 on each), so nothing broke — but it
+is a mutation disguised as a no-op, and it was found by probing, not by reading. Treat
+`PUT /availability` as a write (**T02**), not a status check.
+
+**Do instead:** Decide `publishOnCreate` **before** `POST /products`. To publish after the fact, archive
++ recreate — which mints a new id, a new slug, and (because names are de-duplicated silently) needs
+`--force` → **T03**. Renaming and tagging are **dashboard-only**. A private staging collection is also
+**not creatable via the API**: collections have `available` but no `private` flag, and
+`PUT /collections/{id}/products` replaces the entire list → **T05**. Staging must be done by leaving
+products hidden.
+**Source:** 2026-10-04.
+
+<a id="t38"></a>
+### T38 — Promotions cannot publish, target, or reveal a hidden product
+**Status:** OPEN
+**Bites:** With no publish endpoint (T37), the obvious next idea is a promotion — a discount code that
+makes the new products visible or reachable. It does not. A promotion operates on **carts**, and a hidden
+product cannot enter a cart, so a promotion over hidden products has nothing to act on. Creating one
+would be a live discount with no effect.
+**Evidence:** Measured 2026-10-04. The shop's one promotion is `prm_66-jM6bQQQuA12XcdchJIQ`
+(`LASTCHANCE_5_CK`, 5% `PERCENTAGE`, `shippingOption: Excluded`, `status: Live`, `usageCount: 0`).
+Its scope is **`appliesTo: {"type": "ENTIRE_ORDER"}`** with `type: "SHOP_SINGLE"` — order-level, with no
+product, collection, or variant selector anywhere in the payload. `/discounts` and `/coupons` → 404;
+promotions are the only such endpoint.
+Independently confirmed on the read path: storefront `GET /v1/collections/all/products` returns **10
+products, 0 of them non-public** — the hidden products are absent from the storefront entirely, so there
+is no listing for a promotion to attach to.
+**Do instead:** Do not treat promotions as a publishing or staging mechanism. They are a **post-launch
+discount tool**, applied to products that are already `PUBLIC`. Staging = hidden products (**T37**).
+If a launch needs a timed discount, the order is fixed: publish first (dashboard), then create the
+promotion — never the reverse, and never create a live promotion against hidden stock.
+**Source:** 2026-10-04.

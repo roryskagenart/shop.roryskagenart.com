@@ -14,6 +14,7 @@ import {
   type FourthwallCredentials,
   type AuthMode,
   type ProductTemplate,
+  type ProductTemplateDetail,
   type TemplateArea,
   type UploadUrlRequest,
   type UploadUrlResponse,
@@ -78,7 +79,11 @@ export async function apiCall<T>(
 ): Promise<T> {
   const auth = buildAuthHeader(creds);
   if (!auth) {
-    throw new FourthwallApiError('No usable Platform API credentials. Set accessToken or apiUsername/apiPassword.', 401, null);
+    throw new FourthwallApiError(
+      'No usable Platform API credentials. Set accessToken or apiUsername/apiPassword.',
+      401,
+      null
+    );
   }
 
   const res = await fetch(fullUrl(creds, path), {
@@ -122,18 +127,74 @@ function extractErrorDetail(data: unknown): string {
 // High-level API operations
 // ---------------------------------------------------------------------------
 
-/** List available product templates. */
+/**
+ * List available product templates.
+ *
+ * ⚠️ THIS DOES NOT ENUMERATE THE CATALOGUE. The response carries a `total` (measured 605 on
+ * 2026-10-04) but returns only the first 25 rows, and `?page=` / `?size=` are **silently
+ * ignored** — page 7 returns byte-identical ids to page 1. Treat the returned length as
+ * "one page", never as the size of the set. To enumerate you must verify a seed of real
+ * productIds with `getTemplate()`. → T34
+ *
+ * The response keys each entry by `productId` (`pro_…`), not by the dashboard label —
+ * see `ProductTemplate`. Do not map results by name: the template list is mutable and
+ * changed mid-session once already. → T07
+ */
 export async function listTemplates(creds: FourthwallCredentials): Promise<ProductTemplate[]> {
   const res = await apiCall<{ results?: ProductTemplate[] }>(creds, 'GET', '/product-templates');
   return res.results ?? [];
 }
 
-/** Get a single template's customizable areas. */
-export async function getTemplateAreas(creds: FourthwallCredentials, productId: string): Promise<TemplateArea[]> {
-  const res = await apiCall<{ customizableAreas?: TemplateArea[] }>(
-    creds, 'GET', `/product-templates/${encodeURIComponent(productId)}`
+/**
+ * Fetch one template's full detail document by productId.
+ *
+ * This is the only way to reach the whole catalogue, because the list endpoint is capped
+ * (see `listTemplates`). It is also the only source for `colorVariants`, `priceFrom`/`priceTo`,
+ * and `minimumOrdersNumber` — the list rows omit them.
+ *
+ * ⚠️ The detail document exposes **no `sizes` / `sizeVariants` array at all**, on any of the
+ * 605 templates measured. The only size-ish fields are `sizeGuide` (measured `{url: null,
+ * content: null}`) and a `minimumOrdersNumber` scalar. So a template's accepted sizes cannot be
+ * read from this API — do not invent them, and do not omit `sizes` from a create payload
+ * expecting the API to infer them, because that produces exactly one variant → T06.
+ */
+export async function getTemplate(
+  creds: FourthwallCredentials,
+  productId: string
+): Promise<ProductTemplateDetail> {
+  return apiCall<ProductTemplateDetail>(
+    creds,
+    'GET',
+    `/product-templates/${encodeURIComponent(productId)}`
   );
-  return (res.customizableAreas ?? []).filter((a) => a.available !== false);
+}
+
+/**
+ * Get a single template's customizable areas.
+ *
+ * ⚠️ `available` is NOT a usable signal here, and filtering on it silently discards
+ * templates that are live and orderable.
+ *
+ * Measured 2026-10-04 against `pro_DaDG_vA9Qc2o00poXQM-ww` (Cozie Can Cooler): both of
+ * its areas return `available: false`, yet the template is in the catalogue, is
+ * orderable, and renders a design pipeline. The previous filter (`a.available !== false`)
+ * therefore returned an **empty array** for a perfectly usable template, which reads as
+ * "no printable region" and stops the release.
+ *
+ * So the areas are returned as-is and the caller decides. The `available` flag is passed
+ * through untouched so a caller can still filter deliberately — it just must not be
+ * treated as ground truth.
+ */
+export async function getTemplateAreas(
+  creds: FourthwallCredentials,
+  productId: string
+): Promise<TemplateArea[]> {
+  const res = await apiCall<{ customizableAreas?: TemplateArea[] }>(
+    creds,
+    'GET',
+    `/product-templates/${encodeURIComponent(productId)}`
+  );
+  return res.customizableAreas ?? [];
 }
 
 /** Request a pre-signed upload URL. */
@@ -183,7 +244,12 @@ export async function setCollectionProducts(
   collectionId: string,
   req: SetCollectionProductsRequest
 ): Promise<Collection> {
-  return apiCall<Collection>(creds, 'PUT', `/collections/${encodeURIComponent(collectionId)}/products`, req);
+  return apiCall<Collection>(
+    creds,
+    'PUT',
+    `/collections/${encodeURIComponent(collectionId)}/products`,
+    req
+  );
 }
 
 /** List all collections. */

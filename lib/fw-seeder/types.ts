@@ -29,15 +29,36 @@ export type AuthMode = 'bearer' | 'basic' | 'none';
 // ---------------------------------------------------------------------------
 
 export interface ProductTemplate {
+  /**
+   * The template's canonical, opaque identifier — the only thing the API accepts.
+   *
+   * ⚠️ This field was previously declared as `id: string`, which the wire format has
+   * never contained. Measured 2026-10-04 against `GET /open-api/v1.0/product-templates`:
+   * the response keys templates by `productId` (`pro_…`) and carries no `id` at all.
+   * A config built from a dashboard label like `"Mugz M065"` 404s with
+   * `PRODUCT_CATALOG_PRODUCT_ID_NOT_FOUND` — the dashboard label is not an id. → T07
+   */
   productId: string;
   name: string;
   category?: string;
+  brand?: string;
   basePrice?: { amount: number; currency: string };
   productionMethod?: string;
+  supportsBackendRendering?: boolean;
+  slug?: string;
 }
 
 export interface TemplateArea {
-  regionId: string;
+  /**
+   * Per-template identifier used by `regions[].region` when creating a design product.
+   *
+   * ⚠️ Measured `null` on real templates — e.g. `pro_lLYMnccJTqOijMduWMT-fA` (Area Rug) and
+   * `pro_f0b3df34ce6144fb86` (Canvas (in)) both return `regionId: null` with `type: "front"`.
+   * So a null regionId is a valid, orderable template, not a broken one. Do not type this as a
+   * non-nullable `string` and do not filter nulls out — and do not hardcode a value, because
+   * the same field is `"default"` on some templates and `"front"` on others. → T08
+   */
+  regionId: string | null;
   name?: string;
   type?: string;
   available?: boolean;
@@ -49,6 +70,31 @@ export interface TemplateArea {
     inchesHeight?: number;
   };
   placements?: Array<{ id: string; name?: string }>;
+}
+
+/**
+ * The full detail document for one template — `GET /product-templates/{productId}`.
+ *
+ * ⚠️ It carries **no `sizes` or `sizeVariants` field on any of the 605 templates measured
+ * 2026-10-04.** The only size-adjacent keys are `sizeGuide` (measured `{url: null, content:
+ * null}`) and the `minimumOrdersNumber` scalar. A template's accepted sizes are therefore not
+ * readable from this API at all. → T06
+ */
+export interface ProductTemplateDetail {
+  productId: string;
+  name: string;
+  category?: string;
+  brand?: string;
+  slug?: string;
+  description?: string;
+  productionMethod?: string;
+  supportsBackendRendering?: boolean;
+  customizableAreas?: TemplateArea[];
+  colorVariants?: Array<{ color?: { name?: string; hex?: string }; photos?: unknown[] }>;
+  sizeGuide?: { url?: string | null; content?: string | null };
+  minimumOrdersNumber?: number;
+  priceFrom?: { amount: number; currency: string };
+  priceTo?: { amount: number; currency: string };
 }
 
 // ---------------------------------------------------------------------------

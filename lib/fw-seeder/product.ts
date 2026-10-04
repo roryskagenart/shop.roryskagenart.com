@@ -12,6 +12,7 @@ import {
   type PlacementStrategy
 } from './types';
 import { createDesignProduct } from './client';
+import { resolvePublishOnCreate } from './placeholder-guard';
 
 export interface CreateProductOptions {
   credentials: FourthwallCredentials;
@@ -51,7 +52,15 @@ export async function createProduct(
     name: opts.name,
     description: opts.description,
     regions: [region],
-    publishOnCreate: opts.publishOnCreate ?? false
+    // Placeholder artwork (third-party photography standing in for Rory's real work)
+    // is forced to hidden here. This is the only place a product can be published, so
+    // this is where the rule is enforced — no flag or env var can override it.
+    // See lib/fw-seeder/placeholder-guard.ts.
+    publishOnCreate: resolvePublishOnCreate({
+      name: opts.name,
+      description: opts.description,
+      requested: opts.publishOnCreate ?? false
+    })
   };
 
   if (opts.colors?.length) request.colors = opts.colors;
