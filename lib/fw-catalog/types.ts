@@ -51,6 +51,18 @@ export interface ColorVariant {
 /**
  * One template. Deliberately minimal: the fields a fit decision needs, and nothing that would make
  * the file large enough to discourage regeneration.
+ *
+ * ⚠️ `priceFrom` / `priceTo` CAN BE `null`, NOT JUST ABSENT
+ *
+ * The live API returns `null` for both on a template with no published price, and
+ * `build-registry.ts:110-111` casts the detail straight through, so the committed JSON carries
+ * `"priceFrom": null`. Measured on the 2026-10-05 registry: exactly one entry,
+ * `pro_N5AoSUPYR02t-KHfllNdrQ` ("Christmas Stocking"), has `priceFrom: null` AND `priceTo: null`.
+ *
+ * So the honest type is `| null` and the earlier `{...} | undefined` was wrong — it described the
+ * intention, not the data. Widened here rather than casting around it downstream, and deliberately
+ * NOT "fixed" in `build-registry.ts`: normalising null to undefined there would make the committed
+ * JSON differ from a fresh regeneration, and `build-registry.ts --check` would then fail on drift.
  */
 export interface TemplateRegistryEntry {
   productId: string;
@@ -61,8 +73,9 @@ export interface TemplateRegistryEntry {
   supportsBackendRendering: boolean;
   regions: TemplateRegion[];
   colorVariants: ColorVariant[];
-  priceFrom?: { amount: number; currency: string };
-  priceTo?: { amount: number; currency: string };
+  /** Dollars, not cents. → **T09**. `null` when the template publishes no price. */
+  priceFrom?: { amount: number; currency: string } | null;
+  priceTo?: { amount: number; currency: string } | null;
   minimumOrdersNumber?: number;
 
   /**
