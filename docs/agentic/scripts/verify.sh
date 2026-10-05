@@ -17,8 +17,8 @@
 
 set -uo pipefail
 
-BASELINE_TESTS=182
-BASELINE_FILES=14
+BASELINE_TESTS=223
+BASELINE_FILES=15
 FAILED=0
 
 head_() { printf '\n== %s\n' "$*"; }
