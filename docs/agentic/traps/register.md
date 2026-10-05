@@ -591,4 +591,13 @@ being an empty shell** — do not infer sellable stock from a collection appeari
 **Do instead:** Treat hidden as *not listed*, not *not reachable*. Verify by slug as well as by listing —
 it is a legitimate second path when the Platform API is unavailable (**T28**), and it is the cheapest way
 to confirm a product exists without publishing it.
+
+⚠️ **This applies to `ARCHIVED` too, and it is the same trap.** Archiving the defective orphan
+(`5f239c60-…`, the T06 single-variant poster) on 2026-10-04 correctly moved it to
+`access: ARCHIVED` / `state: SOLD_OUT` — but `GET /v1/collections/all/products` **still lists its slug**.
+An archived product is removed from purchase but **not** from the storefront listing, so a duplicate
+listing survives the archive. Confirmed by slug after archiving: still present in the collection payload.
+To actually remove a duplicate from a listing it must be taken out of the collection, not merely
+archived. Archive + `PUT /collections/{id}/products` → **T05** (that call replaces the entire list, so
+send the complete intended list).
 **Source:** 2026-10-04.

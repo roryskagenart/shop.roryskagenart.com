@@ -1,5 +1,14 @@
 # Created product ledger — merch release v0.2.0
 
+> **STATUS: LIVE.** Rory published all products and renamed both collections on 2026-10-04. All 6 are
+> `PUBLIC` / `AVAILABLE`. The collections are **`wall-artwork`** ("Wall Artwork") and **`gifts-goodies`**
+> ("Gifts and Goodies"), each holding 3 offers. The storefront nav reads: *All Products · Gifts and
+> Goodies · Wall Artwork · Studio Editions · Original Artwork* — no code change was needed for the renames,
+> because `getCollections()` reads live stock.
+>
+> Current live state: [`live-state-review.v0.2.0.md`](live-state-review.v0.2.0.md).
+> Follow-up: pricing re-check is backlogged.
+
 **Created:** 2026-10-04 · **Execution ID:** `a1967bc6-6892-4a0a-b813-61b0520216e7`
 **Config:** `docs/releases/seed-config.v0.2.0.json` · **Result:** 6 products, 2 collections, **0 errors**
 
