@@ -83,10 +83,25 @@ Recorded per template in the JSON. These are the template's *available* colours.
 others are single-colour `All-Over Print` / `White`, which is normal for UV and printed
 substrates rather than a data gap.
 
-## Sizes — recorded as `none-exposed-by-api`
+## Sizes — RETRACTED, then re-measured: they are nested
 
-**No template in the 605-template catalogue exposes a `sizes` or `sizeVariants` array.** The
-detail document's complete key set is:
+**An earlier revision of this note recorded `"sizes": "none-exposed-by-api"` for all 11 favourited
+templates, and the KB propagated that as "sizes cannot be read from the API". It was wrong.** There is
+no *top-level* `sizes`/`sizeVariants` key and `sizeGuide` is `{url: null, content: null}` — which is
+precisely what the mistake was: a partial read of the key set reported as a property of the document.
+
+The ladder is nested at **`colorVariants[].sizeVariants[].size`**, and each entry carries
+`{variantId, size, price, available}`. Re-measured live 2026-10-04 and now recorded in
+`verified-templates.json` as `sizes` + `sizePrices`:
+
+| Favourited | colours | sizes | per-size price |
+| :-- | --: | --: | :-- |
+| `Allcolor P001` Enhanced Matte Paper Poster | 1 | 14 | $5.50 – $18.00 |
+| `Allcolor P002` Framed High-Quality Matte Poster | 3 | 12 each | $20.35 – $74.41 |
+| `Allcolor 5478` Soy Wax Candle | 1 | 1 (`Unscented`) | $12.95 |
+| `Mugz M065` Enamel Camp Mug | 1 | 2 (`Slim 12 oz`, `Regular 12 oz`) | — |
+
+The detail document's complete top-level key set is:
 
 ```
 brand, category, colorVariants, customizableAreas, description, minimumOrdersNumber,
@@ -94,22 +109,23 @@ name, priceFrom, priceTo, productId, productionMethod, sizeGuide, slug,
 supportsBackendRendering
 ```
 
-The only size-adjacent fields are `sizeGuide` (measured `{url: null, content: null}` on all
-four templates spot-checked) and the `minimumOrdersNumber` scalar. A template's accepted sizes
-**cannot be read from this API at all**, so the artifact records
-`"sizes": "none-exposed-by-api"` rather than inventing values.
+Note that this key list is the **top level** only. It is exactly this list — a complete, accurate
+reading of the top level — that produced the false "sizes cannot be read" conclusion. The ladder is
+inside `colorVariants`, and a key list stops at the top level.
 
-This is a live risk for **T06** and worth being blunt about: omitting `sizes` from a create
-payload produces exactly one variant, and that bug is on four mugs in production now. If sizes
-cannot be enumerated from the template API they must come from the dashboard per template, or
-the products get created with one variant each. **This needs a decision before `t_5a646577`
-authors any config** — it is not solvable by further probing.
+The earlier conclusion here was also **a live risk for T06, and was wrong in the worst direction**: it
+said sizes "cannot be read from this API at all" and that the question "is not solvable by further
+probing", while a single further `GET` returned them. **T06 remains open** — omitting `sizes` still
+produces exactly one variant, and that bug is on four mugs in production — but it is now *fully
+avoidable*: read the ladder rather than transcribing it from the dashboard.
 
 > An earlier revision of this note listed concrete size arrays per template (`["Slim 12 oz",
-> "Regular 12 oz"]`, 46 canvas sizes, 14 poster sizes, …). Those came from the **MCP browse
-> catalogue**, not the Platform API, and the Platform API does not expose them. They may well be
-> correct — but they are unverified against the surface the seeder writes to, so they have been
-> removed rather than presented as measurements.
+> "Regular 12 oz"]`, 46 canvas sizes, 14 poster sizes, …) sourced from the **MCP browse
+> catalogue**, and rejected them as unverified against the API. They are in fact readable from the
+> API — the poster figures (14, and 12×3) match the live measurement above. So the MCP browse
+> catalogue and the Platform API agree here, and rejecting the figures for lack of verification was
+> over-cautious rather than wrong. The lesson is narrower: **a top-level key list is not a document
+> inventory**.
 
 ## `available` is not a usable signal
 

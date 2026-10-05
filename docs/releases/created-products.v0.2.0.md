@@ -37,7 +37,7 @@ collections do **not** appear, which is the correct behaviour for hidden product
 
 | Product | productId | Why it exists |
 | :-- | :-- | :-- |
-| Today (Atomic Sunrise) — Enhanced Matte Paper Poster | `5f239c60-1127-40c9-8db0-8d3b84a38809` | **Defective: 1 variant where the template offers many.** Created by single-product CLI mode, which has no `--sizes` flag, so `sizes` was never sent. (The exact size count is **not readable from the Platform API** — the detail document exposes no `sizes` array; see **T06**/**T13**. The 1-vs-many comparison is what matters and is measured from the created product.) |
+| Today (Atomic Sunrise) — Enhanced Matte Paper Poster | `5f239c60-1127-40c9-8db0-8d3b84a38809` | **Defective: 1 variant where the template offers many.** Created by single-product CLI mode, which has no `--sizes` flag, so `sizes` was never sent. **Correction 2026-10-04:** this note originally said the size count was not readable from the API. It *is*, nested at `colorVariants[].sizeVariants[].size` — **14 distinct sizes** on that template, so the defect is 1-vs-14. See **T06**, now corrected. |
 
 This is trap **T06** reproduced live. It is **hidden**, so it is not sellable, and there is **no update
 endpoint** (**T03**) — the only remedy is archive + recreate, which is what product #1 above is. The

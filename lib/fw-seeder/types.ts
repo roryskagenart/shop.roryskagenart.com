@@ -75,10 +75,14 @@ export interface TemplateArea {
 /**
  * The full detail document for one template — `GET /product-templates/{productId}`.
  *
- * ⚠️ It carries **no `sizes` or `sizeVariants` field on any of the 605 templates measured
- * 2026-10-04.** The only size-adjacent keys are `sizeGuide` (measured `{url: null, content:
- * null}`) and the `minimumOrdersNumber` scalar. A template's accepted sizes are therefore not
- * readable from this API at all. → T06
+ * Sizes are **readable**, but not from a top-level field and not from `sizeGuide` (measured
+ * `{url: null, content: null}` on every template). They live **nested**:
+ * `colorVariants[].sizeVariants[].size`. Measured 2026-10-04 — 14 sizes on
+ * `pro_15bc29bc8a324d449d`, 36 on `pro_kRSsoYjwSoyyTEmWko5o0A`, 1 on the candle.
+ *
+ * An earlier note here claimed no `sizes` field existed anywhere in the document. That was wrong, and
+ * the error was costly: it was cited as the justification for transcribing sizes by hand, when the launch
+ * had already read them from this endpoint to avoid exactly that. → T06
  */
 export interface ProductTemplateDetail {
   productId: string;
@@ -90,7 +94,33 @@ export interface ProductTemplateDetail {
   productionMethod?: string;
   supportsBackendRendering?: boolean;
   customizableAreas?: TemplateArea[];
-  colorVariants?: Array<{ color?: { name?: string; hex?: string }; photos?: unknown[] }>;
+  colorVariants?: Array<{
+    color?: { name?: string; hex?: string };
+    photos?: unknown[];
+    status?: string;
+    available?: boolean;
+    /**
+     * Per-size variants — **this is where a template's accepted sizes live.**
+     *
+     * ⚠️ Measured 2026-10-04. The detail document has NO top-level `sizes` or `sizeVariants`
+     * key, and `sizeGuide` is `{url: null, content: null}` on every template — but the ladder is
+     * nested at `colorVariants[].sizeVariants[].size`. An earlier note here asserted no such
+     * field existed anywhere in the document; that was a partial read reported as a property of
+     * the set, and it was costly: it justified transcribing sizes by hand when the endpoint had
+     * already returned them. → T06
+     *
+     * Note `price` is per-size and in **dollars** (T09): the framed poster's smallest size is
+     * $20.35 and its largest is a different figure on the same template. A single `profitMargin`
+     * across a ladder therefore produces a price spread you did not choose.
+     */
+    sizeVariants?: Array<{
+      variantId?: string;
+      size?: string;
+      price?: { amount: number; currency: string };
+      available?: boolean;
+    }>;
+  }>;
+  /** Convenience: every distinct `size` across all colour variants. Not from the wire format. */
   sizeGuide?: { url?: string | null; content?: string | null };
   minimumOrdersNumber?: number;
   priceFrom?: { amount: number; currency: string };

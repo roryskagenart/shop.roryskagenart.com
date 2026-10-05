@@ -40,8 +40,19 @@ trace. Commit (not push) before doing anything else.
 
 ## What v0.2.0 actually requires
 
-Recorded here because the plan document is long and the state is easy to misread. **The tooling is merged;
-the release is not executed.**
+Recorded here because the plan document is long and the state is easy to misread. **The plan has since
+executed** — see the status note below.
+
+> **Update 2026-10-04: this release DID execute, and is live.** 6 products were created, verified, then
+> published — all `PUBLIC`. The collections were renamed to **`wall-artwork`** and **`gifts-goodies`**, and
+> the storefront nav picks them up with no code change (`getCollections()` reads live stock). Ledger:
+> `docs/releases/created-products.v0.2.0.md`; live state: `docs/releases/live-state-review.v0.2.0.md`;
+> KB at `1.4.1`.
+>
+> Two items remain open: the T06 orphan is **`ARCHIVED` but still appears in collection listings**
+> (**T39**) — archiving is not enough to drop a duplicate, it must be removed from the collection; and a
+> **pricing re-check is backlogged**. The table below is preserved as **the plan's original pre-execution
+> state**, not as current truth.
 
 **Re-scoped 2026-10-02.** v0.2.0 now **constructs the catalogue only**. Publication, the front-end
 refactor, and the removal of the fabricated-catalogue fallback are **Phase B** — a separate PRD. The

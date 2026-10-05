@@ -1,7 +1,8 @@
 {
   "_source": "Fourthwall Platform API, GET /open-api/v1.0/product-templates/{productId}",
-  "_probedAt": "2026-10-04T16:46:31.902Z",
-  "_warning": "Generated file \u2014 regenerate with `npx tsx lib/fw-seeder/probe-templates.ts --out <path>`. Identifiers are opaque productId values, NOT dashboard labels. The list endpoint is capped at 25 and ignores ?page/?size, so the catalogue was enumerated by verifying a seed of real ids \u2014 never by trusting list length. \u2192 T34",
+  "_probedAt": "2026-10-05T13:18:42.062Z",
+  "_warning": "Generated file — regenerate with `npx tsx lib/fw-seeder/probe-templates.ts --out <path>`. Identifiers are opaque productId values, NOT dashboard labels. The list endpoint is capped at 25 and ignores ?page/?size, so the catalogue was enumerated by verifying a seed of real ids — never by trusting list length. → T34",
+  "_scope": "Detail records for the 12 favourited templates only. The full catalogue is not duplicated here — it ships as docs/agentic/skills/fourthwall-product-catalog/references/catalog_full.csv.",
   "seedPath": "docs/agentic/skills/fourthwall-product-catalog/references/catalog_full.csv",
   "listEndpointReturns": 25,
   "seedIds": 605,
@@ -14,101 +15,56 @@
   "favouritedUnresolved": [
     {
       "label": "Mixam MXM-COMIC",
-      "candidates": ["Custom Comic Book"],
+      "candidates": [
+        "Custom Comic Book"
+      ],
       "reason": "no live template with that exact name"
     }
   ],
-  "_scope": "DETAIL RECORDS FOR THE 12 FAVOURITED TEMPLATES ONLY (11 resolve; see favouritedUnresolved). The full 605-template catalogue is NOT duplicated here \u2014 it already ships as docs/agentic/skills/fourthwall-product-catalog/references/catalog_full.csv (one row per template, 15 columns). Regenerate with: npx tsx lib/fw-seeder/probe-templates.ts --out docs/releases/templates/verified-templates.json",
-  "fullCatalogueCsv": "docs/agentic/skills/fourthwall-product-catalog/references/catalog_full.csv",
   "templates": [
     {
-      "productId": "pro_edded89f55cc4be2b0",
-      "name": "Enamel Camp Mug",
-      "brand": "Mugz",
-      "category": "Drinkware/Coffee Mugs",
-      "productionMethod": "SUBLIMATION",
-      "supportsBackendRendering": true,
-      "favouritedLabel": "Mugz M065",
-      "areas": [
-        {
-          "regionId": "default",
-          "type": "default",
-          "available": true,
-          "dimensions": {
-            "dpi": 300,
-            "pixelsWidth": 2400,
-            "pixelsHeight": 720,
-            "inchesWidth": 8,
-            "inchesHeight": 2.4
-          },
-          "placements": [
-            {
-              "id": "front"
-            },
-            {
-              "id": "back"
-            }
-          ]
-        }
-      ],
-      "colors": ["White"],
-      "sizes": "none-exposed-by-api"
-    },
-    {
-      "productId": "pro_N__f9U5XQJqcP_oCvwk2rw",
-      "name": "Soy Wax Candle In A Clear Glass Jar",
+      "productId": "pro_GOXfR9Q0QkyTcaH6lW0GMw",
+      "name": "Wrapping Paper Sheets (3)",
       "brand": "Allcolor",
-      "category": "Home & Living/Candles",
+      "category": "Home & Living/Holiday",
       "productionMethod": "PRINTED",
-      "supportsBackendRendering": true,
-      "favouritedLabel": "Allcolor 5478",
+      "supportsBackendRendering": false,
+      "favouritedLabel": "Allcolor 1224",
       "areas": [
         {
-          "regionId": "default",
-          "type": "default",
+          "regionId": null,
+          "type": "first",
           "available": true,
-          "dimensions": {
-            "dpi": 300,
-            "pixelsWidth": 1191,
-            "pixelsHeight": 720,
-            "inchesWidth": 3.97,
-            "inchesHeight": 2.4
-          },
+          "dimensions": null,
+          "placements": []
+        },
+        {
+          "regionId": null,
+          "type": "second",
+          "available": true,
+          "dimensions": null,
+          "placements": []
+        },
+        {
+          "regionId": null,
+          "type": "third",
+          "available": true,
+          "dimensions": null,
           "placements": []
         }
       ],
-      "colors": ["White"],
-      "sizes": "none-exposed-by-api"
-    },
-    {
-      "productId": "pro_ZUOYt-04ToOgL7V03qNIYg",
-      "name": "Poker Playing Cards",
-      "brand": "Generic",
-      "category": "Home & Living/Gaming",
-      "productionMethod": "PRINTED",
-      "supportsBackendRendering": true,
-      "favouritedLabel": "Generic 1425",
-      "areas": [
-        {
-          "regionId": "front",
-          "type": "front",
-          "available": true,
-          "dimensions": {
-            "dpi": 300,
-            "pixelsWidth": 780,
-            "pixelsHeight": 1050,
-            "inchesWidth": 2.6,
-            "inchesHeight": 3.5
-          },
-          "placements": [
-            {
-              "id": "front"
-            }
-          ]
-        }
+      "colors": [
+        "White Matte"
       ],
-      "colors": ["White"],
-      "sizes": "none-exposed-by-api"
+      "sizes": [
+        "28.75″×19.75″"
+      ],
+      "sizePrices": {
+        "28.75″×19.75″": {
+          "amount": 9.13,
+          "currency": "USD"
+        }
+      }
     },
     {
       "productId": "pro_DaDG_vA9Qc2o00poXQM-ww",
@@ -154,34 +110,23 @@
           ]
         }
       ],
-      "colors": ["White"],
-      "sizes": "none-exposed-by-api"
-    },
-    {
-      "productId": "pro_i5KAb0LiTo2y4xMrB2JORA",
-      "name": "Glossed Cork Coaster",
-      "brand": "Allcolor",
-      "category": "Home & Living/Accessories",
-      "productionMethod": "SUBLIMATION",
-      "supportsBackendRendering": true,
-      "favouritedLabel": "Allcolor 513",
-      "areas": [
-        {
-          "regionId": "default",
-          "type": "default",
-          "available": true,
-          "dimensions": {
-            "dpi": 300,
-            "pixelsWidth": 1122,
-            "pixelsHeight": 1122,
-            "inchesWidth": 3.74,
-            "inchesHeight": 3.74
-          },
-          "placements": []
-        }
+      "colors": [
+        "White"
       ],
-      "colors": ["All-Over Print"],
-      "sizes": "none-exposed-by-api"
+      "sizes": [
+        "Slim 12 oz",
+        "Regular 12 oz"
+      ],
+      "sizePrices": {
+        "Slim 12 oz": {
+          "amount": 3.42,
+          "currency": "USD"
+        },
+        "Regular 12 oz": {
+          "amount": 3.42,
+          "currency": "USD"
+        }
+      }
     },
     {
       "productId": "pro_KLKGnobKR0u-aO6RghFzxA",
@@ -210,8 +155,137 @@
           ]
         }
       ],
-      "colors": ["All-Over Print"],
-      "sizes": "none-exposed-by-api"
+      "colors": [
+        "All-Over Print"
+      ],
+      "sizes": [
+        "16 oz"
+      ],
+      "sizePrices": {
+        "16 oz": {
+          "amount": 14.95,
+          "currency": "USD"
+        }
+      }
+    },
+    {
+      "productId": "pro_edded89f55cc4be2b0",
+      "name": "Enamel Camp Mug",
+      "brand": "Mugz",
+      "category": "Drinkware/Coffee Mugs",
+      "productionMethod": "SUBLIMATION",
+      "supportsBackendRendering": true,
+      "favouritedLabel": "Mugz M065",
+      "areas": [
+        {
+          "regionId": "default",
+          "type": "default",
+          "available": true,
+          "dimensions": {
+            "dpi": 300,
+            "pixelsWidth": 2400,
+            "pixelsHeight": 720,
+            "inchesWidth": 8,
+            "inchesHeight": 2.4
+          },
+          "placements": [
+            {
+              "id": "front"
+            },
+            {
+              "id": "back"
+            }
+          ]
+        }
+      ],
+      "colors": [
+        "White"
+      ],
+      "sizes": [
+        "12oz"
+      ],
+      "sizePrices": {
+        "12oz": {
+          "amount": 12.42,
+          "currency": "USD"
+        }
+      }
+    },
+    {
+      "productId": "pro_ZUOYt-04ToOgL7V03qNIYg",
+      "name": "Poker Playing Cards",
+      "brand": "Generic",
+      "category": "Home & Living/Gaming",
+      "productionMethod": "PRINTED",
+      "supportsBackendRendering": true,
+      "favouritedLabel": "Generic 1425",
+      "areas": [
+        {
+          "regionId": "front",
+          "type": "front",
+          "available": true,
+          "dimensions": {
+            "dpi": 300,
+            "pixelsWidth": 780,
+            "pixelsHeight": 1050,
+            "inchesWidth": 2.6,
+            "inchesHeight": 3.5
+          },
+          "placements": [
+            {
+              "id": "front"
+            }
+          ]
+        }
+      ],
+      "colors": [
+        "White"
+      ],
+      "sizes": [
+        "2.5\" x 3.5\""
+      ],
+      "sizePrices": {
+        "2.5\" x 3.5\"": {
+          "amount": 13.69,
+          "currency": "USD"
+        }
+      }
+    },
+    {
+      "productId": "pro_N__f9U5XQJqcP_oCvwk2rw",
+      "name": "Soy Wax Candle In A Clear Glass Jar",
+      "brand": "Allcolor",
+      "category": "Home & Living/Candles",
+      "productionMethod": "PRINTED",
+      "supportsBackendRendering": true,
+      "favouritedLabel": "Allcolor 5478",
+      "areas": [
+        {
+          "regionId": "default",
+          "type": "default",
+          "available": true,
+          "dimensions": {
+            "dpi": 300,
+            "pixelsWidth": 1191,
+            "pixelsHeight": 720,
+            "inchesWidth": 3.97,
+            "inchesHeight": 2.4
+          },
+          "placements": []
+        }
+      ],
+      "colors": [
+        "White"
+      ],
+      "sizes": [
+        "Unscented"
+      ],
+      "sizePrices": {
+        "Unscented": {
+          "amount": 12.95,
+          "currency": "USD"
+        }
+      }
     },
     {
       "productId": "pro_f0b3df34ce6144fb86",
@@ -236,8 +310,243 @@
           "placements": []
         }
       ],
-      "colors": ["All-Over Print"],
-      "sizes": "none-exposed-by-api"
+      "colors": [
+        "All-Over Print"
+      ],
+      "sizes": [
+        "6″×6″",
+        "8″×8″",
+        "8″×10″",
+        "8″×12″",
+        "9″×12″",
+        "10″×10″",
+        "10″×20″",
+        "11″×14″",
+        "12″×12″",
+        "12″×16″",
+        "12″×18″",
+        "12″×24″",
+        "12″×36″",
+        "14″×14″",
+        "16″×16″",
+        "16″×20″",
+        "16″×24″",
+        "16″×32″",
+        "16″×48″",
+        "18″×18″",
+        "18″×24″",
+        "18″×26″",
+        "20″×20″",
+        "20″×24″",
+        "20″×28″",
+        "20″×30″",
+        "20″×40″",
+        "20″×60″",
+        "24″×24″",
+        "24″×30″",
+        "24″×32″",
+        "24″×36″",
+        "24″×48″",
+        "26″×26″",
+        "26″×40″",
+        "28″×28″",
+        "28″×40″",
+        "30″×30″",
+        "30″×40″",
+        "30″×60″",
+        "32″×32″",
+        "32″×48″",
+        "36″×36″",
+        "37″×37″",
+        "40″×55″",
+        "40″×60″"
+      ],
+      "sizePrices": {
+        "6″×6″": {
+          "amount": 13.72,
+          "currency": "USD"
+        },
+        "8″×8″": {
+          "amount": 15.25,
+          "currency": "USD"
+        },
+        "8″×10″": {
+          "amount": 15.81,
+          "currency": "USD"
+        },
+        "8″×12″": {
+          "amount": 16.27,
+          "currency": "USD"
+        },
+        "9″×12″": {
+          "amount": 16.32,
+          "currency": "USD"
+        },
+        "10″×10″": {
+          "amount": 16.83,
+          "currency": "USD"
+        },
+        "10″×20″": {
+          "amount": 26.01,
+          "currency": "USD"
+        },
+        "11″×14″": {
+          "amount": 17.34,
+          "currency": "USD"
+        },
+        "12″×12″": {
+          "amount": 17.75,
+          "currency": "USD"
+        },
+        "12″×16″": {
+          "amount": 23.41,
+          "currency": "USD"
+        },
+        "12″×18″": {
+          "amount": 24.99,
+          "currency": "USD"
+        },
+        "12″×24″": {
+          "amount": 28.56,
+          "currency": "USD"
+        },
+        "12″×36″": {
+          "amount": 47.43,
+          "currency": "USD"
+        },
+        "14″×14″": {
+          "amount": 19.38,
+          "currency": "USD"
+        },
+        "16″×16″": {
+          "amount": 28.05,
+          "currency": "USD"
+        },
+        "16″×20″": {
+          "amount": 28.56,
+          "currency": "USD"
+        },
+        "16″×24″": {
+          "amount": 31.11,
+          "currency": "USD"
+        },
+        "16″×32″": {
+          "amount": 53.55,
+          "currency": "USD"
+        },
+        "16″×48″": {
+          "amount": 60.18,
+          "currency": "USD"
+        },
+        "18″×18″": {
+          "amount": 29.84,
+          "currency": "USD"
+        },
+        "18″×24″": {
+          "amount": 33.66,
+          "currency": "USD"
+        },
+        "18″×26″": {
+          "amount": 35.19,
+          "currency": "USD"
+        },
+        "20″×20″": {
+          "amount": 34.68,
+          "currency": "USD"
+        },
+        "20″×24″": {
+          "amount": 35.65,
+          "currency": "USD"
+        },
+        "20″×28″": {
+          "amount": 35.7,
+          "currency": "USD"
+        },
+        "20″×30″": {
+          "amount": 36.72,
+          "currency": "USD"
+        },
+        "20″×40″": {
+          "amount": 59.16,
+          "currency": "USD"
+        },
+        "20″×60″": {
+          "amount": 99.96,
+          "currency": "USD"
+        },
+        "24″×24″": {
+          "amount": 42.84,
+          "currency": "USD"
+        },
+        "24″×30″": {
+          "amount": 50.49,
+          "currency": "USD"
+        },
+        "24″×32″": {
+          "amount": 51,
+          "currency": "USD"
+        },
+        "24″×36″": {
+          "amount": 52.02,
+          "currency": "USD"
+        },
+        "24″×48″": {
+          "amount": 69.36,
+          "currency": "USD"
+        },
+        "26″×26″": {
+          "amount": 55.08,
+          "currency": "USD"
+        },
+        "26″×40″": {
+          "amount": 88.23,
+          "currency": "USD"
+        },
+        "28″×28″": {
+          "amount": 56.1,
+          "currency": "USD"
+        },
+        "28″×40″": {
+          "amount": 68.34,
+          "currency": "USD"
+        },
+        "30″×30″": {
+          "amount": 61.2,
+          "currency": "USD"
+        },
+        "30″×40″": {
+          "amount": 64.26,
+          "currency": "USD"
+        },
+        "30″×60″": {
+          "amount": 114.24,
+          "currency": "USD"
+        },
+        "32″×32″": {
+          "amount": 55.08,
+          "currency": "USD"
+        },
+        "32″×48″": {
+          "amount": 90.78,
+          "currency": "USD"
+        },
+        "36″×36″": {
+          "amount": 88.74,
+          "currency": "USD"
+        },
+        "37″×37″": {
+          "amount": 137.7,
+          "currency": "USD"
+        },
+        "40″×55″": {
+          "amount": 120.36,
+          "currency": "USD"
+        },
+        "40″×60″": {
+          "amount": 137.7,
+          "currency": "USD"
+        }
+      }
     },
     {
       "productId": "pro_kRSsoYjwSoyyTEmWko5o0A",
@@ -262,8 +571,75 @@
           "placements": []
         }
       ],
-      "colors": ["Black", "Red Oak", "White"],
-      "sizes": "none-exposed-by-api"
+      "colors": [
+        "Black",
+        "Red Oak",
+        "White"
+      ],
+      "sizes": [
+        "8\" x 10\"",
+        "10\" x 10\"",
+        "11\" x 14\"",
+        "12\" x 12\"",
+        "12\" x 16\"",
+        "12\" x 18\"",
+        "14\" x 14\"",
+        "16\" x 16\"",
+        "16\" x 20\"",
+        "18\" x 18\"",
+        "18\" x 24\"",
+        "24\" x 36\""
+      ],
+      "sizePrices": {
+        "8\" x 10\"": {
+          "amount": 20.35,
+          "currency": "USD"
+        },
+        "10\" x 10\"": {
+          "amount": 23.41,
+          "currency": "USD"
+        },
+        "11\" x 14\"": {
+          "amount": 30.09,
+          "currency": "USD"
+        },
+        "12\" x 12\"": {
+          "amount": 28.51,
+          "currency": "USD"
+        },
+        "12\" x 16\"": {
+          "amount": 31.57,
+          "currency": "USD"
+        },
+        "12\" x 18\"": {
+          "amount": 32.13,
+          "currency": "USD"
+        },
+        "14\" x 14\"": {
+          "amount": 33.15,
+          "currency": "USD"
+        },
+        "16\" x 16\"": {
+          "amount": 36.98,
+          "currency": "USD"
+        },
+        "16\" x 20\"": {
+          "amount": 41.77,
+          "currency": "USD"
+        },
+        "18\" x 18\"": {
+          "amount": 42.33,
+          "currency": "USD"
+        },
+        "18\" x 24\"": {
+          "amount": 45.39,
+          "currency": "USD"
+        },
+        "24\" x 36\"": {
+          "amount": 74.41,
+          "currency": "USD"
+        }
+      }
     },
     {
       "productId": "pro_15bc29bc8a324d449d",
@@ -288,42 +664,119 @@
           "placements": []
         }
       ],
-      "colors": ["White"],
-      "sizes": "none-exposed-by-api"
+      "colors": [
+        "White"
+      ],
+      "sizes": [
+        "5\" x 7\"",
+        "8\" x 10\"",
+        "10\" x 10\"",
+        "11\" x 14\"",
+        "12\" x 12\"",
+        "12\" x 16\"",
+        "12\" x 18\"",
+        "14\" x 14\"",
+        "16\" x 16\"",
+        "16\" x 20\"",
+        "18\" x 18\"",
+        "18\" x 24\"",
+        "20\" x 30\"",
+        "24\" x 36\""
+      ],
+      "sizePrices": {
+        "5\" x 7\"": {
+          "amount": 5.5,
+          "currency": "USD"
+        },
+        "8\" x 10\"": {
+          "amount": 7,
+          "currency": "USD"
+        },
+        "10\" x 10\"": {
+          "amount": 8,
+          "currency": "USD"
+        },
+        "11\" x 14\"": {
+          "amount": 9.75,
+          "currency": "USD"
+        },
+        "12\" x 12\"": {
+          "amount": 9,
+          "currency": "USD"
+        },
+        "12\" x 16\"": {
+          "amount": 11,
+          "currency": "USD"
+        },
+        "12\" x 18\"": {
+          "amount": 11.5,
+          "currency": "USD"
+        },
+        "14\" x 14\"": {
+          "amount": 10,
+          "currency": "USD"
+        },
+        "16\" x 16\"": {
+          "amount": 11.75,
+          "currency": "USD"
+        },
+        "16\" x 20\"": {
+          "amount": 12,
+          "currency": "USD"
+        },
+        "18\" x 18\"": {
+          "amount": 12.5,
+          "currency": "USD"
+        },
+        "18\" x 24\"": {
+          "amount": 13,
+          "currency": "USD"
+        },
+        "20\" x 30\"": {
+          "amount": 13,
+          "currency": "USD"
+        },
+        "24\" x 36\"": {
+          "amount": 18,
+          "currency": "USD"
+        }
+      }
     },
     {
-      "productId": "pro_GOXfR9Q0QkyTcaH6lW0GMw",
-      "name": "Wrapping Paper Sheets (3)",
+      "productId": "pro_i5KAb0LiTo2y4xMrB2JORA",
+      "name": "Glossed Cork Coaster",
       "brand": "Allcolor",
-      "category": "Home & Living/Holiday",
-      "productionMethod": "PRINTED",
-      "supportsBackendRendering": false,
-      "favouritedLabel": "Allcolor 1224",
+      "category": "Home & Living/Accessories",
+      "productionMethod": "SUBLIMATION",
+      "supportsBackendRendering": true,
+      "favouritedLabel": "Allcolor 513",
       "areas": [
         {
-          "regionId": null,
-          "type": "first",
+          "regionId": "default",
+          "type": "default",
           "available": true,
-          "dimensions": null,
-          "placements": []
-        },
-        {
-          "regionId": null,
-          "type": "second",
-          "available": true,
-          "dimensions": null,
-          "placements": []
-        },
-        {
-          "regionId": null,
-          "type": "third",
-          "available": true,
-          "dimensions": null,
+          "dimensions": {
+            "dpi": 300,
+            "pixelsWidth": 1122,
+            "pixelsHeight": 1122,
+            "inchesWidth": 3.74,
+            "inchesHeight": 3.74
+          },
           "placements": []
         }
       ],
-      "colors": ["White Matte"],
-      "sizes": "none-exposed-by-api"
+      "colors": [
+        "All-Over Print"
+      ],
+      "sizes": [
+        "3.74″×3.74″"
+      ],
+      "sizePrices": {
+        "3.74″×3.74″": {
+          "amount": 5.44,
+          "currency": "USD"
+        }
+      }
     },
     {
       "productId": "pro_lLYMnccJTqOijMduWMT-fA",
@@ -342,8 +795,43 @@
           "placements": []
         }
       ],
-      "colors": ["All-over print"],
-      "sizes": "none-exposed-by-api"
+      "colors": [
+        "All-over print"
+      ],
+      "sizes": [
+        "24″×36″",
+        "36″×24″",
+        "36″×60″",
+        "48″×72″",
+        "60″×36″",
+        "72″×48″"
+      ],
+      "sizePrices": {
+        "24″×36″": {
+          "amount": 24.06,
+          "currency": "USD"
+        },
+        "36″×24″": {
+          "amount": 24.06,
+          "currency": "USD"
+        },
+        "36″×60″": {
+          "amount": 48.2,
+          "currency": "USD"
+        },
+        "48″×72″": {
+          "amount": 75.25,
+          "currency": "USD"
+        },
+        "60″×36″": {
+          "amount": 48.2,
+          "currency": "USD"
+        },
+        "72″×48″": {
+          "amount": 75.25,
+          "currency": "USD"
+        }
+      }
     }
   ]
 }

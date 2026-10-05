@@ -138,7 +138,8 @@ prints well beats a long one that does not.
 
 ```jsonc
 { "profitMargin": 10 }
- // +$10.00 on top of base cost
+
+// +$10.00 on top of base cost
 ```
 
 A **margin** is a USD amount; a **margin %** is a fraction of the retail price. Fourthwall's guidance:
@@ -163,17 +164,39 @@ Omitting `sizes` does **not** create all sizes. It creates exactly one variant, 
 This bit production once and was **reproduced live** during a measured launch: a poster template that
 offers a full size ladder produced a product with 1.
 
-⚠️ **You cannot read the ladder from the API.** The detail document exposes **no `sizes` or
-`sizeVariants` array on any of the 605 templates** — only `colorGuide`/`sizeGuide` (`{url: null,
-content: null}`) and a `minimumOrdersNumber` scalar. So "does this size exist on that template?" is not
-answerable from `GET /product-templates/{id}`. Take the size strings from the **Fourthwall dashboard
-product page** and record where each came from; do not copy a list between templates on the assumption
-that they are the same. Numbers sourced from the MCP _browse_ catalogue are a different surface and are
-**unverified against the API the seeder writes to** → **T13**.
+⚠️ **Read the ladder from the API — it is nested, not absent.** The detail document has **no top-level
+`sizes` or `sizeVariants` key**, and `sizeGuide` is `{url: null, content: null}` on every template. That
+is what made an earlier version of this skill conclude the sizes were unreadable and recommended
+transcribing them by hand. They are readable, at **`colorVariants[].sizeVariants[].size`**:
+
+| template                         | colours | **distinct** sizes | sizeVariants | per-size price  |
+| :------------------------------- | ------: | -----------------: | -----------: | :-------------- |
+| Enhanced Matte Paper Poster      |       1 |             **14** |           14 | $5.50 – $18.00  |
+| Framed High-Quality Matte Poster |       3 |             **12** |       **36** | $20.35 – $74.41 |
+
+⚠️ **"How many sizes?" has two honest answers: 12 or 36.** Sizes are per colour variant, so 3 colours ×
+12 sizes = 36 `sizeVariants` carrying only **12 distinct** sizes. Both figures appear in the wild and
+they describe different products — 12 variants vs 36. State which you mean, and de-duplicate the
+ladder before building a config.
+
+Each entry is `{variantId, size, price, available}` — so **per-size pricing is readable too**, which
+this skill previously said it was not.
+
+```ts
+const sizes = [
+  ...new Set(
+    (detail.colorVariants ?? []).flatMap((c) =>
+      (c.sizeVariants ?? []).map((s) => s.size).filter(Boolean)
+    )
+  )
+];
+```
 
 - **Single-product CLI mode has no `--sizes` flag** → it cannot produce a correct multi-size product at
   all. Use config mode for anything with a size ladder. → **T06**
-- **The API's size spelling is inconsistent** (`"20 oz"`, not `"20oz"`). Copy exactly, never normalise.
+- **The API's size spelling is inconsistent** (`"20 oz"`, not `"20oz"`; note the `″` character in the
+  poster sizes). Copy exactly, never normalise — a normalised string will not match a variant.
+- Sizes are **per colour variant**, so de-duplicate rather than shipping colour × size.
 
 ---
 

@@ -69,11 +69,23 @@ Fourthwall name (asserted in `lib/fourthwall/__tests__/collections.test.ts`).
 
 <a id="t06"></a>
 ### T06 — Omitting `sizes` creates exactly one variant
-**Status:** OPEN (already live in production)
+**Status:** OPEN (already live in production). **Mitigation added 2026-10-04** — see below.
 **Bites:** The shop's four mugs each have **only** a `White, 11oz` variant. The intent was a size range.
 **Evidence:** `GET /open-api/v1.0/products` → each mug has one variant, `attributes.size: "11oz"`.
-**Do instead:** Pass `sizes` explicitly. Watch the API's inconsistent spelling (`"20 oz"`).
-**Source:** 2026-10-01.
+**Sizes ARE readable from the API — the earlier claim that they are not was wrong.** There is no
+top-level `sizes`/`sizeVariants` key and `sizeGuide` is `{url: null, content: null}`, which is exactly
+what made that false conclusion. The ladder is **nested** at `colorVariants[].sizeVariants[].size`, and
+each entry also carries `price` and `available`. Re-measured live 2026-10-04: 14 sizes on
+`pro_15bc29bc8a324d449d` ($5.50–$18.00); on `pro_kRSsoYjwSoyyTEmWko5o0A` **12 distinct sizes across
+3 colours = 36 `sizeVariants`** ($20.35–$74.41) — so "how many sizes" is ambiguous unless you say
+whether you mean the ladder or the variants. `probe-templates.ts` now records de-duplicated `sizes`
+and `sizePrices` instead of writing
+`"none-exposed-by-api"`. **So this trap is fully avoidable: read the ladder, do not transcribe it, and
+never omit it.**
+**Do instead:** Pass `sizes` explicitly, read from the detail endpoint. Note the API's inconsistent
+spelling (`"20 oz"`, not `"20oz"`; and the `″` character in poster sizes) — copy exactly, never
+normalise, or the string will not match a variant. Sizes are per colour variant: de-duplicate.
+**Source:** 2026-10-01; corrected 2026-10-04.
 
 ---
 
@@ -158,15 +170,26 @@ regions:
 Plus buildable `Desk Mat 12"x18"` / `15.5"x31.5"` / mouse pads, `All-Over Print Basic Pillow`, and
 `Soy Wax Candle`. A measured launch shipped products on the first two.
 
-**Correction to this entry, 2026-10-04:** the size counts previously quoted here ("14 sizes",
-"36 sizes") are **not readable from the Platform API** — the detail document exposes no `sizes` or
-`sizeVariants` array on any of the 605 templates, only `sizeGuide` (`{url: null, content: null}`)
-and `minimumOrdersNumber`. Those figures came from the MCP *browse* catalogue, a different surface,
-and are **unverified against the API the seeder writes to**. Do not treat them as measured; and note
-the risk they create → **T06**. A third, sharper correction: `Home & Living/Wall Art` has **five**
-templates, not two — the other three (`Canvas (in)`, `Thin Canvas (in)`, `Matte Paper Framed Poster
-With Mat`) are real and resolvable but have `supportsBackendRendering: false`. So "no wall art" is
-wrong twice over: the category exists, and the failure mode for 3 of its 5 members is *not
+**Correction to this entry, 2026-10-04:** the size counts quoted here ("14 sizes", "36 sizes") came
+from the MCP *browse* catalogue — a different surface from the Platform API the seeder writes to — and
+were initially recorded as unverifiable. **They are in fact readable from the API, nested:** the detail
+document has no top-level `sizes`/`sizeVariants` key and `sizeGuide` is `{url: null, content: null}`,
+but `colorVariants[].sizeVariants[].size` carries the ladder. Re-measured live against
+`GET /open-api/v1.0/product-templates/{productId}`:
+
+| productId | colour variants | sizes | per-size price |
+| :-- | --: | --: | :-- |
+| `pro_15bc29bc8a324d449d` (Enhanced Matte Paper Poster) | 1 | **14** | $5.50 – $18.00 |
+| `pro_kRSsoYjwSoyyTEmWko5o0A` (Framed High-Quality Matte Poster) | 3 | **12 each** | $20.35 – $74.41 |
+
+So the original figures were right by coincidence of the right source, and the "not readable" claim
+was a **partial read reported as a property of the set** — the same error class as **T33**/**T34**, and
+the third time it has appeared. Each `sizeVariants[]` entry also carries its own `price` and
+`available`, so per-size pricing *is* readable, which this entry previously said it was not. The risk
+in **T06** is unchanged: omitting `sizes` from a create payload still yields exactly one variant → now
+avoidable entirely, by reading them.
+
+A third, sharper correction: `Home & Living/Wall Art` has **five**
 backend-renderable* rather than *absent*.
 **Do instead:** **Never infer a capability from a partial read** → **T34**. Before declaring a category
 impossible, enumerate the whole catalogue by direct `productId` lookup and probe the specific

@@ -124,11 +124,17 @@ interface TemplateRecord {
   }>;
   colors?: string[];
   /**
-   * These templates have no `sizes` / `sizeVariants` array at all — the detail endpoint exposes
-   * only `colorVariants` and a `sizeGuide` of `{url: null, content: null}`. Recorded explicitly
-   * so "none" is a measurement, not an omission. → T06
+   * The template's accepted sizes, read from `colorVariants[].sizeVariants[].size`.
+   *
+   * ⚠️ Measured 2026-10-04: these live NESTED. There is no top-level `sizes`/`sizeVariants` key
+   * and `sizeGuide` is `{url: null, content: null}` on every template — which is what made an
+   * earlier version of this probe report `"none-exposed-by-api"` for all 605 templates. That was a
+   * partial read reported as a property of the set, and it propagated into the KB as "sizes cannot
+   * be read from the API". → T06
    */
-  sizes: string[] | 'none-exposed-by-api';
+  sizes: string[];
+  /** Distinct `size` values across colour variants, with the per-size price where present. */
+  sizePrices?: Record<string, { amount: number; currency: string }>;
 }
 
 async function main(): Promise<void> {
@@ -311,8 +317,29 @@ async function main(): Promise<void> {
       colors: (detail.colorVariants ?? [])
         .map((c: { color?: { name?: string } }) => c.color?.name)
         .filter((n: string | undefined): n is string => !!n),
-      // Measured: the detail document has no sizes/sizeVariants field at all. → T06
-      sizes: 'none-exposed-by-api'
+      // Sizes are NESTED under each colour variant. Measured 2026-10-04: the framed poster's
+      // 3 colour variants each carry 12 sizeVariants; the matte poster's single White variant
+      // carries 14. De-duplicated so the ladder is a set, not colour x size. → T06
+      sizes: [
+        ...new Set(
+          (detail.colorVariants ?? []).flatMap((c) =>
+            (c.sizeVariants ?? [])
+              .map((s: { size?: string }) => s.size)
+              .filter((s): s is string => !!s)
+          )
+        )
+      ],
+      // Per-size price where the template publishes one. Dollars, not cents → T09.
+      sizePrices: Object.fromEntries(
+        (detail.colorVariants ?? []).flatMap((c) =>
+          (c.sizeVariants ?? [])
+            .filter(
+              (s): s is { size?: string; price?: { amount: number; currency: string } } =>
+                !!s.size && !!s.price
+            )
+            .map((s) => [s.size as string, s.price as { amount: number; currency: string }])
+        )
+      )
     });
   }
 

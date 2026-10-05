@@ -152,11 +152,15 @@ export async function listTemplates(creds: FourthwallCredentials): Promise<Produ
  * (see `listTemplates`). It is also the only source for `colorVariants`, `priceFrom`/`priceTo`,
  * and `minimumOrdersNumber` — the list rows omit them.
  *
- * ⚠️ The detail document exposes **no `sizes` / `sizeVariants` array at all**, on any of the
- * 605 templates measured. The only size-ish fields are `sizeGuide` (measured `{url: null,
- * content: null}`) and a `minimumOrdersNumber` scalar. So a template's accepted sizes cannot be
- * read from this API — do not invent them, and do not omit `sizes` from a create payload
- * expecting the API to infer them, because that produces exactly one variant → T06.
+ * ⚠️ Sizes ARE readable, but **nested** — not from a top-level field, and not from `sizeGuide`
+ * (measured `{url: null, content: null}` on every template checked). They live at
+ * `colorVariants[].sizeVariants[].size`, and each sizeVariant also carries its own `price`
+ * (dollars, → T09) and `available`.
+ *
+ * So: do **not** invent sizes, and do **not** omit `sizes` from a create payload expecting the API
+ * to infer them, because that produces exactly one variant → T06. But do not transcribe them by hand
+ * either — read them here. An earlier note on this file claimed no such field existed anywhere in
+ * the document; that was a partial read reported as a property of the set.
  */
 export async function getTemplate(
   creds: FourthwallCredentials,
