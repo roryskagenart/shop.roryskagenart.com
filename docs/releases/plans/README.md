@@ -34,14 +34,26 @@ trace. Commit (not push) before doing anything else.
 | :--- | :--- | :--- | :--- |
 | [`pr-gh-oauth_DRAFT.md`](https://github.com/roryskagenart/shop.roryskagen.com/blob/docs/gh-oauth-plan/docs/releases/plans/pr-gh-oauth_DRAFT.md) — GitHub OAuth for the `/import` admin gate | **DRAFT**, open PR | `docs/gh-oauth-plan` · **PR #2** (draft, unmerged) | **OQ1–OQ4** — whose GitHub account owns the OAuth App; OAuth App vs GitHub App; whether to keep Basic auth as a fallback; session lifetime |
 | [`pr-merch-catalog-v0.2.0_DRAFT.md`](pr-merch-catalog-v0.2.0_DRAFT.md) — **v0.2.0 "Staged Catalogue"** (re-scoped 2026-10-02 from "Sellable Storefront") | **DRAFT**, not started | `docs/merch-catalog-staged` (planned) | **OQ1–OQ8** — `beat-bop`'s dead image (T18) blocks the build outright; then the 1500px gate and `apparel` viability; see the document's open-questions table |
+| [`pr-launch-playground-v0.3.0_DRAFT.md`](pr-launch-playground-v0.3.0_DRAFT.md) — **v0.3.0 "Launch Playground"**: local registry cache, async status, search/recommend, approval wizard, admin dashboard | **DRAFT**, not started | `docs/launch-playground-v0.3.0` (planned, no PR yet) | **OQ1–OQ7** — **OQ1 is the blocker: which Supabase project** (the shop has none today, and the KB says do not conflate). Then **B1**, a verified backup, before any write. Note **T37**: there is no publish path, so "approval" ends at a human clicking the dashboard |
 
 > ⚠️ The `pr-gh-oauth` document lives on the **unmerged** `docs/gh-oauth-plan` branch, so it is linked to
 > its GitHub blob rather than a relative path — it does not exist on `main`.
 
 ## What v0.2.0 actually requires
 
-Recorded here because the plan document is long and the state is easy to misread. **The tooling is merged;
-the release is not executed.**
+Recorded here because the plan document is long and the state is easy to misread. **The plan has since
+executed** — see the status note below.
+
+> **Update 2026-10-04: this release DID execute, and is live.** 6 products were created, verified, then
+> published — all `PUBLIC`. The collections were renamed to **`wall-artwork`** and **`gifts-goodies`**, and
+> the storefront nav picks them up with no code change (`getCollections()` reads live stock). Ledger:
+> `docs/releases/created-products.v0.2.0.md`; live state: `docs/releases/live-state-review.v0.2.0.md`;
+> KB at `1.4.1`.
+>
+> Two items remain open: the T06 orphan is **`ARCHIVED` but still appears in collection listings**
+> (**T39**) — archiving is not enough to drop a duplicate, it must be removed from the collection; and a
+> **pricing re-check is backlogged**. The table below is preserved as **the plan's original pre-execution
+> state**, not as current truth.
 
 **Re-scoped 2026-10-02.** v0.2.0 now **constructs the catalogue only**. Publication, the front-end
 refactor, and the removal of the fabricated-catalogue fallback are **Phase B** — a separate PRD. The

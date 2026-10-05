@@ -10,7 +10,7 @@
 | Gate | Command | Baseline |
 | :--- | :--- | :--- |
 | Typecheck | `./node_modules/.bin/tsc --noEmit` (alias `npm run lint`) | 0 errors |
-| Tests | `./node_modules/.bin/vitest run` (alias `npm test`) | **137 passed / 11 files** |
+| Tests | `./node_modules/.bin/vitest run` (alias `npm test`) | **163 passed / 13 files** |
 | Format | `prettier --check` — **opt-in only**, see below | advisory |
 | CI | `.github/workflows/ci.yml` → `npm ci`, lint, test | must be green |
 
@@ -68,6 +68,13 @@ the docs needs re-checking.
 This happened for real: `verify.sh` carried `BASELINE_TESTS=97` while the suite ran 137, so **the gate
 failed on a clean tree** and the failure text ("a DROP means a guard was deleted") pointed at the opposite
 of the truth. Baseline re-derived and fixed 2026-10-03.
+
+And again on 2026-10-04: the baseline said **137** while **HEAD ran 139** — a pre-existing 2-test
+drift, nothing to do with the change that surfaced it. Confirmed by stashing all work and running
+the suite at a clean `HEAD` (139), then re-running without the one new test file (139), then with it
+(163). So: **137 → 139 was already wrong, and my change contributed the 139 → 163.** Derive the
+number by *subtracting* what you added, not by reading your own new total — otherwise you inherit
+someone else's drift and record it as yours. Baseline re-derived to 163 / 13 files.
 
 Corollary: a **drop** in the test count means a guard was deleted, not that the suite got faster. Treat it
 as a failure until proven otherwise — but re-derive first, because a stale baseline looks identical to a

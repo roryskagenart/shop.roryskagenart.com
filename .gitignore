@@ -34,6 +34,10 @@ yarn-error.log*
 # directory `.vercelignore` excludes from deployments, and it was previously only excluded there.
 .workbuddy-ai
 
+# Kanban worker worktrees. Each spawned worker gets its own checkout and branch under here, so
+# parallel workers cannot collide on the same files. Never commit — the contents are other branches.
+.worktrees/
+
 # vercel
 .vercel
 

@@ -94,15 +94,21 @@ explicitly** — do not let a release name drift between them.
 
 | | |
 | :--- | :--- |
-| Test files | **11** |
-| Tests | **137 passing** |
-| Baseline verified | 2026-10-02, `tsc --noEmit` 0 errors |
+| Test files | **14** |
+| Tests | **182 passing** |
+| Baseline verified | 2026-10-04, `tsc --noEmit` 0 errors |
 
 Test files:
 
 - `lib/fourthwall/__tests__/collections.test.ts`
 - `lib/fourthwall/__tests__/importer.test.ts`
 - `lib/fourthwall/__tests__/merch.test.ts`
+- `lib/fw-catalog/__tests__/fit.test.ts`\n- `lib/fw-seeder/__tests__/client.test.ts`
+- `lib/fw-seeder/__tests__/client.templates.test.ts`
+- `lib/fw-seeder/__tests__/collection.test.ts`
+- `lib/fw-seeder/__tests__/placeholder-guard.test.ts`
+- `lib/fw-seeder/__tests__/product.test.ts`
+- `lib/fw-seeder/__tests__/upload.test.ts`
 - `app/api/webhooks/fourthwall/__tests__/route.test.ts`
 - `components/__tests__/public-surfaces.test.ts`
 - `middleware.test.ts`

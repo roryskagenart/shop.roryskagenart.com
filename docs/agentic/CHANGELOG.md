@@ -8,6 +8,83 @@ This file tracks the **KB**, not the application. The application's release reco
 
 ---
 
+## [1.4.1] — 2026-10-04
+
+### Added
+
+- **T39 — a hidden product is still readable by direct slug.** `GET /v1/products/{slug}` on the
+  **Storefront** API returns **200** with the full product for an `access: HIDDEN` product, while the
+  collection listing omits it entirely. Measured on `gondoleu-soy-wax-candle`: storefront → 200,
+  `access: HIDDEN`; `GET /v1/collections/{id}/products` for the same collection → 404.
+  **Hidden means "not listed", not "not reachable."** Two consequences: `publishOnCreate: false` is a
+  reasonable staging mechanism (**T37**) because nothing surfaces it in browsing, **and** staging is not
+  access control — anyone with the slug can read it, so it must never carry anything sensitive. Also
+  means a slug re-check is a valid verification path (**T28**) when the Platform API is unavailable.
+
+## [1.4.0] — 2026-10-04
+
+Produced by a measured merch launch: 6 Fourthwall products created and verified. Every entry below was
+learned by hitting it, and **three of them correct claims this KB previously asserted.**
+
+### Added
+
+- **New skill [`skills/fourthwall-product-launch/SKILL.md`](skills/fourthwall-product-launch/SKILL.md)** —
+  the full create-and-ship procedure, written from a launch that actually ran: the 605/274 catalogue
+  split, the 45-template non-transparency subset, print-fit gating by aspect ratio, `profitMargin` as a
+  USD amount, the `sizes` requirement, verify-by-re-`GET`, and a table of what the API **cannot** do.
+- **T34 — "25 templates" was page 1.** `GET /product-templates` returns **25 rows against
+  `total: 605`**; `?page=`/`?size=` are **silently ignored** (page 7 is byte-identical to page 1). The
+  `total` field was in the response body that was read and ignored. A partial read here caused a product
+  line to be wrongly scoped out of existence — the same error class as T33, one layer up. Enumeration
+  requires a seed of real ids verified by direct lookup; `lib/fw-seeder/probe-templates.ts` does this.
+- **T35 — a vendored project in `lib/` can hold the answer you are missing.** *Reported:* a
+  `lib/fw-revops/` tree carried a complete measured API profile plus its own `.git` and a `.env.local`
+  with 17 live credentials, **untracked by the parent repo**, so invisible to `git status`, to KB
+  search, and to review. ⚠️ **Re-checked 2026-10-04 and the cited tree does not reproduce** — there is
+  no `lib/fw-revops/` and no nested `.git` in this checkout. The *lesson* holds (the integrated
+  `skills/fourthwall-product-catalog/` was answering T34 while an agent asserted 25 templates from the
+  API); the *specific tree* does not, so do not cite it as proof of a credential-bearing nested repo.
+- **T36 — upscaling and background-removal cannot manufacture what JPEG destroyed.** Cloudinary
+  `e_background_removal` returns RGBA with **0 transparent pixels, 99.8% at alpha 224–255**; LANCZOS adds
+  no information; colour-keying fails because the corners are mid-tone. Only **45 of 274** buildable
+  templates avoid the transparency requirement.
+- **T37 — publishing, renaming and tagging are dashboard-only.** `PATCH /products/{id}` → 405;
+  `/access`, `/publish`, `/tags`, `/products/{id}/collections` → 404. `publishOnCreate` is create-time
+  only. `PUT /availability` returns **200 but does not publish**, and **rewrites the slug** — a write
+  disguised as a no-op.
+- **T38 — promotions cannot publish, target, or reveal a hidden product.** The shop's promotion is
+  `appliesTo: ENTIRE_ORDER` with no product selector; a promotion acts on carts, and a hidden product
+  cannot enter one.
+- **Three code defects fixed**, each measured before the fix:
+  - `ProductTemplate.id` → **`productId`** — the wire format has no `id` field at all
+  - `getTemplateAreas()` no longer filters on `available` — it turned a **live, orderable** template into
+    an empty array, which reads as "no printable region" and silently stops a release
+  - added the real `brand`, `supportsBackendRendering` and `slug` fields
+- **`lib/fw-seeder/` gained `probe-templates.ts`** (read-only, GET-only catalogue probe that generates the
+  template reference), **`placeholder-art.ts`** + **`placeholder-guard.ts`** — the guard makes third-party
+  placeholder photography **structurally impossible to publish** via `createProduct`, with 13 tests.
+
+### Changed
+
+- **T13 — "There is no wall-art template" → RESOLVED, and the conclusion was wrong.** Wall art **is**
+  available: `pro_15bc29bc8a324d449d` (Enhanced Matte Paper Poster, $5.50) and
+  `pro_kRSsoYjwSoyyTEmWko5o0A` (Framed Matte Poster, $20.35), both verified live against the Platform API. The original
+  entry generalised from a page-1 read — the exact failure T34 now names. Two products were shipped on
+  these templates.
+- **T03 — "there is no update endpoint" needs one addition.** `PATCH`/`PUT` on a product are indeed 405,
+  but **`PUT /products/{id}/availability` does respond (200)** — it just does not change `access`. Worth
+  recording because its side effect (slug rewrite) is not obvious from a 200.
+
+### Removed
+
+- **A vendored `lib/fw-revops/` tree (22M, untracked)** — *reported as removed; **not reproducible in
+  this checkout**, see T35 above.* Its unique content was integrated into
+  `skills/fourthwall-product-catalog/references/` (`product-create-schema.md`,
+  `catalog-pull-notes.md`). Any tree removed for shipping live credentials must have been confirmed
+  deleted with the credential file, not assumed.
+
+---
+
 ## [1.3.0] — 2026-10-02
 
 ### Added

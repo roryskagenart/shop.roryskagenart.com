@@ -1,0 +1,92 @@
+{
+  "_note": "Austin Art Garage works — 3 of11. Created 2026-10-04. DRY RUN: nothing in this file has been applied to Fourthwall.",
+  "_provenance": {
+    "source": "https://austinartgarage.com/collections/rory-skagen — Rory Skagen's own listing, used with explicit permission",
+    "artworkHosting": "Cloudinary xjilp2pq (uploaded 2026-10-04, 1500x1000 JPEG each)",
+    "permission": "Explicit permission granted by Jaden 2026-10-04 to use the Austin Art Garage content"
+  },
+  "_scope": {
+    "diffed": "All 33 works in the AAG collection were compared against lib/fourthwall/rory-artworks-data.json (137 works, 42 Available).",
+    "alreadyOurs": 19,
+    "falsePositives": [
+      "Balloon Cats -> The Balloon Cats II",
+      "Broken Record -> The Broken Record",
+      "78704 -> Austin 78704 (South Austin Zip)"
+    ],
+    "genuinelyNew": 11,
+    "inThisConfig": 3,
+    "deferred": 8,
+    "deferredReason": "Source files are 830x563. Every non-transparency template region in the catalogue is larger than 830px, so a create would require an upscale. T36: upscaling adds no detail, and there is no update endpoint (T03), so a bad create is permanent. Blocked on high-res masters from Rory.",
+    "deferredWorks": [
+      "Tuna 4 Cats (830x563)",
+      "Tiger (830x563)",
+      "Going to HEB (830x563)",
+      "Fridge (830x563)",
+      "Cold Beer (830x623)",
+      "Biere Larue (830x563)",
+      "Monster 7 (830x563)",
+      "Monster 1 (830x563)"
+    ],
+    "apparelNote": "9 templates DO fit all 11 artworks at 450x336 (DTG/DTFX tees, hoodies, sweatshirts, polo) — measured against all 605 templates in fw-revops/fw-templates-skill/working/catalog_details.json. Every one requires cutout transparency, which T36 measured as unmanufacturable from JPEG. Blocked on transparent PNG masters, not on template availability."
+  },
+  "credentials": {},
+  "artworks": [
+    {
+      "id": "art-lobedicus",
+      "name": "Lobedicus",
+      "description": "\"Lobedicus\" by Rory Skagen. Original painting, reproduced as a soy wax candle in a clear glass jar. Full-bleed print on the label, so the artwork wraps the vessel. Hand-poured soy wax with a natural scent that suits a room rather than shouting over it. Doubles as home decor — the kind of object you notice because it looks like a picture first and a candle second.",
+      "imageUrl": "https://res.cloudinary.com/xjilp2pq/image/upload/v1791210283/rory-skagen/austin-art-garage/rory-skagen/lobedicus.jpg",
+      "imageWidth": 1500,
+      "imageHeight": 1000,
+      "imageContentType": "image/jpeg"
+    },
+    {
+      "id": "art-gnardred",
+      "name": "Gnardred",
+      "description": "\"Gnardred\" by Rory Skagen. Original painting, reproduced as a soy wax candle in a clear glass jar. Full-bleed print on the label, so the artwork wraps the vessel. Hand-poured soy wax with a natural scent that suits a room rather than shouting over it. Doubles as home decor — the kind of object you notice because it looks like a picture first and a candle second.",
+      "imageUrl": "https://res.cloudinary.com/xjilp2pq/image/upload/v1791210304/gnardred.jpg",
+      "imageWidth": 1500,
+      "imageHeight": 1000,
+      "imageContentType": "image/jpeg"
+    },
+    {
+      "id": "art-kelzon-5",
+      "name": "Kelzon 5",
+      "description": "\"Kelzon 5\" by Rory Skagen. Original painting, reproduced as a soy wax candle in a clear glass jar. Full-bleed print on the label, so the artwork wraps the vessel. Hand-poured soy wax with a natural scent that suits a room rather than shouting over it. Doubles as home decor — the kind of object you notice because it looks like a picture first and a candle second.",
+      "imageUrl": "https://res.cloudinary.com/xjilp2pq/image/upload/v1791210305/kelzon-5.jpg",
+      "imageWidth": 1500,
+      "imageHeight": 1000,
+      "imageContentType": "image/jpeg"
+    }
+  ],
+  "templates": [
+    {
+      "templateId": "pro_N__f9U5XQJqcP_oCvwk2rw",
+      "templateName": "Soy Wax Candle In A Clear Glass Jar",
+      "region": "default",
+      "_regionVerified": "GET /product-templates/pro_N__f9U5XQJqcP_oCvwk2rw, 2026-10-04 — regionId 'default', 1191x720 @300dpi, available: true",
+      "_fit": "Artwork 1500x1000 vs region 1191x720: retained 87%, covers 1.26. Passes (>=85% retained, >=1.0 covers). No upscale.",
+      "_onlyOption": "Of 45 JPEG-safe (non-transparency) templates this is the ONLY region that fits these three. Apparel fits too but needs alpha -> T36.",
+      "profitMargin": 12.95,
+      "_pricing": "Template base is $12.95. profitMargin is a USD amount on top of base, not a percentage. This reproduces the existing live candles exactly ($25.90 retail), which verified at $25.90 on the Gondoleu product. 100% markup on cost.",
+      "targetPrice": 25.9,
+      "sizes": ["Unscented"],
+      "_sizesNote": "The template publishes exactly one size. Sent explicitly anyway — omitting sizes creates exactly one variant as a side effect (T06), and being explicit keeps the intent legible.",
+      "publishOnCreate": false,
+      "_publishNote": "FALSE. publishOnCreate is create-time-only and there is no publish endpoint (T37), so this is a deliberate one-way door: hidden now, dashboard click later. Never set true for a bulk create."
+    }
+  ],
+  "collections": [
+    {
+      "handle": "candles",
+      "name": "Candles",
+      "description": "Rory Skagen artwork on hand-poured soy wax candles.",
+      "pairs": [
+        { "artworkId": "art-lobedicus", "templateId": "pro_N__f9U5XQJqcP_oCvwk2rw" },
+        { "artworkId": "art-gnardred", "templateId": "pro_N__f9U5XQJqcP_oCvwk2rw" },
+        { "artworkId": "art-kelzon-5", "templateId": "pro_N__f9U5XQJqcP_oCvwk2rw" }
+      ]
+    }
+  ],
+  "_collectionWarning": "T04/T05: the collection slug is minted by Fourthwall from the NAME, so passing 'candles' does not control it — the previous release produced 'museum-canvas-archival-prints' from 'Museum Canvas & Archival Prints' and the taxonomy title no longer overrode it. Also PUT /collections/{id}/products REPLACES the entire list, so a partial send silently drops the others. Verify by re-reading the collection after applying, not by trusting a 200."
+}
