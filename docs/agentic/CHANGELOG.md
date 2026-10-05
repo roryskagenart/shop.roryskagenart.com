@@ -8,6 +8,19 @@ This file tracks the **KB**, not the application. The application's release reco
 
 ---
 
+## [1.4.1] — 2026-10-04
+
+### Added
+
+- **T39 — a hidden product is still readable by direct slug.** `GET /v1/products/{slug}` on the
+  **Storefront** API returns **200** with the full product for an `access: HIDDEN` product, while the
+  collection listing omits it entirely. Measured on `gondoleu-soy-wax-candle`: storefront → 200,
+  `access: HIDDEN`; `GET /v1/collections/{id}/products` for the same collection → 404.
+  **Hidden means "not listed", not "not reachable."** Two consequences: `publishOnCreate: false` is a
+  reasonable staging mechanism (**T37**) because nothing surfaces it in browsing, **and** staging is not
+  access control — anyone with the slug can read it, so it must never carry anything sensitive. Also
+  means a slug re-check is a valid verification path (**T28**) when the Platform API is unavailable.
+
 ## [1.4.0] — 2026-10-04
 
 Produced by a measured merch launch: 6 Fourthwall products created and verified. Every entry below was

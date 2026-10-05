@@ -573,3 +573,22 @@ discount tool**, applied to products that are already `PUBLIC`. Staging = hidden
 If a launch needs a timed discount, the order is fixed: publish first (dashboard), then create the
 promotion — never the reverse, and never create a live promotion against hidden stock.
 **Source:** 2026-10-04.
+
+<a id="t39"></a>
+### T39 — a hidden product is still readable by direct slug
+**Status:** OPEN
+**Bites:** "Hidden" reads like "inaccessible", and it is not. A product with `access: HIDDEN` is absent
+from every collection listing and from the storefront nav, so it looks completely gone — yet
+`GET /v1/products/{slug}` on the **Storefront** API still returns **200** with the full record. Two
+consequences pull in opposite directions: `publishOnCreate: false` **is** a sound staging mechanism
+(browsing cannot reach it), **and** staging is **not** access control (anyone with the slug can read it,
+so it must never carry anything sensitive).
+**Evidence:** Measured 2026-10-04. `GET /v1/products/gondoleu-soy-wax-candle` with the storefront token →
+**200**, `access: HIDDEN`. `GET /v1/collections/col_NIvGTHCLQGOQByOcB-iS4A/products` (the collection that
+holds it) → **404**. Also verified: the two new collections appear in `GET /v1/collections` while
+returning 404 on their own product list, so **an available collection can appear in the listing while
+being an empty shell** — do not infer sellable stock from a collection appearing → **T04**.
+**Do instead:** Treat hidden as *not listed*, not *not reachable*. Verify by slug as well as by listing —
+it is a legitimate second path when the Platform API is unavailable (**T28**), and it is the cheapest way
+to confirm a product exists without publishing it.
+**Source:** 2026-10-04.
