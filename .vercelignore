@@ -8,5 +8,9 @@
 # Local agent working notes (memory logs, snapshots). Never part of a deployment.
 .workbuddy-ai
 
+# Kanban worker worktrees. These are full checkouts of other branches — uploading them would ship
+# every other worker's working state into this deployment, and they are large.
+.worktrees
+
 # Incremental TypeScript build cache — regenerated during the build, no reason to ship it.
 tsconfig.tsbuildinfo
