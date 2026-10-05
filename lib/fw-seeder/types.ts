@@ -75,10 +75,14 @@ export interface TemplateArea {
 /**
  * The full detail document for one template — `GET /product-templates/{productId}`.
  *
- * ⚠️ It carries **no `sizes` or `sizeVariants` field on any of the 605 templates measured
- * 2026-10-04.** The only size-adjacent keys are `sizeGuide` (measured `{url: null, content:
- * null}`) and the `minimumOrdersNumber` scalar. A template's accepted sizes are therefore not
- * readable from this API at all. → T06
+ * Sizes are **readable**, but not from a top-level field and not from `sizeGuide` (measured
+ * `{url: null, content: null}` on every template). They live **nested**:
+ * `colorVariants[].sizeVariants[].size`. Measured 2026-10-04 — 14 sizes on
+ * `pro_15bc29bc8a324d449d`, 36 on `pro_kRSsoYjwSoyyTEmWko5o0A`, 1 on the candle.
+ *
+ * An earlier note here claimed no `sizes` field existed anywhere in the document. That was wrong, and
+ * the error was costly: it was cited as the justification for transcribing sizes by hand, when the launch
+ * had already read them from this endpoint to avoid exactly that. → T06
  */
 export interface ProductTemplateDetail {
   productId: string;
