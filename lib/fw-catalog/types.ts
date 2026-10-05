@@ -64,6 +64,18 @@ export interface TemplateRegistryEntry {
   priceFrom?: { amount: number; currency: string };
   priceTo?: { amount: number; currency: string };
   minimumOrdersNumber?: number;
+
+  /**
+   * Denormalised by `build-registry.ts` so a UI can filter the JSON without importing `fit.ts`.
+   *
+   * ⚠️ **This is a coarse filter, not a verdict.** It mirrors `supportsBackendRendering`; real
+   * usability is per *region* and also depends on the artwork — a buildable template can have a
+   * region with no dimensions, and `nonTransparency` says nothing about whether the chosen artwork
+   * actually fits. Call `evaluateTemplate()` for the answer that matters.
+   */
+  buildable?: boolean;
+  /** True when this template needs no cutout transparency, so a JPEG source can print on it (T36). */
+  nonTransparency?: boolean;
 }
 
 export interface TemplateRegistry {

@@ -272,7 +272,21 @@ async function main(): Promise<void> {
     nonTransparency: entries.filter(
       (e) => e.supportsBackendRendering && !requiresTransparency(e.productionMethod)
     ).length,
-    entries
+    entries: entries.map((e) => ({
+      ...e,
+      /**
+       * Denormalised so a UI can filter the JSON without importing `fit.ts`.
+       *
+       * ⚠️ This mirrors — it does not replace — `evaluateTemplate()`. **Usability is per region**:
+       * a buildable template can still have a region with no dimensions, and a non-transparent
+       * requirement depends on the *artwork*, not the template. Treat this as the cheapest
+       * possible filter (274 / 45) and let `evaluateTemplate()` produce the real verdict.
+       */
+      buildable: e.supportsBackendRendering,
+      /** The 45 that a JPEG source can satisfy without cutout transparency (T36). */
+      nonTransparency:
+        e.supportsBackendRendering && !requiresTransparency(e.productionMethod),
+    }))
   };
 
   console.log(`\nRegistry: ${registry.total} templates`);

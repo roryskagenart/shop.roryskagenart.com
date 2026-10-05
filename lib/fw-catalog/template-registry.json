@@ -1,6 +1,6 @@
 {
   "_source": "Fourthwall Platform API, GET /open-api/v1.0/product-templates/{productId}",
-  "_generatedAt": "2026-10-05T14:46:30.773Z",
+  "_generatedAt": "2026-10-05T15:23:21.035Z",
   "_provenance": "Projected from the full catalogue detail pull; fit-relevant fields only.",
   "_warning": "Generated file. Regenerate: `npx tsx lib/fw-catalog/build-registry.ts`. Verify: `--check` (exits 1 on drift). Identifiers are opaque productId values, NOT dashboard labels → T07. The list endpoint is capped at 25 and ignores ?page/?size, so the catalogue was enumerated by verifying a seed of real ids → T34. `available` is recorded but is NOT a usability signal → T08. Sizes are nested under colorVariants[].sizeVariants[] → T06.",
   "total": 605,
@@ -194,7 +194,9 @@
         "amount": 39.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro__Bh8rYvsRL6Mr-WEeuMMBQ",
@@ -1619,7 +1621,9 @@
         "amount": 34.3,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro__bw1lug-S9qtAWjykD6lmQ",
@@ -1772,7 +1776,9 @@
         "amount": 54.06,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro__nnH5FmfTvCGMqBhmQtggw",
@@ -2544,7 +2550,9 @@
         "amount": 18.8,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro__xPZ4ufxSDejZW70y73ZLQ",
@@ -2730,7 +2738,9 @@
         "amount": 22.18,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro__z-oosgJRLyvcwmHVScXGw",
@@ -2775,7 +2785,9 @@
         "amount": 21.37,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_-_eKMgWnQ_2iC1HibqY3FQ",
@@ -2925,7 +2937,9 @@
         "amount": 42.59,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_-bngIa6-TG2W4a5dOab_6g",
@@ -4444,7 +4458,9 @@
         "amount": 22.2,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_-wHFTR2xRbO-5bYAvLSVng",
@@ -4493,7 +4509,9 @@
         "amount": 15.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_-YCra144Tx-PgZ8B_FasKw",
@@ -4665,7 +4683,9 @@
         "amount": 39.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_03a16bb288d64a999f",
@@ -5235,7 +5255,9 @@
         "amount": 32.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_03d87f32d60d4f23bf",
@@ -5410,7 +5432,9 @@
         "amount": 14.39,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_05kHMsNpQZubKsMrnysvyQ",
@@ -5720,7 +5744,9 @@
         "amount": 28.84,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_094123c3de2846919f",
@@ -5987,7 +6013,9 @@
         "amount": 22.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_0a6837d41a7e4b08ae",
@@ -6137,7 +6165,9 @@
         "amount": 15.79,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_0a6e6486e8e540b89a",
@@ -6354,7 +6384,9 @@
         "amount": 16.49,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_0aad9ccaf31e46aaa7",
@@ -6426,7 +6458,9 @@
         "amount": 18.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_0b1e46cc9bb141569b",
@@ -6724,7 +6758,9 @@
         "amount": 29.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_0b3ff6cb56e44d3d83",
@@ -6830,7 +6866,9 @@
         "amount": 34.55,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_0cf324babe944c9d8a",
@@ -6918,7 +6956,9 @@
         "amount": 20.35,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_0g-taS96SNG72vtsRqa9dg",
@@ -7690,7 +7730,9 @@
         "amount": 53.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_0rcBR12kSWK9o2QYX2vwcQ",
@@ -7803,7 +7845,9 @@
         "amount": 25.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_11FMuGWJQBubJq_HHwQIVg",
@@ -8062,7 +8106,9 @@
         "amount": 39.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_12abde5f29c34ffbb2",
@@ -8182,7 +8228,9 @@
         "amount": 13.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_149a5b8d86ae4219aa",
@@ -8250,7 +8298,9 @@
         "amount": 32.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_14kNy0EJQkqopY-Z9Pm41A",
@@ -10312,7 +10362,9 @@
         "amount": 26.79,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_15bc29bc8a324d449d",
@@ -10474,7 +10526,9 @@
         "amount": 18,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_162",
@@ -12371,7 +12425,9 @@
         "amount": 24.2,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_16d14027368d4e1380",
@@ -12459,7 +12515,9 @@
         "amount": 17.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_17PsFKJxRfmdgOA5htEg3A",
@@ -12869,7 +12927,9 @@
         "amount": 27.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_181",
@@ -13201,7 +13261,9 @@
         "amount": 10.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_1a2e46bb4e47400da4",
@@ -13323,7 +13385,9 @@
         "amount": 25.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_1a8d1f40e76847d182",
@@ -15053,7 +15117,9 @@
         "amount": 23.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_1BGgRpFrQCSYM5ErNQXkkA",
@@ -15263,7 +15329,9 @@
         "amount": 26.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_1eLW7ATDQb28GlzE_0faGA",
@@ -16497,7 +16565,9 @@
         "amount": 27.73,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_1f46aeeb877742278c",
@@ -16567,7 +16637,9 @@
         "amount": 15.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_1gvCBQcGTHKvxcvxq8y9nA",
@@ -17071,7 +17143,9 @@
         "amount": 25.65,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_1nCF0eI2SQed0-8f0KPP0g",
@@ -17564,7 +17638,9 @@
         "amount": 33.58,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_1s7gYHiTStKJWTlEZlOW9A",
@@ -17979,7 +18055,9 @@
         "amount": 26.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_1Usu24vTR8uxdZCaFzQlNA",
@@ -18349,7 +18427,9 @@
         "amount": 50.21,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_1wD3FeF5R6Cl_EvMehNlfQ",
@@ -18904,7 +18984,9 @@
         "amount": 44.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_2-YGyY4UT8G5_I6-9hsELw",
@@ -19086,7 +19168,9 @@
         "amount": 12.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_20aAvMMERQGgO2e-mQ-rHg",
@@ -19269,7 +19353,9 @@
         "amount": 34,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_20fbecd2f2914d29ba",
@@ -19325,7 +19411,9 @@
         "amount": 23.2,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_22456d0504af4ae38f",
@@ -19410,7 +19498,9 @@
         "amount": 21.37,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_225EgiqLR46twTj-hVwwRg",
@@ -19997,7 +20087,9 @@
         "amount": 28.17,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_24d46afb47894141ac",
@@ -20096,7 +20188,9 @@
         "amount": 25.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_266",
@@ -20306,7 +20400,9 @@
         "amount": 13.79,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_267",
@@ -20530,7 +20626,9 @@
         "amount": 10.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_26e320173a5c414aa5",
@@ -20618,7 +20716,9 @@
         "amount": 23.41,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_27a6557d9c564482ac",
@@ -20663,7 +20763,9 @@
         "amount": 9.13,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_27e6f768f23748a193",
@@ -20984,7 +21086,9 @@
         "amount": 22.33,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_27WhPXBCSWq817VYXNHqMQ",
@@ -21170,7 +21274,9 @@
         "amount": 41,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_29fbc999ea114ad187",
@@ -21276,7 +21382,9 @@
         "amount": 24.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_2ASanCB9QcmAuVHyVqp4fQ",
@@ -21886,7 +21994,9 @@
         "amount": 36.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_2BlKPhJOR0ykg0GTKlW1zg",
@@ -22066,7 +22176,9 @@
         "amount": 12.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_2c9db4638f4a46ddb1",
@@ -22172,7 +22284,9 @@
         "amount": 22.82,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_2CK8ZHbUR66AWy-GWkDugg",
@@ -22721,7 +22835,9 @@
         "amount": 16.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_2e72c3fc0a18466baf",
@@ -22931,7 +23047,9 @@
         "amount": 27.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_2fd801a1877f4ebc83",
@@ -23528,7 +23646,9 @@
         "amount": 31.39,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_2HOe2JR0R0STSEs600GLXQ",
@@ -24015,7 +24135,9 @@
         "amount": 17.4,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_2rGgEOJ6QHO-K_OPKVielA",
@@ -24299,7 +24421,9 @@
         "amount": 42.02,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_2rm7OCxJTSmpw8keIxABOg",
@@ -24489,7 +24613,9 @@
         "amount": 55.49,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_3004c1c36d6a48b481",
@@ -24561,7 +24687,9 @@
         "amount": 14.14,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_30b82b45c67847e090",
@@ -25407,7 +25535,9 @@
         "amount": 20.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_31837649f7494d55a5",
@@ -25495,7 +25625,9 @@
         "amount": 17.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_31c84f7365a3487db9",
@@ -25617,7 +25749,9 @@
         "amount": 23.41,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_31mYu_1cTt6N_qiDZs3_1Q",
@@ -26047,7 +26181,9 @@
         "amount": 37.49,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_320",
@@ -26221,7 +26357,9 @@
         "amount": 44.63,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_327d59c5edf3474f8b",
@@ -26343,7 +26481,9 @@
         "amount": 21.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_339e20ee1a0d4fbf90",
@@ -26425,7 +26565,9 @@
         "amount": 46.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_342",
@@ -26668,7 +26810,9 @@
         "amount": 25.2,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_34ff78d967d045089f",
@@ -26969,7 +27113,9 @@
         "amount": 37.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_358",
@@ -27043,7 +27189,9 @@
         "amount": 5.36,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_367",
@@ -27112,7 +27260,9 @@
         "amount": 15.56,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_379",
@@ -27187,7 +27337,9 @@
         "amount": 17.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_380",
@@ -28554,7 +28706,9 @@
         "amount": 31.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_382",
@@ -28616,7 +28770,9 @@
         "amount": 20.35,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_386c05f635934cc893",
@@ -28760,7 +28916,9 @@
         "amount": 37,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_38fYCFwWQGKz3ZTgDTRrYg",
@@ -28932,7 +29090,9 @@
         "amount": 11.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_39opWs4LRzWBM9ISCKzLYQ",
@@ -29602,7 +29762,9 @@
         "amount": 43.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_39t0AIq0QeWdmOKym5sx9g",
@@ -29671,7 +29833,9 @@
         "amount": 18.31,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_3b62f1a76ced4b0e91",
@@ -29774,7 +29938,9 @@
         "amount": 53.01,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_3dc77725fdeb42eaba",
@@ -29942,7 +30108,9 @@
         "amount": 21.31,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_3e7ecf3562a14dd29b",
@@ -30064,7 +30232,9 @@
         "amount": 38.63,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_3Ttr7zN_TRaFg-wQbD3Ibw",
@@ -30164,7 +30334,9 @@
         "amount": 9.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_3urOKteTRXmHmLyvNM_48w",
@@ -30502,7 +30674,9 @@
         "amount": 23.35,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_3WAxijeHRa60iWOTsmDCeA",
@@ -31286,7 +31460,9 @@
         "amount": 20.32,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_400",
@@ -31400,7 +31576,9 @@
         "amount": 42.71,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_44jlY4dLSyqO6hVPVUT91A",
@@ -31779,7 +31957,9 @@
         "amount": 18.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_4557da81f18a428983",
@@ -31867,7 +32047,9 @@
         "amount": 22.39,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_472jqtviRyOt1g_GSgZyeg",
@@ -32188,7 +32370,9 @@
         "amount": 45.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_47cc3ae6bb2b4598b7",
@@ -33904,7 +34088,9 @@
         "amount": 21.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_4932ab400111449b9b",
@@ -34401,7 +34587,9 @@
         "amount": 28.4,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_4a2702c209f3452c98",
@@ -34514,7 +34702,9 @@
         "amount": 24.39,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_4a2ee4301ccc465ab3",
@@ -34652,7 +34842,9 @@
         "amount": 52.96,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_4b5a93f26f5a4aa18c",
@@ -34890,7 +35082,9 @@
         "amount": 20.31,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_4cb50ea9e50d4f83be",
@@ -34982,7 +35176,9 @@
         "amount": 58,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_4eca61554bd446bd8a",
@@ -35036,7 +35232,9 @@
         "amount": 31.89,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_4v5OfYhyRx62KW5b7Oj6Uw",
@@ -35102,7 +35300,9 @@
         "amount": 10.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_4ZeCol9JSD-UFXXEKu0oDw",
@@ -35267,7 +35467,9 @@
         "amount": 36.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_56b446304d1042a587",
@@ -35314,7 +35516,9 @@
         "amount": 17.35,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_56eb094e138c4d9686",
@@ -35420,7 +35624,9 @@
         "amount": 29.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_573566ef15794bf3ac",
@@ -35988,7 +36194,9 @@
         "amount": 22.85,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_5786d059adeb42899b",
@@ -36751,7 +36959,9 @@
         "amount": 18.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_5814NoKJQH6eXQTHvl2xIA",
@@ -36940,7 +37150,9 @@
         "amount": 37.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_58970849183e48909d",
@@ -37075,7 +37287,9 @@
         "amount": 18.59,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_59cd3c45c45243a180",
@@ -37197,7 +37411,9 @@
         "amount": 25.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_5a05131dbedf41a39b",
@@ -37266,7 +37482,9 @@
         "amount": 18.31,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_5a4e01c344354b4691",
@@ -37388,7 +37606,9 @@
         "amount": 19.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_5b687f51cd014cbdb8",
@@ -37555,7 +37775,9 @@
         "amount": 18.27,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_5c050a83edbe4512bf",
@@ -37680,7 +37902,9 @@
         "amount": 23.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_5c5SsTWySS-NqLM0vDiPoQ",
@@ -38037,7 +38261,9 @@
         "amount": 21.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_5e83ed05a7d7439d90",
@@ -38373,7 +38599,9 @@
         "amount": 48.9,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_5ewa0klOT6CSoYc2nrBEgw",
@@ -38420,7 +38648,9 @@
         "amount": 17.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_5fc5327b16f342f494",
@@ -38534,7 +38764,9 @@
         "amount": 32.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_5txqjQSlSLiJ6gH6voRyYQ",
@@ -38900,7 +39132,9 @@
         "amount": 39.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_5wvPkh6JQXy-kwNFpRWnfg",
@@ -39092,7 +39326,9 @@
         "amount": 23.35,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_5zlGgpmnQXKDccJxtqH4Jg",
@@ -39175,7 +39411,9 @@
         "amount": 18.19,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_6-zjqRfMQF-5wR-9AVz2NQ",
@@ -39784,7 +40022,9 @@
         "amount": 22.37,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_606c3460ee07410a83",
@@ -40624,7 +40864,9 @@
         "amount": 20.16,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_608f843c73bc411295",
@@ -40741,7 +40983,9 @@
         "amount": 51,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_60zZalF0S_qvXk3of8Sfeg",
@@ -42762,7 +43006,9 @@
         "amount": 26.79,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_655f212a028d4d25a3",
@@ -42866,7 +43112,9 @@
         "amount": 29.53,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_6695501bccab43a481",
@@ -43148,7 +43396,9 @@
         "amount": 36.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_67cxn1sxQiiR61I-C84v0w",
@@ -43800,7 +44050,9 @@
         "amount": 34.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_69437fbde05a4d5882",
@@ -43935,7 +44187,9 @@
         "amount": 16.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_69TltvBrTfOWxYV3nAy8Qg",
@@ -44206,7 +44460,9 @@
         "amount": 28.76,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_6a8bdd4fd14d4cf687",
@@ -44267,7 +44523,9 @@
         "amount": 5.05,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_6AanP-RRS1mRYvvJZkaQ5A",
@@ -45717,7 +45975,9 @@
         "amount": 18.78,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_6ae602fcb22447bfbc",
@@ -47008,7 +47268,9 @@
         "amount": 20.79,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_6Bpv2ppeRQinzGwuQqmMYw",
@@ -47374,7 +47636,9 @@
         "amount": 20.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_6c19c15a7ef340eca6",
@@ -47464,7 +47728,9 @@
         "amount": 24.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_6df4f9b3f9214e08ac",
@@ -47527,7 +47793,9 @@
         "amount": 7.09,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_6f0c60d31d964328bf",
@@ -47668,7 +47936,9 @@
         "amount": 18.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_6VB0qAOWR42Kwu5TnYEZuw",
@@ -47722,7 +47992,9 @@
         "amount": 23.2,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_6z4GUurATC2-mwQ_hms_5g",
@@ -48698,7 +48970,9 @@
         "amount": 20.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_6ZGxApdMR9qmkO-yiIowNQ",
@@ -48850,7 +49124,9 @@
         "amount": 22.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_702a01e5c3db45619b",
@@ -48895,7 +49171,9 @@
         "amount": 9.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_70dcd2d2a91f478a8f",
@@ -48942,7 +49220,9 @@
         "amount": 17.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_7503382199934b548c",
@@ -48994,7 +49274,9 @@
         "amount": 20.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_79afd248d4ff4f6da4",
@@ -49099,7 +49381,9 @@
         "amount": 18.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_7bbd49f02b464f75b0",
@@ -49332,7 +49616,9 @@
         "amount": 21.58,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_7ce95852dc604199b4",
@@ -49497,7 +49783,9 @@
         "amount": 26.43,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_7cIdZpgFT92Apc-R5PKjAg",
@@ -50059,7 +50347,9 @@
         "amount": 8.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_7e0b6faa756c4fea88",
@@ -50145,7 +50435,9 @@
         "amount": 3.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_7eff6f9b20aa4edb83",
@@ -50418,7 +50710,9 @@
         "amount": 10.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_7f754db073634df38e",
@@ -50509,7 +50803,9 @@
         "amount": 22.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_7N9YvQIBSSavluOVj3VAfQ",
@@ -50581,7 +50877,9 @@
         "amount": 10.15,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_7pHhXNY8Q5mxJzkzx9BqGg",
@@ -50851,7 +51149,9 @@
         "amount": 42.79,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_8-Q6ojdASCqwX60LQsGBwg",
@@ -51187,7 +51487,9 @@
         "amount": 20.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_839d603f3d004932aa",
@@ -51354,7 +51656,9 @@
         "amount": 29.07,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_84a6a84c94de4fdca2",
@@ -51459,7 +51763,9 @@
         "amount": 19.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_854035a9adc0423a8d",
@@ -51506,7 +51812,9 @@
         "amount": 16.8,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_8651c9165922482da0",
@@ -52218,7 +52526,9 @@
         "amount": 18.83,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_87106e8200b84e15b9",
@@ -52277,7 +52587,9 @@
         "amount": 17.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_871eada7472541908b",
@@ -52451,7 +52763,9 @@
         "amount": 45.65,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_8be1acca2fe7403f89",
@@ -55650,7 +55964,9 @@
         "amount": 21.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_8d6f583046aa433f93",
@@ -58477,7 +58793,9 @@
         "amount": 20.48,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_8ULc2oZITRKO0d9viilMFg",
@@ -58531,7 +58849,9 @@
         "amount": 8.67,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_8vXYBo5SQX6Aer9yXhY3SA",
@@ -58879,7 +59199,9 @@
         "amount": 43,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_8zM_V_iFRGSx0_PWg3P8Dw",
@@ -59249,7 +59571,9 @@
         "amount": 29.58,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_92081b33cf7042aebd",
@@ -61386,7 +61710,9 @@
         "amount": 16.48,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_9225cd05703244a291",
@@ -61430,7 +61756,9 @@
         "amount": 15.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_938721852e0648fc83",
@@ -61499,8 +61827,8 @@
               "available": true
             },
             {
-              "variantId": "prv_pk-9YD9fRb-fszhwryXfcg",
-              "size": "6X",
+              "variantId": "prv_IaTHJJkxTga93OXtaQMoWg",
+              "size": "6",
               "price": {
                 "amount": 22.39,
                 "currency": "USD"
@@ -61508,8 +61836,8 @@
               "available": true
             },
             {
-              "variantId": "prv_IaTHJJkxTga93OXtaQMoWg",
-              "size": "6",
+              "variantId": "prv_pk-9YD9fRb-fszhwryXfcg",
+              "size": "6X",
               "price": {
                 "amount": 22.39,
                 "currency": "USD"
@@ -61536,7 +61864,9 @@
         "amount": 22.39,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_955a8fc6bc9b4b068f",
@@ -63657,7 +63987,9 @@
         "amount": 31.43,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_95invf6OQiKI7BuoXvvfYQ",
@@ -64826,7 +65158,9 @@
         "amount": 32.43,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_97e7d2acfa5f4375bb",
@@ -64923,7 +65257,9 @@
         "amount": 22.35,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_98f6cb9959664463a7",
@@ -65064,7 +65400,9 @@
         "amount": 17.59,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_99",
@@ -65404,7 +65742,9 @@
         "amount": 17.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_99dc11a51e574aec87",
@@ -65584,7 +65924,9 @@
         "amount": 27.3,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_9a40f9ff4cfe42c5ac",
@@ -65795,7 +66137,9 @@
         "amount": 11.15,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_9AVXuRf8QaiM14mai5ZcWQ",
@@ -65866,7 +66210,9 @@
         "amount": 7.65,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_9blvEXZBR0266WsyzhglhQ",
@@ -66356,7 +66702,9 @@
         "amount": 21.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_9ffee09919bc4fe8b1",
@@ -66462,7 +66810,9 @@
         "amount": 18.31,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_9LaSyDgPT0es5HU1eaZt-Q",
@@ -66661,7 +67011,9 @@
         "amount": 36.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_9NQO8csiQPKQLSvGHwROkg",
@@ -67088,7 +67440,9 @@
         "amount": 16.65,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_9nyijnrVQleeD-IEZELKig",
@@ -67720,7 +68074,9 @@
         "amount": 33.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_9qrmiEUEQ9-fq-zYZOr4ww",
@@ -67936,7 +68292,9 @@
         "amount": 15.65,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_9T8nQsxGROKwcQxFoY-KeQ",
@@ -68110,7 +68468,9 @@
         "amount": 45.65,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_9v_VJMjDRbOkx0IxCvxtyQ",
@@ -68290,7 +68650,9 @@
         "amount": 39.53,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_9zesYG_BRDyTifPLOsq3vQ",
@@ -68350,7 +68712,9 @@
         "amount": 18.6,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_a038818c39564a89a3",
@@ -68472,7 +68836,9 @@
         "amount": 33.53,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_a0e4db25108747b496",
@@ -68521,7 +68887,9 @@
         "amount": 13,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_a3f829815788451d91",
@@ -68617,7 +68985,9 @@
         "amount": 19.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_a448a4717f2f477e86",
@@ -68954,7 +69324,9 @@
         "amount": 13.52,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_A4V3H1yzSt2fhexTwPMYCg",
@@ -69168,7 +69540,9 @@
         "amount": 26.12,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_a73844d1f2124fc997",
@@ -69660,7 +70034,9 @@
         "amount": 29.47,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_a7441f1041474b6ab2",
@@ -69825,7 +70201,9 @@
         "amount": 30.51,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_a93a9a4eccd94b7cb6",
@@ -69956,7 +70334,9 @@
         "amount": 8.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_a9ca89d53a3a4f8886",
@@ -70073,7 +70453,9 @@
         "amount": 17.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ab8c2d88d989421ba1",
@@ -70224,7 +70606,9 @@
         "amount": 12.2,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ac3b9cf06529431aae",
@@ -70650,7 +71034,9 @@
         "amount": 50.9,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ace97e7bf0c64e98ba",
@@ -71045,7 +71431,9 @@
         "amount": 34.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ad0aba45e4804c6287",
@@ -71368,7 +71756,9 @@
         "amount": 17.19,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_adc356572358457d82",
@@ -71481,7 +71871,9 @@
         "amount": 23.37,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_af4a13c2ae9143b3ad",
@@ -71595,7 +71987,9 @@
         "amount": 42.71,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_afd021a04f914a1fae",
@@ -71717,7 +72111,9 @@
         "amount": 25.37,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_aFuN8XE0Q4WKIhqY1-KbxA",
@@ -72036,7 +72432,9 @@
         "amount": 42.46,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_AJTZJzqjQhCcfUvjs5aocw",
@@ -73299,7 +73697,9 @@
         "amount": 22.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_akBtRBr3QJe_F9srWrhXCQ",
@@ -73470,7 +73870,9 @@
         "amount": 71.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_alk8KjBwRTmImltno5734w",
@@ -73689,7 +74091,9 @@
         "amount": 21.58,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_auD0xiKtSymB5pwBrrCc3A",
@@ -73758,7 +74162,9 @@
         "amount": 15.56,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_AVRuaCJnTZmH2_vFLDdeIQ",
@@ -74317,7 +74723,9 @@
         "amount": 41.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_AvzhD5W1SC2haQOqD1JJww",
@@ -76499,7 +76907,9 @@
         "amount": 22.53,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_aW78feKfQ96-Rck7PsAM7Q",
@@ -76722,7 +77132,9 @@
         "amount": 43.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ax_jlOVKTk--CLvnuKupgw",
@@ -77089,7 +77501,9 @@
         "amount": 18.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ayaWW0o9TjWE7QwwZ4RGqA",
@@ -77293,7 +77707,9 @@
         "amount": 42,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_AZf5B6ulREyJzwmRJhnKOA",
@@ -77768,7 +78184,9 @@
         "amount": 33.58,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_b017OW6DSX6CfI0muPpb7w",
@@ -78258,7 +78676,9 @@
         "amount": 39.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_b1Ai8ULES4a98y1gcMqc6w",
@@ -78323,7 +78743,9 @@
         "amount": 5.87,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_b257653b05f9454084",
@@ -79551,7 +79973,9 @@
         "amount": 30.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_b2f26769820c438a95",
@@ -80127,7 +80551,9 @@
         "amount": 23.89,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_b4a416f1c5ac4899ae",
@@ -80488,7 +80914,9 @@
         "amount": 19.2,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_B4HEEGR_TAeHjMAWo4QdXQ",
@@ -80825,7 +81253,9 @@
         "amount": 11.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_b510WoZLQmSUrHUU1gOc_w",
@@ -81219,7 +81649,9 @@
         "amount": 36.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_B5CJM1GgTLar30hvHl3vYw",
@@ -82472,7 +82904,9 @@
         "amount": 23.85,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_b651e4747029439e88",
@@ -82630,7 +83064,9 @@
         "amount": 45.65,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_babe0231d88c4eda88",
@@ -83123,7 +83559,9 @@
         "amount": 39.7,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_bb51620c46724d1598",
@@ -85168,7 +85606,9 @@
         "amount": 28.39,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_bc85d4c2ff634ea88b",
@@ -85326,7 +85766,9 @@
         "amount": 27.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_bcHnX9DvRSWsrrH3lABU5g",
@@ -85836,7 +86278,9 @@
         "amount": 13.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_bd2e2b0d02e04dd8b4",
@@ -85962,7 +86406,9 @@
         "amount": 15.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_BedPJwZhRvaLnG0x2kfVzA",
@@ -88295,7 +88741,9 @@
         "amount": 17.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_bfN-Hm-wRzK3LBjAZVQJIw",
@@ -88767,7 +89215,9 @@
         "amount": 13.2,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_BiDc4qlSRFCoaUCJnkAfCg",
@@ -91888,7 +92338,9 @@
         "amount": 21.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_BimRc2bnSPGhw1mHQcRnIA",
@@ -92375,7 +92827,9 @@
         "amount": 11.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_BirtPmLITdaD0Qn0BUs-BQ",
@@ -92696,7 +93150,9 @@
         "amount": 52.2,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_BrepWMcMSgilXN4EM-X4Mw",
@@ -93465,7 +93921,9 @@
         "amount": 23.11,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_bRhuU6RIQl6Z6eB535UD5g",
@@ -93651,7 +94109,9 @@
         "amount": 42,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Bv69Ybx5SsG8-QRJ6N1jQg",
@@ -93912,7 +94372,9 @@
         "amount": 20.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Bz2tcGE7TU6de3U3g-acjA",
@@ -94590,7 +95052,9 @@
         "amount": 33.06,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_C2FgPZB0Q0qCj3trHHaBag",
@@ -95986,7 +96450,9 @@
         "amount": 27.57,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_c2IyX98wSBKBUoMo66AVXg",
@@ -97164,7 +97630,9 @@
         "amount": 32.43,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_c30181901b0049b8b4",
@@ -97268,7 +97736,9 @@
         "amount": 28.51,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_c49cab91050c41dd96",
@@ -98529,7 +98999,9 @@
         "amount": 27.73,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_c50398010c644fd0a0",
@@ -98633,7 +99105,9 @@
         "amount": 22.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_c87c16ed132449e68f",
@@ -98779,7 +99253,9 @@
         "amount": 39.65,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_c899d29d5e504ba782",
@@ -98841,7 +99317,9 @@
         "amount": 10.15,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_C8RvP3y7T46GBMMvKP20ng",
@@ -99305,7 +99783,9 @@
         "amount": 19.33,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_cbc83ea461844ea19e",
@@ -99427,7 +99907,9 @@
         "amount": 38.63,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ce1007d39ab84161b7",
@@ -99549,7 +100031,9 @@
         "amount": 33.53,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_cf65a8a7d3a94c4ca7",
@@ -99655,7 +100139,9 @@
         "amount": 18.31,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_chRp9eyeRnm1fvuFgo0N0g",
@@ -100072,7 +100558,9 @@
         "amount": 40.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_CjkJ9w72RPyiUNebTJV2Fw",
@@ -100472,7 +100960,9 @@
         "amount": 24.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_CknYQ_PZSjmcWbpvmwPUfA",
@@ -101012,7 +101502,9 @@
         "amount": 20.49,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Clm3iXjoStSjIrSfumYuQA",
@@ -101065,7 +101557,9 @@
         "amount": 24.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_cq-C_0zhR3y5UEY6vAynQQ",
@@ -101209,7 +101703,9 @@
         "amount": 40.59,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Cr1QEtEHQgu-ycYFRRhDCA",
@@ -101277,7 +101773,9 @@
         "amount": 18.31,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_CtiuJfN7SQ6yz3onTOAL1Q",
@@ -101889,7 +102387,9 @@
         "amount": 27.6,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_d-bhtbreQqGwflHOgHUsbA",
@@ -102057,7 +102557,9 @@
         "amount": 25.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_d0174db253d24a0099",
@@ -105250,7 +105752,9 @@
         "amount": 23.59,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_d0bcb10a7a53410283",
@@ -105853,7 +106357,9 @@
         "amount": 29.35,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_d0e6b02bd9c940cc95",
@@ -106065,7 +106571,9 @@
         "amount": 43,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_D1uE7n9GT3674UFKud2fvA",
@@ -106130,7 +106638,9 @@
         "amount": 4.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_d58f08763bd641e7bd",
@@ -106350,7 +106860,9 @@
         "amount": 12.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_d6cdcc76a68f456181",
@@ -106462,7 +106974,9 @@
         "amount": 42.59,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_da990f3f6771499a9f",
@@ -106511,7 +107025,9 @@
         "amount": 11.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_DaDG_vA9Qc2o00poXQM-ww",
@@ -106578,7 +107094,9 @@
         "amount": 3.42,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_DAr2FIE9QPeY-lJTAa2Fyg",
@@ -106902,7 +107420,9 @@
         "amount": 57.97,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_dcI8FftzTcy4UkxdZMBSFA",
@@ -107674,7 +108194,9 @@
         "amount": 18.92,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_DcjVv8F9SLS8vtE7SB21cg",
@@ -108086,7 +108608,9 @@
         "amount": 17.81,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_dd71ae5d0baf4d4bbb",
@@ -108278,7 +108802,9 @@
         "amount": 28.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_dfj8YGtrTWKCUTkb6YUbLg",
@@ -108636,7 +109162,9 @@
         "amount": 31.82,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_dHEzLH3PTWuMlasEn48DOw",
@@ -109011,7 +109539,9 @@
         "amount": 28.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_dJgqxAvjROmnEouxN0jiDw",
@@ -109347,7 +109877,9 @@
         "amount": 34.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_dlwYP4cPSU686r92tQtfeg",
@@ -109524,7 +110056,9 @@
         "amount": 28.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_DsivUutdTiOI28xVKDHBpQ",
@@ -109980,7 +110514,9 @@
         "amount": 20.33,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Dt-YHffESNWZWihNYujr0w",
@@ -110569,7 +111105,9 @@
         "amount": 17.85,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_DuUfqAjgRmmzvHLF1hPIlg",
@@ -111809,7 +112347,9 @@
         "amount": 20.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_dWMJDO04TgWcXKGQohVnHw",
@@ -111866,7 +112406,9 @@
         "amount": 10.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_dYdJWPXgROCj0IaEHR8VPA",
@@ -112369,7 +112911,9 @@
         "amount": 23.62,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_dzdIBRpyQQCjCIwGqGhDjg",
@@ -113841,7 +114385,9 @@
         "amount": 20.83,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_DZkw80OUR3erDir8RiP2rw",
@@ -114119,7 +114665,9 @@
         "amount": 38.65,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_e1ff99d4d6154e6abf",
@@ -114506,7 +115054,9 @@
         "amount": 44.57,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_e25ZKMLjSGa_FCzF8D_z_Q",
@@ -115508,7 +116058,9 @@
         "amount": 15.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_e4677535402b4eeb81",
@@ -118341,7 +118893,9 @@
         "amount": 17.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_e52717efe1f9444b99",
@@ -118390,7 +118944,9 @@
         "amount": 10.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_e8da30cfb6df4f8c82",
@@ -118534,7 +119090,9 @@
         "amount": 18.89,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_edded89f55cc4be2b0",
@@ -118582,7 +119140,9 @@
         "amount": 12.42,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_edf6683f16cb4cf49b",
@@ -118845,7 +119405,9 @@
         "amount": 17.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ee42b007a1954c96b9",
@@ -119136,7 +119698,9 @@
         "amount": 10.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_EfhZQjDdRDqvrbXEc6r9wA",
@@ -119512,7 +120076,9 @@
         "amount": 34.88,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_EJBSRKhJSd2unv4ZnGKwdQ",
@@ -120305,7 +120871,9 @@
         "amount": 20.32,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ejfjYlGYRQaoCBCXD2ILQQ",
@@ -127185,7 +127753,9 @@
         "amount": 19.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_el-JNlFgRBSlCvR6jn0svQ",
@@ -127254,7 +127824,9 @@
         "amount": 21.35,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_eNOFhHLhSCeYmzns0ZlcYQ",
@@ -127398,7 +127970,9 @@
         "amount": 26.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_epSQe0OWTeKpZRUuxRIG8g",
@@ -127785,7 +128359,9 @@
         "amount": 14.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_er0JiWjzS22uauZb_67b3g",
@@ -128074,7 +128650,9 @@
         "amount": 42.02,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ERCBw3XuTAyBtUAh8kXfiw",
@@ -128479,7 +129057,9 @@
         "amount": 17.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_euoCZvUGQWm-RzZNs4W_Fg",
@@ -128605,7 +129185,9 @@
         "amount": 22.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Ev93jJN7Sg2shZI9WjJKqg",
@@ -128652,7 +129234,9 @@
         "amount": 15.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_Evll-pjOShWJUUk8AW5cVw",
@@ -129142,7 +129726,9 @@
         "amount": 13.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_EyKjhgTjRKGyqKIbLNt7xw",
@@ -129445,7 +130031,9 @@
         "amount": 53.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_EYvD6dHZRNO4QdKC9cRf0Q",
@@ -130199,7 +130787,9 @@
         "amount": 25.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_eyZIwAjKTNOwvfnmukcbqg",
@@ -130461,7 +131051,9 @@
         "amount": 23.64,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_f0b3df34ce6144fb86",
@@ -130911,7 +131503,9 @@
         "amount": 137.7,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_f1e4620e17d64915b6",
@@ -130963,7 +131557,9 @@
         "amount": 7.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_f21d84b83fd24f21b2",
@@ -131155,7 +131751,9 @@
         "amount": 16.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_f4d2c03a52ef440e95",
@@ -131217,7 +131815,9 @@
         "amount": 38.98,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_f5fdfe4ae25248499e",
@@ -131277,7 +131877,9 @@
         "amount": 33.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_f7422bc5acc14a318c",
@@ -131488,7 +132090,9 @@
         "amount": 24.11,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_fAO_wrOBTeSfVLgFXpxjwg",
@@ -133379,7 +133983,9 @@
         "amount": 25.35,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_fbc574b15d42494081",
@@ -133521,7 +134127,9 @@
         "amount": 36.47,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_fcfbd6d3f77b47dd92",
@@ -133643,7 +134251,9 @@
         "amount": 19.33,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_fd6Ey6H3SUSAZMvwH1AA6A",
@@ -133733,7 +134343,9 @@
         "amount": 24.14,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_FPfWLV5wSiSgx8tneTwaHQ",
@@ -134463,7 +135075,9 @@
         "amount": 43.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_fU4jV1zGTdKeMEe2YF01zg",
@@ -134953,7 +135567,9 @@
         "amount": 33.06,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_FUJmudj0TL-QouKeg92U6A",
@@ -135442,7 +136058,9 @@
         "amount": 40.7,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_fur0cz31TDC0tRUiYzJXXw",
@@ -135970,7 +136588,9 @@
         "amount": 12.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_fX3MU-6_Ts6XCcjU0BtKWA",
@@ -136077,7 +136697,9 @@
         "amount": 20.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_fy5YZDa9Sw-sCWYqBQ5Mvg",
@@ -136197,7 +136819,9 @@
         "amount": 11.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_FZD2mAbLTLaGckQjmYi-6Q",
@@ -136281,7 +136905,9 @@
         "amount": 34,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_g-yu12tUQZCQI59ec6NGzQ",
@@ -136737,7 +137363,9 @@
         "amount": 20.49,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_G4HQ9Sw9SIeWUNhGH5hc5Q",
@@ -137231,7 +137859,9 @@
         "amount": 23.62,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_G6IlDOyJTxqCeNZ1XmY9ew",
@@ -138237,7 +138867,9 @@
         "amount": 24.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_g81oozWVR5yq5aPlhNGf6Q",
@@ -138492,7 +139124,9 @@
         "amount": 40.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_gEgxEF1dS0W8OhK8hmgulw",
@@ -139381,7 +140015,9 @@
         "amount": 49.82,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_GKb_pc1DTw6FUehzGXeprw",
@@ -139881,7 +140517,9 @@
         "amount": 27.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Gke2BSS5Tc2pABL9Pfk4gg",
@@ -140412,7 +141050,9 @@
         "amount": 29.31,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_glxNguymSgC0O619XcWWYA",
@@ -140574,7 +141214,9 @@
         "amount": 18.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_GO1jfWn5S2mM8gJLpBaS1w",
@@ -140764,7 +141406,9 @@
         "amount": 39.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_GOXfR9Q0QkyTcaH6lW0GMw",
@@ -140824,7 +141468,9 @@
         "amount": 9.13,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_gpqWG4EBSlCIgxJSM-26Aw",
@@ -141401,7 +142047,9 @@
         "amount": 22.85,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_GQTbsxvCTHK_B0m5t7rhpA",
@@ -141841,7 +142489,9 @@
         "amount": 16.52,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_gTvn3dKWSr-bkXTbSHy6Rg",
@@ -142862,7 +143512,9 @@
         "amount": 20.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_GTyQ58OXQE2ScfswE70Wqg",
@@ -143351,7 +144003,9 @@
         "amount": 34.58,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_gUu4CvXsRm-BxogjB89KzA",
@@ -145486,7 +146140,9 @@
         "amount": 30.2,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_h_npGAqiS66njjHCLCBEAQ",
@@ -145648,7 +146304,9 @@
         "amount": 16.15,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_H-jWjhNQSbe0dVAoyyJWJg",
@@ -146205,7 +146863,9 @@
         "amount": 49.04,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_hcWASkSHTi6S6vmNYqhsWQ",
@@ -146508,7 +147168,9 @@
         "amount": 53.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_HFDBXZyxRou7uyx6B-wWAA",
@@ -147243,7 +147905,9 @@
         "amount": 45.24,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_HHCW1ImeR_GGNmZEP9Gknw",
@@ -147331,7 +147995,9 @@
         "amount": 15.3,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_HhrNrjtxSgimmFYjfMgeEw",
@@ -147768,7 +148434,9 @@
         "amount": 37.94,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_HjUzEUWhSBSa77b1sLtKTw",
@@ -147873,7 +148541,9 @@
         "amount": 13.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_hKd3oWWzSoWRxSkkj_21PA",
@@ -148659,7 +149329,9 @@
         "amount": 19.55,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_HoZGRhOJQhONzQ2okZ3BoQ",
@@ -148821,7 +149493,9 @@
         "amount": 23.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_hsPrz9kkQKe1J-gbr_kGqA",
@@ -149314,7 +149988,9 @@
         "amount": 11.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_hVdaDI1_TIeqaNBh-glWIA",
@@ -149361,7 +150037,9 @@
         "amount": 8.67,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_HzA8JsVySNi3NUkIfmCB6g",
@@ -149450,7 +150128,9 @@
         "amount": 20.35,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_i5KAb0LiTo2y4xMrB2JORA",
@@ -149495,7 +150175,9 @@
         "amount": 5.44,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_IAp5p98JRVazpjc7MzTBzg",
@@ -150548,7 +151230,9 @@
         "amount": 21.66,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ICJk1KQhSrCbuv9Mf6AFtw",
@@ -150623,7 +151307,9 @@
         "amount": 45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_IDPgZmZATdCzSf1XllcFYw",
@@ -150864,7 +151550,9 @@
         "amount": 27.15,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_IonNlU72RsCT7yj1TGWmFA",
@@ -151322,7 +152010,9 @@
         "amount": 16.52,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_iuYHsSJQR5qfnaS_DiQ9tQ",
@@ -151382,7 +152072,9 @@
         "amount": 26.94,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_J_hvGZEIQHKQinmKAs0Egg",
@@ -151932,7 +152624,9 @@
         "amount": 31.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_J0pgzSYpSZOCcOY-GrO8Bg",
@@ -152094,7 +152788,9 @@
         "amount": 34.43,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_JBZ8pRVlR-m84AwNl7WbnQ",
@@ -152142,7 +152838,9 @@
         "amount": 10.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_jC37DB6MStW5Mwach_3bFg",
@@ -152857,7 +153555,9 @@
         "amount": 9.69,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_jCmCc6-mS5C92N1SlGU_EA",
@@ -152964,7 +153664,9 @@
         "amount": 23.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_JDR6rRPiSf2ZZcdZv7kfBQ",
@@ -153223,7 +153925,9 @@
         "amount": 37.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_jdRtdbSURmauaeahssYxeQ",
@@ -153797,7 +154501,9 @@
         "amount": 28.17,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Jehzj139SlmHXHsODLpbGg",
@@ -154346,7 +155052,9 @@
         "amount": 12.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Jhi7_L6hRvSZbCoUmeNbIA",
@@ -154572,7 +155280,9 @@
         "amount": 27.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_JKZWHm1OQWSGzgPYB3kYFw",
@@ -154944,7 +155654,9 @@
         "amount": 37.67,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_joaVqTzETh6hHGSLsikJJQ",
@@ -155167,7 +155879,9 @@
         "amount": 21.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_jr_YKdtKQbGMyhoVG1JsGQ",
@@ -155494,7 +156208,9 @@
         "amount": 21.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_jsr5O7oDSh2gNRQ8EmV8Vw",
@@ -155656,7 +156372,9 @@
         "amount": 49.73,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_jVG-XzjkQXKNEsKdfunEFQ",
@@ -155764,7 +156482,9 @@
         "amount": 23.41,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_jxzU4X9-SpuG6MnU0DDPIg",
@@ -155853,7 +156573,9 @@
         "amount": 41,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_k66ZW4fsRm6c2def3itltA",
@@ -163181,7 +163903,9 @@
         "amount": 19.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_k7DhwZejQxOozR4L4b21LQ",
@@ -163391,7 +164115,9 @@
         "amount": 18.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_kETxMZCkQXyYsLwxFU4GYg",
@@ -163544,7 +164270,9 @@
         "amount": 11.67,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_kh1njiaqTGWX35rd9vVWlw",
@@ -163832,7 +164560,9 @@
         "amount": 49.93,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_KLKGnobKR0u-aO6RghFzxA",
@@ -163879,7 +164609,9 @@
         "amount": 14.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_Kopn6rWCSha3TZHQyN1H2Q",
@@ -164258,7 +164990,9 @@
         "amount": 42,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_kPIbbXXrRqWd4V_46kWf1A",
@@ -164633,7 +165367,9 @@
         "amount": 34.89,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_KQGjKFASQE2mTp9w076gSQ",
@@ -164838,7 +165574,9 @@
         "amount": 15.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_kRSsoYjwSoyyTEmWko5o0A",
@@ -165210,7 +165948,9 @@
         "amount": 74.41,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_kugNDCWqTAWO8l1Nta7tbQ",
@@ -165516,7 +166256,9 @@
         "amount": 22.55,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_kulQNHadQw2LAIZPqZSa6Q",
@@ -165937,7 +166679,9 @@
         "amount": 34.39,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_KzN7L-YbSTa3lK2SyO_WWA",
@@ -166141,7 +166885,9 @@
         "amount": 44,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_L6qBCFlHQgi87sDTCMNAXQ",
@@ -166628,7 +167374,9 @@
         "amount": 17.4,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_L8J8K-xgTwmdLlehztQCLQ",
@@ -166902,7 +167650,9 @@
         "amount": 48.14,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_L8kqaFXRRpGfc4GDlplbZQ",
@@ -167296,7 +168046,9 @@
         "amount": 20.27,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_lAc9uXztQO-IklsIexE7Bg",
@@ -167341,7 +168093,9 @@
         "amount": 8.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_Lb51U0TSTDeYSp_h8a-JtQ",
@@ -167515,7 +168269,9 @@
         "amount": 48.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Lb6UCK4GSZG78aY5iN4cFQ",
@@ -167595,7 +168351,9 @@
         "amount": 5.96,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_lcY8lsUxT0abgQ35lT919g",
@@ -167657,7 +168415,9 @@
         "amount": 13.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_LdJboRuzTlStLs5NfRas5w",
@@ -167732,7 +168492,9 @@
         "amount": 17.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_lkYSEGoST9a3x5AIlLit6A",
@@ -168191,7 +168953,9 @@
         "amount": 17.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_LLwXvCN7RjiTe_J3N4EYBA",
@@ -168583,7 +169347,9 @@
         "amount": 17.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_lLYMnccJTqOijMduWMT-fA",
@@ -168672,7 +169438,9 @@
         "amount": 75.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Lmt59F6TQWS2n62-UzTuMQ",
@@ -168946,7 +169714,9 @@
         "amount": 42.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_lrSIwpEBTqmNuYgkngphVQ",
@@ -169451,7 +170221,9 @@
         "amount": 36.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ltQ1sWE2Qq6Xl1I69D1R3A",
@@ -170223,7 +170995,9 @@
         "amount": 41.15,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_lTrgWBIrSOK2IyDeGJ25ww",
@@ -170457,7 +171231,9 @@
         "amount": 18.55,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_lukPUKFjTO2rqTTdd0w-Zg",
@@ -170880,7 +171656,9 @@
         "amount": 39.73,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_lypeb3sGQXmbGpSVUwCKnA",
@@ -171084,7 +171862,9 @@
         "amount": 74.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_LZfMO9XdSLq9jZ9WyzejRw",
@@ -171514,7 +172294,9 @@
         "amount": 34.39,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_LZJ-TFBKTrSeq7Db3u8_SQ",
@@ -171866,7 +172648,9 @@
         "amount": 20.89,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_M3HSE3JUTCOTbTs_LmLTMw",
@@ -172574,7 +173358,9 @@
         "amount": 46.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_M4qDVsunSaC5rOl3fckmmw",
@@ -173290,7 +174076,9 @@
         "amount": 21.87,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_m58IIQBNRA2_bbYLZbaPdA",
@@ -173680,7 +174468,9 @@
         "amount": 43.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_mBFhqBDUTum4XP311poo9Q",
@@ -173933,7 +174723,9 @@
         "amount": 10.15,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_mduIEvApQZmeIOT-5j0GFA",
@@ -174416,7 +175208,9 @@
         "amount": 28.4,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_MfLju-lLRlO81JP6h-1ndQ",
@@ -174690,7 +175484,9 @@
         "amount": 43.17,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_mhaHjQ7GSE6OaJx1n0Y0ZA",
@@ -175107,7 +175903,9 @@
         "amount": 23.49,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_mhfoA-4rSpyJqmCEA4OFxA",
@@ -176265,7 +177063,9 @@
         "amount": 35.47,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_MHfYEwXFRXW2-UR8kABKTQ",
@@ -176399,15 +177199,6 @@
               "available": true
             },
             {
-              "variantId": "prv_YbFq1aMqT2G6sNqFRg3-KQ",
-              "size": "iPhone 17 Air",
-              "price": {
-                "amount": 15.95,
-                "currency": "USD"
-              },
-              "available": true
-            },
-            {
               "variantId": "prv_WWVQSKGvTi-GOZsgaLXW4A",
               "size": "iPhone 17 Pro Max",
               "price": {
@@ -176419,6 +177210,15 @@
             {
               "variantId": "prv_M-bEJVfYQc-CzQShA9QjaQ",
               "size": "iPhone 17 Pro",
+              "price": {
+                "amount": 15.95,
+                "currency": "USD"
+              },
+              "available": true
+            },
+            {
+              "variantId": "prv_YbFq1aMqT2G6sNqFRg3-KQ",
+              "size": "iPhone 17 Air",
               "price": {
                 "amount": 15.95,
                 "currency": "USD"
@@ -176567,15 +177367,6 @@
               "available": true
             },
             {
-              "variantId": "prv_7K2dPgv5RGSQEbCT-_x35w",
-              "size": "iPhone 17 Air",
-              "price": {
-                "amount": 15.95,
-                "currency": "USD"
-              },
-              "available": true
-            },
-            {
               "variantId": "prv_YwjnyGEITYWbEFM_92StHg",
               "size": "iPhone 17 Pro Max",
               "price": {
@@ -176587,6 +177378,15 @@
             {
               "variantId": "prv_rjFHfDmPQ9KkoCCdArs0RA",
               "size": "iPhone 17 Pro",
+              "price": {
+                "amount": 15.95,
+                "currency": "USD"
+              },
+              "available": true
+            },
+            {
+              "variantId": "prv_7K2dPgv5RGSQEbCT-_x35w",
+              "size": "iPhone 17 Air",
               "price": {
                 "amount": 15.95,
                 "currency": "USD"
@@ -176631,7 +177431,9 @@
         "amount": 15.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_mhj6IdQNRa2krlkm06lecg",
@@ -176781,7 +177583,9 @@
         "amount": 27.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_MiArqqqJQRq310oBPxSdIw",
@@ -177000,7 +177804,9 @@
         "amount": 11.73,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_mKdWI2a6SoSfu0yy2jI-4w",
@@ -177274,7 +178080,9 @@
         "amount": 21.35,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_MM5b96z_SmuzWjmL8hmSOw",
@@ -177557,7 +178365,9 @@
         "amount": 41,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_mmQSH5rhRpu6lOet69TdCg",
@@ -177978,7 +178788,9 @@
         "amount": 30.58,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_mMtT1jHuQ5SX37VNiAhzBg",
@@ -178948,7 +179760,9 @@
         "amount": 36.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_MOOJjZS4R4q_jzbhXpu6Pw",
@@ -179432,7 +180246,9 @@
         "amount": 42.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_moPcvJ-TSIK2KiHUp2c3AQ",
@@ -179682,7 +180498,9 @@
         "amount": 53.83,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_mp2TklPASMmSJu1goWURow",
@@ -180037,7 +180855,9 @@
         "amount": 14.49,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_mRyOrJImQbqtk8eXfevjrQ",
@@ -180187,7 +181007,9 @@
         "amount": 14.85,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_MU1fPCPZQcewBg5kEkdOOA",
@@ -180544,7 +181366,9 @@
         "amount": 32.9,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_mvJQo8uPTqiWMNNWABid1g",
@@ -180588,7 +181412,9 @@
         "amount": 10.61,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_MwGEQkplQayg_ZD9jlLYCA",
@@ -180678,7 +181504,9 @@
         "amount": 25.89,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_mwwgny37S_mMSwJklyGT5Q",
@@ -181090,7 +181918,9 @@
         "amount": 16.2,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_MZA4buigQZaOqflqg_pTuw",
@@ -181240,7 +182070,9 @@
         "amount": 24.23,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_N__f9U5XQJqcP_oCvwk2rw",
@@ -181285,7 +182117,9 @@
         "amount": 12.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_N4l_2rtTTZax_fPnW-pzEw",
@@ -181600,7 +182434,9 @@
         "amount": 60.01,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_N4uxZFmfQ42ATPkh_CEh6w",
@@ -181925,7 +182761,9 @@
         "amount": 16.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_N5AoSUPYR02t-KHfllNdrQ",
@@ -181963,7 +182801,9 @@
       ],
       "priceFrom": null,
       "priceTo": null,
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_nbzZuIKIRnGSoOHdUmRN9w",
@@ -182319,7 +183159,9 @@
         "amount": 23.35,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_nDWdUcweQTaLc4RWjsACFA",
@@ -182506,7 +183348,9 @@
         "amount": 49.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_NmGrLjGTTJOaVdPc2uv6ZA",
@@ -183127,7 +183971,9 @@
         "amount": 25.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_nncKtxfKQzar4Q-3ZoPtng",
@@ -183202,7 +184048,9 @@
         "amount": 63.37,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_NrkbEbetRMaxO6c-hDba6Q",
@@ -183527,7 +184375,9 @@
         "amount": 33.61,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_nUCaI_VvRmaLxPvx_V6c4A",
@@ -183610,7 +184460,9 @@
         "amount": 17,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_NwjwY8GJS_at8fKFhZDPPA",
@@ -183672,7 +184524,9 @@
         "amount": 27.33,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_O0zzPz-aTd-U9j9Sdw3olQ",
@@ -184290,7 +185144,9 @@
         "amount": 21.55,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_O7Dd4-6JTUuq48NSUd3TMg",
@@ -186433,7 +187289,9 @@
         "amount": 13.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ODh_gv0ESl6jIcRfvSww0w",
@@ -187148,7 +188006,9 @@
         "amount": 9.69,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ODjU1rQgRXeWk2tt9rXB0w",
@@ -187568,7 +188428,9 @@
         "amount": 17.81,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_odr9QTauTISHL6ECFqjVMA",
@@ -187878,7 +188740,9 @@
         "amount": 20.55,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_oEH9q7C-T2uYRwekI8XCSg",
@@ -188618,7 +189482,9 @@
         "amount": 42.46,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_OirsyY9TTwiBEDimkmwb9w",
@@ -188823,7 +189689,9 @@
         "amount": 64.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_oj4ARjXxT8u9BOBznfLeTA",
@@ -189390,7 +190258,9 @@
         "amount": 19.64,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_OJY6MToERs-eWVF43kIEbA",
@@ -189480,7 +190350,9 @@
         "amount": 15.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_oky8t1iCRJS5CVBJAIrNgA",
@@ -190159,7 +191031,9 @@
         "amount": 40.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ol-LjJvbQH2gwnx9J8hLzg",
@@ -190549,7 +191423,9 @@
         "amount": 20.85,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_olwS9NvGSjOXzS646WN0KQ",
@@ -191044,7 +191920,9 @@
         "amount": 32.09,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Om1rCFyiTl6iRQCxgA_oVQ",
@@ -191335,7 +192213,9 @@
         "amount": 13.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_OPtT4UntRqaITwbTKf9BaA",
@@ -191501,7 +192381,9 @@
         "amount": 37.49,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_P7b01IqxTie9MPJRo16ftg",
@@ -191678,7 +192560,9 @@
         "amount": 42,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_P7bmVXXyT86aViXjM4aTQQ",
@@ -191768,7 +192652,9 @@
         "amount": 33.03,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_PAOdznORTp-UnxI8sfxopw",
@@ -191972,7 +192858,9 @@
         "amount": 29.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_PcdBxJd4QsmME8EzzaSxDg",
@@ -192440,7 +193328,9 @@
         "amount": 26.66,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_PFAKiNZBQuqPinMkeIITEQ",
@@ -192870,7 +193760,9 @@
         "amount": 25.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_pg1s-2xPRNa4s_WMYSulSw",
@@ -192930,7 +193822,9 @@
         "amount": 28.69,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_pi3PYsMUSWSDWVcMMYMvcg",
@@ -193480,7 +194374,9 @@
         "amount": 27.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_PIN1yafrRmq_vi-ukVBXcg",
@@ -193615,7 +194511,9 @@
         "amount": 17.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Pio-Rw6YRaKWEAOKeeUe9Q",
@@ -193951,7 +194849,9 @@
         "amount": 17.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_PK7ASfRrTMWRS0oUlOjwMw",
@@ -194064,7 +194964,9 @@
         "amount": 26.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Pkhdi4LDQrWkSPXvxPOB_Q",
@@ -194794,7 +195696,9 @@
         "amount": 27.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_PnLI7OI4SseMHnBhDnHzDQ",
@@ -194842,7 +195746,9 @@
         "amount": 9.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_PpTzovAMQWC_bvGw0IHh4w",
@@ -195152,7 +196058,9 @@
         "amount": 51.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ptaHHIL2RO-IQ074-UoM9A",
@@ -195603,7 +196511,9 @@
         "amount": 29.31,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_pU_Ph4IURkeynA6vNLnL0Q",
@@ -195680,7 +196590,9 @@
         "amount": 32.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_pUZxZCZNQZy1QFowPVwcJQ",
@@ -196046,7 +196958,9 @@
         "amount": 23.21,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_pxEN1TCYTDOhI94Lmm3mVQ",
@@ -196532,7 +197446,9 @@
         "amount": 30.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_pYqJ8kWCQfyRYF0ZllNUTA",
@@ -196586,7 +197502,9 @@
         "amount": 19.33,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_PZpWnq4mR_SexU7xCOMf7A",
@@ -196938,7 +197856,9 @@
         "amount": 38.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Q_e2P21nSZuZ8saaEcy6Hg",
@@ -197190,7 +198110,9 @@
         "amount": 30.55,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_q5WMSr6rSWCx8uyNeZCN9g",
@@ -197235,7 +198157,9 @@
         "amount": 8.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Q9e5DV4QScqg0brrc_GVVg",
@@ -197437,7 +198361,9 @@
         "amount": 42,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_qdrxJKTSRzCuL6VP-hQXuA",
@@ -197527,7 +198453,9 @@
         "amount": 15.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_QFIsRXwJS0mWZydO91G2rA",
@@ -197589,7 +198517,9 @@
         "amount": 29.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_qH9yK17ETQGv3dvextlldw",
@@ -197899,7 +198829,9 @@
         "amount": 26.41,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_QiPpIT8dSZWI-PWG72lKIQ",
@@ -198248,7 +199180,9 @@
         "amount": 14.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_QkxQQ6lpThagbimtE1PbPA",
@@ -198662,7 +199596,9 @@
         "amount": 18.31,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_QmOruCkbQeG7drMm9mO-eA",
@@ -198828,7 +199764,9 @@
         "amount": 41.57,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_qNudZcUDRb6bwV4IK3GxBA",
@@ -199047,7 +199985,9 @@
         "amount": 32.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_QRO0uPxBQ9iVqrXL87cb0Q",
@@ -199498,7 +200438,9 @@
         "amount": 19.33,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_quHTYBtVRFqTh6ODh8g9Bw",
@@ -199584,7 +200526,9 @@
         "amount": 38,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_R2jHRGLDRcavqu3RqLgvcA",
@@ -199894,7 +200838,9 @@
         "amount": 45.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_r512tc7fQMyHuk1JJ1l1Yg",
@@ -200076,7 +201022,9 @@
         "amount": 40.55,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_R6zNHlzrSK6Z5Osi4pkB0Q",
@@ -200341,7 +201289,9 @@
         "amount": 41,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_rC9paInZT2upmvKB-LuM6A",
@@ -200431,7 +201381,9 @@
         "amount": 19.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_RE_5h1elTUO4fI76Y5b8Dg",
@@ -200981,7 +201933,9 @@
         "amount": 37.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_RgRnLHwDRci57LfR2Z7seQ",
@@ -201044,7 +201998,9 @@
         "amount": 19.77,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_RjYh9Eq1SzGB--rAk3J7zA",
@@ -201092,7 +202048,9 @@
         "amount": 10.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_rkWo0swHRROhNgJEeNQR_A",
@@ -201658,7 +202616,9 @@
         "amount": 17.49,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_rnzUinMWTei6fUsrzAIMZg",
@@ -202686,7 +203646,9 @@
         "amount": 55.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_roBQm9LDSc2I9vFcGleuvA",
@@ -202844,7 +203806,9 @@
         "amount": 31.37,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_roTTCavJRYOvlM3E-jZ5dg",
@@ -203040,7 +204004,9 @@
         "amount": 17.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_RpzI1gR0SiqSUhlQ_xMYTQ",
@@ -203475,7 +204441,9 @@
         "amount": 18.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_RqkX3NcxTcaflqbVdCaH7g",
@@ -204151,7 +205119,9 @@
         "amount": 30.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_RROwQXenTG6nC3ZoztM7lQ",
@@ -204250,7 +205220,9 @@
         "amount": 16.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_rTVMQkroR1C07yeqWB5eyg",
@@ -204364,7 +205336,9 @@
         "amount": 39.19,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_RU96lVcqQ9-OK7AP-DIcMQ",
@@ -204607,7 +205581,9 @@
         "amount": 32.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_rwY4MtJUTxSBb8_7r0V2yg",
@@ -204651,7 +205627,9 @@
         "amount": 25.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_rzL9B-YlS0SS7Fe0UJ8GsQ",
@@ -204928,7 +205906,9 @@
         "amount": 39.23,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_s_PNYCavSJujkRqidgnbJA",
@@ -205402,7 +206382,9 @@
         "amount": 17.27,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_s2ckNe_-TT-sGfZul-J-CA",
@@ -205494,7 +206476,9 @@
         "amount": 24.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_sBlASJ6lTXObwpVZiJDHrQ",
@@ -205556,7 +206540,9 @@
         "amount": 20.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_SJmfUn0YSOOwCATTBEoQKw",
@@ -205708,7 +206694,9 @@
         "amount": 12.71,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_skuDRY4HQPayrypKpuErBw",
@@ -205910,7 +206898,9 @@
         "amount": 33.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_So-peOXoSbeh34fjNveiiQ",
@@ -206806,7 +207796,9 @@
         "amount": 33.82,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_sO8r9drtQQaGEzzJ8bUHeg",
@@ -207130,7 +208122,9 @@
         "amount": 15.54,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_SOXwsLuvR4KUznMUlwpTtg",
@@ -208142,7 +209136,9 @@
         "amount": 34.44,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_sq5I26VeQnyWVNLOtra97w",
@@ -208538,7 +209534,9 @@
         "amount": 27.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_SSfihsRfQhKraIlnNuL2zA",
@@ -208772,7 +209770,9 @@
         "amount": 26.55,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_STPsbnZuTlyjzeJPJKtufg",
@@ -209375,7 +210375,9 @@
         "amount": 27.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_sxGQGvBmRWSpOQOf7imPEg",
@@ -209565,7 +210567,9 @@
         "amount": 19.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_sYPpVppmTqyGQtXVu5tolg",
@@ -211054,7 +212058,9 @@
         "amount": 21.58,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_T-zU7PLHSOuspNq7MI8g3Q",
@@ -211153,7 +212159,9 @@
         "amount": 17.49,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_t9PU-6SXRteEFJVveukdeA",
@@ -211221,7 +212229,9 @@
         "amount": 27.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_tBcnrUjETPmYC5tyvKAiNw",
@@ -211564,7 +212574,9 @@
         "amount": 18.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_tC5lJsKHR_qTF1VlrNpsoQ",
@@ -211701,7 +212713,9 @@
         "amount": 18.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_tGQ-hxS-T2GK-2bf-D59sw",
@@ -211906,7 +212920,9 @@
         "amount": 52.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_TjNgDaCKRS2Qacitg87Pbg",
@@ -212003,7 +213019,9 @@
         "amount": 8.21,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_TjVA7rwDSyeA3XvMwNoZ8w",
@@ -212298,7 +213316,9 @@
         "amount": 10.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_tm8d4qRXTX-v8IX-TAlbYg",
@@ -212478,7 +213498,9 @@
         "amount": 20.84,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_TQ6DXO1UQiCanVVG3xBt3g",
@@ -212660,7 +213682,9 @@
         "amount": 80.07,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_TR_X1XNUQnaHZ7wbIqrJTA",
@@ -212707,7 +213731,9 @@
         "amount": 11.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_Tt13ahLqQmOs0lgYd-uRgw",
@@ -213407,7 +214433,9 @@
         "amount": 33.06,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Tt5YK5XJSJ6rU2CnDqdo9w",
@@ -213484,7 +214512,9 @@
         "amount": 23.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_tuCVn0gtSReDaSOxRqT5tQ",
@@ -213625,7 +214655,9 @@
         "amount": 60,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_tvdnfxVeQXSiK9cFuJ6mJw",
@@ -214178,7 +215210,9 @@
         "amount": 14.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_U8GdtA3SSOWbm9X8XMLRoA",
@@ -214310,7 +215344,9 @@
         "amount": 16.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_udXxVC5wQBms9fXopAms3w",
@@ -214495,7 +215531,9 @@
         "amount": 12.98,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_uIj7bXeOQjKKeTtpGY3a5g",
@@ -214711,7 +215749,9 @@
         "amount": 27.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_UJaTpYSFRGq4KzB8tEQ8Bg",
@@ -214816,7 +215856,9 @@
         "amount": 19.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_Uk65hmksSje_qsiNsgau5A",
@@ -214879,7 +215921,9 @@
         "amount": 15.91,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_UMfTCe9RRHiTf5hoWdlqZQ",
@@ -215014,7 +216058,9 @@
         "amount": 14.65,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_uqRjFjlzQFKgmw5wH1nfdg",
@@ -215109,7 +216155,9 @@
         "amount": 20.13,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_UxXgAeF6SXuFiUSxTKL1vg",
@@ -215214,7 +216262,9 @@
         "amount": 15.85,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_uy7i3MqjSEaopfV2uHojGw",
@@ -215396,7 +216446,9 @@
         "amount": 47,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_uYZnNXwpT22xIU5R8Fy_XQ",
@@ -216035,7 +217087,9 @@
         "amount": 33.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_v-B_3zIkT7iZMUc_OW0A9g",
@@ -216407,7 +217461,9 @@
         "amount": 42.77,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_V7qS5M2SQheH2blj_fACEQ",
@@ -216824,7 +217880,9 @@
         "amount": 40.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_V950oxDJRvirwipFW1eUTQ",
@@ -217998,7 +219056,9 @@
         "amount": 45.03,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Ve53HhSHT565G7Uw5H1_EA",
@@ -219337,7 +220397,9 @@
         "amount": 31.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_VI45gehfQJqavT6bllGWeQ",
@@ -219583,7 +220645,9 @@
         "amount": 42.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ViqUJu3STUSa5AcLUI1u9Q",
@@ -219916,7 +220980,9 @@
         "amount": 24.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_VLxtTji-Q-WAj2ktKgVadg",
@@ -220292,7 +221358,9 @@
         "amount": 36.92,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_VN8F6NmHR6e7rA_GH8Vs0Q",
@@ -220616,7 +221684,9 @@
         "amount": 14.29,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_vOSpTmgoToWgITljhqomog",
@@ -220835,7 +221905,9 @@
         "amount": 32.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_vPO1M84rTSePpckMCoHLag",
@@ -221291,7 +222363,9 @@
         "amount": 21.35,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_VPp3DJGEQfKTMzWHZByRpw",
@@ -221616,7 +222690,9 @@
         "amount": 38.71,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_VPTDxok3ROWQrQlONrGnlQ",
@@ -221766,7 +222842,9 @@
         "amount": 12.98,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_vResl8K_TOiYmAZGjtcR8g",
@@ -222150,7 +223228,9 @@
         "amount": 46.8,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Vv1XdaPMSdm6jZ5pj24NCQ",
@@ -223421,7 +224501,9 @@
         "amount": 23.85,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_vvYMmaDLR8Cls1bzyAIKFQ",
@@ -223664,7 +224746,9 @@
         "amount": 12.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_w_7C1xyySHiquXONlBoWrA",
@@ -223871,7 +224955,9 @@
         "amount": 14.02,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_w_g6OmfpQBijIQPMGjkMFA",
@@ -224229,7 +225315,9 @@
         "amount": 39.98,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_W-ZbH8_mT8WV3zxWetcq4w",
@@ -224403,7 +225491,9 @@
         "amount": 40.55,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_W5aAA7zVQD-1nvOH8sXoRg",
@@ -224742,7 +225832,9 @@
         "amount": 25.14,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_w9P3bRioRgOCMlzlMsO3HA",
@@ -225108,7 +226200,9 @@
         "amount": 30.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_wbwrbdEjQMCKxV0nHA9-fg",
@@ -225222,7 +226316,9 @@
         "amount": 14.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_wEtOWsmERH-OjGGsnuAWNw",
@@ -225611,7 +226707,9 @@
         "amount": 23.5,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_wIgk77XsQiqUsK10sLxD8A",
@@ -225843,7 +226941,9 @@
         "amount": 35.15,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_wLyT-xtrQDipnNDm1yhl5A",
@@ -225903,7 +227003,9 @@
         "amount": 18.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_WMCMF14xT3WRZgUp_eS9Ow",
@@ -226595,7 +227697,9 @@
         "amount": 31.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_WrNMrEOORiS3V5hA8Bz4OA",
@@ -226958,7 +228062,9 @@
         "amount": 31.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Wt35eD3uTT6GsN0WXa3pZA",
@@ -227229,7 +228335,9 @@
         "amount": 28.76,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_WTrDTfoZSjuG5Qtdt5qaag",
@@ -228219,7 +229327,9 @@
         "amount": 18.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_wxeN8ZuDSIWVSZa95AN-LQ",
@@ -229605,7 +230715,9 @@
         "amount": 20.83,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_wzbpAlxNQ2C9U99gK2Wgxw",
@@ -230121,7 +231233,9 @@
         "amount": 23.2,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_X1k0vo6XSLOZOXcHwSAe8A",
@@ -230411,7 +231525,9 @@
         "amount": 37.9,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_x5cx7m2PRiGZVE9ei_s4yQ",
@@ -230639,7 +231755,9 @@
         "amount": 38.19,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_xacgglXiT12bHuGgta6h9g",
@@ -232122,7 +233240,9 @@
         "amount": 30.2,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_xakbEXykR7W1MHzq9LAR8A",
@@ -232344,7 +233464,9 @@
         "amount": 20.33,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_XblCMVtcQJ6y2Y3hmI2U_A",
@@ -233807,7 +234929,9 @@
         "amount": 17.7,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_XEiJj0okRsKaQCItso_FoA",
@@ -233998,7 +235122,9 @@
         "amount": 42.59,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_xfZcDraGROiiMWlqLbcAGw",
@@ -234060,7 +235186,9 @@
         "amount": 8.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_xH5FAJwbQ6mXOrGxMuhZ3Q",
@@ -234602,7 +235730,9 @@
         "amount": 50.83,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_XHb2pillRqe9mDDuKq_t3g",
@@ -234674,7 +235804,9 @@
         "amount": 17.23,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_xlSuVhrgT8KxFObAJjZHjA",
@@ -234803,7 +235935,9 @@
         "amount": 25.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_XolW9rdiT466FMvRJQROMA",
@@ -235179,7 +236313,9 @@
         "amount": 34.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_xPL7YjOBRQWVL50Im8eKAA",
@@ -235600,7 +236736,9 @@
         "amount": 16.2,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_XpYSISIMSxOlRh4grbfjzQ",
@@ -235762,7 +236900,9 @@
         "amount": 29.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_xRCYM5gQRNe9GyykaJC0AA",
@@ -235947,7 +237087,9 @@
         "amount": 43.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_xSk0YVxhSnmFM76o8yOiVA",
@@ -236230,7 +237372,9 @@
         "amount": 20.35,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_XTFPkdAUQFm0oKzYTnssLQ",
@@ -236570,7 +237714,9 @@
         "amount": 18.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_xVxqyeh6T2GlRkVPvmodkw",
@@ -237272,7 +238418,9 @@
         "amount": 12.73,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_XwrUCs-wTFSwVJIuIvNkIw",
@@ -237428,7 +238576,9 @@
         "amount": 17.79,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_xYaNa8GoT5-LgPB4ObOiIg",
@@ -237780,7 +238930,9 @@
         "amount": 26.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Y38u5WS7RrGfZSiQ8QcxdA",
@@ -238685,7 +239837,9 @@
         "amount": 33.82,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_y9TCXB9rQRizgS4WXaHHtg",
@@ -239064,7 +240218,9 @@
         "amount": 43,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_YAUq6YCmQPyale243AAH0Q",
@@ -239351,7 +240507,9 @@
         "amount": 17.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ydmlwrSpSWK7L_T_0rXpFg",
@@ -239565,7 +240723,9 @@
         "amount": 24.86,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ye2p3meJTX-yPwo6rFXN2A",
@@ -240792,7 +241952,9 @@
         "amount": 26.64,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_YEvmJr_pRGO3wi-j2T_xtg",
@@ -241207,7 +242369,9 @@
         "amount": 45.75,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_yGJPEae6RBCGe4XCiAXmgQ",
@@ -241285,7 +242449,9 @@
         "amount": 35.62,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_yik3Xfh7RlmBN1yymFa6JA",
@@ -241422,7 +242588,9 @@
         "amount": 12.97,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_YjbI31JRRTec8Rv2OESzDg",
@@ -241527,7 +242695,9 @@
         "amount": 19.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_YjH-kTehTjyaRgp9Y8kAbw",
@@ -241679,7 +242849,9 @@
         "amount": 58.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_yvuWMqUzSICCQFx7MDIWUw",
@@ -242106,7 +243278,9 @@
         "amount": 33.15,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Yxjw00veSLqZF9ERjt0GmQ",
@@ -242150,7 +243324,9 @@
         "amount": 42.33,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_yyIfskT9RJK4Nzd3mFcz9Q",
@@ -242457,7 +243633,9 @@
         "amount": 18.45,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_z25FjC-LRPiu95zIY5RAYQ",
@@ -242750,7 +243928,9 @@
         "amount": 48.14,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_Z2U7-l6gRbueWgCtVwPToA",
@@ -243244,7 +244424,9 @@
         "amount": 23.2,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ZCv5wljzTgeAp4w-Mw3uuQ",
@@ -243568,7 +244750,9 @@
         "amount": 67.2,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ZdlBhuysRKSxpV4fnf9VlQ",
@@ -243736,7 +244920,9 @@
         "amount": 29.99,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ZF9p8G6WQ4mF4Z5y18IRxw",
@@ -244225,7 +245411,9 @@
         "amount": 44.7,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_zk5p82pQTtyqRWw6SKbAuA",
@@ -244609,7 +245797,9 @@
         "amount": 20.09,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ZLyWQ6UsToiKnY07YRXEpg",
@@ -244921,7 +246111,9 @@
         "amount": 19.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ZMg9WMyNTnuEnRBDE4Aa1A",
@@ -245245,7 +246437,9 @@
         "amount": 17.95,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_zMlLaKnVTmqQO7ZMMwH_8A",
@@ -246719,7 +247913,9 @@
         "amount": 24.79,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_zq1WLUHfRSC2G8L6BNWZVA",
@@ -246848,7 +248044,9 @@
         "amount": 14.21,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_zSl4k_QzQ6uqTqwe-pqMGA",
@@ -247272,7 +248470,9 @@
         "amount": 23.25,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ZtR6XmRDSliz-38SJI1-fg",
@@ -248172,7 +249372,9 @@
         "amount": 34.57,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     },
     {
       "productId": "pro_ZUOYt-04ToOgL7V03qNIYg",
@@ -248219,7 +249421,9 @@
         "amount": 13.69,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": true
     },
     {
       "productId": "pro_ZvilbSMgQkStyU5hAyPBww",
@@ -248604,7 +249808,9 @@
         "amount": 20.27,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_zvJp6rm7Rd2ILcwdxA16cA",
@@ -248823,7 +250029,9 @@
         "amount": 9.98,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": true,
+      "nonTransparency": false
     },
     {
       "productId": "pro_zynN-e8yRbOveJBiz10Hxw",
@@ -248909,7 +250117,9 @@
         "amount": 39,
         "currency": "USD"
       },
-      "minimumOrdersNumber": 0
+      "minimumOrdersNumber": 0,
+      "buildable": false,
+      "nonTransparency": false
     }
   ]
 }
