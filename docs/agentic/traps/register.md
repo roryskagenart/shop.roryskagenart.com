@@ -624,3 +624,21 @@ To actually remove a duplicate from a listing it must be taken out of the collec
 archived. Archive + `PUT /collections/{id}/products` → **T05** (that call replaces the entire list, so
 send the complete intended list).
 **Source:** 2026-10-04.
+
+### T40 — `npm run dev` silently loses the port race; the studio site answers on 3000
+**Symptom:** `npm run dev` prints its usual banner and then every localhost:3000 request returns pages
+**from a different project**. Requests to `/playground` returned the studio homepage — a totally
+different site — with HTTP 200 and no error anywhere.
+**Cause:** the studio project (`roryskagenart.com`, the OTHER repo) runs a long-lived Express server on
+port 3000. `npm run dev` binds 0.0.0.0:3000; when the port is taken Next.js fails to bind and exits, but
+in this shell the failure did not surface — the caller saw a healthy return code and proceeded to test
+**the wrong server**. Every check then passed against the studio's HTML.
+**Cost:** three tool calls spent verifying the wrong app, plus one false "redirect" conclusion — the page
+had not redirected; it was never this app's server at all.
+**Evidence:** 2026-10-05. `ss -tlnp | grep :3000` → `pid=1498959, "node-MainThread"` — a process this
+repo did not start. `curl -sI localhost:3000` → `X-Powered-By: Express` (studio); the shop answers
+`X-Powered-By: Next.js`.
+**Do instead:** Before verifying any served page, **confirm the server identity**, not just the status
+code: `curl -sI http://localhost:<port>/ | grep -i x-powered-by`. Expect `Next.js`. On collision, start
+on a free port explicitly — `npm run dev -- -p 3111` — and re-confirm the header before trusting any
+rendered output. Server identity is part of verification; a 200 from the wrong process proves nothing.
