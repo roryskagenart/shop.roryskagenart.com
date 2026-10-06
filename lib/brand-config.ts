@@ -27,6 +27,35 @@ export const BRAND_CONFIG = {
   },
 
   theme: {
+    /*
+     * Skagen Light (live on roryskagenart.com design panel).
+     * Synced to shop.roryskagenart.com via globals.css CSS vars.
+     */
+    skagenLight: {
+      background: '#c2c9d1',
+      card: '#edeff2',
+      surface: '#edeff2',
+      surfaceDeep: '#959eb1',
+      foreground: '#16202b',
+      foregroundMuted: '#5f6875',
+      border: '#c3c9d0',
+      lineStrong: '#bcc2c8',
+      accent: '#22d3ee',
+      destructive: '#ef4444'
+    },
+    skagenDark: {
+      background: '#464e58',
+      card: '#2f353c',
+      surface: '#171e23',
+      surfaceDeep: '#181b21',
+      foreground: '#eef2f6',
+      foregroundMuted: '#9aa3ae',
+      border: '#515761',
+      lineStrong: '#828e9b',
+      accent: '#22d3ee',
+      destructive: '#f87171'
+    },
+    /* Legacy names kept for migration compat */
     galleryStoneLight: {
       background: '#e3e1da',
       card: '#eeede8',
@@ -49,7 +78,7 @@ export const BRAND_CONFIG = {
    */
   features: {
     brandExperienceV1: cleanEnv(process.env.NEXT_PUBLIC_FEATURE_BRAND_V1) !== 'false',
-    
+
     /**
      * Step 2: Planned future release feature flags (disabled in Step 1 scope)
      */
@@ -68,35 +97,40 @@ export const BRAND_CONFIG = {
       phase: 'Step 1 (Current Release - Low Risk / Active)',
       version: 'v1.1.0',
       status: 'active',
-      scope: 'Brand logo, icon, core visuals, Shadcn/TW tokens, and favicon propagation across all storefront routes with feature flag isolation.'
+      scope:
+        'Brand logo, icon, core visuals, Shadcn/TW tokens, and favicon propagation across all storefront routes with feature flag isolation.'
     },
     {
       phase: 'Step 2 - Release A (Future)',
       version: 'v1.2.0',
       status: 'planned',
       title: 'Unified Omnichannel Header & Cart Sync',
-      scope: 'Shared header component synchronized across roryskagenart.com and shop.roryskagenart.com via cross-domain session cookies.'
+      scope:
+        'Shared header component synchronized across roryskagenart.com and shop.roryskagenart.com via cross-domain session cookies.'
     },
     {
       phase: 'Step 2 - Release B (Future)',
       version: 'v1.3.0',
       status: 'planned',
       title: 'Cross-Domain Studio Accounts (SSO)',
-      scope: 'Single sign-on uniting Fourthwall supporter checkout accounts with roryskagenart.com collector memberships.'
+      scope:
+        'Single sign-on uniting Fourthwall supporter checkout accounts with roryskagenart.com collector memberships.'
     },
     {
       phase: 'Step 2 - Release C (Future)',
       version: 'v1.4.0',
       status: 'planned',
       title: 'Automated Palette & Design System Sync',
-      scope: 'Webhook listener that receives theme/palette switches made in the roryskagenart.com studio admin and updates storefront theme tokens.'
+      scope:
+        'Webhook listener that receives theme/palette switches made in the roryskagenart.com studio admin and updates storefront theme tokens.'
     },
     {
       phase: 'Step 2 - Release D (Future)',
       version: 'v1.5.0',
       status: 'planned',
       title: 'AR Wall Visualizer & In-Situ Previews',
-      scope: 'Augmented reality mobile camera preview allowing collectors to project 1:1 scale fine art pieces on their home walls before purchasing.'
+      scope:
+        'Augmented reality mobile camera preview allowing collectors to project 1:1 scale fine art pieces on their home walls before purchasing.'
     }
   ]
 };
