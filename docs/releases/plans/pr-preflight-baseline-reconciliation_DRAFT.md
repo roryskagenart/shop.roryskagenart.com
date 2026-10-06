@@ -1,8 +1,9 @@
 # Plan — Preflight & baseline reconciliation
 
-**Status:** DRAFT · implementation on `fix/preflight-and-baseline-reconciliation` · **PR #15 open as a
-draft** (OQ2–OQ4 unanswered)
-**Target release:** `v0.2.0` (catch-up — see [`../RELEASES.md`](../RELEASES.md)) · **KB:** 1.5.0
+**Status:** DRAFT · implementation on `fix/preflight-and-baseline-reconciliation` · **PR #15** open as a
+draft, CI green. **OQ1 answered and executed**; OQ2–OQ4 open, and **each one's recommendation is *no change
+inside this PR***.
+**Target release:** `v0.2.0` (catch-up — see [`../RELEASES.md`](../RELEASES.md)) · **KB:** 1.7.0
 **Author:** Buddy, for Jaden · **Opened:** 2026-10-06
 
 ---
@@ -22,8 +23,10 @@ Alongside it, two smaller drifts: a test-file list that claimed 15 entries and h
 ## 2. Scope
 
 **In.** Make the gate baseline single-sourced and machine-checked. Reconcile every carrier. Declare the
-release version scheme. Record the four untagged releases in a ledger. Register the two defects found and
-not fixed.
+release version scheme. Record the four untagged releases in a ledger. Register **six** defects — **T41–T46**
+— and fix the three that were fixable here: a dead public footer link (**T45**), install instructions that
+named a package manager this repo does not use (**T46**), and the gate's own Windows failure mode
+(**T44**).
 
 **Out — deliberately.**
 
@@ -53,7 +56,12 @@ and executed on Jaden's explicit word later in the same session. **Result:** ann
 | 9 | KB **1.4.1 → 1.5.0** (two new traps = MINOR) | `docs/agentic/{VERSION,CHANGELOG.md,README.md}`, `docs/agentic/scripts/README.md` |
 | 10 | The Vercel team slug and project name corrected; **T43** registered, cross-linked from T23 | `docs/agentic/stack/environments.md`, `docs/agentic/traps/register.md` |
 | 11 | KB **1.5.0 → 1.6.0** (T43, T44 = MINOR) | `docs/agentic/{VERSION,CHANGELOG.md,README.md}` |
-| 12 | **`vi.mock` hoisting restored on Windows.** Vitest's `root` is canonicalised so a lowercase drive letter in `process.cwd()` cannot silently disable mocking | `vitest.config.ts` |
+| 12 | **T44 — `vi.mock` hoisting restored on Windows, fixed in `verify.sh`.** An earlier attempt canonicalised Vitest's `root` in `vitest.config.ts` and is **reverted**: it only appeared to work because `node_modules` was bun-installed at the time. `verify.sh` now re-enters the repo root via `pwd -W` before any gate runs | `docs/agentic/scripts/verify.sh`, `vitest.config.ts` |
+| 13 | KB **1.6.0 → 1.6.1** (PATCH — the reconciliation skill now says to confirm a gate actually ran) | `docs/agentic/{VERSION,CHANGELOG.md,README.md}`, `docs/agentic/skills/docs-reconciliation-release/SKILL.md` |
+| 14 | **T45** — the footer's *"Rory Skagen Studio Archive"* link pointed at `shop.roryskagen.com` (**NXDOMAIN**, on every public page). Now reads `BRAND_CONFIG.domains.shopCustomDomain` | `components/layout/footer.tsx` |
+| 15 | **T46** — three package managers referenced, only npm real. README `pnpm install` / `pnpm dev` → `npm ci` / `npm run dev`; `AGENTS.md` §3 now warns that the installer changes test behaviour, and says to run the gate through `verify.sh` on Windows | `README.md`, `AGENTS.md` §3 |
+| 16 | KB **1.6.1 → 1.7.0** (T45, T46 = MINOR) | `docs/agentic/{VERSION,CHANGELOG.md,README.md}` |
+| 17 | **Record corrections** — the session record's reverted-fix claim and its "residual" struck; this plan's registry row and entry 12 corrected | `docs/agentic/sessions/2026-10-06.md`, `docs/releases/plans/README.md`, this file |
 
 ## 4. Risk register
 
@@ -92,7 +100,12 @@ Claim → the command or `file:line` that proves it. All measured 2026-10-06 at 
 | The tag dereferences to a commit on `main` | `gh api repos/…/git/refs/tags/v0.2.0` → `type=tag` → `870d2748` → `42786bb7`; `git merge-base --is-ancestor 42786bb7 origin/main` → true |
 | A lowercase drive letter in the cwd silently disables `vi.mock` | `vitest run` → banner `c:/…`, 4 files / 23 tests fail; `vitest run --root <abs>` → banner `C:/…`, all 223 pass. Probe: `vi.mock('./lib/utils', …)` + `import { sentinel }` → `undefined` |
 | The 4 failing test files are unmodified | `git hash-object lib/fw-seeder/__tests__/collection.test.ts` = `b454abc…` = `git rev-parse HEAD:…` |
-| The gate is green again after the config fix | `bash docs/agentic/scripts/verify.sh` → `tsc` 0 errors, 223 tests / 15 files, baseline consistent |
+| The gate is green after the `verify.sh` fix | `bash docs/agentic/scripts/verify.sh` → `tsc` 0 errors, 223 tests / 15 files, all gates green, exit 0 |
+| `npm test` is green on an npm tree | `npm test` → 223 passed / 15 files, exit 0. The earlier all-suites *"Vitest failed to find the current suite"* failure had been recorded on a **bun** tree |
+| The `vitest.config.ts` workaround is gone | `git diff origin/main -- vitest.config.ts` → empty |
+| The tree is npm-installed, not bun | `ls node_modules/.bin` → 28 extension-less + 28 `.cmd`, **0** `.exe`. The earlier bun tree: 28 `.exe` + 28 `.bunx`, 0 npm shims |
+| `shop.roryskagen.com` does not exist | `curl -sS "https://dns.google/resolve?name=shop.roryskagen.com&type=A"` → **`Status: 3`** (NXDOMAIN); `shop.roryskagenart.com` → `Status: 0` |
+| Every relative link and anchor resolves | `python docs/agentic/scripts/check-links.py` → 54 files, **182** relative links resolved, 0 broken |
 
 ## 6. Gates
 
@@ -130,3 +143,10 @@ is `git grep` over the tree and needs no toolchain. **Not done in this plan** be
 *Recommendation: yes, for now.* `verify.sh` is described as "the gate sequence", and a guard nobody runs is
 not a guard. If the sequence grows further, the docs guard should split into a `verify-docs.sh` that
 `verify.sh` calls — the invocation stays one command either way.
+
+---
+
+> **None of OQ2–OQ4 changes anything inside this PR.** OQ2's recommendation is to *hold*, OQ3's is to do it
+> as a **separate change**, and OQ4's is to *keep the current arrangement*. All three therefore resolve to
+> "nothing to do here" — accepting them as written is what clears the draft flag, and no further work is
+> implied. OQ3 does leave one follow-up item (`.github/workflows/ci.yml`), tracked separately.
