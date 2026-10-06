@@ -17,9 +17,32 @@
 
 set -uo pipefail
 
+# ---------------------------------------------------------------------------
+# Working directory
+# ---------------------------------------------------------------------------
+#
+# Everything below uses ./node_modules/.bin/*, so the script must run from the repo
+# root. Re-enter it explicitly rather than trusting the caller's cwd.
+#
+# On Windows this is not cosmetic. git-bash can inherit a LOWERCASE drive letter in
+# the cwd (`c:\...`), and Vitest derives module paths from it; the casing then
+# disagrees with the paths the runner itself uses, Node caches modules by path
+# *string*, and two `vitest` instances load. `vi.mock` silently stops being hoisted
+# and EVERY suite fails to load - so gate 2 reports "a DROP means a guard was
+# deleted" when nothing was deleted. `pwd -W` yields the canonical `C:/...` form
+# under MSYS, and cd'ing to it restores the uppercase drive letter.
+# See docs/agentic/traps/register.md#t44.
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR/../../.." || exit 1
+if MSYS_ROOT="$(pwd -W 2>/dev/null)"; then
+  cd "$MSYS_ROOT" 2>/dev/null || true
+fi
+REPO_ROOT="$(pwd)"
+
 # The baseline lives in exactly one place - do NOT inline the numbers here.
 # shellcheck source=baseline.env
-. "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/baseline.env"
+. "$SCRIPT_DIR/baseline.env"
 
 FAILED=0
 
