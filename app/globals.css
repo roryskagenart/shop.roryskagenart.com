@@ -1,6 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ================================================================
+   Live Skagen Light / Dark palette — synced from design panel
+   Covers: background, card, surface, deep-surface, borders, accent.
+   ================================================================ */
+
+:root {
+  /* Page canvas */
+  --brand-bg: #c2c9d1;
+  /* Primary text */
+  --brand-fg: #16202b;
+  /* Cards, panels, raised surfaces */
+  --brand-bg-card: #edeff2;
+  --brand-surface: #edeff2;
+  /* Footer wells, hero backdrop, form fields */
+  --brand-surface-deep: #959eb1;
+  /* Dividers, input edges */
+  --brand-border: #c3c9d0;
+  /* The 2px gallery frames */
+  --brand-line-strong: #bcc2c8;
+  /* Secondary / muted text */
+  --brand-fg-muted: #5f6875;
+  /* Accent: focus rings and brand glow */
+  --brand-accent: #22d3ee;
+  --brand-accent-fg: #16202b;
+  --brand-ring: #22d3ee;
+  --brand-destructive: #ef4444;
+  /* Nav blur */
+  --brand-nav-bg: rgba(194, 201, 209, 0.9);
+}
+
+.dark {
+  --brand-bg: #464e58;
+  --brand-fg: #eef2f6;
+  --brand-bg-card: #2f353c;
+  --brand-surface: #171e23;
+  --brand-surface-deep: #181b21;
+  --brand-border: #515761;
+  --brand-line-strong: #828e9b;
+  --brand-fg-muted: #9aa3ae;
+  --brand-accent: #22d3ee;
+  --brand-accent-fg: #eef2f6;
+  --brand-ring: #22d3ee;
+  --brand-destructive: #f87171;
+  --brand-nav-bg: rgba(70, 78, 88, 0.9);
+}
 
 @media (prefers-color-scheme: dark) {
   html {
@@ -14,8 +62,86 @@
   }
 }
 
+/* Keep neutral scale pointing at brand values for existing hardcoded refs */
+:root {
+  --neutral-50: #faf9f6;
+  --neutral-100: #f5f4f0;
+  --neutral-200: #e8e6df;
+  --neutral-300: #d2cfc6;
+  --neutral-400: #a8a49a;
+  --neutral-500: #7c786f;
+  --neutral-600: #5f5f68;
+  --neutral-700: #3a3a40;
+  --neutral-800: #2a2a30;
+  --neutral-900: #1c1c20;
+  --neutral-950: #111114;
+}
+
+.dark {
+  --neutral-50: #f0f0f2;
+  --neutral-100: #e0e0e4;
+  --neutral-200: #c8c8d0;
+  --neutral-300: #9d9da6;
+  --neutral-400: #7c786f;
+  --neutral-500: #5f5f68;
+  --neutral-600: #3a3a40;
+  --neutral-700: #2a2a30;
+  --neutral-800: #1c1c20;
+  --neutral-900: #17171b;
+  --neutral-950: #0d0d10;
+}
+
+@layer base {
+  html,
+  body {
+    font-family:
+      'Plus Jakarta Sans',
+      var(--font-geist-sans),
+      system-ui,
+      -apple-system,
+      sans-serif;
+    background-color: var(--brand-bg);
+    color: var(--brand-fg);
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family:
+      'Plus Jakarta Sans',
+      system-ui,
+      -apple-system,
+      sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  code,
+  pre,
+  .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+}
+
+/* Focus ring — brand ring color, consistent across modes */
 a,
 input,
 button {
-  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-neutral-600 dark:focus-visible:ring-offset-neutral-900;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-ring focus-visible:ring-offset-2 focus-visible:ring-offset-brand-bg;
+}
+
+/* Precision Sleek scrollbar — brand line-strong */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--brand-line-strong);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-fg-muted);
 }

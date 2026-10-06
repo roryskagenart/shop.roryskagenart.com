@@ -17,7 +17,8 @@ export const metadata = {
     default: 'Rory Skagen Art | Official Studio Store',
     template: '%s | Rory Skagen Art'
   },
-  description: 'Official Fourthwall fine art store for artist Rory Skagen. Archival museum-quality prints, gallery canvas, and pop art originals from Austin, Texas.',
+  description:
+    'Official Fourthwall fine art store for artist Rory Skagen. Archival museum-quality prints, gallery canvas, and pop art originals from Austin, Texas.',
   icons: {
     icon: [
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
@@ -28,7 +29,8 @@ export const metadata = {
   manifest: '/site.webmanifest',
   openGraph: {
     title: 'Rory Skagen Art | Official Studio Store',
-    description: 'Official Fourthwall fine art store for artist Rory Skagen. Archival museum-quality prints, gallery canvas, and pop art originals from Austin, Texas.'
+    description:
+      'Official Fourthwall fine art store for artist Rory Skagen. Archival museum-quality prints, gallery canvas, and pop art originals from Austin, Texas.'
   },
   robots: {
     follow: true,
@@ -68,9 +70,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             })(window,document,'script','dataLayer','${GTM_ID}');`}
         </Script>
       </head>
-      <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
