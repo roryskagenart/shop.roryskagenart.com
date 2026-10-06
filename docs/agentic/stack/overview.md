@@ -78,17 +78,22 @@ scripts/                    one-shot Fourthwall seeding + env migration (these W
 
 ## Versions
 
-⚠️ **Two version spaces disagree. Reconcile before naming any release.**
+**`v0.x.y` is the release scheme.** It is the only space that has ever been tagged, and the only one that
+plans are named from.
 
-| Source | Claims |
+| | |
 | :--- | :--- |
-| `lib/brand-config.ts:66-101` | **`v1.1.0` is "Step 1 (Current Release)"**; `v1.2.0`–`v1.5.0` planned |
-| `lib/docs-content.ts:1178-1190` | Mirrors the same roadmap |
-| `git tag` | **Only `v0.1.0`** |
-| `docs/releases/plans/pr-merch-catalog-v0.2.0_DRAFT.md` | Plans the next release as **`v0.2.0`** |
+| Release record | `git tag` — currently **`v0.1.0`** |
+| Tag placement | the **merge commit** of the PR that delivered the release, not the branch tip |
+| Plan naming | `docs/releases/plans/pr-<slug>-v0.x.y_DRAFT.md` |
 
-There is no `v1.1.0` tag. `v0.2.0` is the version the current plan uses. **Pick one scheme and say so
-explicitly** — do not let a release name drift between them.
+⚠️ **`lib/brand-config.ts:104-144` carries a second, `v1.x` space — it is a roadmap, not a release
+record.** `roadmapId: 'v1.1.0'`–`'v1.5.0'` name phases of the brand/omnichannel programme. **No `v1.x` tag
+exists and none should be created.** The array is not read by any component today.
+
+The same phase names are rendered on the **public `/docs` page** at `lib/docs-content.ts:1174-1192`, where
+they are still worded *"Release v1.2.0"* etc. That wording is a **residual ambiguity** — tracked as
+**T24, MITIGATED**, not a competing scheme. Do not name a release from it.
 
 ## Testing
 
@@ -96,22 +101,29 @@ explicitly** — do not let a release name drift between them.
 | :--- | :--- |
 | Test files | **15** |
 | Tests | **223 passing** |
-| Baseline verified | 2026-10-05, `tsc --noEmit` 0 errors |
+| Baseline verified | 2026-10-06, `tsc --noEmit` 0 errors |
+| Source of truth | [`../scripts/baseline.env`](../scripts/baseline.env) — `check-baseline.sh` asserts this table against it |
 
 Test files:
 
+- `app/api/webhooks/fourthwall/__tests__/route.test.ts`
+- `components/__tests__/public-surfaces.test.ts`
 - `lib/fourthwall/__tests__/collections.test.ts`
 - `lib/fourthwall/__tests__/importer.test.ts`
+- `lib/fourthwall/__tests__/merch-catalog.test.ts`
 - `lib/fourthwall/__tests__/merch.test.ts`
-- `lib/fw-catalog/__tests__/fit.test.ts`\n- `lib/playground/__tests__/playground.test.ts`\n- `lib/fw-seeder/__tests__/client.test.ts`
+- `lib/fw-catalog/__tests__/fit.test.ts`
 - `lib/fw-seeder/__tests__/client.templates.test.ts`
+- `lib/fw-seeder/__tests__/client.test.ts`
 - `lib/fw-seeder/__tests__/collection.test.ts`
 - `lib/fw-seeder/__tests__/placeholder-guard.test.ts`
 - `lib/fw-seeder/__tests__/product.test.ts`
 - `lib/fw-seeder/__tests__/upload.test.ts`
-- `app/api/webhooks/fourthwall/__tests__/route.test.ts`
-- `components/__tests__/public-surfaces.test.ts`
+- `lib/playground/__tests__/playground.test.ts`
 - `middleware.test.ts`
+
+> This list is derived from the tree, so it drifts. `check-baseline.sh` counts the entries here and fails
+> if the total disagrees with `baseline.env` — it caught this list claiming 15 while listing 14.
 
 > ⚠️ **`vitest` passes where `tsc` fails.** `globals: true` is set at runtime only, so a test using
 > `describe`/`it`/`expect` without importing them runs green and fails `npm run lint` (`TS2582`).

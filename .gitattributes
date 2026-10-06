@@ -24,5 +24,12 @@
 *.sh    text eol=lf
 *.py    text eol=lf
 
+# Sourced environment files are in the same class as a shell script: a CR makes
+# `BASELINE_TESTS=223\r` a different value from `223`, so every comparison in
+# check-baseline.sh silently fails and the guard reports stale counts on a clean
+# tree. Found 2026-10-06 when `git add docs/agentic/scripts/baseline.env` warned
+# "LF will be replaced by CRLF" - `.env` was not covered by the policy above.
+*.env   text eol=lf
+
 # Keep this file itself stable.
 .gitattributes text eol=lf

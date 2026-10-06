@@ -53,9 +53,11 @@ editing is a mystery.
 ./node_modules/.bin/vitest run
 ```
 
-Record the exact counts. The baseline is **97 passed / 6 files**. If you see a different number, the
-documentation is stale or a test was deleted — **re-derive, never assume.** This repo has documented a
-test count of 67 when the real count was 127.
+Record the exact counts. The baseline is **223 passed / 15 files**, and it lives in
+[`../scripts/baseline.env`](../scripts/baseline.env) — read it there, do not copy it into a document. If
+you see a different number, the documentation is stale or a test was deleted — **re-derive, never
+assume.** This repo has documented a test count of 67 when the real count was 127, and on 2026-10-06 four
+different counts were live at once (**T41**).
 
 ## 5. Is the version number you intend to use already spent?
 

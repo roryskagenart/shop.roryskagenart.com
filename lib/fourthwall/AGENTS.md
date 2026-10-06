@@ -30,7 +30,7 @@ The API behaviour is documented in [`../../docs/agentic/stack/fourthwall.md`](..
 | `types.ts` | Types for the above. |
 | `originals-data.json` | Local fallback data for the 15 originals. |
 | `rory-artworks-data.json` | The 137-artwork source inventory. |
-| `__tests__/` | `collections`, `importer`, `merch`. |
+| `__tests__/` | `collections`, `importer`, `merch`, `merch-catalog`. |
 
 ## ⚠️ The fallback that fabricates products
 
@@ -51,7 +51,9 @@ fallback makes the empty result look valid.
 
 - **Run both gates.** `tsc --noEmit` **and** `vitest run`. `globals: true` is set at runtime only, so a test
   omitting its `describe`/`it`/`expect` imports passes vitest and fails `tsc` (`TS2582`). → T15
-- **Baseline: 97 passed / 6 files.** A **drop** means a guard was deleted.
+- **Baseline: 223 passed / 15 files.** The number lives in
+  [`../../docs/agentic/scripts/baseline.env`](../../docs/agentic/scripts/baseline.env) — read it there.
+  A **drop** means a guard was deleted. → T41
 - `collections.test.ts:20-28` asserts all **7** taxonomy handles resolve. ⚠️ **That asserts the taxonomy,
   not the data** — most handles have no products behind them. Do not read a green run as "the catalogue
   works".

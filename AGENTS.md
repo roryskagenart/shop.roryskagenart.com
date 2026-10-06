@@ -40,8 +40,12 @@ The same project answers to four different names. **Never infer one from another
 > `git remote -v` as untrusted for identity and use this table. Fixing the URL is a human decision
 > (rule 4).
 
-Releases: `git tag` shows **only `v0.1.0`**; `lib/brand-config.ts` calls `v1.1.0` "Current Release" and the
-current plan uses `v0.2.0`. Pick one scheme explicitly before naming anything → T24.
+Releases: **`v0.x.y` is the release scheme — it is the only one that has tags.** `git tag` shows `v0.1.0`;
+every plan under `docs/releases/plans/` is named `v0.x.y`; and a tag is placed on the **merge commit** of
+the PR that delivered it. The `v1.1.0`–`v1.5.0` labels in `lib/brand-config.ts:66-101` and
+`lib/docs-content.ts:1178-1190` are a **product roadmap** for the brand/omnichannel programme — they are
+not release numbers, and nothing is or will be tagged with them. **Do not name a release from that
+space.** → T24
 
 ## 3. Dev environment and gates
 
@@ -52,8 +56,8 @@ README's `pnpm install` are template leftovers. Node `>=20` (`engines`).
 npm ci                                          # foreground — never a background install after a wipe
 npm run dev                                     # next dev -p 3000 -H 0.0.0.0
 ./node_modules/.bin/tsc --noEmit                # npm run lint
-./node_modules/.bin/vitest run                  # npm test — baseline: 137 passed / 11 files
-bash docs/agentic/scripts/verify.sh             # both gates + counts, read-only
+./node_modules/.bin/vitest run                  # npm test — baseline: 223 passed / 15 files
+bash docs/agentic/scripts/verify.sh             # both gates + counts + baseline guard, read-only
 ```
 
 CI (`.github/workflows/ci.yml`, the only workflow) runs `npm ci` → `npm run lint` → `npm test`.
@@ -100,10 +104,23 @@ Full protocol: [`docs/agentic/protocols/verification.md`](docs/agentic/protocols
   `file:line`. Do not write a plan outside that idiom.
 - **Generated or derived documents** must ship with a `--check` mode that can actually fail.
 - **Measure, then write.** Every number in a document must be re-derived from a real command. Numbers in
-  this repo's docs have drifted before (a documented test count was 67; then 97; the real one is **137 /
-  11 files**). If you change the test count, update `docs/agentic/scripts/verify.sh`
-  (`BASELINE_TESTS`/`BASELINE_FILES`) and `docs/agentic/stack/overview.md` in the same change — the
-  verifier fails loudly otherwise.
+  this repo's docs have drifted before — a documented test count has been 67, then 97, then 137, then 163,
+  while the real one is **223 passed / 15 files**. → T41
+
+  **The gate baseline lives in exactly one place: `docs/agentic/scripts/baseline.env`.** Never inline it.
+  `check-baseline.sh` fails if any document that quotes the count disagrees with it, and `verify.sh` runs
+  that guard as a gate. So the way to change the baseline is:
+
+  1. re-derive with `./node_modules/.bin/vitest run` — never guess, and never read your own new total
+     without subtracting what you added;
+  2. edit **only** `docs/agentic/scripts/baseline.env`;
+  3. run `bash docs/agentic/scripts/check-baseline.sh` and fix every carrier it flags.
+
+  The carriers today are `AGENTS.md`, `docs/agentic/protocols/preflight.md`,
+  `docs/agentic/protocols/verification.md`, `docs/agentic/stack/overview.md`, `lib/fourthwall/AGENTS.md`
+  and `scripts/AGENTS.md`. **Add a new carrier to the `CARRIERS` list in `check-baseline.sh` in the same
+  change that introduces it** — an unlisted carrier is one nothing checks, which is exactly how four
+  different counts came to be live here at once.
 
 ## 6. Pitfalls that cost real time
 

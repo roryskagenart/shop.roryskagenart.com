@@ -23,8 +23,10 @@ fail() { printf '  FAIL  %s\n' "$*"; FAILED=$((FAILED + 1)); }
 head_() { printf '\n== %s\n' "$*"; }
 
 REPO="roryskagenart/shop.roryskagen.com"
-EXPECTED_TESTS=97
-EXPECTED_FILES=6
+
+# The baseline lives in exactly one place - do NOT inline the numbers here.
+# shellcheck source=baseline.env
+. "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/baseline.env"
 
 head_ "1. Is this checkout current?"
 
@@ -151,9 +153,9 @@ if [ -x ./node_modules/.bin/vitest ]; then
     | grep -E '^[[:space:]]*Tests[[:space:]]' \
     | tail -1 || true)
   printf '  vitest    %s\n' "${TEST_LINE:-<could not parse>}"
-  printf '  expected  %s passed / %s files\n' "$EXPECTED_TESTS" "$EXPECTED_FILES"
+  printf '  expected  %s passed / %s files (baseline.env)\n' "$BASELINE_TESTS" "$BASELINE_FILES"
   case "$TEST_LINE" in
-    *"$EXPECTED_TESTS passed"*) ok "test count matches the documented baseline" ;;
+    *"$BASELINE_TESTS passed"*) ok "test count matches the documented baseline" ;;
     "") warn "could not read the test count" ;;
     *)  warn "test count DIFFERS from the documented baseline - re-derive it, do not trust the docs" ;;
   esac
