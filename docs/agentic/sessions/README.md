@@ -34,6 +34,7 @@ fact survives in whatever document quoted it. Write the correction explicitly:
 | Date | Summary |
 | :--- | :--- |
 | [2026-10-01](2026-10-01.md) | First full working day: repo↔GitHub verification, importer repair, v0.1.0 released, Vercel account migration, first live Fourthwall writes, v0.2.0 plan drafted |
+| [2026-10-06](2026-10-06.md) | Preflight found four different test counts live at once; three merged remote branches pruned; the gate baseline given one home and a guard that can fail; `v0.x.y` declared the release scheme; the release ledger created |
 
 > Earlier work exists only as git history. It is **not** reconstructed here — a session record written from
 > hindsight is a hypothesis, not a record. Future sessions should be appended as they happen.
