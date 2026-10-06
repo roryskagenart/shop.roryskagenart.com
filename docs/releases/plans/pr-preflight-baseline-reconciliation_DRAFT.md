@@ -1,6 +1,7 @@
 # Plan — Preflight & baseline reconciliation
 
-**Status:** DRAFT · implementation on `fix/preflight-and-baseline-reconciliation` · **no PR open yet**
+**Status:** DRAFT · implementation on `fix/preflight-and-baseline-reconciliation` · **PR #15 open as a
+draft** (OQ2–OQ4 unanswered)
 **Target release:** `v0.2.0` (catch-up — see [`../RELEASES.md`](../RELEASES.md)) · **KB:** 1.5.0
 **Author:** Buddy, for Jaden · **Opened:** 2026-10-06
 
@@ -30,8 +31,12 @@ not fixed.
 | :--- | :--- |
 | Rewording the public `/docs` `v1.x` "Release" labels | User-visible product copy is a product decision. Surfaced as **T24** residual. |
 | Fixing the `/docs` palette table | Same reason. Registered as **T42**. |
-| Tagging `v0.2.0` | A tag is a remote write needing explicit approval, and the target should be chosen against merged `main`. |
 | Any application behaviour change | The only `lib/` edit renames an unread field. |
+
+**Held out of scope, then approved separately — and done:** *tagging `v0.2.0`*. A tag is a remote write
+needing explicit approval, and the target had to be chosen against merged `main`, so it was excluded here
+and executed on Jaden's explicit word later in the same session. **Result:** annotated tag object
+`870d2748`, dereferencing to `42786bb7` — OQ1's recommendation, followed.
 
 ## 3. What changes
 
@@ -46,6 +51,9 @@ not fixed.
 | 7 | **T41** (RESOLVED), **T42** (OPEN), **T24** → MITIGATED; T40's missing anchor and `Source` restored | `docs/agentic/traps/register.md` |
 | 8 | Release ledger + session record | `docs/releases/RELEASES.md` (new), `docs/agentic/sessions/2026-10-06.md` (new) |
 | 9 | KB **1.4.1 → 1.5.0** (two new traps = MINOR) | `docs/agentic/{VERSION,CHANGELOG.md,README.md}`, `docs/agentic/scripts/README.md` |
+| 10 | The Vercel team slug and project name corrected; **T43** registered, cross-linked from T23 | `docs/agentic/stack/environments.md`, `docs/agentic/traps/register.md` |
+| 11 | KB **1.5.0 → 1.6.0** (T43, T44 = MINOR) | `docs/agentic/{VERSION,CHANGELOG.md,README.md}` |
+| 12 | **`vi.mock` hoisting restored on Windows.** Vitest's `root` is canonicalised so a lowercase drive letter in `process.cwd()` cannot silently disable mocking | `vitest.config.ts` |
 
 ## 4. Risk register
 
@@ -78,6 +86,13 @@ Claim → the command or `file:line` that proves it. All measured 2026-10-06 at 
 | The three pruned branches held nothing unique | `git diff --diff-filter=A --name-only origin/main origin/<branch>` → empty for all three |
 | `/docs` documents retired tokens | `lib/docs-content.ts:1159-1170` vs `app/globals.css:12-51` vs `lib/brand-config.ts:34-72` |
 | The guard fails before it passes | `check-baseline.sh` run pre-fix → **6 FAILs**; post-fix → **0** |
+| The Vercel project is `roryskagenart/shop.roryskagenart.com`, not `roryskagen-5713/shop-roryskagen-com` | `GET /v9/projects/prj_u3hPHBRFkibIkIkthndzS1sjvhKJ` → `name: shop.roryskagenart.com`; `GET /v2/teams/team_lD7ZSbm44CpPmByF9eN22dJT` → `slug: roryskagenart`, `name: roryskagen`; `GET /v2/teams` → that team only. Both ids are **unchanged** from the 2026-10-01 record ⇒ a rename, not a different project |
+| The retired `.vercel.app` alias still resolves | `GET /v9/projects/…/domains` → `shop.roryskagenart.com` **and** `shop-roryskagen-com.vercel.app`, both `verified: true` |
+| The rename landed 2026-10-03 | project `link.createdAt` = `1790895069955` → 2026-10-01 22:51 UTC; `link.updatedAt` = `1791060791369` → 2026-10-03 20:53 UTC |
+| The tag dereferences to a commit on `main` | `gh api repos/…/git/refs/tags/v0.2.0` → `type=tag` → `870d2748` → `42786bb7`; `git merge-base --is-ancestor 42786bb7 origin/main` → true |
+| A lowercase drive letter in the cwd silently disables `vi.mock` | `vitest run` → banner `c:/…`, 4 files / 23 tests fail; `vitest run --root <abs>` → banner `C:/…`, all 223 pass. Probe: `vi.mock('./lib/utils', …)` + `import { sentinel }` → `undefined` |
+| The 4 failing test files are unmodified | `git hash-object lib/fw-seeder/__tests__/collection.test.ts` = `b454abc…` = `git rev-parse HEAD:…` |
+| The gate is green again after the config fix | `bash docs/agentic/scripts/verify.sh` → `tsc` 0 errors, 223 tests / 15 files, baseline consistent |
 
 ## 6. Gates
 
@@ -98,6 +113,7 @@ Each carries a recommendation. A question without one is a stall.
 verified `v0.1.0` convention (tag the merge commit), and it is the last commit of the four untagged PRs —
 the state that was actually live. The alternative, tagging *this* PR's merge commit, would label a
 docs/tooling change "Staged Catalogue", which it is not.
+**Answered and executed 2026-10-06** — tagged at exactly `42786bb7`, on Jaden's explicit approval.
 
 **OQ2 — Fix the `/docs` palette table now, or hold it?**
 *Recommendation: hold it, as done.* It is a real defect (T42) and the fix is mechanical — derive the table

@@ -303,7 +303,8 @@ knowingly stale.
 **Bites:** The GitHub remote is **not** derivable from the folder name, the Vercel project, or the custom
 domain. Inferring it points work at the wrong repository — and the local URL is not evidence either, since
 GitHub redirects renamed repos, so a stale `git remote -v` keeps working and looks correct.
-**Evidence:** Local folder `shop.roryskagenart.com`; Vercel `roryskagen-5713/shop-roryskagen-com`;
+**Evidence:** Local folder `shop.roryskagenart.com`; Vercel `roryskagenart/shop.roryskagenart.com`
+(it was `roryskagen-5713/shop-roryskagen-com` until the 2026-10-03 rename — **T43**);
 custom domain `shop.roryskagenart.com`. On 2026-10-01 the GitHub repo was
 **`roryskagenart/shop.roryskagen.com`** (`.com`) — *not* the folder name, which is why this trap exists.
 **Renamed 2026-10-06 to `roryskagenart/shop.roryskagenart.com`**, confirmed twice: `git push` reported
@@ -725,4 +726,60 @@ design panel" changed the CSS and the config but not the `/docs` copy.
 **Do instead:** Treat `app/globals.css` as the token source of truth; it and `brand-config.ts` are
 asserted together by hand today, and nothing checks the `/docs` table. A guard that derives the table
 from the CSS would close it — see **T41** for the shape of that fix.
+**Source:** 2026-10-06.
+
+<a id="t43"></a>
+### T43 — A renamed Vercel project keeps its old `*.vercel.app` alias, so the retired name still resolves
+**Status:** RESOLVED — the documents were corrected 2026-10-06; the *mechanism* is permanent.
+**Bites:** A stale project identifier **keeps working**, so it never announces itself. After the Vercel
+project was renamed `shop-roryskagen-com` → `shop.roryskagenart.com`, the old alias
+`shop-roryskagen-com.vercel.app` stayed **attached and verified**, and deployments still answer on it. So
+*"the old name resolves"* is not evidence that the old name is current — the same shape as **T23**, where
+a renamed GitHub repo keeps serving through a redirect.
+**Evidence:** Measured 2026-10-06. `GET /v9/projects/prj_u3hPHBRFkibIkIkthndzS1sjvhKJ/domains` returns
+**both** `shop.roryskagenart.com` (`verified: true`) **and** `shop-roryskagen-com.vercel.app`
+(`verified: true`). The project id and the team id are the *same* as in the 2026-10-01 record
+(`team_lD7ZSbm44CpPmByF9eN22dJT` = `shop-roryskagen-com`), but the names now read
+`name: shop.roryskagenart.com` and team `slug: roryskagenart` — equal ids, different names, which is what
+proves a rename rather than a different project. `stack/environments.md` carried the old pair for five
+days; `link.updatedAt` = **2026-10-03** marks the change. The team slug is `roryskagenart` and the team
+*name* is `roryskagen` — the two are not the same string, and neither was ever `roryskagen-5713`.
+**Do instead:** Treat a Vercel identifier as **untrusted** until re-read from the API, and compare the
+**id**, not the name — `prj_…` and `team_…` are immutable, so equal ids prove the same object while the
+display names drift. Never conclude "it still resolves, so it is current".
+[`../stack/environments.md`](../stack/environments.md)
+**Source:** 2026-10-06.
+
+<a id="t44"></a>
+### T44 — `vi.mock` silently stops working when Vitest's root carries a lowercase drive letter
+**Status:** RESOLVED — `vitest.config.ts` normalises the root. The casing sensitivity underneath remains.
+**Bites:** On Windows, `process.cwd()` returns a **lowercase drive letter** (`c:\…`) when the shell was
+entered as `/c/…`. Vitest derives its `root` from that string, and the module paths that follow differ in
+case from the ones the runner itself uses. Node caches modules by **path string**, so two instances of
+`vitest` end up loaded — the test file's `describe`/`vi` come from one, the runner from the other. The
+failure is **silent and selective**: `vi.spyOn` keeps working and `vi.mock` stops being hoisted, so only
+the files that use `vi.mock` fail (4 files, 23 tests) with
+`TypeError: vi.mocked(...).mockResolvedValue is not a function` — which reads like a broken test, not a
+broken runner. Under `npm test` the split is total and every suite reports *"Vitest failed to find the
+current suite"*. **It is also non-deterministic across shells**, which is how it survived: the same
+command passes or fails depending on how the working directory was entered.
+**Evidence:** Measured 2026-10-06. With `process.cwd()` = `c:\…`, `./node_modules/.bin/vitest run` → 4
+files failed / 23 tests failed and the banner reads `RUN v4.1.11 c:/Users/…`. With the same cwd plus an
+absolute `--root`, the banner reads `RUN v4.1.11 C:/Users/…` and **all 223 tests pass**. **Any absolute
+`--root` works, because Vitest normalises it; a relative `--root .` does not**, because it resolves
+against the lowercase cwd — measured both ways. A 3-line probe (`vi.mock('./lib/utils', …)` then
+`import { sentinel }`) returned `undefined`, proving hoisting is skipped rather than the factory failing.
+Ruled out by measurement: CRLF (the probe was pure LF, and a CRLF file passes), the transform cache
+(cleared, `node_modules/.vite` removed), the config loader (the committed `.ts` vs an equivalent `.mjs`),
+the pool (`forks` / `threads` / `vmThreads`, isolate on and off), a second `node_modules` above the repo,
+and the esbuild platform binary (present). The affected files are **byte-identical to `HEAD`**
+(`git hash-object` matches `HEAD:<path>`) and CI on ubuntu is green, so this is environmental — not a
+regression.
+**Do instead:** `vitest.config.ts` sets `root: fs.realpathSync.native(__dirname)`, which canonicalises the
+drive letter on Windows and is a no-op on Linux/macOS. If you ever see `vi.mocked(...)… is not a
+function`, **read the `RUN v…` banner first**: a lowercase drive letter there *is* the defect.
+**Known residual:** `npm test` still fails on Windows even with a normalised root — npm's shim loads a
+second `vitest` instance (all 15 suites report *"failed to find the current suite"*). CI is unaffected
+(ubuntu + `npm ci`). Locally, use `bash docs/agentic/scripts/verify.sh`, which invokes the binary
+directly.
 **Source:** 2026-10-06.

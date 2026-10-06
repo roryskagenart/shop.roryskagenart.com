@@ -8,6 +8,45 @@ This file tracks the **KB**, not the application. The application's release reco
 
 ---
 
+## [1.6.0] — 2026-10-06
+
+Follow-on to 1.5.0, same session. A Vercel check on PR #15 printed a project path that contradicted the
+KB — and the contradiction turned out to be real.
+
+### Added
+
+- **T43 — a renamed Vercel project keeps its old `*.vercel.app` alias, so the retired name still
+  resolves.** The project *and* the team were renamed after the 2026-10-01 migration, and the old alias
+  stayed attached and `verified: true`, so nothing ever failed and nothing looked wrong. Same shape as
+  **T23**, where a renamed GitHub repo keeps serving through a redirect: *"it still resolves"* is **not**
+  evidence that a name is current. The generalisable rule is to compare **ids** — `prj_…` and `team_…` are
+  immutable — rather than display names.
+- **T44 — `vi.mock` silently stops working when Vitest's root carries a lowercase drive letter.** On
+  Windows, `process.cwd()` returns `c:\…` when the shell was entered as `/c/…`. Vitest derives its `root`
+  from that string, the module paths that follow then differ in case from the runner's, and Node caches
+  modules by path *string* — so two `vitest` instances load. `vi.spyOn` keeps working and `vi.mock` stops
+  being hoisted, so only the 4 files that use `vi.mock` fail, with an error that reads like a broken test
+  rather than a broken runner. **RESOLVED**, with a known residual: `npm test` still fails on Windows for
+  a separate npm-shim reason; CI is unaffected.
+
+### Changed
+
+- **`vitest.config.ts`:** `root` is now `fs.realpathSync.native(__dirname)` and both aliases resolve from
+  it, so a lowercase drive letter in `process.cwd()` can no longer silently disable `vi.mock`. A no-op on
+  Linux/macOS. Measured before/after: the `RUN v…` banner goes `c:/…` → `C:/…` and the suite goes from 4
+  files / 23 tests failing to **all 223 passing**.
+
+- **`stack/environments.md`:** the Vercel project row and account row corrected from
+  `roryskagen-5713/shop-roryskagen-com` to **`roryskagenart/shop.roryskagenart.com`**, with the team
+  **slug** (`roryskagenart`) distinguished from the team **name** (`roryskagen`) — they are different
+  strings, and neither was ever `roryskagen-5713`. Both ids are unchanged from the 2026-10-01 record,
+  which is what makes this a rename rather than a different project.
+- **T23's evidence** now cites the current Vercel identifier instead of the retired one.
+- **The dated `sessions/2026-10-01.md` record was deliberately left alone** — it documents what was true
+  then, and rewriting it would erase the evidence that the rename happened.
+
+---
+
 ## [1.5.0] — 2026-10-06
 
 Produced by a preflight that measured the gate baseline and found **four different test counts live in the
