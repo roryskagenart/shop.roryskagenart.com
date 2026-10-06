@@ -1,6 +1,6 @@
 # Agentic Ops KB — shop.roryskagenart.com
 
-**Version 1.6.1** · see [`CHANGELOG.md`](CHANGELOG.md) · entry point: [`/AGENTS.md`](../../AGENTS.md)
+**Version 1.7.0** · see [`CHANGELOG.md`](CHANGELOG.md) · entry point: [`/AGENTS.md`](../../AGENTS.md)
 
 The durable, versioned, tool-agnostic knowledge base for working on this repository with an AI agent.
 

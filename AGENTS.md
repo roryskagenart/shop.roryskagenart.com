@@ -50,8 +50,11 @@ brand/omnichannel programme — they are not release numbers, and nothing is or 
 
 ## 3. Dev environment and gates
 
-**npm**, not pnpm or bun: `.npmrc` sets `legacy-peer-deps=true` and CI depends on it. `bun.lock` and the
-README's `pnpm install` are template leftovers. Node `>=20` (`engines`).
+**npm**, not pnpm or bun: `.npmrc` sets `legacy-peer-deps=true` and CI depends on it. A `bun.lock` is
+still committed and the README used to say `pnpm install` — both template leftovers; the README now reads
+`npm ci` / `npm run dev`. **The installer is not cosmetic.** A bun-installed `node_modules` masked T44 and
+passed a suite that failed on a fresh `npm ci` — a tree green under one installer and red under another.
+If `node_modules/.bin` contains `.exe` entries, you are on the wrong tree. → T46. Node `>=20` (`engines`).
 
 ```bash
 npm ci                                          # foreground — never a background install after a wipe
@@ -60,6 +63,12 @@ npm run dev                                     # next dev -p 3000 -H 0.0.0.0
 ./node_modules/.bin/vitest run                  # npm test — baseline: 223 passed / 15 files
 bash docs/agentic/scripts/verify.sh             # both gates + counts + baseline guard, read-only
 ```
+
+> **On Windows, run the gate through `verify.sh`, not `vitest` directly.** A lowercase drive letter in the
+> cwd (`c:\…`) silently disables `vi.mock` hoisting, so a raw run can report every suite as failed — and
+> `verify.sh` can then cry *"a DROP means a guard was deleted"* when nothing was deleted. `verify.sh`
+> re-enters the repo root via `pwd -W`. Diagnose from the `RUN v…` banner: `c:/…` is the defect, `C:/…`
+> is healthy. → T44
 
 CI (`.github/workflows/ci.yml`, the only workflow) runs `npm ci` → `npm run lint` → `npm test`.
 

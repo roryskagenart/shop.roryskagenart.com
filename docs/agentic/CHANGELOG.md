@@ -8,6 +8,46 @@ This file tracks the **KB**, not the application. The application's release reco
 
 ---
 
+## [1.7.0] — 2026-10-06
+
+Third pass in the same session. T43 and T44 were registered before their causes were fully understood;
+finishing the investigation corrected both and turned up two more defects.
+
+### Added
+
+- **T45 — a public footer link pointed at a domain that does not exist.**
+  `components/layout/footer.tsx` rendered *"Rory Skagen Studio Archive"* at `https://shop.roryskagen.com`,
+  which is **NXDOMAIN** (DNS `Status: 3`) — a dead link on **every public page**, and invisible to CI
+  because nothing checks a link *target*. It was also a hardcoded duplicate of a domain that already
+  lives in `BRAND_CONFIG.domains`. **The footer is fixed** to use that constant; two further references
+  are **OPEN** because their correct value is a product decision.
+- **T46 — three package managers are referenced; only npm is real.** `package-lock.json` (what CI uses),
+  a committed `bun.lock`, and a README that said `pnpm install`, with no `packageManager` field to settle
+  it. Measured: a **bun**-installed `node_modules` passed the suite while a fresh `npm ci` tree failed
+  identically, because Bun's symlinked layout masked T44. **The README is fixed.**
+
+### Changed
+
+- **T44 corrected — its previous entry was wrong twice.** It claimed `vitest.config.ts` normalised the
+  root and fixed the problem, and that a "known residual" remained in `npm test`. The config change only
+  *appeared* to work because `node_modules` was bun-installed at the time (Bun symlinks its packages, so
+  realpath canonicalisation happened anyway); against an npm-installed tree it changed nothing, and it has
+  been **reverted**. The real fix is in `docs/agentic/scripts/verify.sh`, which now re-enters the repo root
+  through `pwd -W` so the drive letter is canonical — **observed red first** (15 files failed, *"no
+  tests"*, GATES FAILED, exit 1, and a false *"a DROP means a guard was deleted"*) and **green after**
+  (223 tests / 15 files, exit 0).
+- `README.md` install instructions: `pnpm install` / `pnpm dev` → `npm ci` / `npm run dev`.
+- `stack/overview.md` now records the measured bun-vs-npm behavioural difference and how to spot the
+  wrong tree.
+- `/AGENTS.md` §3 — the package-manager note no longer calls the README a `pnpm` leftover, it warns that
+  the installer changes test behaviour, and a new callout says to run the gate through `verify.sh` on
+  Windows rather than `vitest` directly (T44).
+- `sessions/2026-10-06.md` — the T44 record corrected: the `vitest.config.ts` change is marked
+  **reverted**, the real fix is `verify.sh`, and the "residual" claim is struck. Re-measured on a fresh
+  `npm ci` tree, `npm test` → 223 passed / 15 files, exit 0; the failure had been recorded on a bun tree.
+
+---
+
 ## [1.6.1] — 2026-10-06
 
 ### Changed

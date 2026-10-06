@@ -31,13 +31,19 @@ the real storefront; the Fourthwall-hosted site is a browsing-gated mirror (see
 ### Package manager
 
 **npm.** `package-lock.json` is the file that actually matches `package.json` (verified with
-`npm ci --dry-run`). A `bun.lock` is present and the `README.md` still says `pnpm install` — both are
-vestigial from the upstream template. CI follows npm.
+`npm ci --dry-run`). A `bun.lock` is committed and the `README.md` used to say `pnpm install` — both were
+vestigial from the upstream template; the README now reads `npm ci` / `npm run dev`. CI follows npm.
 
 `.npmrc` sets `legacy-peer-deps=true`; npm honours it, and CI depends on it.
 
 > ⚠️ `bun install` rewrites `react`/`react-dom` inside `bun.lock`. Revert with `git checkout HEAD -- bun.lock`
 > unless the change was intentional.
+
+> ⚠️ **The installer is not cosmetic — it changes test behaviour.** Measured 2026-10-06: a bun-installed
+> `node_modules` (28 `.exe` + 28 `.bunx` entries in `.bin`, **zero** npm shims) passed the suite, while a
+> fresh `npm ci` tree failed identically — Bun **symlinks** its packages, which masked **T44**. Same
+> `vitest` 4.1.11 / `vite` 8.3.1 / `esbuild` 0.28.2 in both. Install with npm; if you see `.exe` entries
+> in `node_modules/.bin`, you are on the wrong tree. → **T46**
 
 ## Layout
 

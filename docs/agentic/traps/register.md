@@ -751,35 +751,75 @@ display names drift. Never conclude "it still resolves, so it is current".
 **Source:** 2026-10-06.
 
 <a id="t44"></a>
-### T44 — `vi.mock` silently stops working when Vitest's root carries a lowercase drive letter
-**Status:** RESOLVED — `vitest.config.ts` normalises the root. The casing sensitivity underneath remains.
-**Bites:** On Windows, `process.cwd()` returns a **lowercase drive letter** (`c:\…`) when the shell was
-entered as `/c/…`. Vitest derives its `root` from that string, and the module paths that follow differ in
-case from the ones the runner itself uses. Node caches modules by **path string**, so two instances of
-`vitest` end up loaded — the test file's `describe`/`vi` come from one, the runner from the other. The
-failure is **silent and selective**: `vi.spyOn` keeps working and `vi.mock` stops being hoisted, so only
-the files that use `vi.mock` fail (4 files, 23 tests) with
-`TypeError: vi.mocked(...).mockResolvedValue is not a function` — which reads like a broken test, not a
-broken runner. Under `npm test` the split is total and every suite reports *"Vitest failed to find the
-current suite"*. **It is also non-deterministic across shells**, which is how it survived: the same
-command passes or fails depending on how the working directory was entered.
-**Evidence:** Measured 2026-10-06. With `process.cwd()` = `c:\…`, `./node_modules/.bin/vitest run` → 4
-files failed / 23 tests failed and the banner reads `RUN v4.1.11 c:/Users/…`. With the same cwd plus an
-absolute `--root`, the banner reads `RUN v4.1.11 C:/Users/…` and **all 223 tests pass**. **Any absolute
-`--root` works, because Vitest normalises it; a relative `--root .` does not**, because it resolves
-against the lowercase cwd — measured both ways. A 3-line probe (`vi.mock('./lib/utils', …)` then
-`import { sentinel }`) returned `undefined`, proving hoisting is skipped rather than the factory failing.
-Ruled out by measurement: CRLF (the probe was pure LF, and a CRLF file passes), the transform cache
-(cleared, `node_modules/.vite` removed), the config loader (the committed `.ts` vs an equivalent `.mjs`),
-the pool (`forks` / `threads` / `vmThreads`, isolate on and off), a second `node_modules` above the repo,
-and the esbuild platform binary (present). The affected files are **byte-identical to `HEAD`**
-(`git hash-object` matches `HEAD:<path>`) and CI on ubuntu is green, so this is environmental — not a
-regression.
-**Do instead:** `vitest.config.ts` sets `root: fs.realpathSync.native(__dirname)`, which canonicalises the
-drive letter on Windows and is a no-op on Linux/macOS. If you ever see `vi.mocked(...)… is not a
-function`, **read the `RUN v…` banner first**: a lowercase drive letter there *is* the defect.
-**Known residual:** `npm test` still fails on Windows even with a normalised root — npm's shim loads a
-second `vitest` instance (all 15 suites report *"failed to find the current suite"*). CI is unaffected
-(ubuntu + `npm ci`). Locally, use `bash docs/agentic/scripts/verify.sh`, which invokes the binary
-directly.
+### T44 — A lowercase drive letter in the cwd silently disables `vi.mock`
+**Status:** MITIGATED — the gate re-enters the repo root with a canonical path. The casing sensitivity
+itself is upstream and unfixed.
+**Bites:** On Windows, `process.cwd()` returns a **lowercase drive letter** (`c:\…`) when the shell
+inherited one — which is not exotic here: it is how this machine's agent shell starts. Vitest derives
+module paths from that string, they disagree in case with the paths the runner itself uses, and Node
+caches modules by **path string** — so two `vitest` instances load. The failure is **silent, selective and
+gate-destroying**: `vi.spyOn` keeps working while `vi.mock` stops being hoisted, so only the files using
+`vi.mock` fail (4 files, 23 tests) with `TypeError: vi.mocked(...).mockResolvedValue is not a function` —
+which reads like a broken test, not a broken runner. On a full run every suite can fail to load instead,
+and then [`../scripts/verify.sh`](../scripts/verify.sh) reports **"a DROP means a guard was deleted"** and
+*"GATES FAILED"* — a false accusation that invites someone to "fix" the baseline.
+**Evidence:** Measured 2026-10-06. The lowercase cwd is reproducible on demand:
+`node -e "process.chdir('c:/…'); console.log(process.cwd())"` → `c:\…`. With it,
+`bash docs/agentic/scripts/verify.sh` → 15 files failed, *"no tests"*, **GATES FAILED (2)**, exit 1. From
+an uppercase cwd — or after the fix below — the same script → 223 tests / 15 files and *"All gates
+green"*, exit 0. A 3-line probe (`vi.mock('./lib/utils', …)` then `import { sentinel }`) returns
+`undefined`, proving hoisting is skipped rather than the factory throwing. Ruled out by measurement:
+CRLF (the probe was pure LF), the transform cache, the config loader (`.ts` vs an equivalent `.mjs`), four
+pool modes, a duplicate `node_modules` above the repo, the esbuild platform binary, the injected
+`NODE_OPTIONS` shim, and the pre-change config. The affected test files are **byte-identical to `HEAD`**
+(`git hash-object` matches `HEAD:<path>`) and CI on ubuntu is green — environmental, not a regression.
+**Do instead:** Run the gate through [`../scripts/verify.sh`](../scripts/verify.sh), which `cd`s to the
+repo root via `pwd -W` so the drive letter is canonical. If you invoke `vitest` yourself, **read the
+`RUN v…` banner** — `c:/…` is the defect, `C:/…` is healthy.
+**Tried and reverted — do not repeat:** `root: fs.realpathSync.native(__dirname)` in `vitest.config.ts`.
+It appeared to fix this, but only because `node_modules` was bun-installed at the time; Bun **symlinks**
+its packages, so realpath canonicalisation happened anyway. Against an npm-installed tree it changes
+nothing. See **T46** for why the install method matters.
+**Source:** 2026-10-06.
+
+<a id="t45"></a>
+### T45 — A public footer link pointed at a domain that does not exist
+**Status:** PARTIALLY RESOLVED — the footer link is fixed 2026-10-06; two more references are **OPEN**
+because their correct value is a product decision.
+**Bites:** [`../../../components/layout/footer.tsx`](../../../components/layout/footer.tsx) rendered a
+link labelled *"Rory Skagen Studio Archive"* at `https://shop.roryskagen.com` — on **every public page**.
+That domain is **NXDOMAIN**: it does not resolve, so every visitor who clicked it got a browser error.
+Nothing in CI, and no test, looks at a link *target*, so a dead link is invisible to the gate. The string
+was also a **hardcoded duplicate** of a domain that already lives in `BRAND_CONFIG.domains`.
+**Evidence:** Measured 2026-10-06. `curl -sS "https://dns.google/resolve?name=shop.roryskagen.com&type=A"`
+→ **`Status: 3` (NXDOMAIN)**; `shop.roryskagenart.com` → `Status: 0` with Vercel A records and HTTP 200
+→ `/USD`; `roryskagenart.com` → `Status: 0`. `lib/brand-config.ts:16-18` already defines
+`portfolio: 'https://roryskagenart.com'` and `shopCustomDomain: 'https://shop.roryskagenart.com'`, and the
+footer already imports `BRAND_CONFIG`. The string arrived in `f1a1c8f` (the initial catalogue commit).
+**Do instead:** Use `BRAND_CONFIG.domains.*` — never a hardcoded domain. **Fixed:** the footer link now
+reads `BRAND_CONFIG.domains.shopCustomDomain`, preserving the original self-link intent. **Still open:**
+`lib/fourthwall/index.ts:170-171,754` (`MOCK_SHOP.domain` / `publicDomain`, a fallback used only when
+`NEXT_PUBLIC_FW_CHECKOUT` is unset) and the public `/docs` copy at `lib/docs-content.ts:723,944` — the
+correct value there is a product decision, so it is surfaced rather than guessed. A guard that resolves
+every external link target would close the class; see **T41** for the shape of that fix.
+**Source:** 2026-10-06.
+
+<a id="t46"></a>
+### T46 — Three package managers are referenced; only npm is real, and the choice changes test behaviour
+**Status:** OPEN — the README is fixed; `bun.lock` is still tracked.
+**Bites:** `package-lock.json` is the lockfile CI uses (`npm ci`), a `bun.lock` is committed, and the
+README told you to run `pnpm install`. Nothing in `package.json` says which is authoritative — there is
+no `packageManager` field and no `name`. So an agent picks one, and **the choice is not cosmetic**: on
+2026-10-06 this machine's `node_modules` had been installed by **bun** (`node_modules/.bin` held 28 `.exe`
++ 28 `.bunx` and **zero** npm shims), and Bun's symlinked layout **masked T44** — the test suite passed
+there and failed identically on a fresh `npm ci`. A tree that is green under one installer and red under
+another is worse than no tree. `bun install` also rewrites `react`/`react-dom` inside `bun.lock`, which
+then reads as a real dependency change.
+**Evidence:** Measured 2026-10-06. `ls node_modules/.bin | grep -c '\.exe$'` → 28 and
+`grep -c '^[^.]+$'` → 0 on the bun tree; after `npm ci` → 28 extension-less + 28 `.cmd`, 0 `.exe`. Same
+`vitest` 4.1.11 / `vite` 8.3.1 / `esbuild` 0.28.2 in both. `npm ci --dry-run` exits 0, so the npm
+lockfile is the one that matches `package.json`. CI (`.github/workflows/ci.yml`) runs `npm ci`.
+**Do instead:** **npm.** `npm ci` (foreground — never a background install after a wipe), then
+`npm run dev`. Do not run `bun install`; if it happens, `git checkout HEAD -- bun.lock` and re-install
+with npm. Read [`../stack/overview.md`](../stack/overview.md#package-manager).
 **Source:** 2026-10-06.
