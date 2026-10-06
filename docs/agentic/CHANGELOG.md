@@ -8,6 +8,22 @@ This file tracks the **KB**, not the application. The application's release reco
 
 ---
 
+## [1.6.1] — 2026-10-06
+
+### Changed
+
+- **[`skills/docs-reconciliation-release`](skills/docs-reconciliation-release/SKILL.md), step 8
+  (Validate):** added the rule that a gate must be confirmed to have *actually run* before its
+  result is trusted. A runner that silently mis-runs reports a real number that is not about your
+  change, and the failure reads as a broken test rather than a broken runner — the T44 case, where
+  a lowercase drive letter in `process.cwd()` silently disabled `vi.mock` and the identical command
+  passed or failed depending on how the directory had been entered. Carries two transferable
+  habits: prove a failure's source is unmodified (`git hash-object` vs `git rev-parse HEAD:<path>`)
+  before debugging the test, and read the runner's own banner — it names the root it resolved.
+  Links to **T44**.
+
+---
+
 ## [1.6.0] — 2026-10-06
 
 Follow-on to 1.5.0, same session. A Vercel check on PR #15 printed a project path that contradicted the

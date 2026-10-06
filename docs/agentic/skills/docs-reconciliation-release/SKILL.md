@@ -84,6 +84,29 @@ npm test          # if an offline suite exists
 A docs-only change must not break these. Record the exact evidence (e.g. "64/64
 passing") in the CHANGELOG so the release is auditable.
 
+**Then confirm the gate itself actually ran.** A runner that silently mis-runs is worse than no
+gate: it reports a number that is real but is not about your change, and the failure looks like a
+broken test rather than a broken runner. Before trusting a green *or* red result, check that the
+runner's own banner agrees with the path you think you are in, and that the count of tests
+executed matches the count that exist.
+
+Measured 2026-10-06: on Windows, a lowercase drive letter in `process.cwd()` (`c:\…`, because the
+shell had been entered as `/c/…`) made Vitest derive a `root` whose path casing differed from the
+module paths the runner itself used. Node caches modules by **path string**, so two `vitest`
+instances loaded — `vi.spyOn` kept working, `vi.mock` silently stopped being hoisted, and 4 files
+/ 23 tests failed with `vi.mocked(...).mockResolvedValue is not a function`. **The identical
+command passed** when the working directory happened to be entered with an uppercase drive letter,
+which is how it survives unnoticed. Fix the root, not the test — canonicalise it
+(`root: fs.realpathSync.native(__dirname)` for Vitest; a no-op off Windows). See
+[`../../traps/register.md`](../../traps/register.md#t44).
+
+Two transferable habits from that:
+- **When a failure's source is byte-identical to the committed version, stop debugging the test.**
+  Prove it first (`git hash-object <f>` vs `git rev-parse HEAD:<f>`), then look at how the runner
+  was started.
+- **Read the runner's banner.** It names the root it actually resolved — a mismatch there is the
+  defect, and it costs one line to check.
+
 Also **verify every internal doc link resolves** — this routinely surfaces real defects
 (wrong filenames, links to files that never existed). For each markdown link, resolve it
 relative to the doc's directory and assert the target exists:
