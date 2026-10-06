@@ -8,6 +8,59 @@ This file tracks the **KB**, not the application. The application's release reco
 
 ---
 
+## [1.5.0] — 2026-10-06
+
+Produced by a preflight that measured the gate baseline and found **four different test counts live in the
+tree at once**. The count was right in two files and wrong in four.
+
+### Added
+
+- **T41 — the gate baseline was duplicated in six carriers, and four of them drifted.** Measured
+  `main` = `42786bb7`: `vitest run` → **`223 passed / 15 files`**, while `AGENTS.md` said **137/11**,
+  `protocols/verification.md` said **163/13**, and `protocols/preflight.md`, `scripts/preflight.sh`,
+  `lib/fourthwall/AGENTS.md` and `scripts/AGENTS.md` all said **97/6**. **Root cause, and it was not
+  carelessness:** `AGENTS.md` §5 named only *two* files to update when the count changed, so nothing
+  could fail on the other four. **RESOLVED** by the single source of truth below.
+- **T42 — the `/docs` palette table documents tokens and colours that no longer exist.**
+  `lib/docs-content.ts:1159-1170` still advertises `--background` / `--card` / `--accent` at the retired
+  Gallery Stone values, while `app/globals.css:12-51` defines `--brand-bg` / `--brand-fg` / … at the
+  Skagen values. PR #14 changed the CSS and the config but not the copy. **OPEN — deliberately not fixed
+  here**, because rewording public product copy is a product decision. Owner: Jaden.
+- [`scripts/baseline.env`](scripts/baseline.env) — **the gate baseline, in one place.** `verify.sh` and
+  `preflight.sh` source it; nothing inlines the number any more.
+- [`scripts/check-baseline.sh`](scripts/check-baseline.sh) — a guard that **can actually fail**: it fails
+  if any document that quotes the count disagrees with `baseline.env`, if the on-disk test-file count
+  moves, or if `stack/overview.md`'s file list stops matching the count. Observed **red first** (6 FAILs)
+  and then green — a guard nobody has watched fail is not a guard.
+
+### Changed
+
+- `verify.sh` now runs the baseline guard as a **third gate**, and its failure text points at
+  `baseline.env` instead of at two named documents.
+- Every carrier reconciled to the measured baseline; the measured counts are recorded with the command
+  that produced them.
+- `/AGENTS.md` §2 now **declares `v0.x.y` the release scheme** (the only space with tags; tags go on the
+  **merge commit**), and §5 names every carrier plus the guard rather than two of six.
+- `/AGENTS.md` §5's drift anecdote updated — the count has been 67, then 97, then 137, then 163, and is
+  now 223.
+- `lib/brand-config.ts` — the roadmap field **`version` renamed to `roadmapId`**, with the array's header
+  stating that it is a roadmap and not a release record. The array is read by no component.
+- **T24 → MITIGATED** (was OPEN). The scheme is now declared and enforced, but the public `/docs` page
+  still words the `v1.x` roadmap phases as *"Release v1.2.0"* — surfaced rather than silently reworded.
+
+### Fixed
+
+- **`.gitattributes` did not cover `.env`** — so `baseline.env`, a file bash *sources*, was exposed to
+  `core.autocrlf = true`. `BASELINE_TESTS=223\r` is a different value from `223`, which would have made
+  every comparison in the new guard fail and report stale counts on a clean tree. Caught by the
+  `warning: LF will be replaced by CRLF` on `git add`, and by `git check-attr` returning `unspecified`.
+  `*.env text eol=lf` added; **T32** extended.
+- `stack/overview.md` test-file list: a **literal `\n`** joined three entries onto one line, and the list
+  held **14 entries against a claimed 15** — `lib/fourthwall/__tests__/merch-catalog.test.ts` was missing.
+- `lib/fourthwall/AGENTS.md` and `scripts/AGENTS.md` both undercounted the test files in
+  `lib/fourthwall/__tests__/` (three named; four exist).
+- `traps/register.md` — T40 was missing its `<a id="t40"></a>` anchor and its `**Source:**` line.
+
 ## [1.4.1] — 2026-10-04
 
 ### Added

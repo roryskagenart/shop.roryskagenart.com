@@ -308,13 +308,24 @@ domain. Inferring it points work at the wrong repository.
 
 <a id="t24"></a>
 ### T24 — Two version spaces disagree
-**Status:** OPEN
+**Status:** MITIGATED — the scheme is now declared and enforced; one piece of public copy still uses the
+old wording.
 **Bites:** Naming a release from the wrong scheme produces two contradictory plans, and the repo follows
 the wrong one.
-**Evidence:** `lib/brand-config.ts:66-101` calls **`v1.1.0` "Step 1 (Current Release)"** (mirrored at
-`lib/docs-content.ts:1178-1190`), but `git tag` shows **only `v0.1.0`**. The current plan uses `v0.2.0`.
-**Do instead:** Check `git tag` and the plan directory before naming anything. Pick one scheme explicitly.
-**Source:** 2026-10-01.
+**Evidence:** `lib/brand-config.ts:104-144` (was `:66-101`) called **`v1.1.0` "Step 1 (Current Release)"**
+and listed `v1.2.0`–`v1.5.0`, mirrored at `lib/docs-content.ts:1174-1192` — while `git tag` showed **only
+`v0.1.0`** and every plan was named `v0.x.y`. No `v1.x` tag has ever existed.
+**Fixed by:** 2026-10-06, `fix/preflight-and-baseline-reconciliation`. `/AGENTS.md` §2 now declares
+`v0.x.y` the release scheme and states that a tag goes on the **merge commit**;
+`lib/brand-config.ts` renamed the field `version` → **`roadmapId`** and documents that the array is a
+roadmap, not a release record; `stack/overview.md#versions` carries the same policy. The `v1.x` phase
+names are left in place — they are real roadmap labels, and deleting them would lose information.
+**Residual (why MITIGATED, not RESOLVED):** the **public `/docs` page** (`lib/docs-content.ts:1174-1192`)
+still renders them as *"Release v1.2.0"*. Rewording user-visible product copy is a product decision, not
+a docs-reconciliation one, so it was surfaced rather than changed. **Owner: Jaden.**
+**Do instead:** `git tag` and `docs/releases/plans/` are the release record. Never name a release from
+the `v1.x` roadmap space.
+**Source:** 2026-10-01; re-scoped 2026-10-06.
 
 <a id="t25"></a>
 ### T25 — A stale checkout inflates `git diff` catastrophically
@@ -405,20 +416,26 @@ damage.
 <a id="t32"></a>
 
 ### T32 — A CRLF checkout breaks the shell scripts
-**Status:** MITIGATED (`.gitattributes` pins LF for `*.sh` and `*.py`)
+**Status:** MITIGATED (`.gitattributes` pins LF for `*.sh`, `*.py` and `*.env`)
 **Bites:** `core.autocrlf = true` rewrites the **working tree** to CRLF on checkout. TypeScript, Markdown
 and JSON do not care. **An executable script does**: the shebang becomes `#!/usr/bin/env bash\r` and
 `./preflight.sh` dies with *bad interpreter*; a CR inside a `case`, heredoc or `[[ ]]` construct produces
 `$'\r': command not found`. It presents as "the script is broken", not "the checkout is broken", which is
-what makes it expensive.
+what makes it expensive. **A *sourced* file is the same class as an executable** — and was missed:
+`BASELINE_TESTS=223\r` is a different value from `223`, so every comparison in `check-baseline.sh` fails
+and the guard reports stale counts on a clean tree.
 **Evidence:** `git config --get core.autocrlf` → `true`. No `.gitattributes` existed.
 `git check-attr text eol -- docs/agentic/scripts/preflight.sh` → **`unspecified`** for both. Scope measured
 with `git ls-files --eol | awk '{print $1,$2}' | sort | uniq -c` → **107 files `i/lf w/crlf`**, i.e. the
 worktree is already being rewritten repo-wide.
-**Do instead:** `.gitattributes` at the repo root pins `*.sh` and `*.py` to `eol=lf`. **If you add a new
-executable script language, add it there too.** Note the fix is deliberately narrow — the 107 CRLF files
-are cosmetic; only executables are a defect.
-**Source:** 2026-10-02.
+**And again 2026-10-06:** adding `docs/agentic/scripts/baseline.env` produced
+`warning: LF will be replaced by CRLF` on `git add`, and `git check-attr text eol -- …/baseline.env` →
+**`unspecified`** — the policy covered `*.sh` and `*.py` but not `.env`. `*.env text eol=lf` added.
+**Do instead:** `.gitattributes` at the repo root pins `*.sh`, `*.py` and `*.env` to `eol=lf`. **If you add
+a new executable — or sourced — file type, add it there too.** A `git add` warning about LF/CRLF is the
+signal; do not scroll past it. Note the fix is deliberately narrow — the 107 CRLF files are cosmetic; only
+executables and sourced files are a defect.
+**Source:** 2026-10-02; extended 2026-10-06.
 
 <a id="t33"></a>
 
@@ -625,6 +642,7 @@ archived. Archive + `PUT /collections/{id}/products` → **T05** (that call repl
 send the complete intended list).
 **Source:** 2026-10-04.
 
+<a id="t40"></a>
 ### T40 — `npm run dev` silently loses the port race; the studio site answers on 3000
 **Symptom:** `npm run dev` prints its usual banner and then every localhost:3000 request returns pages
 **from a different project**. Requests to `/playground` returned the studio homepage — a totally
@@ -642,3 +660,59 @@ repo did not start. `curl -sI localhost:3000` → `X-Powered-By: Express` (studi
 code: `curl -sI http://localhost:<port>/ | grep -i x-powered-by`. Expect `Next.js`. On collision, start
 on a free port explicitly — `npm run dev -- -p 3111` — and re-confirm the header before trusting any
 rendered output. Server identity is part of verification; a 200 from the wrong process proves nothing.
+**Source:** 2026-10-05.
+
+<a id="t41"></a>
+### T41 — The gate baseline was duplicated in six places, and four of them drifted
+**Status:** RESOLVED
+**Bites:** A stale baseline **fails the gate on a clean tree**, and the failure text points at the
+opposite of the truth: `verify.sh` prints *"a DROP means a guard was deleted"* when in fact nothing was
+deleted and the documented number was simply old. Worse, the number a reader trusts depends on which file
+they happen to open — so an agent can "verify" a change against a baseline that was never true.
+**Evidence:** Measured 2026-10-06 at `main` = `42786bb7`. `./node_modules/.bin/vitest run` →
+**`Test Files 15 passed (15)` / `Tests 223 passed (223)`**. The tree simultaneously claimed:
+
+| Carrier | Claimed |
+| :--- | :--- |
+| `docs/agentic/scripts/verify.sh:20-21` (now `baseline.env`) | 223 / 15 ✓ |
+| `docs/agentic/stack/overview.md:98` (now `:103`) | 223 passing ✓ (but its file list held 14 entries against a claimed 15, with a literal `\n` joining three of them) |
+| `AGENTS.md:55,103` | **137 / 11** |
+| `docs/agentic/protocols/verification.md:13` | **163 / 13** |
+| `docs/agentic/protocols/preflight.md:56`, `scripts/preflight.sh:26-27`, `lib/fourthwall/AGENTS.md:54`, `scripts/AGENTS.md:48-49` | **97 / 6** |
+
+Line numbers are as measured **before** the fix — every carrier was rewritten by it.
+
+**Root cause — and it was not carelessness:** `AGENTS.md` §5 instructed a contributor to update exactly
+**two** files when the count changed (`verify.sh`, `stack/overview.md`). Four carriers were never named,
+so nothing could fail on them. **A guard that does not know a file exists cannot fail on it.**
+**Fixed by:** 2026-10-06, `fix/preflight-and-baseline-reconciliation`. The count now lives in one place,
+[`../scripts/baseline.env`](../scripts/baseline.env); `verify.sh` and `preflight.sh` **source** it rather
+than inlining it; `AGENTS.md` §5 names every carrier; and
+[`../scripts/check-baseline.sh`](../scripts/check-baseline.sh) is a new gate that fails if any document
+quoting the count disagrees with it, if the on-disk test-file count moves, or if `overview.md`'s list
+stops matching. **Observed red first** — 6 FAILs — then green, which is the point.
+**Do instead:** Never inline the baseline. Change `baseline.env`, run `check-baseline.sh`, fix what it
+flags. Add any new document that quotes the count to the `CARRIERS` list in the same change.
+**Source:** 2026-10-06.
+
+<a id="t42"></a>
+### T42 — The `/docs` palette table documents tokens and colours that no longer exist
+**Status:** OPEN — **found 2026-10-06, not fixed.** Deliberately left out of a docs-reconciliation
+release, because rewording public product copy is a product decision.
+**Bites:** `lib/docs-content.ts:1159-1170` tells a reader the design tokens are `--background`,
+`--card`, `--foreground`, `--border`, `--line-strong`, `--accent` with values `#e3e1da` / `#17171b` /
+`#1c1c20` / `#d2cfc6` / `#3a3a40` / `#b45309`. **None of that is live.** `app/globals.css:12-51` defines
+`--brand-bg`, `--brand-fg`, `--brand-bg-card`, `--brand-surface`, `--brand-surface-deep`,
+`--brand-border`, `--brand-line-strong`, `--brand-fg-muted`, `--brand-accent`. Live values, light →
+dark: `--brand-bg` `#c2c9d1`→`#464e58`, `--brand-fg` `#16202b`→`#eef2f6`, `--brand-bg-card`
+`#edeff2`→`#2f353c`, `--brand-border` `#c3c9d0`→`#515761`, `--brand-line-strong` `#bcc2c8`→`#828e9b`,
+`--brand-accent` `#22d3ee` in both. Both the **names** and the **values** in the docs table are wrong,
+and it still calls the palettes "Gallery Stone" / "Charcoal Gallery" — names `lib/brand-config.ts:34-72`
+now keeps only as *legacy migration aliases* (`galleryStoneLight`, `charcoalGalleryDark`).
+**Evidence:** 2026-10-06. `app/globals.css:12-51` (live) vs `lib/docs-content.ts:1159-1170` (documented)
+vs `lib/brand-config.ts:34-72` (Skagen Light/Dark). PR #14 "sync Skagen Light/Dark palette from studio
+design panel" changed the CSS and the config but not the `/docs` copy.
+**Do instead:** Treat `app/globals.css` as the token source of truth; it and `brand-config.ts` are
+asserted together by hand today, and nothing checks the `/docs` table. A guard that derives the table
+from the CSS would close it — see **T41** for the shape of that fix.
+**Source:** 2026-10-06.

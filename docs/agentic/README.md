@@ -1,6 +1,6 @@
 # Agentic Ops KB — shop.roryskagenart.com
 
-**Version 1.0.0** · see [`CHANGELOG.md`](CHANGELOG.md) · entry point: [`/AGENTS.md`](../../AGENTS.md)
+**Version 1.5.0** · see [`CHANGELOG.md`](CHANGELOG.md) · entry point: [`/AGENTS.md`](../../AGENTS.md)
 
 The durable, versioned, tool-agnostic knowledge base for working on this repository with an AI agent.
 
@@ -57,13 +57,16 @@ docs/agentic/
 │   ├── README.md             how MCP servers are configured here
 │   └── mcp.example.json      template — no credentials, ever
 ├── scripts/                  runnable, agent-agnostic helpers
+│   ├── baseline.env          THE gate baseline — single source of truth
 │   ├── preflight.sh          session-start checks
-│   ├── verify.sh             the gate sequence
+│   ├── verify.sh             the gate sequence (also runs check-baseline.sh)
+│   ├── check-baseline.sh     fails when a document disagrees with baseline.env
 │   ├── check-links.py        validates every relative link and #anchor in the repo
 │   └── normalize-skill-frontmatter.py
 └── sessions/                 distilled session records
     ├── README.md
-    └── 2026-10-01.md
+    ├── 2026-10-01.md
+    └── 2026-10-06.md
 ```
 
 **Sibling document series — not part of this KB:**
