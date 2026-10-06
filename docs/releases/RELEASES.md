@@ -30,22 +30,16 @@ two-dot tree diff (`git diff origin/main origin/<branch>`).
 | Version | Tag | Tagged commit | Delivered by | Contains |
 | :--- | :--- | :--- | :--- | :--- |
 | `v0.1.0` | `v0.1.0` | `31e47f2` — PR #1 merge commit | PR #1 `release/v0.1.0`, merged 2026-10-01 | Truthful import surface, admin gate, Fourthwall write path removed |
+| `v0.2.0` "Staged Catalogue" | `v0.2.0` | `42786bb7` — PR #14 merge commit | PRs #11–#14, merged 2026-10-04 → 2026-10-06 | Nav from live stock, the executed merch catalogue, read-only `/playground`, Skagen theme sync |
+
+> **`v0.2.0` is a retroactive tag.** Nothing was tagged between `v0.1.0` and `42786bb7`, so PRs #11–#14
+> shipped through the Vercel Git integration with no tag, no release note and no session record. The tag
+> was cut on 2026-10-06 in the same change that created this ledger. It is an **annotated** tag, pushed by
+> object SHA (`870d2748`), and it dereferences to `42786bb7` — a commit on `main`'s history.
 
 ---
 
-## ⚠️ Untagged — the gap this file exists to close
-
-**Nothing has been tagged since `v0.1.0`.** PRs #11–#14 are merged to `main`, which is git-connected to
-Vercel, so they deployed through the integration — with no tag, no release note, and no session record.
-
-| Version | Status | Intended tag target | Delivered by | Contains |
-| :--- | :--- | :--- | :--- | :--- |
-| `v0.2.0` "Staged Catalogue" | **executed and live, untagged** | `42786bb7` | PRs #11–#14 | See below |
-
-`42786bb7` is **PR #14's `merge_commit_sha`** and was `main`'s tip when this was written — so it is a
-merge commit, matching the `v0.1.0` convention, and it is the last commit of the untagged run.
-
-What `v0.2.0` covers, with the evidence each claim rests on:
+## What `v0.2.0` covers
 
 | PR | Merge commit | Shipped |
 | :--- | :--- | :--- |
@@ -63,9 +57,12 @@ with no code change. Records: [`created-products.v0.2.0.md`](created-products.v0
 (**T39** — archiving is not enough; it must be removed from the collection), and a pricing re-check is
 backlogged.
 
-> **Not yet tagged, deliberately.** A tag is a remote write and needs explicit approval, and the tag
-> target should be chosen against the merged `main`, not this branch. Recorded here so the decision is
-> visible rather than lost.
+> **Why one catch-up tag and not two.** No release process ran on 10-04 or 10-05, so tagging `v0.2.0` at
+> `95ebc41c` *and* `v0.3.0` at `42786bb7` would manufacture a history that never happened — and would
+> spend `v0.3.0`, which the Launch Playground plan needs.
+>
+> **No GitHub Release object was created.** `v0.1.0` has none, so the repo's convention is a tag alone.
+> Introducing Release objects would be a new convention — say the word and it is a one-command change.
 
 ---
 

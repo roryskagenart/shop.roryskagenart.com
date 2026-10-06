@@ -40,12 +40,13 @@ The same project answers to four different names. **Never infer one from another
 > `git remote -v` as untrusted for identity and use this table. Fixing the URL is a human decision
 > (rule 4).
 
-Releases: **`v0.x.y` is the release scheme — it is the only one that has tags.** `git tag` shows `v0.1.0`;
-every plan under `docs/releases/plans/` is named `v0.x.y`; and a tag is placed on the **merge commit** of
-the PR that delivered it. The `v1.1.0`–`v1.5.0` labels in `lib/brand-config.ts:104-144` and
-`lib/docs-content.ts:1174-1192` are a **product roadmap** for the brand/omnichannel programme — they are
-not release numbers, and nothing is or will be tagged with them. **Do not name a release from that
-space.** → T24
+Releases: **`v0.x.y` is the release scheme — it is the only one that has tags.** `git tag` shows `v0.1.0`
+and **`v0.2.0` (current)**; every plan under `docs/releases/plans/` is named `v0.x.y`; and a tag is placed
+on the **merge commit** of the PR that delivered it. The ledger explaining each tag is
+[`docs/releases/RELEASES.md`](docs/releases/RELEASES.md). The `v1.1.0`–`v1.5.0` labels in
+`lib/brand-config.ts:104-144` and `lib/docs-content.ts:1174-1192` are a **product roadmap** for the
+brand/omnichannel programme — they are not release numbers, and nothing is or will be tagged with them.
+**Do not name a release from that space.** → T24
 
 ## 3. Dev environment and gates
 

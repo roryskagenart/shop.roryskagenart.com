@@ -83,7 +83,7 @@ plans are named from.
 
 | | |
 | :--- | :--- |
-| Release record | `git tag` — currently **`v0.1.0`** |
+| Release record | `git tag` — **`v0.1.0`**, **`v0.2.0`** (current). Ledger: [`../../releases/RELEASES.md`](../../releases/RELEASES.md) |
 | Tag placement | the **merge commit** of the PR that delivered the release, not the branch tip |
 | Plan naming | `docs/releases/plans/pr-<slug>-v0.x.y_DRAFT.md` |
 

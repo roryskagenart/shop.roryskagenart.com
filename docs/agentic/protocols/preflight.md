@@ -61,13 +61,16 @@ different counts were live at once (**T41**).
 
 ## 5. Is the version number you intend to use already spent?
 
-Check before naming any release. This repo carries **two disagreeing version spaces** — see
-[`stack/overview.md`](../stack/overview.md#versions).
+**The scheme is settled: `v0.x.y`** — see [`stack/overview.md#versions`](../stack/overview.md#versions).
+The `v1.x` labels in `lib/brand-config.ts` are a *product roadmap*, not release numbers (**T24**), so do
+not name a release from them.
 
 ```bash
 git tag
-grep -rn "v[0-9]\+\.[0-9]\+\.[0-9]\+" lib/brand-config.ts docs/releases/plans/ | head -20
 ```
+
+`git tag` is the release record; the ledger explaining what each tag contains and where it sits is
+[`../../releases/RELEASES.md`](../../releases/RELEASES.md). Read it before reusing a number.
 
 ## 6. Do you have the environment you need?
 

@@ -102,9 +102,10 @@ if command -v git >/dev/null 2>&1; then
   TAGS=$(git tag 2>/dev/null | tr '\n' ' ')
   printf '  tags       %s\n' "${TAGS:-<none>}"
 fi
-printf '  NOTE  two version spaces disagree in this repo:\n'
-printf '        lib/brand-config.ts:66-101 calls v1.1.0 "Step 1 (Current Release)"\n'
-printf '        but git tag shows only v0.1.0. Check before naming a release.\n'
+printf '  NOTE  the release scheme is settled: v0.x.y. Ledger: docs/releases/RELEASES.md\n'
+printf '        lib/brand-config.ts:104-144 labels a v1.x ROADMAP - those are not release\n'
+printf '        numbers, and nothing is tagged with them. Do not name a release from that\n'
+printf '        space (T24).\n'
 if command -v grep >/dev/null 2>&1; then
   # grep -c exits 1 on a zero count, which would break an && chain - hence the || true.
   PLANNED=$(grep -rl "v0\.[0-9]\+\.[0-9]\+" docs/releases/plans/ 2>/dev/null | wc -l | tr -d ' ')
