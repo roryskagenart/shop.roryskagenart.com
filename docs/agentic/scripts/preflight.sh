@@ -22,7 +22,7 @@ warn() { printf '  WARN  %s\n' "$*"; WARNED=$((WARNED + 1)); }
 fail() { printf '  FAIL  %s\n' "$*"; FAILED=$((FAILED + 1)); }
 head_() { printf '\n== %s\n' "$*"; }
 
-REPO="roryskagenart/shop.roryskagen.com"
+REPO="roryskagenart/shop.roryskagenart.com"
 
 # The baseline lives in exactly one place - do NOT inline the numbers here.
 # shellcheck source=baseline.env

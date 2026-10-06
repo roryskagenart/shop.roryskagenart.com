@@ -18,7 +18,7 @@ Measured 2026-10-01/02. **No credential values appear in this document, and none
 | :--- | :--- |
 | Vercel project | `roryskagen-5713/shop-roryskagen-com` (`prj_u3hPHBRFkibIkIkthndzS1sjvhKJ`) |
 | Vercel account | `roryskagen`, team `roryskagen-5713` |
-| GitHub remote | `roryskagenart/shop.roryskagen.com` — **public** |
+| GitHub remote | `roryskagenart/shop.roryskagenart.com` — **public**. ⚠️ Renamed from `…/shop.roryskagen.com`; the local `origin` URL still carries the old name and works only because GitHub redirects renamed repos. See `/AGENTS.md` §2 and **T23**. |
 | GitHub actor used here | `jadenblack` — pull ✓ push ✓ triage ✓ **admin ✗** |
 
 > ⚠️ The legacy `ventureio/…` Vercel project is **retired**. The migration to `roryskagen-5713` is complete
@@ -28,7 +28,8 @@ Measured 2026-10-01/02. **No credential values appear in this document, and none
 > ⚠️ `admin: false` on the GitHub repo **does** block branch protection (needs admin, not `write`), so only
 > the owner can add it. Reading is gated too: `GET /branches/main/protection` returns **404** for a
 > non-admin, which is *indistinguishable* from "not configured". Read the `protected` boolean from
-> `GET /branches/main` instead. **Current state: `main` is UNPROTECTED.**
+> `GET /branches/main` instead. **Current state (measured 2026-10-06): `main` is PROTECTED** — the owner
+> added it at some point after this note was written; do not restate the older "UNPROTECTED" claim.
 
 ## DNS
 

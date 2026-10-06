@@ -16,7 +16,7 @@ describe work already shipped, and edits applied on top of a tree that does not 
 git rev-parse HEAD
 git fetch --quiet origin
 git status --short --branch          # ahead/behind, plus untracked
-gh api repos/roryskagenart/shop.roryskagen.com/commits/main --jq .sha
+gh api repos/roryskagenart/shop.roryskagenart.com/commits/main --jq .sha
 ```
 
 > ⚠️ **Do not trust a local ref after `git fetch`.** In sandboxed environments `fetch` has reported

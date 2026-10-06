@@ -35,6 +35,14 @@ tree at once**. The count was right in two files and wrong in four.
 
 ### Changed
 
+- **The GitHub repository name was reconciled: `roryskagenart/shop.roryskagen.com` →
+  `roryskagenart/shop.roryskagenart.com`.** Found at push time — `git push` reported
+  `remote: This repository moved. Please use the new location`, and
+  `gh api repos/…/shop.roryskagen.com` resolves with that `full_name`. `/AGENTS.md` §2 already documented
+  the rename and was right; `stack/environments.md`, `plugins/registry.md`, `protocols/preflight.md`,
+  `scripts/preflight.sh` and the `plans/README.md` blob link still used the old name. **T23 updated to
+  MITIGATED.** The local `origin` URL was deliberately **not** changed — repointing the remote is a human
+  decision (rule 4), and GitHub's redirect keeps it working.
 - `verify.sh` now runs the baseline guard as a **third gate**, and its failure text points at
   `baseline.env` instead of at two named documents.
 - Every carrier reconciled to the measured baseline; the measured counts are recorded with the command
@@ -50,6 +58,10 @@ tree at once**. The count was right in two files and wrong in four.
 
 ### Fixed
 
+- **`stack/environments.md` claimed `main` was UNPROTECTED.** Measured 2026-10-06:
+  `gh api repos/…/branches/main --jq .protected` → **`true`**. The owner added protection after that note
+  was written. **T27**'s point about `admin: false` blocking the *write* still holds — only the state had
+  changed.
 - **`.gitattributes` did not cover `.env`** — so `baseline.env`, a file bash *sources*, was exposed to
   `core.autocrlf = true`. `BASELINE_TESTS=223\r` is a different value from `223`, which would have made
   every comparison in the new guard fail and report stale counts on a clean tree. Caught by the

@@ -298,13 +298,23 @@ and logo aria-label render `undefined`.
 
 <a id="t23"></a>
 ### T23 — Four names for one project
-**Status:** OPEN
+**Status:** MITIGATED — the GitHub repo has been renamed to match the folder, and the local remote URL is
+knowingly stale.
 **Bites:** The GitHub remote is **not** derivable from the folder name, the Vercel project, or the custom
-domain. Inferring it points work at the wrong repository.
-**Evidence:** Local folder `shop.roryskagenart.com`; Vercel `roryskagen-5713/shop-roryskagen-com`; domain
-`shop.roryskagenart.com`; **GitHub `roryskagenart/shop.roryskagen.com`** (`.com`).
-**Do instead:** Use the table in [`/AGENTS.md`](../../../AGENTS.md#2-read-this-before-you-name-anything).
-**Source:** 2026-10-01.
+domain. Inferring it points work at the wrong repository — and the local URL is not evidence either, since
+GitHub redirects renamed repos, so a stale `git remote -v` keeps working and looks correct.
+**Evidence:** Local folder `shop.roryskagenart.com`; Vercel `roryskagen-5713/shop-roryskagen-com`;
+custom domain `shop.roryskagenart.com`. On 2026-10-01 the GitHub repo was
+**`roryskagenart/shop.roryskagen.com`** (`.com`) — *not* the folder name, which is why this trap exists.
+**Renamed 2026-10-06 to `roryskagenart/shop.roryskagenart.com`**, confirmed twice: `git push` reported
+`remote: This repository moved. Please use the new location`, and `gh api repos/…/shop.roryskagen.com`
+resolves with **`full_name: roryskagenart/shop.roryskagenart.com`**. The local `origin` URL was
+**deliberately not changed** (rule 4 — repointing the remote is a human decision), so `git remote -v` still
+prints the old name and still works.
+**Do instead:** Use the table in [`/AGENTS.md`](../../../AGENTS.md#2-read-this-before-you-name-anything),
+which is authoritative, and treat `git remote -v` as untrusted for identity. The lesson generalises: the
+mapping between these names has changed once already, so **re-verify it rather than pattern-matching it**.
+**Source:** 2026-10-01; rename confirmed 2026-10-06.
 
 <a id="t24"></a>
 ### T24 — Two version spaces disagree

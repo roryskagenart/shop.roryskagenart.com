@@ -42,8 +42,8 @@ The same project answers to four different names. **Never infer one from another
 
 Releases: **`v0.x.y` is the release scheme — it is the only one that has tags.** `git tag` shows `v0.1.0`;
 every plan under `docs/releases/plans/` is named `v0.x.y`; and a tag is placed on the **merge commit** of
-the PR that delivered it. The `v1.1.0`–`v1.5.0` labels in `lib/brand-config.ts:66-101` and
-`lib/docs-content.ts:1178-1190` are a **product roadmap** for the brand/omnichannel programme — they are
+the PR that delivered it. The `v1.1.0`–`v1.5.0` labels in `lib/brand-config.ts:104-144` and
+`lib/docs-content.ts:1174-1192` are a **product roadmap** for the brand/omnichannel programme — they are
 not release numbers, and nothing is or will be tagged with them. **Do not name a release from that
 space.** → T24
 
