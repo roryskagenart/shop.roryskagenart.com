@@ -96,9 +96,22 @@ module paths the runner itself used. Node caches modules by **path string**, so 
 instances loaded — `vi.spyOn` kept working, `vi.mock` silently stopped being hoisted, and 4 files
 / 23 tests failed with `vi.mocked(...).mockResolvedValue is not a function`. **The identical
 command passed** when the working directory happened to be entered with an uppercase drive letter,
-which is how it survives unnoticed. Fix the root, not the test — canonicalise it
-(`root: fs.realpathSync.native(__dirname)` for Vitest; a no-op off Windows). See
+which is how it survives unnoticed.
+
+**Canonicalise the working directory before the runner starts — not the runner's config.** Under MSYS,
+`cd "$(pwd -W)"`; or pass an **absolute** `--root` (Vitest normalises it). A *relative* `--root .`
+does **not** work: it resolves against the lowercase cwd. A `root: fs.realpathSync.native(__dirname)`
+change in `vitest.config.ts` was tried and **reverted** — it only appeared to work because
+`node_modules` had been installed by **bun** at the time, and Bun *symlinks* its packages, so realpath
+canonicalisation happened anyway. Against an npm-installed tree it is a no-op. See
 [`../../traps/register.md`](../../traps/register.md#t44).
+
+**The install method is itself a variable.** A tree installed by one package manager can pass a suite
+that the same commit fails under another. Measured 2026-10-06: a bun-installed `node_modules` (28 `.exe`
++ 28 `.bunx` shims in `.bin`, **zero** npm shims) passed, while a fresh `npm ci` tree failed
+identically — Bun's symlinked layout had masked the defect above, and the "residual failure" was
+recorded as a runner problem for a day. **If `node_modules/.bin` holds `.exe` entries, you are on the
+wrong tree.** See [`../../traps/register.md`](../../traps/register.md#t46).
 
 Two transferable habits from that:
 - **When a failure's source is byte-identical to the committed version, stop debugging the test.**
@@ -239,6 +252,22 @@ versioning scheme, guardrails) in its long-term file.
 - **Don't rewrite spec history.** Status-flip and annotate; leave the original body.
 - **Scope creep is the enemy.** This release changes docs only. If you find a code bug,
   report it — don't fix it here.
+- **A fix's own record is the least-verified claim in the document.** If you register a defect and its
+  fix in the same commit, you are writing the fix's story before the fix is understood — and it will be
+  wrong. Measured 2026-10-06: one branch did this **three times**, and each pass found the previous
+  pass's record false. `f2f4625` documented a `vitest.config.ts` fix that was later **reverted**; the
+  session record it added carried a "residual" that was really a *second package manager*; and the plan
+  document's change table still described the reverted change after the correction had shipped. Every
+  one was a document asserting something the code no longer did.
+  **Register the defect first. Verify the fix. Write the record last** — or, if the record must ship
+  with the fix, mark it provisional and re-read it after the next gate run. A record written in the same
+  breath as its subject has not had time to be checked.
+- **When you correct a record, grep for every other document that repeats it.** A falsified claim is
+  rarely in one place. The same wrong fix turned up in the trap register, the session record, the plan's
+  change table, the CHANGELOG, this skill's own step 8, two memory files, and the PR description.
+  Fixing the one you happened to be looking at leaves the rest still asserting it. Run
+  `git grep -n "<the claim>"` before you commit and treat every hit as a task — including skills, which
+  are the easiest place to forget because nothing in the repo links to them.
 
 ## Reviewing a previous session before it is archived
 

@@ -8,6 +8,33 @@ This file tracks the **KB**, not the application. The application's release reco
 
 ---
 
+## [1.7.1] — 2026-10-07
+
+### Changed
+
+- **[`skills/docs-reconciliation-release`](skills/docs-reconciliation-release/SKILL.md), step 8
+  (Validate):** the prescribed fix for the T44 defect was **the reverted one**. The skill told the reader
+  to canonicalise Vitest's `root` in `vitest.config.ts` — a change that is no longer in the tree and that
+  does nothing against an npm-installed `node_modules`. It now says to canonicalise the **working
+  directory** before the runner starts (`cd "$(pwd -W)"`, or an absolute `--root`), and marks the config
+  route **tried and reverted**. Step 8 also gains the **T46** lesson: the install method is itself a
+  variable, and a `.bin` full of `.exe` entries means the tree is bun-installed. A skill is the easiest
+  place for a stale instruction to hide — nothing in the repo links to it, so no guard can see it.
+- **Same skill, "Pitfalls learned in practice":** two new entries. **A fix's own record is the
+  least-verified claim in the document** — registering a defect and its fix in the same commit means
+  writing the fix's story before the fix is understood, and this branch did exactly that three times. And
+  **when you correct a record, grep for every other document that repeats it** — the reverted fix was
+  still being asserted in the trap register, the session record, the plan's change table, the 1.6.0
+  CHANGELOG entry, this skill, two memory files and the PR description.
+
+### Fixed
+
+- **The 1.6.0 entry was annotated, not rewritten.** Its `vitest.config.ts` bullet and its
+  `T44 — RESOLVED` bullet are historical records of what 1.6.0 believed; both now carry a forward pointer
+  to the correction. Status-flip and annotate — do not rewrite history.
+
+---
+
 ## [1.7.0] — 2026-10-06
 
 Third pass in the same session. T43 and T44 were registered before their causes were fully understood;
@@ -84,6 +111,9 @@ KB — and the contradiction turned out to be real.
   being hoisted, so only the 4 files that use `vi.mock` fail, with an error that reads like a broken test
   rather than a broken runner. **RESOLVED**, with a known residual: `npm test` still fails on Windows for
   a separate npm-shim reason; CI is unaffected.
+  > ⚠️ **Both halves of that entry were wrong; 1.7.0 records the correction.** T44 is **MITIGATED**, not
+  > resolved, and there was no npm-shim residual — the all-suites failure was a **bun**-installed
+  > `node_modules`. The entry stands as the record of what 1.6.0 believed.
 
 ### Changed
 
@@ -91,6 +121,10 @@ KB — and the contradiction turned out to be real.
   it, so a lowercase drive letter in `process.cwd()` can no longer silently disable `vi.mock`. A no-op on
   Linux/macOS. Measured before/after: the `RUN v…` banner goes `c:/…` → `C:/…` and the suite goes from 4
   files / 23 tests failing to **all 223 passing**.
+  > ⚠️ **Reverted in 1.7.0 — do not reapply.** It only *appeared* to work because `node_modules` was
+  > bun-installed at the time, and Bun symlinks its packages, so realpath canonicalisation happened
+  > anyway. Against an npm-installed tree it is a no-op. The real fix is in
+  > `docs/agentic/scripts/verify.sh`.
 
 - **`stack/environments.md`:** the Vercel project row and account row corrected from
   `roryskagen-5713/shop-roryskagen-com` to **`roryskagenart/shop.roryskagenart.com`**, with the team

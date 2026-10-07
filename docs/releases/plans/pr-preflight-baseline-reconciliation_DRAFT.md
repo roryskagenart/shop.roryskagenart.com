@@ -3,7 +3,7 @@
 **Status:** DRAFT · implementation on `fix/preflight-and-baseline-reconciliation` · **PR #15** open as a
 draft, CI green. **OQ1 answered and executed**; OQ2–OQ4 open, and **each one's recommendation is *no change
 inside this PR***.
-**Target release:** `v0.2.0` (catch-up — see [`../RELEASES.md`](../RELEASES.md)) · **KB:** 1.7.0
+**Target release:** `v0.2.0` (catch-up — see [`../RELEASES.md`](../RELEASES.md)) · **KB:** 1.7.1
 **Author:** Buddy, for Jaden · **Opened:** 2026-10-06
 
 ---
@@ -62,6 +62,7 @@ and executed on Jaden's explicit word later in the same session. **Result:** ann
 | 15 | **T46** — three package managers referenced, only npm real. README `pnpm install` / `pnpm dev` → `npm ci` / `npm run dev`; `AGENTS.md` §3 now warns that the installer changes test behaviour, and says to run the gate through `verify.sh` on Windows | `README.md`, `AGENTS.md` §3 |
 | 16 | KB **1.6.1 → 1.7.0** (T45, T46 = MINOR) | `docs/agentic/{VERSION,CHANGELOG.md,README.md}` |
 | 17 | **Record corrections** — the session record's reverted-fix claim and its "residual" struck; this plan's registry row and entry 12 corrected | `docs/agentic/sessions/2026-10-06.md`, `docs/releases/plans/README.md`, this file |
+| 18 | KB **1.7.0 → 1.7.1** (PATCH) — the reconciliation skill's step 8 still prescribed the **reverted** `vitest.config.ts` fix. Corrected, plus the T46 install-method lesson and two pitfalls on writing a fix's record | `docs/agentic/skills/docs-reconciliation-release/SKILL.md`, `docs/agentic/{VERSION,CHANGELOG.md,README.md}` |
 
 ## 4. Risk register
 
