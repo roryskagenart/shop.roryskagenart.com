@@ -823,3 +823,56 @@ lockfile is the one that matches `package.json`. CI (`.github/workflows/ci.yml`)
 `npm run dev`. Do not run `bun install`; if it happens, `git checkout HEAD -- bun.lock` and re-install
 with npm. Read [`../stack/overview.md`](../stack/overview.md#package-manager).
 **Source:** 2026-10-06.
+
+<a id="t47"></a>
+### T47 — The home page's featured sections read a collection handle that does not exist
+**Status:** RESOLVED for the home page 2026-10-07 — the underlying fallback (**T01**) is still OPEN.
+**Bites:** "Featured Works" and the product carousel on `/USD` looked like live storefront content and
+were not. Both read one handle from `NEXT_PUBLIC_FW_COLLECTION`, which is set to `fine-art-originals` — a
+collection that **does not exist in the shop**. The storefront API answers `404`, `getCollectionProducts`
+catches it and falls through to the **local JSON catalogue**, so the home page served 15 hardcoded
+originals with a working add-to-cart while the real catalogue never appeared on it. **Nothing throws, the
+page returns 200, and the products look plausible** — the same defect as T01, reached by a different road:
+a fallback that is indistinguishable from success, and a config value that reads as correct because it is
+a name from `lib/taxonomy.ts`.
+**Evidence:** Measured 2026-10-07.
+`GET https://storefront-api.fourthwall.com/v1/collections/fine-art-originals/products?storefront_token=…`
+→ **HTTP 404** `{"code":"COLLECTION_NOT_FOUND_BY_SHOP_ID_AND_SHOP_ERROR","slug":"fine-art-originals"}`. The
+token is valid — `GET /collections` on the same host returns **5** collections, and per-collection product
+counts are **6 / 2 / 4 / 1 / 10**:
+
+| slug | Fourthwall name | products |
+| :-- | :-- | --: |
+| `gifts-goodies` | The Goods | 6 |
+| `wall-artwork` | `" Wall Art"` — note the leading space | 2 |
+| `studio-editions` | Studio Editions | 4 |
+| `original` | Original Artwork | 1 |
+| `all` | All Products | 10 |
+
+None of the four real slugs is in `PRODUCT_COLLECTIONS`, so `getCollections()` returns them as *extras* and
+every one of them labels from Fourthwall's own name. `lib/fourthwall/index.ts:448` is the fallback branch
+`fine-art-originals` hits.
+**Do instead:** Drive the home page from `getCollections()` — the same source as the header menu — so the
+two surfaces cannot disagree, and stop treating `NEXT_PUBLIC_FW_COLLECTION` as a home-page input.
+`components/grid/collection-sections.tsx` renders one group per stocked collection, `all` excluded because
+it is a superset. **Still open:** the fallback itself (T01) — the 15 originals remain add-to-cart-able at
+`/collections/fine-art-originals`, a live URL that no menu links to. **Also open:** `lib/taxonomy.ts` no
+longer matches the live catalogue at all (T04's "taxonomy title wins" rule now applies to zero live
+collections).
+**Source:** 2026-10-07.
+
+<a id="t48"></a>
+### T48 — The storefront API ignores `limit` on a collection's products
+**Status:** OPEN (vendor behaviour)
+**Bites:** `getCollectionProducts({ limit: n })` reads as a cap and is not one on the live path. A caller
+that trusts it renders the whole collection. It caps **only** the local JSON fallback
+(`ORIGINALS.slice(0, limit)`), so the defect is invisible in exactly the environment where the fallback
+runs, and appears the moment real stock exists.
+**Evidence:** Measured 2026-10-07 against the storefront API, collection `gifts-goodies` (6 products):
+`?limit=4` → **6**, `?limit=2` → **6**, no `limit` → **6**. The param is passed correctly
+(`lib/fourthwall/index.ts:435-437`) and simply not honoured. Caught in the wild the same day: the first
+build of the grouped home page rendered 13 products instead of the intended 11.
+**Do instead:** Slice at the call site — `components/grid/collection-sections.tsx` does
+`.slice(0, PER_GROUP)`. Same class as **T34**: the length of a list endpoint is not something you can
+negotiate with a query param, so read what you got and cut it yourself.
+**Source:** 2026-10-07.
