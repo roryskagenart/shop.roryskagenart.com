@@ -16,7 +16,7 @@ describe work already shipped, and edits applied on top of a tree that does not 
 git rev-parse HEAD
 git fetch --quiet origin
 git status --short --branch          # ahead/behind, plus untracked
-gh api repos/roryskagenart/shop.roryskagen.com/commits/main --jq .sha
+gh api repos/roryskagenart/shop.roryskagenart.com/commits/main --jq .sha
 ```
 
 > ⚠️ **Do not trust a local ref after `git fetch`.** In sandboxed environments `fetch` has reported
@@ -53,19 +53,24 @@ editing is a mystery.
 ./node_modules/.bin/vitest run
 ```
 
-Record the exact counts. The baseline is **97 passed / 6 files**. If you see a different number, the
-documentation is stale or a test was deleted — **re-derive, never assume.** This repo has documented a
-test count of 67 when the real count was 127.
+Record the exact counts. The baseline is **223 passed / 15 files**, and it lives in
+[`../scripts/baseline.env`](../scripts/baseline.env) — read it there, do not copy it into a document. If
+you see a different number, the documentation is stale or a test was deleted — **re-derive, never
+assume.** This repo has documented a test count of 67 when the real count was 127, and on 2026-10-06 four
+different counts were live at once (**T41**).
 
 ## 5. Is the version number you intend to use already spent?
 
-Check before naming any release. This repo carries **two disagreeing version spaces** — see
-[`stack/overview.md`](../stack/overview.md#versions).
+**The scheme is settled: `v0.x.y`** — see [`stack/overview.md#versions`](../stack/overview.md#versions).
+The `v1.x` labels in `lib/brand-config.ts` are a *product roadmap*, not release numbers (**T24**), so do
+not name a release from them.
 
 ```bash
 git tag
-grep -rn "v[0-9]\+\.[0-9]\+\.[0-9]\+" lib/brand-config.ts docs/releases/plans/ | head -20
 ```
+
+`git tag` is the release record; the ledger explaining what each tag contains and where it sits is
+[`../../releases/RELEASES.md`](../../releases/RELEASES.md). Read it before reusing a number.
 
 ## 6. Do you have the environment you need?
 

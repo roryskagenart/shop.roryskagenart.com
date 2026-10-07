@@ -298,23 +298,45 @@ and logo aria-label render `undefined`.
 
 <a id="t23"></a>
 ### T23 — Four names for one project
-**Status:** OPEN
+**Status:** MITIGATED — the GitHub repo has been renamed to match the folder, and the local remote URL is
+knowingly stale.
 **Bites:** The GitHub remote is **not** derivable from the folder name, the Vercel project, or the custom
-domain. Inferring it points work at the wrong repository.
-**Evidence:** Local folder `shop.roryskagenart.com`; Vercel `roryskagen-5713/shop-roryskagen-com`; domain
-`shop.roryskagenart.com`; **GitHub `roryskagenart/shop.roryskagen.com`** (`.com`).
-**Do instead:** Use the table in [`/AGENTS.md`](../../../AGENTS.md#2-read-this-before-you-name-anything).
-**Source:** 2026-10-01.
+domain. Inferring it points work at the wrong repository — and the local URL is not evidence either, since
+GitHub redirects renamed repos, so a stale `git remote -v` keeps working and looks correct.
+**Evidence:** Local folder `shop.roryskagenart.com`; Vercel `roryskagenart/shop.roryskagenart.com`
+(it was `roryskagen-5713/shop-roryskagen-com` until the 2026-10-03 rename — **T43**);
+custom domain `shop.roryskagenart.com`. On 2026-10-01 the GitHub repo was
+**`roryskagenart/shop.roryskagen.com`** (`.com`) — *not* the folder name, which is why this trap exists.
+**Renamed 2026-10-06 to `roryskagenart/shop.roryskagenart.com`**, confirmed twice: `git push` reported
+`remote: This repository moved. Please use the new location`, and `gh api repos/…/shop.roryskagen.com`
+resolves with **`full_name: roryskagenart/shop.roryskagenart.com`**. The local `origin` URL was
+**deliberately not changed** (rule 4 — repointing the remote is a human decision), so `git remote -v` still
+prints the old name and still works.
+**Do instead:** Use the table in [`/AGENTS.md`](../../../AGENTS.md#2-read-this-before-you-name-anything),
+which is authoritative, and treat `git remote -v` as untrusted for identity. The lesson generalises: the
+mapping between these names has changed once already, so **re-verify it rather than pattern-matching it**.
+**Source:** 2026-10-01; rename confirmed 2026-10-06.
 
 <a id="t24"></a>
 ### T24 — Two version spaces disagree
-**Status:** OPEN
+**Status:** MITIGATED — the scheme is now declared and enforced; one piece of public copy still uses the
+old wording.
 **Bites:** Naming a release from the wrong scheme produces two contradictory plans, and the repo follows
 the wrong one.
-**Evidence:** `lib/brand-config.ts:66-101` calls **`v1.1.0` "Step 1 (Current Release)"** (mirrored at
-`lib/docs-content.ts:1178-1190`), but `git tag` shows **only `v0.1.0`**. The current plan uses `v0.2.0`.
-**Do instead:** Check `git tag` and the plan directory before naming anything. Pick one scheme explicitly.
-**Source:** 2026-10-01.
+**Evidence:** `lib/brand-config.ts:104-144` (was `:66-101`) called **`v1.1.0` "Step 1 (Current Release)"**
+and listed `v1.2.0`–`v1.5.0`, mirrored at `lib/docs-content.ts:1174-1192` — while `git tag` showed **only
+`v0.1.0`** and every plan was named `v0.x.y`. No `v1.x` tag has ever existed.
+**Fixed by:** 2026-10-06, `fix/preflight-and-baseline-reconciliation`. `/AGENTS.md` §2 now declares
+`v0.x.y` the release scheme and states that a tag goes on the **merge commit**;
+`lib/brand-config.ts` renamed the field `version` → **`roadmapId`** and documents that the array is a
+roadmap, not a release record; `stack/overview.md#versions` carries the same policy. The `v1.x` phase
+names are left in place — they are real roadmap labels, and deleting them would lose information.
+**Residual (why MITIGATED, not RESOLVED):** the **public `/docs` page** (`lib/docs-content.ts:1174-1192`)
+still renders them as *"Release v1.2.0"*. Rewording user-visible product copy is a product decision, not
+a docs-reconciliation one, so it was surfaced rather than changed. **Owner: Jaden.**
+**Do instead:** `git tag` and `docs/releases/plans/` are the release record. Never name a release from
+the `v1.x` roadmap space.
+**Source:** 2026-10-01; re-scoped 2026-10-06.
 
 <a id="t25"></a>
 ### T25 — A stale checkout inflates `git diff` catastrophically
@@ -405,20 +427,26 @@ damage.
 <a id="t32"></a>
 
 ### T32 — A CRLF checkout breaks the shell scripts
-**Status:** MITIGATED (`.gitattributes` pins LF for `*.sh` and `*.py`)
+**Status:** MITIGATED (`.gitattributes` pins LF for `*.sh`, `*.py` and `*.env`)
 **Bites:** `core.autocrlf = true` rewrites the **working tree** to CRLF on checkout. TypeScript, Markdown
 and JSON do not care. **An executable script does**: the shebang becomes `#!/usr/bin/env bash\r` and
 `./preflight.sh` dies with *bad interpreter*; a CR inside a `case`, heredoc or `[[ ]]` construct produces
 `$'\r': command not found`. It presents as "the script is broken", not "the checkout is broken", which is
-what makes it expensive.
+what makes it expensive. **A *sourced* file is the same class as an executable** — and was missed:
+`BASELINE_TESTS=223\r` is a different value from `223`, so every comparison in `check-baseline.sh` fails
+and the guard reports stale counts on a clean tree.
 **Evidence:** `git config --get core.autocrlf` → `true`. No `.gitattributes` existed.
 `git check-attr text eol -- docs/agentic/scripts/preflight.sh` → **`unspecified`** for both. Scope measured
 with `git ls-files --eol | awk '{print $1,$2}' | sort | uniq -c` → **107 files `i/lf w/crlf`**, i.e. the
 worktree is already being rewritten repo-wide.
-**Do instead:** `.gitattributes` at the repo root pins `*.sh` and `*.py` to `eol=lf`. **If you add a new
-executable script language, add it there too.** Note the fix is deliberately narrow — the 107 CRLF files
-are cosmetic; only executables are a defect.
-**Source:** 2026-10-02.
+**And again 2026-10-06:** adding `docs/agentic/scripts/baseline.env` produced
+`warning: LF will be replaced by CRLF` on `git add`, and `git check-attr text eol -- …/baseline.env` →
+**`unspecified`** — the policy covered `*.sh` and `*.py` but not `.env`. `*.env text eol=lf` added.
+**Do instead:** `.gitattributes` at the repo root pins `*.sh`, `*.py` and `*.env` to `eol=lf`. **If you add
+a new executable — or sourced — file type, add it there too.** A `git add` warning about LF/CRLF is the
+signal; do not scroll past it. Note the fix is deliberately narrow — the 107 CRLF files are cosmetic; only
+executables and sourced files are a defect.
+**Source:** 2026-10-02; extended 2026-10-06.
 
 <a id="t33"></a>
 
@@ -625,6 +653,7 @@ archived. Archive + `PUT /collections/{id}/products` → **T05** (that call repl
 send the complete intended list).
 **Source:** 2026-10-04.
 
+<a id="t40"></a>
 ### T40 — `npm run dev` silently loses the port race; the studio site answers on 3000
 **Symptom:** `npm run dev` prints its usual banner and then every localhost:3000 request returns pages
 **from a different project**. Requests to `/playground` returned the studio homepage — a totally
@@ -642,3 +671,155 @@ repo did not start. `curl -sI localhost:3000` → `X-Powered-By: Express` (studi
 code: `curl -sI http://localhost:<port>/ | grep -i x-powered-by`. Expect `Next.js`. On collision, start
 on a free port explicitly — `npm run dev -- -p 3111` — and re-confirm the header before trusting any
 rendered output. Server identity is part of verification; a 200 from the wrong process proves nothing.
+**Source:** 2026-10-05.
+
+<a id="t41"></a>
+### T41 — The gate baseline was duplicated in six places, and four of them drifted
+**Status:** RESOLVED
+**Bites:** A stale baseline **fails the gate on a clean tree**, and the failure text points at the
+opposite of the truth: `verify.sh` prints *"a DROP means a guard was deleted"* when in fact nothing was
+deleted and the documented number was simply old. Worse, the number a reader trusts depends on which file
+they happen to open — so an agent can "verify" a change against a baseline that was never true.
+**Evidence:** Measured 2026-10-06 at `main` = `42786bb7`. `./node_modules/.bin/vitest run` →
+**`Test Files 15 passed (15)` / `Tests 223 passed (223)`**. The tree simultaneously claimed:
+
+| Carrier | Claimed |
+| :--- | :--- |
+| `docs/agentic/scripts/verify.sh:20-21` (now `baseline.env`) | 223 / 15 ✓ |
+| `docs/agentic/stack/overview.md:98` (now `:103`) | 223 passing ✓ (but its file list held 14 entries against a claimed 15, with a literal `\n` joining three of them) |
+| `AGENTS.md:55,103` | **137 / 11** |
+| `docs/agentic/protocols/verification.md:13` | **163 / 13** |
+| `docs/agentic/protocols/preflight.md:56`, `scripts/preflight.sh:26-27`, `lib/fourthwall/AGENTS.md:54`, `scripts/AGENTS.md:48-49` | **97 / 6** |
+
+Line numbers are as measured **before** the fix — every carrier was rewritten by it.
+
+**Root cause — and it was not carelessness:** `AGENTS.md` §5 instructed a contributor to update exactly
+**two** files when the count changed (`verify.sh`, `stack/overview.md`). Four carriers were never named,
+so nothing could fail on them. **A guard that does not know a file exists cannot fail on it.**
+**Fixed by:** 2026-10-06, `fix/preflight-and-baseline-reconciliation`. The count now lives in one place,
+[`../scripts/baseline.env`](../scripts/baseline.env); `verify.sh` and `preflight.sh` **source** it rather
+than inlining it; `AGENTS.md` §5 names every carrier; and
+[`../scripts/check-baseline.sh`](../scripts/check-baseline.sh) is a new gate that fails if any document
+quoting the count disagrees with it, if the on-disk test-file count moves, or if `overview.md`'s list
+stops matching. **Observed red first** — 6 FAILs — then green, which is the point.
+**Do instead:** Never inline the baseline. Change `baseline.env`, run `check-baseline.sh`, fix what it
+flags. Add any new document that quotes the count to the `CARRIERS` list in the same change.
+**Source:** 2026-10-06.
+
+<a id="t42"></a>
+### T42 — The `/docs` palette table documents tokens and colours that no longer exist
+**Status:** OPEN — **found 2026-10-06, not fixed.** Deliberately left out of a docs-reconciliation
+release, because rewording public product copy is a product decision.
+**Bites:** `lib/docs-content.ts:1159-1170` tells a reader the design tokens are `--background`,
+`--card`, `--foreground`, `--border`, `--line-strong`, `--accent` with values `#e3e1da` / `#17171b` /
+`#1c1c20` / `#d2cfc6` / `#3a3a40` / `#b45309`. **None of that is live.** `app/globals.css:12-51` defines
+`--brand-bg`, `--brand-fg`, `--brand-bg-card`, `--brand-surface`, `--brand-surface-deep`,
+`--brand-border`, `--brand-line-strong`, `--brand-fg-muted`, `--brand-accent`. Live values, light →
+dark: `--brand-bg` `#c2c9d1`→`#464e58`, `--brand-fg` `#16202b`→`#eef2f6`, `--brand-bg-card`
+`#edeff2`→`#2f353c`, `--brand-border` `#c3c9d0`→`#515761`, `--brand-line-strong` `#bcc2c8`→`#828e9b`,
+`--brand-accent` `#22d3ee` in both. Both the **names** and the **values** in the docs table are wrong,
+and it still calls the palettes "Gallery Stone" / "Charcoal Gallery" — names `lib/brand-config.ts:34-72`
+now keeps only as *legacy migration aliases* (`galleryStoneLight`, `charcoalGalleryDark`).
+**Evidence:** 2026-10-06. `app/globals.css:12-51` (live) vs `lib/docs-content.ts:1159-1170` (documented)
+vs `lib/brand-config.ts:34-72` (Skagen Light/Dark). PR #14 "sync Skagen Light/Dark palette from studio
+design panel" changed the CSS and the config but not the `/docs` copy.
+**Do instead:** Treat `app/globals.css` as the token source of truth; it and `brand-config.ts` are
+asserted together by hand today, and nothing checks the `/docs` table. A guard that derives the table
+from the CSS would close it — see **T41** for the shape of that fix.
+**Source:** 2026-10-06.
+
+<a id="t43"></a>
+### T43 — A renamed Vercel project keeps its old `*.vercel.app` alias, so the retired name still resolves
+**Status:** RESOLVED — the documents were corrected 2026-10-06; the *mechanism* is permanent.
+**Bites:** A stale project identifier **keeps working**, so it never announces itself. After the Vercel
+project was renamed `shop-roryskagen-com` → `shop.roryskagenart.com`, the old alias
+`shop-roryskagen-com.vercel.app` stayed **attached and verified**, and deployments still answer on it. So
+*"the old name resolves"* is not evidence that the old name is current — the same shape as **T23**, where
+a renamed GitHub repo keeps serving through a redirect.
+**Evidence:** Measured 2026-10-06. `GET /v9/projects/prj_u3hPHBRFkibIkIkthndzS1sjvhKJ/domains` returns
+**both** `shop.roryskagenart.com` (`verified: true`) **and** `shop-roryskagen-com.vercel.app`
+(`verified: true`). The project id and the team id are the *same* as in the 2026-10-01 record
+(`team_lD7ZSbm44CpPmByF9eN22dJT` = `shop-roryskagen-com`), but the names now read
+`name: shop.roryskagenart.com` and team `slug: roryskagenart` — equal ids, different names, which is what
+proves a rename rather than a different project. `stack/environments.md` carried the old pair for five
+days; `link.updatedAt` = **2026-10-03** marks the change. The team slug is `roryskagenart` and the team
+*name* is `roryskagen` — the two are not the same string, and neither was ever `roryskagen-5713`.
+**Do instead:** Treat a Vercel identifier as **untrusted** until re-read from the API, and compare the
+**id**, not the name — `prj_…` and `team_…` are immutable, so equal ids prove the same object while the
+display names drift. Never conclude "it still resolves, so it is current".
+[`../stack/environments.md`](../stack/environments.md)
+**Source:** 2026-10-06.
+
+<a id="t44"></a>
+### T44 — A lowercase drive letter in the cwd silently disables `vi.mock`
+**Status:** MITIGATED — the gate re-enters the repo root with a canonical path. The casing sensitivity
+itself is upstream and unfixed.
+**Bites:** On Windows, `process.cwd()` returns a **lowercase drive letter** (`c:\…`) when the shell
+inherited one — which is not exotic here: it is how this machine's agent shell starts. Vitest derives
+module paths from that string, they disagree in case with the paths the runner itself uses, and Node
+caches modules by **path string** — so two `vitest` instances load. The failure is **silent, selective and
+gate-destroying**: `vi.spyOn` keeps working while `vi.mock` stops being hoisted, so only the files using
+`vi.mock` fail (4 files, 23 tests) with `TypeError: vi.mocked(...).mockResolvedValue is not a function` —
+which reads like a broken test, not a broken runner. On a full run every suite can fail to load instead,
+and then [`../scripts/verify.sh`](../scripts/verify.sh) reports **"a DROP means a guard was deleted"** and
+*"GATES FAILED"* — a false accusation that invites someone to "fix" the baseline.
+**Evidence:** Measured 2026-10-06. The lowercase cwd is reproducible on demand:
+`node -e "process.chdir('c:/…'); console.log(process.cwd())"` → `c:\…`. With it,
+`bash docs/agentic/scripts/verify.sh` → 15 files failed, *"no tests"*, **GATES FAILED (2)**, exit 1. From
+an uppercase cwd — or after the fix below — the same script → 223 tests / 15 files and *"All gates
+green"*, exit 0. A 3-line probe (`vi.mock('./lib/utils', …)` then `import { sentinel }`) returns
+`undefined`, proving hoisting is skipped rather than the factory throwing. Ruled out by measurement:
+CRLF (the probe was pure LF), the transform cache, the config loader (`.ts` vs an equivalent `.mjs`), four
+pool modes, a duplicate `node_modules` above the repo, the esbuild platform binary, the injected
+`NODE_OPTIONS` shim, and the pre-change config. The affected test files are **byte-identical to `HEAD`**
+(`git hash-object` matches `HEAD:<path>`) and CI on ubuntu is green — environmental, not a regression.
+**Do instead:** Run the gate through [`../scripts/verify.sh`](../scripts/verify.sh), which `cd`s to the
+repo root via `pwd -W` so the drive letter is canonical. If you invoke `vitest` yourself, **read the
+`RUN v…` banner** — `c:/…` is the defect, `C:/…` is healthy.
+**Tried and reverted — do not repeat:** `root: fs.realpathSync.native(__dirname)` in `vitest.config.ts`.
+It appeared to fix this, but only because `node_modules` was bun-installed at the time; Bun **symlinks**
+its packages, so realpath canonicalisation happened anyway. Against an npm-installed tree it changes
+nothing. See **T46** for why the install method matters.
+**Source:** 2026-10-06.
+
+<a id="t45"></a>
+### T45 — A public footer link pointed at a domain that does not exist
+**Status:** PARTIALLY RESOLVED — the footer link is fixed 2026-10-06; two more references are **OPEN**
+because their correct value is a product decision.
+**Bites:** [`../../../components/layout/footer.tsx`](../../../components/layout/footer.tsx) rendered a
+link labelled *"Rory Skagen Studio Archive"* at `https://shop.roryskagen.com` — on **every public page**.
+That domain is **NXDOMAIN**: it does not resolve, so every visitor who clicked it got a browser error.
+Nothing in CI, and no test, looks at a link *target*, so a dead link is invisible to the gate. The string
+was also a **hardcoded duplicate** of a domain that already lives in `BRAND_CONFIG.domains`.
+**Evidence:** Measured 2026-10-06. `curl -sS "https://dns.google/resolve?name=shop.roryskagen.com&type=A"`
+→ **`Status: 3` (NXDOMAIN)**; `shop.roryskagenart.com` → `Status: 0` with Vercel A records and HTTP 200
+→ `/USD`; `roryskagenart.com` → `Status: 0`. `lib/brand-config.ts:16-18` already defines
+`portfolio: 'https://roryskagenart.com'` and `shopCustomDomain: 'https://shop.roryskagenart.com'`, and the
+footer already imports `BRAND_CONFIG`. The string arrived in `f1a1c8f` (the initial catalogue commit).
+**Do instead:** Use `BRAND_CONFIG.domains.*` — never a hardcoded domain. **Fixed:** the footer link now
+reads `BRAND_CONFIG.domains.shopCustomDomain`, preserving the original self-link intent. **Still open:**
+`lib/fourthwall/index.ts:170-171,754` (`MOCK_SHOP.domain` / `publicDomain`, a fallback used only when
+`NEXT_PUBLIC_FW_CHECKOUT` is unset) and the public `/docs` copy at `lib/docs-content.ts:723,944` — the
+correct value there is a product decision, so it is surfaced rather than guessed. A guard that resolves
+every external link target would close the class; see **T41** for the shape of that fix.
+**Source:** 2026-10-06.
+
+<a id="t46"></a>
+### T46 — Three package managers are referenced; only npm is real, and the choice changes test behaviour
+**Status:** OPEN — the README is fixed; `bun.lock` is still tracked.
+**Bites:** `package-lock.json` is the lockfile CI uses (`npm ci`), a `bun.lock` is committed, and the
+README told you to run `pnpm install`. Nothing in `package.json` says which is authoritative — there is
+no `packageManager` field and no `name`. So an agent picks one, and **the choice is not cosmetic**: on
+2026-10-06 this machine's `node_modules` had been installed by **bun** (`node_modules/.bin` held 28 `.exe`
++ 28 `.bunx` and **zero** npm shims), and Bun's symlinked layout **masked T44** — the test suite passed
+there and failed identically on a fresh `npm ci`. A tree that is green under one installer and red under
+another is worse than no tree. `bun install` also rewrites `react`/`react-dom` inside `bun.lock`, which
+then reads as a real dependency change.
+**Evidence:** Measured 2026-10-06. `ls node_modules/.bin | grep -c '\.exe$'` → 28 and
+`grep -c '^[^.]+$'` → 0 on the bun tree; after `npm ci` → 28 extension-less + 28 `.cmd`, 0 `.exe`. Same
+`vitest` 4.1.11 / `vite` 8.3.1 / `esbuild` 0.28.2 in both. `npm ci --dry-run` exits 0, so the npm
+lockfile is the one that matches `package.json`. CI (`.github/workflows/ci.yml`) runs `npm ci`.
+**Do instead:** **npm.** `npm ci` (foreground — never a background install after a wipe), then
+`npm run dev`. Do not run `bun install`; if it happens, `git checkout HEAD -- bun.lock` and re-install
+with npm. Read [`../stack/overview.md`](../stack/overview.md#package-manager).
+**Source:** 2026-10-06.

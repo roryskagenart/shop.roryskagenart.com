@@ -16,19 +16,29 @@ Measured 2026-10-01/02. **No credential values appear in this document, and none
 
 | Thing | Value |
 | :--- | :--- |
-| Vercel project | `roryskagen-5713/shop-roryskagen-com` (`prj_u3hPHBRFkibIkIkthndzS1sjvhKJ`) |
-| Vercel account | `roryskagen`, team `roryskagen-5713` |
-| GitHub remote | `roryskagenart/shop.roryskagen.com` — **public** |
+| Vercel project | `roryskagenart/shop.roryskagenart.com` (`prj_u3hPHBRFkibIkIkthndzS1sjvhKJ`) |
+| Vercel account | `roryskagen` — team slug **`roryskagenart`**, name `roryskagen` (`team_lD7ZSbm44CpPmByF9eN22dJT`) |
+| GitHub remote | `roryskagenart/shop.roryskagenart.com` — **public**. ⚠️ Renamed from `…/shop.roryskagen.com`; the local `origin` URL still carries the old name and works only because GitHub redirects renamed repos. See `/AGENTS.md` §2 and **T23**. |
 | GitHub actor used here | `jadenblack` — pull ✓ push ✓ triage ✓ **admin ✗** |
 
-> ⚠️ The legacy `ventureio/…` Vercel project is **retired**. The migration to `roryskagen-5713` is complete
-> and verified — live `/robots.txt` reports `Host: https://shop.roryskagenart.com`, a value only the new
-> project has.
+> ⚠️ The legacy `ventureio/…` Vercel project is **retired**. The migration to
+> `team_lD7ZSbm44CpPmByF9eN22dJT` is complete and verified — live `/robots.txt` reports
+> `Host: https://shop.roryskagenart.com`, a value only the new project has.
+>
+> ⚠️ **Both the team slug and the project name were changed after that migration**, and this file said
+> `roryskagen-5713` / `shop-roryskagen-com` until **2026-10-06**. Measured 2026-10-06:
+> `GET /v2/teams/team_lD7ZSbm44CpPmByF9eN22dJT` → `slug: roryskagenart`, `name: roryskagen`;
+> `GET /v9/projects/prj_u3hPHBRFkibIkIkthndzS1sjvhKJ` → `name: shop.roryskagenart.com`, with
+> `link.repo: shop.roryskagenart.com`. **The two ids are unchanged**, which is what makes this a rename
+> rather than a different project — the 2026-10-01 record already had
+> `team_lD7ZSbm44CpPmByF9eN22dJT` = `shop-roryskagen-com`. The git link's `updatedAt` is **2026-10-03**,
+> matching the GitHub repo rename found at push time. → **T43**
 
 > ⚠️ `admin: false` on the GitHub repo **does** block branch protection (needs admin, not `write`), so only
 > the owner can add it. Reading is gated too: `GET /branches/main/protection` returns **404** for a
 > non-admin, which is *indistinguishable* from "not configured". Read the `protected` boolean from
-> `GET /branches/main` instead. **Current state: `main` is UNPROTECTED.**
+> `GET /branches/main` instead. **Current state (measured 2026-10-06): `main` is PROTECTED** — the owner
+> added it at some point after this note was written; do not restate the older "UNPROTECTED" claim.
 
 ## DNS
 

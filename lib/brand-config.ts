@@ -90,19 +90,28 @@ export const BRAND_CONFIG = {
   },
 
   /**
-   * Future Releases Roadmap (Step 2 Planning Specification)
+   * Future Features Roadmap (Step 2 planning specification)
+   *
+   * ⚠️ These are ROADMAP ids, not release numbers. Releases are tagged
+   * `v0.x.y` on the merge commit of the PR that delivered them, and nothing is
+   * ever tagged from this list — `git tag` is the release record (AGENTS.md §2,
+   * trap T24). The `v1.x` labels below are phase names for the
+   * brand/omnichannel programme and must not be used to name a release.
+   *
+   * This array is not read by any component today; it is planning data kept in
+   * code. If you wire it up, keep the naming rule above.
    */
   roadmap: [
     {
-      phase: 'Step 1 (Current Release - Low Risk / Active)',
-      version: 'v1.1.0',
+      phase: 'Step 1 (Active)',
+      roadmapId: 'v1.1.0',
       status: 'active',
       scope:
         'Brand logo, icon, core visuals, Shadcn/TW tokens, and favicon propagation across all storefront routes with feature flag isolation.'
     },
     {
       phase: 'Step 2 - Release A (Future)',
-      version: 'v1.2.0',
+      roadmapId: 'v1.2.0',
       status: 'planned',
       title: 'Unified Omnichannel Header & Cart Sync',
       scope:
@@ -110,7 +119,7 @@ export const BRAND_CONFIG = {
     },
     {
       phase: 'Step 2 - Release B (Future)',
-      version: 'v1.3.0',
+      roadmapId: 'v1.3.0',
       status: 'planned',
       title: 'Cross-Domain Studio Accounts (SSO)',
       scope:
@@ -118,7 +127,7 @@ export const BRAND_CONFIG = {
     },
     {
       phase: 'Step 2 - Release C (Future)',
-      version: 'v1.4.0',
+      roadmapId: 'v1.4.0',
       status: 'planned',
       title: 'Automated Palette & Design System Sync',
       scope:
@@ -126,7 +135,7 @@ export const BRAND_CONFIG = {
     },
     {
       phase: 'Step 2 - Release D (Future)',
-      version: 'v1.5.0',
+      roadmapId: 'v1.5.0',
       status: 'planned',
       title: 'AR Wall Visualizer & In-Situ Previews',
       scope:

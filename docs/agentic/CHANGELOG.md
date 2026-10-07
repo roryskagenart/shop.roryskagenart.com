@@ -8,6 +8,200 @@ This file tracks the **KB**, not the application. The application's release reco
 
 ---
 
+## [1.7.1] — 2026-10-07
+
+### Changed
+
+- **[`skills/docs-reconciliation-release`](skills/docs-reconciliation-release/SKILL.md), step 8
+  (Validate):** the prescribed fix for the T44 defect was **the reverted one**. The skill told the reader
+  to canonicalise Vitest's `root` in `vitest.config.ts` — a change that is no longer in the tree and that
+  does nothing against an npm-installed `node_modules`. It now says to canonicalise the **working
+  directory** before the runner starts (`cd "$(pwd -W)"`, or an absolute `--root`), and marks the config
+  route **tried and reverted**. Step 8 also gains the **T46** lesson: the install method is itself a
+  variable, and a `.bin` full of `.exe` entries means the tree is bun-installed. A skill is the easiest
+  place for a stale instruction to hide — nothing in the repo links to it, so no guard can see it.
+- **Same skill, "Pitfalls learned in practice":** two new entries. **A fix's own record is the
+  least-verified claim in the document** — registering a defect and its fix in the same commit means
+  writing the fix's story before the fix is understood, and this branch did exactly that three times. And
+  **when you correct a record, grep for every other document that repeats it** — the reverted fix was
+  still being asserted in the trap register, the session record, the plan's change table, the 1.6.0
+  CHANGELOG entry, this skill, two memory files and the PR description.
+
+### Fixed
+
+- **The 1.6.0 entry was annotated, not rewritten.** Its `vitest.config.ts` bullet and its
+  `T44 — RESOLVED` bullet are historical records of what 1.6.0 believed; both now carry a forward pointer
+  to the correction. Status-flip and annotate — do not rewrite history.
+
+---
+
+## [1.7.0] — 2026-10-06
+
+Third pass in the same session. T43 and T44 were registered before their causes were fully understood;
+finishing the investigation corrected both and turned up two more defects.
+
+### Added
+
+- **T45 — a public footer link pointed at a domain that does not exist.**
+  `components/layout/footer.tsx` rendered *"Rory Skagen Studio Archive"* at `https://shop.roryskagen.com`,
+  which is **NXDOMAIN** (DNS `Status: 3`) — a dead link on **every public page**, and invisible to CI
+  because nothing checks a link *target*. It was also a hardcoded duplicate of a domain that already
+  lives in `BRAND_CONFIG.domains`. **The footer is fixed** to use that constant; two further references
+  are **OPEN** because their correct value is a product decision.
+- **T46 — three package managers are referenced; only npm is real.** `package-lock.json` (what CI uses),
+  a committed `bun.lock`, and a README that said `pnpm install`, with no `packageManager` field to settle
+  it. Measured: a **bun**-installed `node_modules` passed the suite while a fresh `npm ci` tree failed
+  identically, because Bun's symlinked layout masked T44. **The README is fixed.**
+
+### Changed
+
+- **T44 corrected — its previous entry was wrong twice.** It claimed `vitest.config.ts` normalised the
+  root and fixed the problem, and that a "known residual" remained in `npm test`. The config change only
+  *appeared* to work because `node_modules` was bun-installed at the time (Bun symlinks its packages, so
+  realpath canonicalisation happened anyway); against an npm-installed tree it changed nothing, and it has
+  been **reverted**. The real fix is in `docs/agentic/scripts/verify.sh`, which now re-enters the repo root
+  through `pwd -W` so the drive letter is canonical — **observed red first** (15 files failed, *"no
+  tests"*, GATES FAILED, exit 1, and a false *"a DROP means a guard was deleted"*) and **green after**
+  (223 tests / 15 files, exit 0).
+- `README.md` install instructions: `pnpm install` / `pnpm dev` → `npm ci` / `npm run dev`.
+- `stack/overview.md` now records the measured bun-vs-npm behavioural difference and how to spot the
+  wrong tree.
+- `/AGENTS.md` §3 — the package-manager note no longer calls the README a `pnpm` leftover, it warns that
+  the installer changes test behaviour, and a new callout says to run the gate through `verify.sh` on
+  Windows rather than `vitest` directly (T44).
+- `sessions/2026-10-06.md` — the T44 record corrected: the `vitest.config.ts` change is marked
+  **reverted**, the real fix is `verify.sh`, and the "residual" claim is struck. Re-measured on a fresh
+  `npm ci` tree, `npm test` → 223 passed / 15 files, exit 0; the failure had been recorded on a bun tree.
+
+---
+
+## [1.6.1] — 2026-10-06
+
+### Changed
+
+- **[`skills/docs-reconciliation-release`](skills/docs-reconciliation-release/SKILL.md), step 8
+  (Validate):** added the rule that a gate must be confirmed to have *actually run* before its
+  result is trusted. A runner that silently mis-runs reports a real number that is not about your
+  change, and the failure reads as a broken test rather than a broken runner — the T44 case, where
+  a lowercase drive letter in `process.cwd()` silently disabled `vi.mock` and the identical command
+  passed or failed depending on how the directory had been entered. Carries two transferable
+  habits: prove a failure's source is unmodified (`git hash-object` vs `git rev-parse HEAD:<path>`)
+  before debugging the test, and read the runner's own banner — it names the root it resolved.
+  Links to **T44**.
+
+---
+
+## [1.6.0] — 2026-10-06
+
+Follow-on to 1.5.0, same session. A Vercel check on PR #15 printed a project path that contradicted the
+KB — and the contradiction turned out to be real.
+
+### Added
+
+- **T43 — a renamed Vercel project keeps its old `*.vercel.app` alias, so the retired name still
+  resolves.** The project *and* the team were renamed after the 2026-10-01 migration, and the old alias
+  stayed attached and `verified: true`, so nothing ever failed and nothing looked wrong. Same shape as
+  **T23**, where a renamed GitHub repo keeps serving through a redirect: *"it still resolves"* is **not**
+  evidence that a name is current. The generalisable rule is to compare **ids** — `prj_…` and `team_…` are
+  immutable — rather than display names.
+- **T44 — `vi.mock` silently stops working when Vitest's root carries a lowercase drive letter.** On
+  Windows, `process.cwd()` returns `c:\…` when the shell was entered as `/c/…`. Vitest derives its `root`
+  from that string, the module paths that follow then differ in case from the runner's, and Node caches
+  modules by path *string* — so two `vitest` instances load. `vi.spyOn` keeps working and `vi.mock` stops
+  being hoisted, so only the 4 files that use `vi.mock` fail, with an error that reads like a broken test
+  rather than a broken runner. **RESOLVED**, with a known residual: `npm test` still fails on Windows for
+  a separate npm-shim reason; CI is unaffected.
+  > ⚠️ **Both halves of that entry were wrong; 1.7.0 records the correction.** T44 is **MITIGATED**, not
+  > resolved, and there was no npm-shim residual — the all-suites failure was a **bun**-installed
+  > `node_modules`. The entry stands as the record of what 1.6.0 believed.
+
+### Changed
+
+- **`vitest.config.ts`:** `root` is now `fs.realpathSync.native(__dirname)` and both aliases resolve from
+  it, so a lowercase drive letter in `process.cwd()` can no longer silently disable `vi.mock`. A no-op on
+  Linux/macOS. Measured before/after: the `RUN v…` banner goes `c:/…` → `C:/…` and the suite goes from 4
+  files / 23 tests failing to **all 223 passing**.
+  > ⚠️ **Reverted in 1.7.0 — do not reapply.** It only *appeared* to work because `node_modules` was
+  > bun-installed at the time, and Bun symlinks its packages, so realpath canonicalisation happened
+  > anyway. Against an npm-installed tree it is a no-op. The real fix is in
+  > `docs/agentic/scripts/verify.sh`.
+
+- **`stack/environments.md`:** the Vercel project row and account row corrected from
+  `roryskagen-5713/shop-roryskagen-com` to **`roryskagenart/shop.roryskagenart.com`**, with the team
+  **slug** (`roryskagenart`) distinguished from the team **name** (`roryskagen`) — they are different
+  strings, and neither was ever `roryskagen-5713`. Both ids are unchanged from the 2026-10-01 record,
+  which is what makes this a rename rather than a different project.
+- **T23's evidence** now cites the current Vercel identifier instead of the retired one.
+- **The dated `sessions/2026-10-01.md` record was deliberately left alone** — it documents what was true
+  then, and rewriting it would erase the evidence that the rename happened.
+
+---
+
+## [1.5.0] — 2026-10-06
+
+Produced by a preflight that measured the gate baseline and found **four different test counts live in the
+tree at once**. The count was right in two files and wrong in four.
+
+### Added
+
+- **T41 — the gate baseline was duplicated in six carriers, and four of them drifted.** Measured
+  `main` = `42786bb7`: `vitest run` → **`223 passed / 15 files`**, while `AGENTS.md` said **137/11**,
+  `protocols/verification.md` said **163/13**, and `protocols/preflight.md`, `scripts/preflight.sh`,
+  `lib/fourthwall/AGENTS.md` and `scripts/AGENTS.md` all said **97/6**. **Root cause, and it was not
+  carelessness:** `AGENTS.md` §5 named only *two* files to update when the count changed, so nothing
+  could fail on the other four. **RESOLVED** by the single source of truth below.
+- **T42 — the `/docs` palette table documents tokens and colours that no longer exist.**
+  `lib/docs-content.ts:1159-1170` still advertises `--background` / `--card` / `--accent` at the retired
+  Gallery Stone values, while `app/globals.css:12-51` defines `--brand-bg` / `--brand-fg` / … at the
+  Skagen values. PR #14 changed the CSS and the config but not the copy. **OPEN — deliberately not fixed
+  here**, because rewording public product copy is a product decision. Owner: Jaden.
+- [`scripts/baseline.env`](scripts/baseline.env) — **the gate baseline, in one place.** `verify.sh` and
+  `preflight.sh` source it; nothing inlines the number any more.
+- [`scripts/check-baseline.sh`](scripts/check-baseline.sh) — a guard that **can actually fail**: it fails
+  if any document that quotes the count disagrees with `baseline.env`, if the on-disk test-file count
+  moves, or if `stack/overview.md`'s file list stops matching the count. Observed **red first** (6 FAILs)
+  and then green — a guard nobody has watched fail is not a guard.
+
+### Changed
+
+- **The GitHub repository name was reconciled: `roryskagenart/shop.roryskagen.com` →
+  `roryskagenart/shop.roryskagenart.com`.** Found at push time — `git push` reported
+  `remote: This repository moved. Please use the new location`, and
+  `gh api repos/…/shop.roryskagen.com` resolves with that `full_name`. `/AGENTS.md` §2 already documented
+  the rename and was right; `stack/environments.md`, `plugins/registry.md`, `protocols/preflight.md`,
+  `scripts/preflight.sh` and the `plans/README.md` blob link still used the old name. **T23 updated to
+  MITIGATED.** The local `origin` URL was deliberately **not** changed — repointing the remote is a human
+  decision (rule 4), and GitHub's redirect keeps it working.
+- `verify.sh` now runs the baseline guard as a **third gate**, and its failure text points at
+  `baseline.env` instead of at two named documents.
+- Every carrier reconciled to the measured baseline; the measured counts are recorded with the command
+  that produced them.
+- `/AGENTS.md` §2 now **declares `v0.x.y` the release scheme** (the only space with tags; tags go on the
+  **merge commit**), and §5 names every carrier plus the guard rather than two of six.
+- `/AGENTS.md` §5's drift anecdote updated — the count has been 67, then 97, then 137, then 163, and is
+  now 223.
+- `lib/brand-config.ts` — the roadmap field **`version` renamed to `roadmapId`**, with the array's header
+  stating that it is a roadmap and not a release record. The array is read by no component.
+- **T24 → MITIGATED** (was OPEN). The scheme is now declared and enforced, but the public `/docs` page
+  still words the `v1.x` roadmap phases as *"Release v1.2.0"* — surfaced rather than silently reworded.
+
+### Fixed
+
+- **`stack/environments.md` claimed `main` was UNPROTECTED.** Measured 2026-10-06:
+  `gh api repos/…/branches/main --jq .protected` → **`true`**. The owner added protection after that note
+  was written. **T27**'s point about `admin: false` blocking the *write* still holds — only the state had
+  changed.
+- **`.gitattributes` did not cover `.env`** — so `baseline.env`, a file bash *sources*, was exposed to
+  `core.autocrlf = true`. `BASELINE_TESTS=223\r` is a different value from `223`, which would have made
+  every comparison in the new guard fail and report stale counts on a clean tree. Caught by the
+  `warning: LF will be replaced by CRLF` on `git add`, and by `git check-attr` returning `unspecified`.
+  `*.env text eol=lf` added; **T32** extended.
+- `stack/overview.md` test-file list: a **literal `\n`** joined three entries onto one line, and the list
+  held **14 entries against a claimed 15** — `lib/fourthwall/__tests__/merch-catalog.test.ts` was missing.
+- `lib/fourthwall/AGENTS.md` and `scripts/AGENTS.md` both undercounted the test files in
+  `lib/fourthwall/__tests__/` (three named; four exist).
+- `traps/register.md` — T40 was missing its `<a id="t40"></a>` anchor and its `**Source:**` line.
+
 ## [1.4.1] — 2026-10-04
 
 ### Added

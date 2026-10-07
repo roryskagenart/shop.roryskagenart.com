@@ -17,8 +17,33 @@
 
 set -uo pipefail
 
-BASELINE_TESTS=223
-BASELINE_FILES=15
+# ---------------------------------------------------------------------------
+# Working directory
+# ---------------------------------------------------------------------------
+#
+# Everything below uses ./node_modules/.bin/*, so the script must run from the repo
+# root. Re-enter it explicitly rather than trusting the caller's cwd.
+#
+# On Windows this is not cosmetic. git-bash can inherit a LOWERCASE drive letter in
+# the cwd (`c:\...`), and Vitest derives module paths from it; the casing then
+# disagrees with the paths the runner itself uses, Node caches modules by path
+# *string*, and two `vitest` instances load. `vi.mock` silently stops being hoisted
+# and EVERY suite fails to load - so gate 2 reports "a DROP means a guard was
+# deleted" when nothing was deleted. `pwd -W` yields the canonical `C:/...` form
+# under MSYS, and cd'ing to it restores the uppercase drive letter.
+# See docs/agentic/traps/register.md#t44.
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR/../../.." || exit 1
+if MSYS_ROOT="$(pwd -W 2>/dev/null)"; then
+  cd "$MSYS_ROOT" 2>/dev/null || true
+fi
+REPO_ROOT="$(pwd)"
+
+# The baseline lives in exactly one place - do NOT inline the numbers here.
+# shellcheck source=baseline.env
+. "$SCRIPT_DIR/baseline.env"
+
 FAILED=0
 
 head_() { printf '\n== %s\n' "$*"; }
@@ -96,12 +121,34 @@ if printf '%s' "$TESTS_LINE" | grep -q "${BASELINE_TESTS} passed"; then
   ok "test count matches the baseline"
 else
   bad "test count DIFFERS from the baseline ($BASELINE_TESTS) - a DROP means a guard was deleted"
-  printf '         Re-derive the number and update the baseline in docs/agentic/stack/overview.md\n'
-  printf '         (and AGENTS.md section 3) in the same change.\n'
+  printf '         Re-derive the number, edit docs/agentic/scripts/baseline.env, then run\n'
+  printf '         check-baseline.sh and fix every carrier it flags.\n'
 fi
 
 # ---------------------------------------------------------------------------
-# 3. Format (advisory, OPT-IN ONLY via --format)
+# 3. Baseline consistency
+# ---------------------------------------------------------------------------
+#
+# Every document that quotes the gate count must agree with baseline.env. This
+# is what catches a carrier nobody remembered to update - the failure mode that
+# left four different counts live in this tree at once (T41). Pure grep, ~50 ms.
+
+head_ "3. Baseline consistency"
+
+CHECK_BASELINE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/check-baseline.sh"
+if [ -f "$CHECK_BASELINE" ]; then
+  if CHECK_OUT=$(bash "$CHECK_BASELINE" 2>&1); then
+    ok "every carrier agrees with baseline.env"
+  else
+    bad "documented baseline disagrees with baseline.env:"
+    printf '%s\n' "$CHECK_OUT" | grep -E 'FAIL|stale|:' | sed 's/^/         /'
+  fi
+else
+  bad "$CHECK_BASELINE not found - the baseline guard is missing"
+fi
+
+# ---------------------------------------------------------------------------
+# 4. Format (advisory, OPT-IN ONLY via --format)
 # ---------------------------------------------------------------------------
 #
 # Removed from the default path deliberately. Measured: prettier over the tree
@@ -116,7 +163,7 @@ fi
 # (`prettier --write <paths>`), never a repo-wide --write as a drive-by. T31.
 
 if [ "${1:-}" = "--format" ] || [ "${VERIFY_FORMAT:-0}" = "1" ]; then
-  head_ "3. Format - prettier (opt-in)"
+  head_ "4. Format - prettier (opt-in)"
 
   if [ -x ./node_modules/.bin/prettier ]; then
     if ./node_modules/.bin/prettier --check --ignore-unknown . >/dev/null 2>&1; then

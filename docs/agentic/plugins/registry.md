@@ -14,7 +14,7 @@ to production are dangerous. This registry records the **blast radius** of each 
 | **Fourthwall MCP** | MCP server (OAuth) | Catalogue reads and writes via `mcp.fourthwall.com`. | ⚠️⚠️ **WRITES PRODUCTION.** Product, collection and variant mutations. Same blast radius as the HTTP API in `scripts/` — see T02. |
 | **Vercel MCP** | MCP server (OAuth) | Project info, env vars, deployment status via `mcp.vercel.com`. | ⚠️ Env-var writes affect the deployed app. Deploy/promote remains forbidden — rule 1. |
 | **Cloudinary MCP** | MCP server (OAuth) | Image asset upload/transform/delete. | ⚠️ **Deletes are not reversible.** A deleted asset breaks live product imagery. |
-| **GitHub connector** | Connector | Read issues, PRs, checks and commit statuses for `roryskagenart/shop.roryskagen.com`. | **Read-only in practice.** The underlying actor (`jadenblack`) has push, but this project's rule is that pushes require explicit per-release approval. |
+| **GitHub connector** | Connector | Read issues, PRs, checks and commit statuses for `roryskagenart/shop.roryskagenart.com`. | **Read-only in practice.** The underlying actor (`jadenblack`) has push, but this project's rule is that pushes require explicit per-release approval. |
 | **Vercel CLI** | CLI (not a plugin) | `env ls` / `env pull`, `deploy --dry --json`, `whoami`, `link`. | ⚠️ **`deploy` publishes production.** Only ever run with `--dry` unless a human approved a deploy. |
 | **`gh` CLI** | CLI (not a plugin) | Repo, PR, secret and variable operations. | ⚠️ `gh secret set` / `gh variable set` succeed here (`admin: false` does not block them). Treat as a write. |
 

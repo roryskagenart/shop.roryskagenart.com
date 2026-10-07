@@ -4,10 +4,16 @@ Runnable, agent-agnostic helpers. Plain `bash` and Python — no framework, no r
 
 | Script | Does | Mutates anything? |
 | :--- | :--- | :--- |
+| [`baseline.env`](baseline.env) | **The gate baseline — `BASELINE_TESTS` / `BASELINE_FILES`.** Not a script: a sourced data file. The one place the number lives. | **No.** Data. |
 | [`preflight.sh`](preflight.sh) | Session-start checks: git state, working-tree pollution, version collisions, gate baseline | **No.** Read-only. |
-| [`verify.sh`](verify.sh) | Runs the gate sequence and reports exact counts | **No.** Read-only. |
+| [`verify.sh`](verify.sh) | Runs the gate sequence — typecheck, tests, baseline consistency — and reports exact counts | **No.** Read-only. |
+| [`check-baseline.sh`](check-baseline.sh) | Fails when any document quoting the test count disagrees with `baseline.env`, when the on-disk test-file count moves, or when `overview.md`'s file list stops matching | **No.** Read-only. |
 | [`check-links.py`](check-links.py) | Validates every relative Markdown link **and `#anchor`** across the repo | **No.** Read-only. |
 | [`normalize-skill-frontmatter.py`](normalize-skill-frontmatter.py) | Rewrites `skills/*/SKILL.md` frontmatter to the portable shape | **Yes** — but only `docs/agentic/skills/**`, and it is idempotent. |
+
+> **`baseline.env` is sourced, never copied.** Inlining `BASELINE_TESTS` in a script or a document is what
+> produced four different test counts live at once (**T41**). To change the baseline, edit that file and
+> run `check-baseline.sh`.
 
 ---
 
@@ -15,7 +21,8 @@ Runnable, agent-agnostic helpers. Plain `bash` and Python — no framework, no r
 
 ```bash
 bash docs/agentic/scripts/preflight.sh          # read-only checks
-bash docs/agentic/scripts/verify.sh             # run the gates
+bash docs/agentic/scripts/verify.sh             # run the gates (includes check-baseline.sh)
+bash docs/agentic/scripts/check-baseline.sh     # just the baseline consistency guard
 python docs/agentic/scripts/check-links.py --root .
 
 # the frontmatter normalizer needs a Python 3 interpreter

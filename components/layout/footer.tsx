@@ -67,7 +67,7 @@ export default async function Footer() {
           </div>
           <hr className="mx-4 hidden h-4 w-[1px] border-l border-neutral-400 md:inline-block" />
           <p className="md:ml-auto">
-            <a href="https://shop.roryskagen.com" className="text-black dark:text-white">
+            <a href={BRAND_CONFIG.domains.shopCustomDomain} className="text-black dark:text-white">
               Rory Skagen Studio Archive
             </a>
           </p>

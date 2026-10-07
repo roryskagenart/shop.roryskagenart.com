@@ -10,12 +10,17 @@
 | Gate | Command | Baseline |
 | :--- | :--- | :--- |
 | Typecheck | `./node_modules/.bin/tsc --noEmit` (alias `npm run lint`) | 0 errors |
-| Tests | `./node_modules/.bin/vitest run` (alias `npm test`) | **163 passed / 13 files** |
+| Tests | `./node_modules/.bin/vitest run` (alias `npm test`) | **223 passed / 15 files** — the number lives in [`../scripts/baseline.env`](../scripts/baseline.env) |
 | Format | `prettier --check` — **opt-in only**, see below | advisory |
 | CI | `.github/workflows/ci.yml` → `npm ci`, lint, test | must be green |
 
 One command: [`../scripts/verify.sh`](../scripts/verify.sh). Measured 2026-10-03: **3.9 s**, down from
 8.0 s — it runs typecheck, tests, and the baseline count, nothing else.
+
+The **count itself lives in exactly one place**, [`../scripts/baseline.env`](../scripts/baseline.env).
+`verify.sh` sources it, and runs [`../scripts/check-baseline.sh`](../scripts/check-baseline.sh) as a third
+gate: that guard fails if any document quoting the count disagrees with it. Do not inline the number in a
+document — quote it if you must, and let the guard keep you honest. See **T41**.
 
 ### Format is not in the default path
 
@@ -74,7 +79,15 @@ drift, nothing to do with the change that surfaced it. Confirmed by stashing all
 the suite at a clean `HEAD` (139), then re-running without the one new test file (139), then with it
 (163). So: **137 → 139 was already wrong, and my change contributed the 139 → 163.** Derive the
 number by *subtracting* what you added, not by reading your own new total — otherwise you inherit
-someone else's drift and record it as yours. Baseline re-derived to 163 / 13 files.
+someone else's drift and record it as yours. Baseline re-derived to 163 / 13 files **at the time**.
+
+And again on 2026-10-06: the drift had become structural rather than incidental. **Four different counts
+were live in this tree at once** — 223/15 in `verify.sh` and `stack/overview.md`, 137/11 in `AGENTS.md`,
+163/13 here, and 97/6 in `preflight.md`, `preflight.sh`, `lib/fourthwall/AGENTS.md` and
+`scripts/AGENTS.md`. The cause was not carelessness: the update instruction named only two of the six
+carriers, so nothing could fail on the other four. **That is now fixed** — the count lives in
+[`../scripts/baseline.env`](../scripts/baseline.env) and `check-baseline.sh` fails on any carrier that
+disagrees. See **T41**.
 
 Corollary: a **drop** in the test count means a guard was deleted, not that the suite got faster. Treat it
 as a failure until proven otherwise — but re-derive first, because a stale baseline looks identical to a
