@@ -248,3 +248,16 @@ export const PRODUCT_COLLECTIONS: ProductCollectionDefinition[] = [
 export function getCollectionByHandle(handle: string): ProductCollectionDefinition | undefined {
   return PRODUCT_COLLECTIONS.find((c) => c.handle === handle);
 }
+
+/**
+ * Display label for a collection, for navigation and section headings.
+ *
+ * `getCollections()` returns a *merged* list: curated taxonomy handles plus whatever Fourthwall
+ * actually stocks. A curated handle gets the taxonomy `shortTitle` (its full `title` is hero copy —
+ * "Fine Art Originals ($4,000 – $28,000)" is not a nav label). A handle Fourthwall owns but the
+ * taxonomy has never heard of keeps Fourthwall's own name. Trimmed because Fourthwall's names can
+ * carry surrounding whitespace — measured 2026-10-07, `wall-artwork` is literally `" Wall Art"`.
+ */
+export function getCollectionNavLabel(handle: string, fallbackTitle: string): string {
+  return (getCollectionByHandle(handle)?.shortTitle ?? fallbackTitle).trim();
+}
