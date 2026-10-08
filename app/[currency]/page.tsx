@@ -50,11 +50,12 @@ export default async function HomePage({ params }: { params: Promise<{ currency:
             {BRAND_CONFIG.tagline}
           </p>
           <h1 className="heading-display mt-3 max-w-3xl text-brand-accent-fg">
-            Original Art &amp; Studio Editions by Rory Skagen
+            Original Art &amp; Studio Good Stuff by Rory Skagen
           </h1>
           <p className="mt-5 max-w-2xl text-sm leading-relaxed opacity-80 sm:text-base">
-            Museum-quality archival prints, gallery canvas, and studio merchandise, shipped worldwide
-            from Austin, Texas.
+            Prints, canvas, and everyday pieces carrying Rory Skagen&apos;s original art — some
+            reimagined, all authentically Austin and made with reverence for the artist himself.
+            Shipped worldwide.
           </p>
           <div className="mt-8 sm:mt-10">
             <Link

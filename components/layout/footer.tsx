@@ -104,10 +104,19 @@ export default async function Footer() {
               prompt. `components/__tests__/public-surfaces.test.ts` guards the old invariant and now
               carries an explicit allow-list entry for this one href. If that test fails, the guard is
               working — the failure is the signal, not a regression to silence.
+
+              ⚠️ MUST be a plain <a>, NOT a next/link <Link>. It was a <Link> and that was a real
+              defect: a <Link> is PREFETCHED as soon as it enters the viewport, so every page carrying
+              the footer fired `GET /import?_rsc=…`, middleware.ts answered 401 with
+              `WWW-Authenticate: Basic`, and the browser raised its password dialog with nobody having
+              clicked Admin. Measured against production 2026-10-08: zero requests on load, then exactly
+              one `fetch /import?_rsc=…` -> 401 the moment the footer scrolled into view. A plain anchor
+              has no prefetch, so the prompt reverts to what was actually agreed — on click only.
+              Do not "tidy" this back into a <Link>.
             */}
-            <Link href="/import" className="transition-colors hover:text-brand-fg">
+            <a href="/import" className="transition-colors hover:text-brand-fg">
               Admin
-            </Link>
+            </a>
           </div>
         </div>
       </div>
