@@ -8,6 +8,52 @@ This file tracks the **KB**, not the application. The application's release reco
 
 ---
 
+## [1.9.0] — 2026-10-08
+
+### Added
+
+- **[`traps/register.md#t50`](traps/register.md#t50) — a container's max-width equal to its breakpoint makes
+  the gutter stop growing.** `mx-auto max-w-screen-2xl px-4` capped the container at **1536px** while
+  Tailwind's `screen-2xl` breakpoint is **also 1536px**, so between ~1440px and 1536px the container sat at
+  max width with a flat **16px** gutter — the desktop layout was byte-for-byte the mobile gutter. Nothing
+  errored; it was reported as *"the desktop layout is max wide with no padding like it's mobile"*.
+  **RESOLVED** by `.page-shell` (`max-w-[1560px]`, gutters 20/32/48/64px).
+- **[`traps/register.md#t51`](traps/register.md#t51) — an option group with an empty `values` array renders a
+  label over nothing.** `variant-selector.tsx` rendered one `<dl>` per option unconditionally, so a live
+  product (`gondeoleu`) declaring `COLOR` and `SIZE` with empty `values` printed two headings over empty
+  `<dd>`s and a dead gap before Add To Cart. A **data** bug that presented as a **spacing** bug. The existing
+  guard tested `options.length`, which counts the empty groups, so it could never fire. **RESOLVED** by
+  filtering before the guard.
+- **[`skills/css-class-emission-audit`](skills/css-class-emission-audit/SKILL.md)** — ported from the agent
+  runtime. New §5, *the mirror trap*: a token that works as a **fill** fails as **text**. Measured on this
+  repo's own accent, `--brand-accent` (#22d3ee) is **1.4:1** on the header band, **1.1:1** on the footer
+  canvas, and **9.1:1** on an ink fill — so the accent may be a fill, border or indicator, never text on a
+  light surface. Includes the WCAG ratio helper and the replacement table (ink underline instead of
+  `hover:text-accent`, and so on).
+
+### Fixed
+
+- **`scripts/normalize-skill-frontmatter.py` could destroy provenance.** Run over the tree — which the
+  [skills contract](skills/README.md) tells you to do — it stamped `x-migrated: <bulk date>` on **every**
+  skill and dropped `x-created`, so the two skills *authored in this repo*
+  (`fourthwall-product-catalog`, `fourthwall-product-launch`) were relabelled as ports of the 2026-10-02
+  migration. A repo-authored skill carrying a migration date is a false provenance claim, and it silently
+  destroyed the real creation date. It also only un-quoted double-quoted values, so a single-quoted
+  description containing an apostrophe (`this shop's subset`) stayed **invalid YAML** and could never
+  normalise. Both are fixed: `x-created` is preserved and takes precedence over `x-migrated`, and
+  `unquote()` handles single quotes. `--migrated YYYY-MM-DD` was added for ports outside the bulk
+  migration. Verified idempotent — a second run reports every file unchanged — and every skill's
+  frontmatter now passes a quoting check. Re-running the old script over this tree would re-break it.
+
+### Notes
+
+- Both traps were **fixed in the same change that registered them** (PR #17), so they are recorded as
+  RESOLVED rather than MITIGATED — there is no outstanding work behind either entry.
+- No baseline change: this release adds no tests, so `scripts/baseline.env` is untouched at
+  **224 passed / 15 files**.
+
+---
+
 ## [1.8.0] — 2026-10-08
 
 ### Added
