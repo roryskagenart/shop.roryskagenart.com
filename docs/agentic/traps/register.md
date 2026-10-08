@@ -907,3 +907,51 @@ colour-opacity modifier that does not. See `app/globals.css` (`.surface-accent`,
 **Recommended follow-up:** a guard that scans `app/**` and `components/**` for `-brand-[a-z-]+/[0-9]+` and
 fails. Not written yet, which is why this is MITIGATED rather than RESOLVED.
 **Source:** 2026-10-08.
+
+<a id="t50"></a>
+### T50 — A container's max-width equal to its breakpoint makes the gutter stop growing
+**Status:** RESOLVED 2026-10-08 — replaced by `.page-shell`.
+**Bites:** `mx-auto max-w-screen-2xl px-4` reads as "a wide container with padding" and is not one.
+`max-w-screen-2xl` is **1536px** and Tailwind's `screen-2xl` breakpoint is **also 1536px** — the same number
+doing two unrelated jobs — so the container reaches its cap at exactly the viewport width where the layout
+is meant to be at its most spacious. Between roughly 1440px and 1536px the container is pinned at its max
+width while the gutter stays a flat **16px**, i.e. the desktop gutter is byte-for-byte the mobile gutter.
+Nothing errors and nothing warns, and the page looks *plausible* — the content is simply too close to the
+edges — which is why it survives review as "the design" rather than as a bug.
+**Evidence:** Measured 2026-10-07 on the storefront. `max-w-screen-2xl` = 1536px (this repo's
+`tailwind.config.js` does not override `screens`, so it is Tailwind's default) and `screens['2xl']` =
+1536px. At a 1440px viewport the container measured 1440px wide with `px-4` gutters of **16px** — identical
+to the gutter at 390px. Reported by the owner as *"The desktop layout is max wide with no padding like it's
+mobile"*, which is precisely what it was.
+**Do instead:** Keep the container cap strictly **above** the largest gutter breakpoint, and let the gutter
+grow with the viewport. `.page-shell` in `app/globals.css` uses `max-w-[1560px]` with
+`px-5 sm:px-8 lg:px-12 xl:px-16` → 20 / 32 / 48 / 64px. Then assert the **computed** padding at two or three
+widths instead of reading the class list — the class list is where the intent lives, and the intent here was
+satisfied by a number that meant something else.
+**Source:** 2026-10-08.
+
+<a id="t51"></a>
+### T51 — An option group with an empty `values` array renders a label over nothing
+**Status:** RESOLVED 2026-10-08 — filtered before the guard.
+**Bites:** `components/product/variant-selector.tsx` rendered one `<dl>` per product option
+**unconditionally**, so an option carrying no values printed a bare `<dt>` label above an empty `<dd>`: two
+headings floating over nothing, followed by a dead gap before Add To Cart. It presents as a **spacing** bug
+and is actually a **data** bug — and the guard meant to prevent it tested `options.length`, which counts the
+empty groups too, so it could never fire.
+**Evidence:** Measured 2026-10-07 against live stock. The Fourthwall product `gondeoleu` declares a `COLOR`
+option and a `SIZE` option whose `values` arrays are both **empty**; the rendered page showed the `COLOR`
+and `SIZE` labels with no swatches under either. `options.length` was non-zero, so
+`hasNoOptionsOrJustOneOption` returned `false` and both blocks rendered. Reported from a screenshot as
+*"all the product individual pages have spacing issues"* — the reported symptom was two steps away from the
+cause.
+**Do instead:** Filter **before** the guard, never after:
+
+```ts
+const visibleOptions = options.filter((option) => option.values.length > 0);
+const hasNoOptionsOrJustOneOption =
+  !visibleOptions.length || (visibleOptions.length === 1 && visibleOptions[0]?.values.length === 1);
+```
+
+Filtering afterwards leaves the guard counting the empty groups and the void comes straight back. An option
+a shopper cannot choose is not an option.
+**Source:** 2026-10-08.

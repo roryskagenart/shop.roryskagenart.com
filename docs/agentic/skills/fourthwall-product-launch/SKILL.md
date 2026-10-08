@@ -1,6 +1,6 @@
 ---
 name: fourthwall-product-launch
-description: 'Use when creating, publishing, pricing, or taking down Fourthwall products via the Platform API — seeding a merch catalogue from artwork, choosing templates, setting profitMargin, verifying a create, or diagnosing why a created product will not appear on the storefront. Covers the 605-template catalogue and the 274 that can actually render, the non-transparency subset that JPEG artwork can satisfy, print-fit gating by aspect ratio, and the hard limits: no publish-after-create, no rename, no tags, no private collections, promotions cannot substitute. Also use when a product created hidden cannot be made public by API, or when a launch looks complete but the storefront is unchanged.'
+description: "Use when creating, publishing, pricing, or taking down Fourthwall products via the Platform API — seeding a merch catalogue from artwork, choosing templates, setting profitMargin, verifying a create, or diagnosing why a created product will not appear on the storefront. Covers the 605-template catalogue and the 274 that can actually render, the non-transparency subset that JPEG artwork can satisfy, print-fit gating by aspect ratio, and the hard limits: no publish-after-create, no rename, no tags, no private collections, promotions cannot substitute. Also use when a product created hidden cannot be made public by API, or when a launch looks complete but the storefront is unchanged."
 version: 1.0.0
 x-origin: shop.roryskagenart.com
 x-created: 2026-10-04

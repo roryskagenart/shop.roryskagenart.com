@@ -18,7 +18,9 @@ A skill here is a Markdown procedure. It is not code, and it is not tied to any 
 | **Idempotent tooling** | [`../scripts/normalize-skill-frontmatter.py`](../scripts/normalize-skill-frontmatter.py) enforces the frontmatter shape and produces identical bytes on a second run. |
 
 Adding a skill: create `skills/<kebab-name>/SKILL.md`, then run the normalizer. Do **not** hand-format the
-frontmatter.
+frontmatter. Pass `--migrated YYYY-MM-DD` when a skill is ported in on a date other than the 2026-10-02 bulk
+migration. A skill **authored in this repo** should carry `x-created` instead — the script preserves it and
+will not overwrite it with a migration date.
 
 ---
 
@@ -52,6 +54,7 @@ frontmatter.
 | :--- | :--- |
 | [`headless-react-verification`](headless-react-verification/SKILL.md) | A React/TypeScript app needs tests that assert on **rendered output**, not source text, with zero new dependencies. Relevant here: `next build` is not usable locally (T16), so rendered-output checks matter more. |
 | [`generated-doc-guard-integrity`](generated-doc-guard-integrity/SKILL.md) | A generated document has a `--check` mode. **Makes the guard actually able to fail.** |
+| [`css-class-emission-audit`](css-class-emission-audit/SKILL.md) | Styling **looks correct in source and has no effect**, with no build error. Two independent silent failures: a utility class that emits **no CSS at all** (Tailwind drops an opacity modifier on a bare `var()` token — **T49**), and a design token that emits fine but is **unreadable as text** (the accent measures 1.1–1.4:1 on this repo's light bands). Includes the compile-and-inspect probe, the WCAG ratio helper, and the accent-as-fill/underline replacement table. |
 
 ### Repository hygiene
 
