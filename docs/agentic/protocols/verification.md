@@ -10,7 +10,7 @@
 | Gate | Command | Baseline |
 | :--- | :--- | :--- |
 | Typecheck | `./node_modules/.bin/tsc --noEmit` (alias `npm run lint`) | 0 errors |
-| Tests | `./node_modules/.bin/vitest run` (alias `npm test`) | **223 passed / 15 files** — the number lives in [`../scripts/baseline.env`](../scripts/baseline.env) |
+| Tests | `./node_modules/.bin/vitest run` (alias `npm test`) | **224 passed / 15 files** — the number lives in [`../scripts/baseline.env`](../scripts/baseline.env) |
 | Format | `prettier --check` — **opt-in only**, see below | advisory |
 | CI | `.github/workflows/ci.yml` → `npm ci`, lint, test | must be green |
 

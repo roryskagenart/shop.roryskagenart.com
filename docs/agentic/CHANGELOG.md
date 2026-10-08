@@ -8,6 +8,40 @@ This file tracks the **KB**, not the application. The application's release reco
 
 ---
 
+## [1.8.0] — 2026-10-08
+
+### Added
+
+- **[`traps/register.md#t49`](traps/register.md#t49) — a Tailwind opacity modifier on a `var()` colour
+  token silently emits no CSS.** `bg-brand-accent/20`, `bg-brand-bg-card/95` and `border-brand-border/60`
+  all compile to **nothing**: no build error, no warning, no rule in the output. Found in the wild rather
+  than by a test — the sticky header had been rendering with `backgroundColor: rgba(0, 0, 0, 0)` and the
+  collection submenu's top divider was missing. The workaround is `color-mix` in a component class
+  (`.surface-accent` / `.surface-accent-soft` in `app/globals.css`). Registered as **MITIGATED**: the three
+  instances are fixed, but no guard yet stops the next one.
+
+### Changed
+
+- **The gate baseline moved 223 → 224** — a test was *added*, not removed — and every carrier was
+  reconciled. `check-baseline.sh` failed on the change before `baseline.env` was updated, which is the
+  guard working as designed.
+- **`check-baseline.sh` now exempts dated records** (`sessions/`, `CHANGELOG.md`, `traps/register.md`),
+  the same class as the already-exempt `docs/reports/` and `docs/releases/plans/`. A baseline bump
+  previously forced a choice between falsifying eight dated measurements and leaving the guard red — and
+  one of them is T41's own evidence (*"Measured 2026-10-06 … Tests 223 passed (223)"*), so rewriting it
+  would have destroyed the evidence of the trap that documents this exact failure mode. A dated record is
+  not a stale claim.
+
+### Fixed
+
+- **`components/__tests__/public-surfaces.test.ts` gained a narrow allow-list.** The owner deliberately
+  put an Admin link to `/import` in the footer, accepting that an anonymous visitor meets a browser
+  password prompt. The exception is scoped to a single file + href pair, and a new test asserts it stays
+  that narrow. The guard was watched failing with the allow-list emptied
+  (`components\layout\footer.tsx:79 -> /import`) before it was restored.
+
+---
+
 ## [1.7.1] — 2026-10-07
 
 ### Changed

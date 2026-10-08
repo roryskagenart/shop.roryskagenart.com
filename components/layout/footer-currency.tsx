@@ -12,10 +12,10 @@ const KNOWN = new Set<string>(CURRENCIES);
  * rendered by four routes that already thread `currency` through `<Wrapper>`, and a
  * prop would have meant widening all four for a single control.
  */
-export function FooterCurrencySelector() {
+export function FooterCurrencySelector({ className }: { className?: string }) {
   const pathname = usePathname();
   const segment = pathname?.split('/')[1] ?? '';
   const currency = KNOWN.has(segment) ? segment : 'USD';
 
-  return <CurrencySelector currency={currency} />;
+  return <CurrencySelector currency={currency} className={className} />;
 }

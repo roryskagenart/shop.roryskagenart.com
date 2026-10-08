@@ -145,3 +145,83 @@ button {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--brand-fg-muted);
 }
+
+/* ================================================================
+   Layout rhythm — page -> section -> content.
+   One shell for horizontal rhythm, one scale for vertical rhythm,
+   and a small type scale so headings stop being ad-hoc per page.
+   ================================================================ */
+
+@layer components {
+  /*
+   * The single horizontal rhythm for the storefront.
+   *
+   * What this replaces: `mx-auto max-w-screen-2xl px-4`. That container
+   * reaches its max-width at 1536px, so on a 1440–1536px laptop the gutters
+   * collapsed to a flat 16px — the desktop layout read like the mobile one.
+   * These gutters grow with the viewport instead: 20 -> 32 -> 48 -> 64px.
+   */
+  .page-shell {
+    @apply mx-auto w-full max-w-[1560px] px-5 sm:px-8 lg:px-12 xl:px-16;
+  }
+
+  /* Vertical rhythm between page sections. */
+  .page-section {
+    @apply py-10 sm:py-14 lg:py-20;
+  }
+
+  /* Small mono label above a heading — mirrors the studio site's eyebrows. */
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.22em] text-brand-fg-muted;
+  }
+
+  /* Page-level display heading. */
+  .heading-display {
+    @apply text-3xl font-black uppercase leading-[1.05] tracking-tight text-brand-fg sm:text-4xl lg:text-5xl;
+  }
+
+  /* Section heading. */
+  .heading-section {
+    @apply text-lg font-bold uppercase tracking-tight text-brand-fg sm:text-xl;
+  }
+
+  /* Mono nav label — matches the studio site's nav typography. */
+  .nav-link {
+    @apply font-mono text-[11px] uppercase tracking-[0.14em] text-brand-fg-muted transition-colors hover:text-brand-fg;
+  }
+
+  /*
+   * Accent bands — the top of the storefront (header + home hero).
+   *
+   * ⚠️ DO NOT write `bg-brand-accent/20` here. Tailwind cannot apply an opacity modifier to a
+   * token whose value is a bare `var(--…)`: it emits **no rule at all**, and the class fails
+   * silently with no build error. Measured 2026-10-08 by compiling this repo's own config —
+   * `bg-brand-accent/15`, `bg-brand-bg-card/95` and `border-brand-border/60` all produced zero
+   * CSS, so the header ran with no background colour and a missing divider. `color-mix` is the
+   * working alternative and stays theme-aware, since it reads the live token.
+   * → docs/agentic/traps/register.md#t49
+   *
+   * `.surface-accent` is the full-strength band (the hero). It also sets the paired foreground
+   * token, which is what `--brand-accent-fg` exists for.
+   */
+  .surface-accent {
+    background-color: var(--brand-accent);
+    color: var(--brand-accent-fg);
+  }
+
+  /* The softer band (the header) — accent mixed into the card colour so text stays readable. */
+  .surface-accent-soft {
+    background-color: color-mix(in srgb, var(--brand-accent) 20%, var(--brand-bg-card));
+  }
+}
+
+/* Hide the scrollbar on horizontally-scrolling nav rows without disabling scroll. */
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}

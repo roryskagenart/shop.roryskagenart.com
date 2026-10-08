@@ -378,9 +378,18 @@ export async function getCollections(): Promise<Collection[]> {
     description: collection.description,
   }));
 
+  /*
+   * The synthetic "everything" collection. Its `title` is the **navigation label**, not a
+   * description of the set: "All Products" reads like a database table, and this entry exists
+   * only to be a link. It is rendered by both the header submenu and the collection-page sidebar,
+   * so the label is set here — one place — rather than patched at each call site.
+   *
+   * It is also appended **last** (see the two returns below) so the submenu can push it to the
+   * right edge as a closing action, separate from the categories.
+   */
   const allProducts: Collection = {
     handle: 'all',
-    title: 'All Products',
+    title: 'View All',
     description: 'Browse the entire Rory Skagen studio archive.',
   };
 
@@ -416,7 +425,9 @@ export async function getCollections(): Promise<Collection[]> {
   // handle keeps its taxonomy title (T04: the taxonomy title wins over a colliding name).
   const curatedStocked = stocked ? curated.filter((c) => stocked.has(c.handle)) : curated;
 
-  return [...curatedStocked, allProducts, ...extras.filter((c) => stocked?.has(c.handle))];
+  // "View All" closes the list, after both the taxonomy categories and Fourthwall's own extras,
+  // so the submenu can render it flush right as the last item.
+  return [...curatedStocked, ...extras.filter((c) => stocked?.has(c.handle)), allProducts];
 }
 
 export async function getCollectionProducts({

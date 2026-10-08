@@ -9,7 +9,7 @@ const PER_GROUP = 4;
 
 function ProductRow({ products, currency }: { products: Product[]; currency: string }) {
   return (
-    <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+    <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4 lg:gap-6">
       {products.map((product) => (
         <li key={product.handle} className="aspect-square">
           <Link
@@ -75,16 +75,14 @@ export async function CollectionSections({ currency }: { currency: string }) {
   if (!populated.length) return null;
 
   return (
-    <div className="mx-auto max-w-screen-2xl space-y-12 px-4 py-12">
+    <div className="page-shell space-y-12 py-10 sm:space-y-16 sm:py-14 lg:py-20">
       {populated.map(({ collection, products }) => (
         <section key={collection.handle}>
-          <div className="mb-4 flex items-end justify-between gap-4">
+          <div className="mb-5 flex items-end justify-between gap-4 sm:mb-6">
             <div className="min-w-0">
-              <h2 className="text-lg font-bold uppercase tracking-tight text-black dark:text-white sm:text-xl">
-                {getCollectionNavLabel(collection.handle, collection.title)}
-              </h2>
+              <h2 className="heading-section">{getCollectionNavLabel(collection.handle, collection.title)}</h2>
               {collection.description ? (
-                <p className="mt-1 line-clamp-1 max-w-2xl text-xs text-neutral-500">
+                <p className="mt-1.5 line-clamp-1 max-w-2xl text-xs text-brand-fg-muted">
                   {collection.description}
                 </p>
               ) : null}
@@ -92,7 +90,7 @@ export async function CollectionSections({ currency }: { currency: string }) {
             <Link
               href={`/${currency}/collections/${collection.handle}`}
               prefetch={true}
-              className="whitespace-nowrap text-xs font-semibold text-neutral-600 hover:text-black dark:text-neutral-400 dark:hover:text-white"
+              className="whitespace-nowrap text-xs font-semibold text-brand-fg-muted transition-colors hover:text-brand-fg"
             >
               View All →
             </Link>

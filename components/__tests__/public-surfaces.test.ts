@@ -17,11 +17,35 @@ import path from 'path';
  *   - plain <a> links to an absolute gated URL
  * It is a tripwire for the obvious regression, not a proof. If it ever feels like proof, it is
  * being trusted for more than it does.
+ *
+ * One exception exists, in `ALLOWED_LINKS` below: the owner deliberately put an Admin link to
+ * `/import` in the footer on 2026-10-08. It is scoped to a single file + href pair, and a test
+ * asserts it stays that narrow.
  */
 
 // Keep in sync with the `matcher` in middleware.ts. middleware.test.ts asserts the matcher itself,
 // so if the gate is widened there, this list is the thing to revisit.
 const GATED_PATHS = ['/import', '/api/import/fourthwall'];
+
+/**
+ * Deliberate, owner-approved exceptions to the rule above.
+ *
+ * On 2026-10-08 the owner asked for an "Admin" entry point in the footer and accepted the
+ * consequence the original comment warned about: an anonymous visitor who clicks it meets a browser
+ * password prompt. The gate still protects the route — what changed is that the surface is now
+ * discoverable on purpose rather than by knowing the URL.
+ *
+ * ⚠️ Keep this list SHORT, and keep every entry justified in the commit that adds it. An exception
+ * is a product decision; a list that grows quietly is how a guard stops meaning anything. The test
+ * below asserts the exception stays narrow.
+ */
+const ALLOWED_LINKS: { file: string; href: string }[] = [
+  { file: path.join('components', 'layout', 'footer.tsx'), href: '/import' }
+];
+
+function isAllowed(file: string, href: string): boolean {
+  return ALLOWED_LINKS.some((entry) => entry.file === file && entry.href === href);
+}
 
 function collectTsx(dir: string): string[] {
   const found: string[] = [];
@@ -76,15 +100,33 @@ describe('public surfaces do not link to gated routes', () => {
     const offenders: string[] = [];
 
     for (const file of files) {
+      const relative = path.relative(process.cwd(), file);
       const source = readFileSync(file, 'utf8');
       for (const { value, line } of hrefLiterals(source)) {
-        if (isGated(value)) {
-          offenders.push(`${path.relative(process.cwd(), file)}:${line} -> ${value}`);
-        }
+        if (!isGated(value)) continue;
+        if (isAllowed(relative, value)) continue;
+        offenders.push(`${relative}:${line} -> ${value}`);
       }
     }
 
     expect(offenders).toEqual([]);
+  });
+
+  it('keeps the allow-list narrow — a gated href anywhere else still fails', () => {
+    // Without this, widening ALLOWED_LINKS to a whole directory (or dropping the file check) would
+    // switch the guard off while the test above stayed green.
+    const footer = path.join('components', 'layout', 'footer.tsx');
+    const navbar = path.join('components', 'layout', 'navbar', 'index.tsx');
+
+    expect(isAllowed(footer, '/import')).toBe(true);
+    // Same href, different file -> still an offence.
+    expect(isAllowed(navbar, '/import')).toBe(false);
+    // Same file, a different gated path -> still an offence.
+    expect(isAllowed(footer, '/api/import/fourthwall')).toBe(false);
+    // The API path is not covered by the footer exception at all.
+    expect(isGated('/api/import/fourthwall') && isAllowed(footer, '/api/import/fourthwall')).toBe(
+      false
+    );
   });
 
   it('detects a gated href when one is present (the guard can fail)', () => {

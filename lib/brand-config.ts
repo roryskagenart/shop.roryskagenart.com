@@ -14,6 +14,20 @@ export const BRAND_CONFIG = {
 
   domains: {
     portfolio: 'https://roryskagenart.com',
+    /**
+     * The studio site is a **hash-router**, not a multi-page site. Measured 2026-10-08:
+     * `/about`, `/contact` and `/catalog` are NOT routes — every path (including nonsense) renders
+     * the identical home document, and the nav's About/Contact are `<button>` elements with no
+     * `href`. The real destinations are hash fragments, and they DO render distinct views on a cold
+     * load: `#about` → 5004 chars / "ARTIST BIOGRAPHY & STUDIO HERITAGE", `#contact` → 2226 chars /
+     * "CONTACT — AUSTIN, TEXAS", `#catalog` → 11799 chars.
+     *
+     * ⚠️ The router swaps the rendered view **without scrolling**, so `window.scrollY` stays 0 on
+     * every one of them. Testing these with a scroll assertion reads them as broken when they work.
+     * Assert on rendered content, not scroll position.
+     */
+    portfolioAbout: 'https://roryskagenart.com/#about',
+    portfolioContact: 'https://roryskagenart.com/#contact',
     fourthwallHosted: 'https://roryskagenart.fourthwall.com',
     shopCustomDomain: 'https://shop.roryskagenart.com'
   },
@@ -25,6 +39,40 @@ export const BRAND_CONFIG = {
     favicon16: '/favicon-16x16.png',
     manifest: '/site.webmanifest'
   },
+
+  /**
+   * Studio social accounts, rendered in the header by `components/layout/social-links.tsx`.
+   *
+   * ⚠️ The X handle is `roryskagen`, NOT `roryskagenart`. Verified 2026-10-07: `x.com/roryskagenart`
+   * answers **404** while `x.com/roryskagen` answers **200** and resolves to *"Rory Skagen Art
+   * (@roryskagen)"* (`profile:username=roryskagen`). The X probe is meaningful — its controls were
+   * `elonmusk` → 200 and a nonsense handle → 404. The account was created Oct 2026 and had 0
+   * followers when measured — new, not wrong.
+   *
+   * ⚠️ Facebook is a `profile.php?id=…` URL, not a vanity path — the page has no username yet, so
+   * the obvious `/roryskagenart` guess 404s. Supplied by the owner 2026-10-08. Do not "tidy" it into
+   * a username form.
+   *
+   * Instagram and Facebook cannot be probed for existence: a nonsense Instagram handle also returns
+   * 200, and `facebook.com/meta` returns 400 just like a dead page. Both are recorded as given.
+   */
+  socials: [
+    {
+      id: 'instagram',
+      label: 'Instagram',
+      url: 'https://www.instagram.com/roryskagenart/'
+    },
+    {
+      id: 'facebook',
+      label: 'Facebook',
+      url: 'https://www.facebook.com/profile.php?id=61595115680897'
+    },
+    {
+      id: 'x',
+      label: 'X',
+      url: 'https://x.com/roryskagen'
+    }
+  ],
 
   theme: {
     /*

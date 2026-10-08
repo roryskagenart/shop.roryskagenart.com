@@ -4,7 +4,12 @@ import { useState } from "react";
 
 export const CURRENCIES = ['USD', 'EUR', 'GBP', 'CAD', 'AUD', 'JPY'] as const;
 
-export function CurrencySelector({ currency }: { currency: string; }) {
+/**
+ * `className` lands on the wrapper, not the button — the wrapper is the flex item when this is
+ * placed in a row, so that is where placement (`ml-auto`, `w-full`) has to go. Optional because
+ * the selector's default is to sit where it is put.
+ */
+export function CurrencySelector({ currency, className }: { currency: string; className?: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelect = (newCurrency: string) => {
@@ -18,7 +23,7 @@ export function CurrencySelector({ currency }: { currency: string; }) {
   }
 
   return (
-    <div className="relative inline-block text-left">
+    <div className={['relative inline-block text-left', className].filter(Boolean).join(' ')}>
       <div>
         <button
           type="button"

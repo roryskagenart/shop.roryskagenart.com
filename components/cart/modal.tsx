@@ -205,11 +205,11 @@ function CheckoutButton() {
 
   return (
     <button
-      className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
+      className="block w-full rounded-full bg-brand-accent p-3 text-center text-sm font-medium text-brand-accent-fg opacity-90 hover:opacity-100"
       type="submit"
       disabled={pending}
     >
-      {pending ? <LoadingDots className="bg-white" /> : 'Proceed to Checkout'}
+      {pending ? <LoadingDots className="bg-brand-accent-fg" /> : 'Proceed to Checkout'}
     </button>
   );
 }

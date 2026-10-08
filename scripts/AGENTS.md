@@ -45,6 +45,6 @@ Treat every script here as a production change.
 ## Testing
 
 Changes to anything these scripts import (`lib/fourthwall/**`) are covered by the four test files under
-`lib/fourthwall/__tests__/`. Run **both** gates — `tsc --noEmit` and `vitest run`. Baseline: **223 passed
+`lib/fourthwall/__tests__/`. Run **both** gates — `tsc --noEmit` and `vitest run`. Baseline: **224 passed
 / 15 files**, read from [`../docs/agentic/scripts/baseline.env`](../docs/agentic/scripts/baseline.env).
 → T15

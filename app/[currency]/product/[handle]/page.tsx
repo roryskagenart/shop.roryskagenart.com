@@ -103,12 +103,17 @@ export default async function ProductPage({ params }: { params: Promise<{ curren
             __html: JSON.stringify(productJsonLd)
           }}
         />
-        <div className="mx-auto max-w-screen-2xl px-4">
-          <div className="flex flex-col rounded-lg border border-neutral-200 bg-white p-8 md:p-12 lg:flex-row lg:gap-8 dark:border-neutral-800 dark:bg-black">
-            <div className="h-full w-full basis-full lg:basis-4/6">
+        {/*
+          Spacing note. This block used to be `mx-auto max-w-screen-2xl px-4` with no vertical
+          padding, so the card sat flush against the header and the page had no top or bottom
+          rhythm. It now uses the shared shell + a real vertical scale.
+        */}
+        <div className="page-shell py-8 sm:py-10 lg:py-14">
+          <div className="flex flex-col gap-8 rounded-lg border border-brand-border bg-brand-bg-card p-5 sm:p-8 lg:flex-row lg:gap-12 lg:p-10">
+            <div className="w-full basis-full lg:basis-1/2">
               <Suspense
                 fallback={
-                  <div className="relative aspect-square h-full max-h-[550px] w-full overflow-hidden" />
+                  <div className="relative aspect-square h-full max-h-[600px] w-full overflow-hidden" />
                 }
               >
                 <Gallery
@@ -117,7 +122,7 @@ export default async function ProductPage({ params }: { params: Promise<{ curren
               </Suspense>
             </div>
 
-            <div className="basis-full lg:basis-2/6">
+            <div className="basis-full lg:basis-1/2">
               <Suspense fallback={null}>
                 <ProductDescription product={product} />
               </Suspense>
