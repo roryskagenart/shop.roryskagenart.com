@@ -1,3 +1,5 @@
+import { BRIEF_PAGES } from './docs-brief';
+
 export interface DocSection {
   title: string;
   slug: string;
@@ -16,7 +18,7 @@ export interface DocPageContent {
   description: string;
   badge?: string;
   category: string;
-  scope: 'public' | 'dev';
+  scope: 'public' | 'dev' | 'brief';
   lastUpdated: string;
   tableOfContents: { id: string; title: string; level: number }[];
   content: string;
@@ -116,6 +118,75 @@ export const DEV_DOCS_STRUCTURE: DocCategory[] = [
         slug: 'build-and-deploy',
         badge: 'Next.js 15',
         description: 'Compilation with output: standalone, Turbopack, typecheck, tests, and CI/CD runbook.'
+      }
+    ]
+  }
+];
+
+/**
+ * The Master Brief scope — `/docs/brief`.
+ *
+ * This is the consolidated client IP / project / reference brief for the whole
+ * Rory Skagen engagement: the shop (this repo) plus the sibling studio repo.
+ * It is a *reference* scope: it documents what exists and what is worth passing
+ * to the client — it is not a public marketing surface and not a dev runbook.
+ */
+export const BRIEF_DOCS_STRUCTURE: DocCategory[] = [
+  {
+    title: 'Master Brief',
+    items: [
+      {
+        title: 'Brief Home & Index',
+        slug: 'overview',
+        badge: 'Start here',
+        description: 'What this brief is, how to read it, and a visual map of the whole engagement.'
+      },
+      {
+        title: 'The Two Sites',
+        slug: 'estate',
+        badge: '2 properties',
+        description: 'Studio archive site vs merch storefront — how they differ, what each is for.'
+      },
+      {
+        title: 'Origins & Version History',
+        slug: 'origins',
+        badge: '1998 → 2026',
+        description: 'Predecessor sites, every iteration, and the full release ledger for both repos.'
+      },
+      {
+        title: 'Accounts, Services & Stack',
+        slug: 'accounts',
+        badge: 'Reference',
+        description: 'Every account, vendor, project id, domain, and credential owner.'
+      },
+      {
+        title: 'Visual Map',
+        slug: 'visual-map',
+        badge: 'Screens',
+        description: 'Screenshots and app screens across both properties, with WIP placeholders.'
+      }
+    ]
+  },
+  {
+    title: 'Assessment',
+    items: [
+      {
+        title: 'Client IP Register',
+        slug: 'client-ip',
+        badge: 'Handover',
+        description: 'What is Rory\'s creative IP vs internal engineering scaffolding, and what passes on.'
+      },
+      {
+        title: 'Value & Handover Flags',
+        slug: 'handover',
+        badge: 'Decisions',
+        description: 'Each item flagged: pass to client, retain internally, or retire.'
+      },
+      {
+        title: 'Open Items & Risks',
+        slug: 'open-items',
+        badge: 'Live',
+        description: 'Unfinished work, known defects, and open questions with recommendations.'
       }
     ]
   }
@@ -1191,10 +1262,14 @@ For upcoming releases beyond the basic visual propagation scope, the following c
 - **Goal:** Allow collectors to preview original enamel paintings and large-scale canvas pieces in 1:1 true scale on their own walls.
 - **Mechanism:** WebXR and Apple Quick Look (\`.usdz\`) models generated from high-resolution artwork aspect ratios and original dimensions.
 `
-  }
+  },
+
+  // ── Master Brief scope (/docs/brief) ────────────────────────────────────────
+  // Content lives in lib/docs-brief.ts to keep this file storefront-focused.
+  ...BRIEF_PAGES
 };
 
-export function getDocPage(scope: 'public' | 'dev', slug: string): DocPageContent | null {
+export function getDocPage(scope: 'public' | 'dev' | 'brief', slug: string): DocPageContent | null {
   const key = `${scope}/${slug}`;
   return DOCS_PAGES[key] || null;
 }
