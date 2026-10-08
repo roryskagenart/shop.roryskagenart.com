@@ -19,7 +19,7 @@ the real storefront; the Fourthwall-hosted site is a browsing-gated mirror (see
 | Tailwind CSS | `^3.4.6` | + `@tailwindcss/typography`, `@tailwindcss/container-queries` |
 | Vitest | `^4.0.17` | `globals: true` — **runtime only**, see the trap below |
 | Prettier | `3.3.3` | ⚠️ **`prettier:check` is not a gate** — see below |
-| Docs UI | `fumadocs-core` / `fumadocs-ui` `^16.15.17` | powers `/docs` |
+| Docs UI | — (hand-rolled) | `components/docs/docs-layout.tsx` renders the Markdown itself. The `fumadocs-core` / `fumadocs-ui` deps were **removed 2026-10-08** — they were declared but never imported |
 | UI | `@headlessui/react`, `@heroicons/react`, `lucide-react`, `sonner`, `geist` | |
 | Scripts | `tsx` | runs the Fourthwall seeding scripts |
 
@@ -53,8 +53,9 @@ app/                        App Router
 ├── collections/[handle]/   legacy redirect surface
 ├── product/[handle]/       legacy redirect surface
 ├── pages/[handle]/         CMS-style pages
-├── docs/[[...slug]]/       public docs (fumadocs)
+├── docs/[[...slug]]/       public docs
 ├── docs/dev/[[...slug]]/   internal docs
+├── docs/brief/[[...slug]]/ the consolidated client brief
 ├── import/                 Basic-auth gated import UI
 ├── api/import/fourthwall/  Basic-auth gated import endpoint
 ├── api/webhooks/fourthwall/
@@ -64,7 +65,8 @@ lib/
 │                           + originals-data.json, rory-artworks-data.json
 ├── taxonomy.ts             ← SOURCE OF TRUTH for the nav
 ├── brand-config.ts         brand + roadmap version labels
-├── docs-content.ts         content for /docs
+├── docs-content.ts         content for /docs and /docs/dev
+├── docs-brief.generated.ts GENERATED from docs/master-brief/*.md — never hand-edit
 ├── analytics.ts, constants.ts, utils.ts, types.ts
 components/                 UI, incl. cart/, grid/, layout/, product/, docs/
 scripts/                    one-shot Fourthwall seeding + env migration (these WRITE)

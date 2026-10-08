@@ -57,7 +57,7 @@ _Gallery surfaces with the series filter rail (Neon Americana, Pop Surrealism & 
 | Aspect | Value |
 | :--- | :--- |
 | Role | Sell print-on-demand merch and studio editions |
-| Stack | Next.js 15 App Router, React 19, Tailwind, `fumadocs-core`/`-ui` |
+| Stack | Next.js 15 App Router, React 19, Tailwind |
 | Data | **None locally** — reads Fourthwall's Storefront API |
 | Catalogue | 137 works in a local JSON *fallback* (see the fabricated-catalogue trap) |
 | Published | 6 products across 3 collections (v0.2.0, 2026-10-04) |

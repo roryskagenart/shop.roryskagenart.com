@@ -93,7 +93,7 @@ belong in any document.**
 | Server | Express 4 (serverless) | Next.js route handlers |
 | Database | Supabase Postgres | none |
 | Media | Supabase Storage + sharp | Fourthwall CDN |
-| Docs | — | `fumadocs-core` + custom renderer |
+| Docs | — | hand-rolled Markdown renderer |
 | Tests | vitest | vitest (15 files, 224 tests) |
 | CI | none | GitHub Actions `ci.yml` only |
 | Installer | npm | **npm** (`.npmrc` `legacy-peer-deps`) — not bun/pnpm (T46) |

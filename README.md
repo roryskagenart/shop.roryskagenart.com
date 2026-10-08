@@ -1,12 +1,22 @@
-# Next.js x Fourthwall
+# Rory Skagen Shop
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FFourthwallHQ%2Fvercel-commerce)
+The merch storefront for **Rory Skagen** — a server-rendered Next.js App Router storefront on the
+Fourthwall creator platform.
 
-Launch your Fourthwall storefront as a high-perfomance, server-rendered Next.js App Router ecommerce application.
+**Live:** <https://shop.roryskagenart.com>
 
-⚡️ [Live Demo](https://fw-commerce.vercel.app)
+| | |
+| :--- | :--- |
+| Storefront | Next.js 15 App Router · React 19 · Tailwind |
+| Catalogue & checkout | Fourthwall — Storefront API (read) + Platform API (write) |
+| Documentation | [`docs/`](docs/README.md) |
+| License | [MIT](LICENSE.md) — inherited from the template below |
 
-📚 [API docs](https://docs.fourthwall.com/storefront)
+This repo began as a fork of Fourthwall's [`vercel-commerce`](https://github.com/FourthwallHQ/vercel-commerce)
+headless commerce template. **The operational sections below are that template's documentation, and remain
+accurate for this deployment.**
+
+📚 Fourthwall API docs: <https://docs.fourthwall.com/storefront>
 
 ## Getting started
 
@@ -50,10 +60,14 @@ Your app should now be running on [localhost:3000](http://localhost:3000/).
 
 ## Deploying
 
-After cloning the repo with the Deploy with Vercel button above, you will need to set the environment variables.
+> ⚠️ **This repo deploys automatically.** It is git-connected to Vercel, so **a push to `main` ships to
+> production** with no further step. Do not run `vercel --prod` by hand — it bypasses the normal path and
+> can promote an unreviewed commit.
+
+After cloning the repo you will need to set the environment variables.
 
 ```bash
-git clone _your repo_ # your repo that you set up with Deploy with Vercel
+git clone <this repo>
 
 vercel # From your repo directory. Links to your project
 
@@ -62,8 +76,6 @@ vercel env add NEXT_PUBLIC_FW_COLLECTION
 vercel env add NEXT_PUBLIC_FW_STOREFRONT_TOKEN
 vercel env add NEXT_PUBLIC_FW_CHECKOUT
 vercel env add NEXT_PUBLIC_VERCEL_URL
-
-vercel --prod # Deploys to production
 ```
 
 ## Image Optimization

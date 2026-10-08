@@ -91,6 +91,7 @@ Full protocol: [`docs/agentic/protocols/verification.md`](docs/agentic/protocols
 
 | You need | Go to |
 | :--- | :--- |
+| **All documentation, indexed** | [`docs/README.md`](docs/README.md) |
 | The rules, in full | [`docs/agentic/README.md`](docs/agentic/README.md) |
 | A known trap | [`docs/agentic/traps/register.md`](docs/agentic/traps/register.md) |
 | Fourthwall API behaviour | [`docs/agentic/stack/fourthwall.md`](docs/agentic/stack/fourthwall.md) |

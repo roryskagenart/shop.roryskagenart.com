@@ -29,7 +29,8 @@ It exists so that a new contributor — human or agent — can understand the wh
 re-reading ~250 commits and two agent knowledge bases.
 
 > **This brief documents. It does not change anything.** Where it records an open defect or an
-> unfinished item, that item is owned elsewhere (see *Open Items & Risks*) — nothing here is a fix.
+> unfinished item, that item is owned elsewhere (see [*Open Items & Risks*](open-items.md)) — nothing here
+> is a fix.
 
 ## The Engagement at a Glance
 
@@ -52,7 +53,7 @@ The two sites intentionally share **one visual identity** (the "Skagen" palette,
 ## Visual Map
 
 A one-glance index of the real screens captured across the engagement. Full-size images and captions
-live in **Visual Map**.
+live in [**Visual Map**](visual-map.md).
 
 ![Merch storefront — gallery-first home page](../../public/docs/master-brief/shop/storefront-home.png)
 _Shop storefront: the gallery-first home page as shipped._
@@ -67,13 +68,13 @@ _Fourthwall hosted storefront — The Goods · Wall Art · Studio Editions · Or
 
 | Page | What you get |
 | :--- | :--- |
-| **The Two Sites** | Why there are two properties and what each one is for |
-| **Origins & Version History** | 1998 → today: predecessor sites, every iteration, every tag |
-| **Accounts, Services & Stack** | Every account, project id, domain, and vendor |
-| **Visual Map** | All screens, real where captured, marked WIP where not |
-| **Client IP Register** | What is Rory's creative IP vs internal scaffolding |
-| **Value & Handover Flags** | Per-item decision: pass on / retain / retire |
-| **Open Items & Risks** | What is unfinished, broken, or undecided |
+| [**The Two Sites**](estate.md) | Why there are two properties and what each one is for |
+| [**Origins & Version History**](origins.md) | 1998 → today: predecessor sites, every iteration, every tag |
+| [**Accounts, Services & Stack**](accounts.md) | Every account, project id, domain, and vendor |
+| [**Visual Map**](visual-map.md) | All screens, real where captured, marked WIP where not |
+| [**Client IP Register**](client-ip.md) | What is Rory's creative IP vs internal scaffolding |
+| [**Value & Handover Flags**](handover.md) | Per-item decision: pass on / retain / retire |
+| [**Open Items & Risks**](open-items.md) | What is unfinished, broken, or undecided |
 
 ## Flag Legend
 
