@@ -876,3 +876,34 @@ build of the grouped home page rendered 13 products instead of the intended 11.
 `.slice(0, PER_GROUP)`. Same class as **T34**: the length of a list endpoint is not something you can
 negotiate with a query param, so read what you got and cut it yourself.
 **Source:** 2026-10-07.
+
+<a id="t49"></a>
+### T49 — A Tailwind opacity modifier on a `var()` colour token silently emits no CSS
+**Status:** MITIGATED 2026-10-08 — the three instances are fixed; nothing yet stops the next one.
+**Bites:** Any `<utility>-<token>/<n>` class whose token value is a bare `var(--…)` — here
+`bg-brand-accent/20`, `bg-brand-bg-card/95`, `border-brand-border/60` — compiles to **nothing**. There is
+no build error, no warning, and no rule in the output: the class is simply absent from the stylesheet, so
+the element keeps `transparent` or its inherited border. It reads as a styling choice that did not take,
+which is exactly why it survives review.
+**Evidence:** Measured 2026-10-08 by compiling this repo's own config with the Tailwind CLI
+(`./node_modules/.bin/tailwindcss -c tailwind.config.js`). A probe document carrying
+`bg-brand-accent/15`, `bg-brand-accent/30`, `bg-brand-bg-card/95` and `border-brand-border/60` produced
+three rules — **none** of them an opacity-modified class. `.bg-brand-bg-card`, `.border-brand-border` and
+`.border-brand-line-strong` all emitted; every `/n` variant emitted nothing.
+
+Found in the wild rather than by a test: the sticky header had been rendering with **no background colour
+at all** — `getComputedStyle(nav).backgroundColor` → `rgba(0, 0, 0, 0)` — and the collection submenu's top
+divider was missing. Both classes were written in the previous change and both read as correct in source.
+**Do instead:** Use `color-mix` in a component class, which reads the live token and stays theme-aware:
+
+```css
+.surface-accent-soft {
+  background-color: color-mix(in srgb, var(--brand-accent) 20%, var(--brand-bg-card));
+}
+```
+
+For hierarchy *inside* a coloured band, a plain `opacity-*` utility on the element works — it is the
+colour-opacity modifier that does not. See `app/globals.css` (`.surface-accent`, `.surface-accent-soft`).
+**Recommended follow-up:** a guard that scans `app/**` and `components/**` for `-brand-[a-z-]+/[0-9]+` and
+fails. Not written yet, which is why this is MITIGATED rather than RESOLVED.
+**Source:** 2026-10-08.

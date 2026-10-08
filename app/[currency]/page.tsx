@@ -36,14 +36,23 @@ export default async function HomePage({ params }: { params: Promise<{ currency:
 
   return (
     <Wrapper currency={currency} shop={shop}>
-      {/* Hero */}
-      <section className="border-b border-brand-border bg-brand-surface">
+      {/*
+        Hero — carried in the accent colour so the top of the home page reads as one band with the
+        header above it. `.surface-accent` also sets the paired foreground token
+        (`--brand-accent-fg`), which is what that token exists for; the heading repeats it because
+        `.heading-display` sets its own colour and the utilities layer wins over the component layer.
+        Hierarchy inside the band comes from `opacity-*` (a plain utility, which works) rather than a
+        colour-opacity modifier on a token (which Tailwind silently drops — see app/globals.css).
+      */}
+      <section className="surface-accent">
         <div className="page-shell py-12 sm:py-16 lg:py-24">
-          <p className="eyebrow">{BRAND_CONFIG.tagline}</p>
-          <h1 className="heading-display mt-3 max-w-3xl">
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] opacity-70">
+            {BRAND_CONFIG.tagline}
+          </p>
+          <h1 className="heading-display mt-3 max-w-3xl text-brand-accent-fg">
             Original Art &amp; Studio Editions by Rory Skagen
           </h1>
-          <p className="mt-5 max-w-2xl text-sm leading-relaxed text-brand-fg-muted sm:text-base">
+          <p className="mt-5 max-w-2xl text-sm leading-relaxed opacity-80 sm:text-base">
             Museum-quality archival prints, gallery canvas, and studio merchandise, shipped worldwide
             from Austin, Texas.
           </p>
@@ -51,7 +60,7 @@ export default async function HomePage({ params }: { params: Promise<{ currency:
             <Link
               href={`/${currency}/collections/all`}
               prefetch={true}
-              className="inline-block rounded-md bg-brand-fg px-5 py-3 text-xs font-bold uppercase tracking-wider text-brand-bg transition hover:opacity-90"
+              className="inline-block rounded-md bg-brand-accent-fg px-5 py-3 text-xs font-bold uppercase tracking-wider text-brand-accent transition hover:opacity-90"
             >
               Shop All Art
             </Link>

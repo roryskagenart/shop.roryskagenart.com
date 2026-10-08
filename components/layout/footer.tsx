@@ -16,7 +16,12 @@ export default async function Footer() {
           <Link className="group flex items-center gap-3" href="/">
             <LogoSquare size="sm" />
             <div className="flex flex-col">
-              <span className="text-xs font-bold uppercase leading-tight tracking-[0.16em] text-brand-fg transition-colors group-hover:text-brand-accent">
+              {/*
+                Hover is an ink underline, NOT `text-brand-accent` — the accent (#22d3ee) against
+                this footer's canvas (#c2c9d1) is ~1.1:1, so the wordmark used to fade to nearly
+                invisible on hover. Same fix as the header wordmark.
+              */}
+              <span className="text-xs font-bold uppercase leading-tight tracking-[0.16em] text-brand-fg transition-colors group-hover:underline group-hover:decoration-2 group-hover:underline-offset-4">
                 {BRAND_CONFIG.name}
               </span>
               <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-brand-fg-muted">
@@ -25,19 +30,29 @@ export default async function Footer() {
             </div>
           </Link>
         </div>
-        <div className="flex flex-wrap items-center gap-3 md:ml-auto">
+        <div className="flex w-full flex-wrap items-center gap-3 md:ml-auto md:w-auto">
           <SocialLinks />
           {/*
             Same-tab on purpose: the studio site is the other half of this brand, not an external
             resource, so it should not throw the visitor into a new tab.
+
+            Deliberately NOT button-shaped (owner, 2026-10-08). It used to carry a border, a card
+            background and padding, which made a plain link read as a control — and put it in visual
+            competition with the currency picker next to it. Only one of those two is a real
+            control; the other is navigation. It now uses the footer's own link treatment.
           */}
           <a
-            className="flex h-8 items-center gap-2 rounded-md border border-brand-border bg-brand-bg-card px-3 text-xs font-medium text-brand-fg transition hover:bg-brand-surface"
+            className="text-xs transition-colors hover:text-brand-fg"
             href={BRAND_CONFIG.domains.portfolio}
           >
-            <span>roryskagenart.com</span>
+            roryskagenart.com
           </a>
-          <FooterCurrencySelector />
+          {/*
+            Flush right. Below `md` the cluster wraps and takes the full width, so `ml-auto` pushes
+            the picker to the right edge; from `md` up the cluster is already hard against the right
+            edge (`md:ml-auto` on the row above), so `md:ml-0` leaves it alone.
+          */}
+          <FooterCurrencySelector className="ml-auto md:ml-0" />
         </div>
       </div>
       <div className="border-t border-brand-border">
@@ -56,24 +71,44 @@ export default async function Footer() {
               Contact
             </Link>
             <Link href="/docs" className="transition-colors hover:text-brand-fg">
-              Public Docs
+              Help
             </Link>
-            <Link href="/docs/dev" className="text-brand-accent transition-colors hover:opacity-80">
-              Dev/Build Docs
-            </Link>
-            {/*
-              No link to /import here. The footer is a public surface, and /import is behind the
-              Basic-auth gate in middleware.ts — a public link would hand visitors a browser
-              password prompt. The importer is still reachable at /import by anyone who knows the
-              URL and has the credentials.
-            */}
           </div>
           <hr className="mx-4 hidden h-4 w-[1px] border-l border-brand-border md:inline-block" />
-          <p className="md:ml-auto">
-            <a href={BRAND_CONFIG.domains.shopCustomDomain} className="text-brand-fg">
-              Rory Skagen Studio Archive
-            </a>
-          </p>
+          {/*
+            Build and tooling surfaces. These three used to sit inline with the customer links
+            above, in the same visual group — which made "Admin" read as a peer of "Returns & FAQ".
+            They now occupy the secondary slot at the end of the row, where the "Rory Skagen Studio
+            Archive" link used to be. That link was removed (owner, 2026-10-08): it pointed at the
+            shop's own custom domain, so it was a link from the site to itself.
+
+            ⚠️ Dev Docs is no longer accent-coloured. `--brand-accent` (#22d3ee) against this
+            footer's canvas (#c2c9d1) measures ~1.1:1 — the same hue-on-light-band failure as the
+            header submenu. Position, not colour, is what separates this group now.
+          */}
+          <div className="flex flex-wrap items-center justify-center gap-4 md:ml-auto md:gap-6">
+            <Link href="/docs/dev" className="transition-colors hover:text-brand-fg">
+              Dev Docs
+            </Link>
+            <Link href="/playground" className="transition-colors hover:text-brand-fg">
+              Tools
+            </Link>
+            {/*
+              ⚠️ DELIBERATE REVERSAL of the decision this block used to record (owner-approved
+              2026-10-08). The previous note read: "No link to /import here. The footer is a public
+              surface, and /import is behind the Basic-auth gate in middleware.ts — a public link
+              would hand visitors a browser password prompt."
+
+              The owner asked for the entry point anyway. The gate is still the protection, and the
+              trade accepted is that an anonymous visitor who clicks Admin meets a browser password
+              prompt. `components/__tests__/public-surfaces.test.ts` guards the old invariant and now
+              carries an explicit allow-list entry for this one href. If that test fails, the guard is
+              working — the failure is the signal, not a regression to silence.
+            */}
+            <Link href="/import" className="transition-colors hover:text-brand-fg">
+              Admin
+            </Link>
+          </div>
         </div>
       </div>
       <div className="border-t border-brand-border">

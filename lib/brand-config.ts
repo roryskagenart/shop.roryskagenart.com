@@ -14,6 +14,20 @@ export const BRAND_CONFIG = {
 
   domains: {
     portfolio: 'https://roryskagenart.com',
+    /**
+     * The studio site is a **hash-router**, not a multi-page site. Measured 2026-10-08:
+     * `/about`, `/contact` and `/catalog` are NOT routes — every path (including nonsense) renders
+     * the identical home document, and the nav's About/Contact are `<button>` elements with no
+     * `href`. The real destinations are hash fragments, and they DO render distinct views on a cold
+     * load: `#about` → 5004 chars / "ARTIST BIOGRAPHY & STUDIO HERITAGE", `#contact` → 2226 chars /
+     * "CONTACT — AUSTIN, TEXAS", `#catalog` → 11799 chars.
+     *
+     * ⚠️ The router swaps the rendered view **without scrolling**, so `window.scrollY` stays 0 on
+     * every one of them. Testing these with a scroll assertion reads them as broken when they work.
+     * Assert on rendered content, not scroll position.
+     */
+    portfolioAbout: 'https://roryskagenart.com/#about',
+    portfolioContact: 'https://roryskagenart.com/#contact',
     fourthwallHosted: 'https://roryskagenart.fourthwall.com',
     shopCustomDomain: 'https://shop.roryskagenart.com'
   },

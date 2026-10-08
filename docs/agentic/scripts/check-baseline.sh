@@ -66,16 +66,32 @@ done
 # Exempted, with a reason each - exempting a NEW file requires editing this
 # script, so the decision is visible in a PR rather than made silently:
 #
-#   docs/reports/           dated process reports. The KB says explicitly they
-#                           are not a rule source and may be superseded, so they
-#                           legitimately quote the number true when written.
-#   docs/releases/plans/    a `_DRAFT` plan is frozen at execution; its "gates
-#                           green at" row is a record of a past measurement.
+#   docs/reports/               dated process reports. The KB says explicitly they
+#                               are not a rule source and may be superseded, so they
+#                               legitimately quote the number true when written.
+#   docs/releases/plans/        a `_DRAFT` plan is frozen at execution; its "gates
+#                               green at" row is a record of a past measurement.
+#   docs/agentic/sessions/      dated session records - same class as docs/reports/.
+#                               Each is a snapshot of what was measured that day.
+#   docs/agentic/CHANGELOG.md   dated release entries. An entry describes the tree as
+#                               it stood at that version, not as it stands now.
+#   docs/agentic/traps/register.md
+#                               trap EVIDENCE is a dated measurement by definition.
+#                               T41's entry reads "Measured 2026-10-06 ... Tests 223
+#                               passed (223)". Rewriting that to the current count
+#                               would falsify the evidence of the trap that documents
+#                               this exact failure mode - the number a reader trusts
+#                               depending on which file they open.
+#
+# Added 2026-10-08 when the baseline moved 223 -> 224 (a new test, not a lost one).
+# Before this, a baseline bump forced a choice between two wrong answers: falsify
+# eight dated measurements, or leave the guard red. A dated record is not a stale
+# claim, and the two are not the same failure.
 #
 # Nothing else is exempt. If a file quotes an old count, FIX THE FILE - do not
 # add it here.
 
-EXEMPT_RE='^(docs/reports/|docs/releases/plans/)'
+EXEMPT_RE='^(docs/reports/|docs/releases/plans/|docs/agentic/sessions/|docs/agentic/CHANGELOG.md|docs/agentic/traps/register.md)'
 
 printf '\n== 2. No other document quotes a stale count\n'
 STALE=$(git grep -nE '[0-9]{2,} (passed|passing)' -- '*.md' '*.sh' 2>/dev/null \

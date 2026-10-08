@@ -13,7 +13,7 @@ export function ProductDescription({ product }: { product: Product }) {
           larger on a 390px phone than the page's own hero. Now it scales.
         */}
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">{product.title}</h1>
-        <div className="mr-auto w-auto rounded-full bg-blue-600 px-3.5 py-1.5 text-sm text-white">
+        <div className="mr-auto w-auto rounded-full bg-brand-accent px-3.5 py-1.5 text-sm text-brand-accent-fg">
           <Price
             amount={product.priceRange.maxVariantPrice.amount}
             currencyCode={product.priceRange.maxVariantPrice.currencyCode}

@@ -189,6 +189,30 @@ button {
   .nav-link {
     @apply font-mono text-[11px] uppercase tracking-[0.14em] text-brand-fg-muted transition-colors hover:text-brand-fg;
   }
+
+  /*
+   * Accent bands — the top of the storefront (header + home hero).
+   *
+   * ⚠️ DO NOT write `bg-brand-accent/20` here. Tailwind cannot apply an opacity modifier to a
+   * token whose value is a bare `var(--…)`: it emits **no rule at all**, and the class fails
+   * silently with no build error. Measured 2026-10-08 by compiling this repo's own config —
+   * `bg-brand-accent/15`, `bg-brand-bg-card/95` and `border-brand-border/60` all produced zero
+   * CSS, so the header ran with no background colour and a missing divider. `color-mix` is the
+   * working alternative and stays theme-aware, since it reads the live token.
+   * → docs/agentic/traps/register.md#t49
+   *
+   * `.surface-accent` is the full-strength band (the hero). It also sets the paired foreground
+   * token, which is what `--brand-accent-fg` exists for.
+   */
+  .surface-accent {
+    background-color: var(--brand-accent);
+    color: var(--brand-accent-fg);
+  }
+
+  /* The softer band (the header) — accent mixed into the card colour so text stays readable. */
+  .surface-accent-soft {
+    background-color: color-mix(in srgb, var(--brand-accent) 20%, var(--brand-bg-card));
+  }
 }
 
 /* Hide the scrollbar on horizontally-scrolling nav rows without disabling scroll. */

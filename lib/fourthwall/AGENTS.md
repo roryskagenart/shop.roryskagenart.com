@@ -51,7 +51,7 @@ fallback makes the empty result look valid.
 
 - **Run both gates.** `tsc --noEmit` **and** `vitest run`. `globals: true` is set at runtime only, so a test
   omitting its `describe`/`it`/`expect` imports passes vitest and fails `tsc` (`TS2582`). → T15
-- **Baseline: 223 passed / 15 files.** The number lives in
+- **Baseline: 224 passed / 15 files.** The number lives in
   [`../../docs/agentic/scripts/baseline.env`](../../docs/agentic/scripts/baseline.env) — read it there.
   A **drop** means a guard was deleted. → T41
 - `collections.test.ts:20-28` asserts all **7** taxonomy handles resolve. ⚠️ **That asserts the taxonomy,

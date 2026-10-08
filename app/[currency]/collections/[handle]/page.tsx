@@ -111,25 +111,9 @@ export default async function CategoryPage({
         {/* Left Sidebar Collections Navigation */}
         <div className="order-first w-full flex-none md:max-w-[220px]">
           <h3 className="text-xs font-bold uppercase tracking-wider text-neutral-400 mb-3 px-2">
-            Store Taxonomy
+            Browse Collections
           </h3>
           <Collections collections={collections} />
-
-          {/* B2B / Corporate Box */}
-          <div className="mt-8 rounded-lg border border-neutral-200 bg-neutral-50 p-4 dark:border-neutral-800 dark:bg-neutral-900">
-            <p className="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">
-              Corporate & HR Advisory
-            </p>
-            <p className="mt-1 text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
-              Curated Austin executive gift boxes, conference tokens, and volume tiering.
-            </p>
-            <Link
-              href="/pages/contact"
-              className="mt-3 inline-block rounded bg-neutral-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 transition"
-            >
-              Contact Art Advisor →
-            </Link>
-          </div>
         </div>
 
         {/* Product Grid Area */}
@@ -193,6 +177,37 @@ export default async function CategoryPage({
           </section>
         </div>
       </div>
+      {/*
+        Studio invitation — deliberately at the foot of the page, below the grid.
+
+        This used to be a "Corporate & HR Advisory" card wedged into the sidebar, sitting above the
+        fold next to the category list. That was the wrong slot and the wrong voice: it competed
+        with navigation a shopper had not finished using, and "advisory / volume tiering" is
+        procurement language aimed at a buying committee, not at someone browsing Rory's work.
+        Same intent — larger orders, gifts, commissions — but addressed to a person, and placed
+        after the products rather than before them.
+      */}
+      <section className="border-t border-brand-border bg-brand-surface">
+        <div className="page-shell page-section">
+          <div className="mx-auto flex max-w-3xl flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
+            <div>
+              <p className="eyebrow">Beyond the shop</p>
+              <h2 className="heading-section mt-2">Planning something bigger?</h2>
+              <p className="mt-2 max-w-xl text-sm leading-relaxed text-brand-fg-muted">
+                Gift boxes for a whole team, a run of prints for a lobby, or one piece for a
+                particular wall — tell Rory&apos;s studio what you have in mind and we&apos;ll work
+                it out with you. No forms to fill in, just a conversation.
+              </p>
+            </div>
+            <Link
+              href="/pages/contact"
+              className="flex-none rounded-full bg-brand-accent px-5 py-2.5 text-sm font-semibold text-brand-accent-fg transition hover:opacity-90"
+            >
+              Talk to Rory&apos;s team
+            </Link>
+          </div>
+        </div>
+      </section>
       <Footer />
     </Wrapper>
   );

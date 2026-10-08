@@ -106,7 +106,7 @@ they are still worded *"Release v1.2.0"* etc. That wording is a **residual ambig
 | | |
 | :--- | :--- |
 | Test files | **15** |
-| Tests | **223 passing** |
+| Tests | **224 passing** |
 | Baseline verified | 2026-10-06, `tsc --noEmit` 0 errors |
 | Source of truth | [`../scripts/baseline.env`](../scripts/baseline.env) — `check-baseline.sh` asserts this table against it |
 

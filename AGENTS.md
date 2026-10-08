@@ -60,7 +60,7 @@ If `node_modules/.bin` contains `.exe` entries, you are on the wrong tree. → T
 npm ci                                          # foreground — never a background install after a wipe
 npm run dev                                     # next dev -p 3000 -H 0.0.0.0
 ./node_modules/.bin/tsc --noEmit                # npm run lint
-./node_modules/.bin/vitest run                  # npm test — baseline: 223 passed / 15 files
+./node_modules/.bin/vitest run                  # npm test — baseline: 224 passed / 15 files
 bash docs/agentic/scripts/verify.sh             # both gates + counts + baseline guard, read-only
 ```
 
@@ -115,7 +115,7 @@ Full protocol: [`docs/agentic/protocols/verification.md`](docs/agentic/protocols
 - **Generated or derived documents** must ship with a `--check` mode that can actually fail.
 - **Measure, then write.** Every number in a document must be re-derived from a real command. Numbers in
   this repo's docs have drifted before — a documented test count has been 67, then 97, then 137, then 163,
-  while the real one is **223 passed / 15 files**. → T41
+  while the real one is **224 passed / 15 files**. → T41
 
   **The gate baseline lives in exactly one place: `docs/agentic/scripts/baseline.env`.** Never inline it.
   `check-baseline.sh` fails if any document that quotes the count disagrees with it, and `verify.sh` runs
