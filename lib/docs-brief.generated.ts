@@ -1,42 +1,95 @@
 /**
- * lib/docs-brief.ts
+ * lib/docs-brief.generated.ts
  *
- * Content for the `/docs/brief` scope — the consolidated Master Brief for the
- * Rory Skagen engagement. Split out of `lib/docs-content.ts` so the brief can
- * grow without bloating the storefront-facing doc set.
+ * ⚠️ GENERATED FILE — DO NOT EDIT BY HAND.
  *
- * Conventions used inside `content` strings — all supported by the renderer in
- * `components/docs/docs-layout.tsx`:
- *   # H1            section divider
- *   ## H2 / ### H3 / #### H4
- *   - list         bullet list
- *   | a | b |      table (first row = header, `---` row skipped)
- *   ```lang        fenced code
- *   ![alt](/p.png) image, with an optional `_caption_` line directly below
- *   > quote         renders as an amber callout
- *   **bold**  *ital*  `code`
+ * Source of truth: `docs/master-brief/*.md` (markdown, rendered by GitHub).
+ * Regenerate:      `npx tsx scripts/build-master-brief.ts`
+ * Verify:          `npx tsx scripts/build-master-brief.ts --check`
+ *
+ * The table of contents and the sidebar structure are derived from the markdown,
+ * so they cannot drift from the content.
  */
-
-import type { DocPageContent } from './docs-content';
+import type { DocCategory, DocPageContent } from './docs-content';
 
 const LAST_UPDATED = '2026-10-08';
 
+export const BRIEF_DOCS_STRUCTURE: DocCategory[] = [
+  {
+    title: "Master Brief",
+    items: [
+      {
+        title: "Brief Home & Index",
+        slug: "overview",
+        badge: "Start here",
+        description: "The single consolidated brief for the Rory Skagen engagement: both web properties, every version, every account, and what is worth passing to the client."
+      },
+      {
+        title: "The Two Sites",
+        slug: "estate",
+        badge: "2 properties",
+        description: "Two deliberately separate web properties — the studio archive/catalogue and the merch storefront — and why they must not be conflated."
+      },
+      {
+        title: "Origins & Version History",
+        slug: "origins",
+        badge: "1998 → 2026",
+        description: "1998 → today: Rory's predecessor websites, the Wayback recoveries, and the full release ledger for both repositories."
+      },
+      {
+        title: "Accounts, Services & Stack",
+        slug: "accounts",
+        badge: "Reference",
+        description: "A single reference table for every account, vendor, project id, domain, and credential owner across the engagement."
+      },
+      {
+        title: "Visual Map",
+        slug: "visual-map",
+        badge: "Screens",
+        description: "Every captured screen across both properties — mockups, storefront screens, admin screens, and the visual history frames — with clearly marked WIP placeholders where evidence was not captured."
+      }
+    ]
+  },
+  {
+    title: "Assessment",
+    items: [
+      {
+        title: "Client IP Register",
+        slug: "client-ip",
+        badge: "Handover",
+        description: "What in this engagement is Rory Skagen's creative IP versus internal engineering scaffolding — and what actually passes to the client."
+      },
+      {
+        title: "Value & Handover Flags",
+        slug: "handover",
+        badge: "Decisions",
+        description: "Every substantive item in the engagement, flagged: pass to client, retain internally, retire, or open."
+      },
+      {
+        title: "Open Items & Risks",
+        slug: "open-items",
+        badge: "Live",
+        description: "Everything unfinished, broken, or undecided across both repos — with a recommendation where one exists."
+      }
+    ]
+  }
+];
+
 export const BRIEF_PAGES: Record<string, DocPageContent> = {
   'brief/overview': {
-    slug: 'overview',
-    title: 'Master Brief — Index & Visual Map',
-    description:
-      'The single consolidated brief for the Rory Skagen engagement: both web properties, every version, every account, and what is worth passing to the client.',
-    badge: 'Master Brief',
-    category: 'Master Brief',
+    slug: "overview",
+    title: "Master Brief — Index & Visual Map",
+    description: "The single consolidated brief for the Rory Skagen engagement: both web properties, every version, every account, and what is worth passing to the client.",
+    badge: "Master Brief",
+    category: "Master Brief",
     scope: 'brief',
     lastUpdated: LAST_UPDATED,
     tableOfContents: [
-      { id: 'purpose', title: 'Purpose & Scope', level: 2 },
-      { id: 'engagement', title: 'The Engagement at a Glance', level: 2 },
-      { id: 'map', title: 'Visual Map', level: 2 },
-      { id: 'how-to-read', title: 'How to Read This Brief', level: 2 },
-      { id: 'flag-legend', title: 'Flag Legend', level: 2 }
+      { id: 'purpose-scope', title: "Purpose & Scope", level: 2 },
+      { id: 'the-engagement-at-a-glance', title: "The Engagement at a Glance", level: 2 },
+      { id: 'visual-map', title: "Visual Map", level: 2 },
+      { id: 'how-to-read-this-brief', title: "How to Read This Brief", level: 2 },
+      { id: 'flag-legend', title: "Flag Legend", level: 2 }
     ],
     content: `# Master Brief — Rory Skagen Engagement
 
@@ -59,7 +112,8 @@ It exists so that a new contributor — human or agent — can understand the wh
 re-reading ~250 commits and two agent knowledge bases.
 
 > **This brief documents. It does not change anything.** Where it records an open defect or an
-> unfinished item, that item is owned elsewhere (see *Open Items & Risks*) — nothing here is a fix.
+> unfinished item, that item is owned elsewhere (see [*Open Items & Risks*](open-items.md)) — nothing here
+> is a fix.
 
 ## The Engagement at a Glance
 
@@ -82,7 +136,7 @@ The two sites intentionally share **one visual identity** (the "Skagen" palette,
 ## Visual Map
 
 A one-glance index of the real screens captured across the engagement. Full-size images and captions
-live in **Visual Map**.
+live in [**Visual Map**](visual-map.md).
 
 ![Merch storefront — gallery-first home page](/docs/master-brief/shop/storefront-home.png)
 _Shop storefront: the gallery-first home page as shipped._
@@ -97,13 +151,13 @@ _Fourthwall hosted storefront — The Goods · Wall Art · Studio Editions · Or
 
 | Page | What you get |
 | :--- | :--- |
-| **The Two Sites** | Why there are two properties and what each one is for |
-| **Origins & Version History** | 1998 → today: predecessor sites, every iteration, every tag |
-| **Accounts, Services & Stack** | Every account, project id, domain, and vendor |
-| **Visual Map** | All screens, real where captured, marked WIP where not |
-| **Client IP Register** | What is Rory's creative IP vs internal scaffolding |
-| **Value & Handover Flags** | Per-item decision: pass on / retain / retire |
-| **Open Items & Risks** | What is unfinished, broken, or undecided |
+| [**The Two Sites**](estate.md) | Why there are two properties and what each one is for |
+| [**Origins & Version History**](origins.md) | 1998 → today: predecessor sites, every iteration, every tag |
+| [**Accounts, Services & Stack**](accounts.md) | Every account, project id, domain, and vendor |
+| [**Visual Map**](visual-map.md) | All screens, real where captured, marked WIP where not |
+| [**Client IP Register**](client-ip.md) | What is Rory's creative IP vs internal scaffolding |
+| [**Value & Handover Flags**](handover.md) | Per-item decision: pass on / retain / retire |
+| [**Open Items & Risks**](open-items.md) | What is unfinished, broken, or undecided |
 
 ## Flag Legend
 
@@ -120,20 +174,19 @@ Every substantive item in this brief carries one of these flags:
   },
 
   'brief/estate': {
-    slug: 'estate',
-    title: 'The Two Sites — Estate Overview',
-    description:
-      'Two deliberately separate web properties — the studio archive/catalogue and the merch storefront — and why they must not be conflated.',
-    badge: 'Estate',
-    category: 'Master Brief',
+    slug: "estate",
+    title: "The Two Sites — Estate Overview",
+    description: "Two deliberately separate web properties — the studio archive/catalogue and the merch storefront — and why they must not be conflated.",
+    badge: "Estate",
+    category: "Master Brief",
     scope: 'brief',
     lastUpdated: LAST_UPDATED,
     tableOfContents: [
-      { id: 'split', title: 'Why Two Sites', level: 2 },
-      { id: 'studio', title: 'Property 1 — Studio Archive', level: 2 },
-      { id: 'shop', title: 'Property 2 — Merch Storefront', level: 2 },
-      { id: 'fw', title: 'Property 3 — Fourthwall Itself', level: 2 },
-      { id: 'naming', title: 'The Naming Trap', level: 2 }
+      { id: 'why-two-sites', title: "Why Two Sites", level: 2 },
+      { id: 'property-1-studio-archive', title: "Property 1 — Studio Archive", level: 2 },
+      { id: 'property-2-merch-storefront', title: "Property 2 — Merch Storefront", level: 2 },
+      { id: 'property-3-fourthwall-itself', title: "Property 3 — Fourthwall Itself", level: 2 },
+      { id: 'the-naming-trap', title: "The Naming Trap", level: 2 }
     ],
     content: `# The Two Sites
 
@@ -184,7 +237,7 @@ _Gallery surfaces with the series filter rail (Neon Americana, Pop Surrealism & 
 | Aspect | Value |
 | :--- | :--- |
 | Role | Sell print-on-demand merch and studio editions |
-| Stack | Next.js 15 App Router, React 19, Tailwind, \`fumadocs-core\`/\`-ui\` |
+| Stack | Next.js 15 App Router, React 19, Tailwind |
 | Data | **None locally** — reads Fourthwall's Storefront API |
 | Catalogue | 137 works in a local JSON *fallback* (see the fabricated-catalogue trap) |
 | Published | 6 products across 3 collections (v0.2.0, 2026-10-04) |
@@ -236,21 +289,20 @@ repo is \`roryskagenart/roryskagenart.com\`, and \`roryskagenart\` is a **User**
   },
 
   'brief/origins': {
-    slug: 'origins',
-    title: 'Origins & Version History',
-    description:
-      '1998 → today: Rory\'s predecessor websites, the Wayback recoveries, and the full release ledger for both repositories.',
-    badge: '1998 → 2026',
-    category: 'Master Brief',
+    slug: "origins",
+    title: "Origins & Version History",
+    description: "1998 → today: Rory's predecessor websites, the Wayback recoveries, and the full release ledger for both repositories.",
+    badge: "1998 → 2026",
+    category: "Master Brief",
     scope: 'brief',
     lastUpdated: LAST_UPDATED,
     tableOfContents: [
-      { id: 'predecessors', title: 'Predecessor Web Presence', level: 2 },
-      { id: 'recovery', title: 'The Wayback Recovery', level: 2 },
-      { id: 'studio-ledger', title: 'Studio Site — Release Ledger', level: 2 },
-      { id: 'shop-ledger', title: 'Shop — Release Ledger', level: 2 },
-      { id: 'phases', title: 'Architecture Phases', level: 2 },
-      { id: 'visual-history', title: 'The Visual History Tool', level: 2 }
+      { id: 'predecessor-web-presence', title: "Predecessor Web Presence", level: 2 },
+      { id: 'the-wayback-recovery', title: "The Wayback Recovery", level: 2 },
+      { id: 'studio-site-release-ledger', title: "Studio Site — Release Ledger", level: 2 },
+      { id: 'shop-release-ledger', title: "Shop — Release Ledger", level: 2 },
+      { id: 'architecture-phases', title: "Architecture Phases", level: 2 },
+      { id: 'the-visual-history-tool', title: "The Visual History Tool", level: 2 }
     ],
     content: `# Origins & Version History
 
@@ -378,22 +430,21 @@ built to be merged into the studio app as a \`#/about/history\` page.
   },
 
   'brief/accounts': {
-    slug: 'accounts',
-    title: 'Accounts, Services & Stack',
-    description:
-      'A single reference table for every account, vendor, project id, domain, and credential owner across the engagement.',
-    badge: 'Reference',
-    category: 'Master Brief',
+    slug: "accounts",
+    title: "Accounts, Services & Stack",
+    description: "A single reference table for every account, vendor, project id, domain, and credential owner across the engagement.",
+    badge: "Reference",
+    category: "Master Brief",
     scope: 'brief',
     lastUpdated: LAST_UPDATED,
     tableOfContents: [
-      { id: 'github', title: 'GitHub', level: 2 },
-      { id: 'vercel', title: 'Vercel', level: 2 },
-      { id: 'supabase', title: 'Supabase', level: 2 },
-      { id: 'fourthwall', title: 'Fourthwall', level: 2 },
-      { id: 'other-vendors', title: 'Other Vendors', level: 2 },
-      { id: 'stacks', title: 'Stack Comparison', level: 2 },
-      { id: 'secrets', title: 'Credential Handling', level: 2 }
+      { id: 'github', title: "GitHub", level: 2 },
+      { id: 'vercel', title: "Vercel", level: 2 },
+      { id: 'supabase', title: "Supabase", level: 2 },
+      { id: 'fourthwall', title: "Fourthwall", level: 2 },
+      { id: 'other-vendors', title: "Other Vendors", level: 2 },
+      { id: 'stack-comparison', title: "Stack Comparison", level: 2 },
+      { id: 'credential-handling', title: "Credential Handling", level: 2 }
     ],
     content: `# Accounts, Services & Stack
 
@@ -480,7 +531,7 @@ belong in any document.**
 | Server | Express 4 (serverless) | Next.js route handlers |
 | Database | Supabase Postgres | none |
 | Media | Supabase Storage + sharp | Fourthwall CDN |
-| Docs | — | \`fumadocs-core\` + custom renderer |
+| Docs | — | hand-rolled Markdown renderer |
 | Tests | vitest | vitest (15 files, 224 tests) |
 | CI | none | GitHub Actions \`ci.yml\` only |
 | Installer | npm | **npm** (\`.npmrc\` \`legacy-peer-deps\`) — not bun/pnpm (T46) |
@@ -501,22 +552,21 @@ belong in any document.**
   },
 
   'brief/visual-map': {
-    slug: 'visual-map',
-    title: 'Visual Map',
-    description:
-      'Every captured screen across both properties — mockups, storefront screens, admin screens, and the visual history frames — with clearly marked WIP placeholders where evidence was not captured.',
-    badge: 'Screens',
-    category: 'Master Brief',
+    slug: "visual-map",
+    title: "Visual Map",
+    description: "Every captured screen across both properties — mockups, storefront screens, admin screens, and the visual history frames — with clearly marked WIP placeholders where evidence was not captured.",
+    badge: "Screens",
+    category: "Master Brief",
     scope: 'brief',
     lastUpdated: LAST_UPDATED,
     tableOfContents: [
-      { id: 'status', title: 'Capture Status', level: 2 },
-      { id: 'shop-screens', title: 'Shop — Storefront', level: 2 },
-      { id: 'shop-admin', title: 'Shop — Playground & Product', level: 2 },
-      { id: 'fourthwall-screens', title: 'Fourthwall Hosted Surfaces', level: 2 },
-      { id: 'studio-screens', title: 'Studio Archive', level: 2 },
-      { id: 'brand-assets', title: 'Brand Assets', level: 2 },
-      { id: 'wip', title: 'WIP Placeholders', level: 2 }
+      { id: 'capture-status', title: "Capture Status", level: 2 },
+      { id: 'shop-storefront', title: "Shop — Storefront", level: 2 },
+      { id: 'shop-playground-product', title: "Shop — Playground & Product", level: 2 },
+      { id: 'fourthwall-hosted-surfaces', title: "Fourthwall Hosted Surfaces", level: 2 },
+      { id: 'studio-archive', title: "Studio Archive", level: 2 },
+      { id: 'brand-assets', title: "Brand Assets", level: 2 },
+      { id: 'wip-placeholders', title: "WIP Placeholders", level: 2 }
     ],
     content: `# Visual Map
 
@@ -643,20 +693,19 @@ The following are **deliberately left as placeholders** rather than filled with 
   },
 
   'brief/client-ip': {
-    slug: 'client-ip',
-    title: 'Client IP Register',
-    description:
-      'What in this engagement is Rory Skagen\'s creative IP versus internal engineering scaffolding — and what actually passes to the client.',
-    badge: 'Handover',
-    category: 'Assessment',
+    slug: "client-ip",
+    title: "Client IP Register",
+    description: "What in this engagement is Rory Skagen's creative IP versus internal engineering scaffolding — and what actually passes to the client.",
+    badge: "Handover",
+    category: "Assessment",
     scope: 'brief',
     lastUpdated: LAST_UPDATED,
     tableOfContents: [
-      { id: 'definition', title: 'What Counts as Client IP', level: 2 },
-      { id: 'rory-ip', title: 'Rory\'s Creative IP', level: 2 },
-      { id: 'platform', title: 'Client-Facing Platform Work', level: 2 },
-      { id: 'scaffolding', title: 'Internal Scaffolding', level: 2 },
-      { id: 'third-party', title: 'Third-Party IP', level: 2 }
+      { id: 'what-counts-as-client-ip', title: "What Counts as Client IP", level: 2 },
+      { id: 'rory-s-creative-ip', title: "Rory's Creative IP", level: 2 },
+      { id: 'client-facing-platform-work', title: "Client-Facing Platform Work", level: 2 },
+      { id: 'internal-scaffolding', title: "Internal Scaffolding", level: 2 },
+      { id: 'third-party-ip', title: "Third-Party IP", level: 2 }
     ],
     content: `# Client IP Register
 
@@ -736,19 +785,18 @@ Not deliverables. Useful to the next engineer, invisible to the client.
   },
 
   'brief/handover': {
-    slug: 'handover',
-    title: 'Value & Handover Flags',
-    description:
-      'Every substantive item in the engagement, flagged: pass to client, retain internally, retire, or open.',
-    badge: 'Decisions',
-    category: 'Assessment',
+    slug: "handover",
+    title: "Value & Handover Flags",
+    description: "Every substantive item in the engagement, flagged: pass to client, retain internally, retire, or open.",
+    badge: "Decisions",
+    category: "Assessment",
     scope: 'brief',
     lastUpdated: LAST_UPDATED,
     tableOfContents: [
-      { id: 'summary', title: 'Flag Summary', level: 2 },
-      { id: 'high-value', title: 'Highest-Value Items', level: 2 },
-      { id: 'retire-list', title: 'Retire List', level: 2 },
-      { id: 'dormant', title: 'Dormant Assets', level: 2 }
+      { id: 'flag-summary', title: "Flag Summary", level: 2 },
+      { id: 'highest-value-items', title: "Highest-Value Items", level: 2 },
+      { id: 'retire-list', title: "Retire List", level: 2 },
+      { id: 'dormant-assets', title: "Dormant Assets", level: 2 }
     ],
     content: `# Value & Handover Flags
 
@@ -816,20 +864,19 @@ Built, working, but not currently surfaced or linked. Worth a decision rather th
   },
 
   'brief/open-items': {
-    slug: 'open-items',
-    title: 'Open Items & Risks',
-    description:
-      'Everything unfinished, broken, or undecided across both repos — with a recommendation where one exists.',
-    badge: 'Live',
-    category: 'Assessment',
+    slug: "open-items",
+    title: "Open Items & Risks",
+    description: "Everything unfinished, broken, or undecided across both repos — with a recommendation where one exists.",
+    badge: "Live",
+    category: "Assessment",
     scope: 'brief',
     lastUpdated: LAST_UPDATED,
     tableOfContents: [
-      { id: 'critical', title: 'Critical', level: 2 },
-      { id: 'high', title: 'High', level: 2 },
-      { id: 'medium', title: 'Medium', level: 2 },
-      { id: 'cross-repo', title: 'Cross-Repo / Convention', level: 2 },
-      { id: 'trap-status', title: 'Trap Register Status', level: 2 }
+      { id: 'critical', title: "Critical", level: 2 },
+      { id: 'high', title: "High", level: 2 },
+      { id: 'medium', title: "Medium", level: 2 },
+      { id: 'cross-repo-convention', title: "Cross-Repo / Convention", level: 2 },
+      { id: 'trap-register-status', title: "Trap Register Status", level: 2 }
     ],
     content: `# Open Items & Risks
 

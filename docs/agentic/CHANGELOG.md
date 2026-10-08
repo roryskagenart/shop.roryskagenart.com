@@ -8,6 +8,41 @@ This file tracks the **KB**, not the application. The application's release reco
 
 ---
 
+## [1.9.1] — 2026-10-08
+
+### Fixed
+
+- **[`README.md`](README.md) — the stated KB version was stale.** It read **1.7.1** while [`VERSION`](VERSION)
+  read **1.9.0**, so the KB's own index disagreed with its version file across two releases. **No guard
+  watches this** — `check-baseline.sh` polices the test count, not the version — which is why it drifted
+  silently. Worth a guard.
+- **[`stack/overview.md`](stack/overview.md) — `fumadocs` was documented as powering `/docs`.** It never
+  did: the docs surface has always been the hand-rolled renderer in `components/docs/docs-layout.tsx`.
+  The dependency is now removed outright (see *Removed*).
+- **[`skills/fourthwall-product-catalog/SKILL.md`](skills/fourthwall-product-catalog/SKILL.md)** cited
+  `fourthwall-product-schema.md`, a file that does not exist. The real artifact is
+  `references/product-create-schema.md`; it and the other three reference files are now linked.
+- **[`sessions/2026-10-01.md`](sessions/2026-10-01.md)** carried a bare date as its H1, unlike its sibling
+  `2026-10-06.md`.
+
+### Removed
+
+- **`skills/fourthwall-product-catalog/references/catalog-pull-notes.md`** — a **byte-identical duplicate**
+  of `analyze_catalog.py`: the same script wrapped in `'''` and carrying a `.md` extension. Verified with a
+  diff before deletion, so no content was lost.
+
+### Changed
+
+- **[`README.md`](README.md)** now lists the `master-brief/` tree alongside the other sibling document
+  series, so the brief is reachable from the KB index.
+
+### Notes
+
+- No baseline change: this release adds no tests, so `scripts/baseline.env` is untouched at
+  **224 passed / 15 files**.
+
+---
+
 ## [1.9.0] — 2026-10-08
 
 ### Added

@@ -66,6 +66,24 @@ backlogged.
 
 ---
 
+## Supporting records
+
+Everything else under `docs/releases/`, indexed so nothing here is orphaned.
+
+| Document | What it is |
+| :--- | :--- |
+| [`created-products.v0.2.0.md`](created-products.v0.2.0.md) | Product-by-product ledger for the merch release |
+| [`live-state-review.v0.2.0.md`](live-state-review.v0.2.0.md) | Post-release review of the live shop |
+| [`created-products.austin-art-garage.md`](created-products.austin-art-garage.md) | Ledger for the Austin Art Garage seeding run (2026-10-04) — **all three products are `HIDDEN`**: publishing has no API path (**T37**) |
+| [`templates/template-verification-note.md`](templates/template-verification-note.md) | Verification of the 12 favourited templates, with machine-readable [`verified-templates.json`](templates/verified-templates.json) |
+| [`prd_fw-products-launcher.md`](prd_fw-products-launcher.md) | PRD — the Fourthwall Products Launcher |
+| [`plans/`](plans/README.md) | Forward-looking release plans (drafts, not shipped) |
+
+The seeder inputs behind the two product ledgers are committed alongside them as
+`seed-config.v0.2.0.json` and `seed-config.austin-art-garage.json`.
+
+---
+
 ## Next
 
 `v0.3.0` "Launch Playground" — [`plans/pr-launch-playground-v0.3.0_DRAFT.md`](plans/pr-launch-playground-v0.3.0_DRAFT.md),

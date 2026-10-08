@@ -1,6 +1,6 @@
 # Agentic Ops KB — shop.roryskagenart.com
 
-**Version 1.7.1** · see [`CHANGELOG.md`](CHANGELOG.md) · entry point: [`/AGENTS.md`](../../AGENTS.md)
+**Version 1.9.1** · see [`CHANGELOG.md`](CHANGELOG.md) · entry point: [`/AGENTS.md`](../../AGENTS.md)
 
 The durable, versioned, tool-agnostic knowledge base for working on this repository with an AI agent.
 
@@ -73,6 +73,7 @@ docs/agentic/
 
 | Directory | Contains |
 | :--- | :--- |
+| [`../master-brief/`](../master-brief/overview.md) | The consolidated client brief — estate, accounts, IP, handover, open items |
 | [`../releases/plans/`](../releases/plans/) | Forward-looking release plans (`<name>_DRAFT.md`) |
 | [`../reports/`](../reports/README.md) | Retrospective process reports — dated, may be superseded, **never** a rule source |
 

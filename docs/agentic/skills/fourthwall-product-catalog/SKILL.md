@@ -31,17 +31,17 @@ Re-pull before you assert a denominator. See §6.
 
 ## 1. What you get (canonical snapshot)
 
-All three live under this skill's `references/`. Treat them as the **source of truth** for the launcher's
-catalog ingest; the launcher's acceptance test re-derives them and must match.
+All four live under this skill's `references/`. Treat the first three as the **source of truth** for the
+launcher's catalog ingest; the launcher's acceptance test re-derives them and must match.
 
 | Artifact | What it is |
 | :--- | :--- |
-| `references/catalog_full.csv` | **All 605 templates × every attribute** (name, productId, top/sub category, brand, productionMethod, basePrice, priceFrom/To, numColors, colors, regions, placements, minOrders, supportsBackendRendering). |
-| `references/catalog_summary.json` | Facet roll-ups: top categories, 47 sub-categories, 10 production methods, 47 brands, price min/avg/max, 544 distinct colors, 91 region ids, 17 placement ids, min-orders. |
-| `references/fourthwall-full-catalog.md` | Human-readable facet map + the admin-gallery → API field mapping (§0) + create-vs-read-only notes. |
+| [`catalog_full.csv`](references/catalog_full.csv) | **All 605 templates × every attribute** (name, productId, top/sub category, brand, productionMethod, basePrice, priceFrom/To, numColors, colors, regions, placements, minOrders, supportsBackendRendering). |
+| [`catalog_summary.json`](references/catalog_summary.json) | Facet roll-ups: top categories, 47 sub-categories, 10 production methods, 47 brands, price min/avg/max, 544 distinct colors, 91 region ids, 17 placement ids, min-orders. |
+| [`fourthwall-full-catalog.md`](references/fourthwall-full-catalog.md) | Human-readable facet map + the admin-gallery → API field mapping (§0) + create-vs-read-only notes. |
+| [`product-create-schema.md`](references/product-create-schema.md) | The **create** schema — product meta and config fields, measured from the Platform API. |
 
-`fourthwall-product-schema.md` (in this skill's `references/` parent history / `.workbuddy-ai/tmp`) holds
-the **create** schema. For the two-API architecture and the live write surface, read
+For the two-API architecture and the live write surface, read
 [`../../stack/fourthwall.md`](../../stack/fourthwall.md) and
 [`../../../../lib/fourthwall/AGENTS.md`](../../../../lib/fourthwall/AGENTS.md) first.
 

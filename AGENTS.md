@@ -91,6 +91,7 @@ Full protocol: [`docs/agentic/protocols/verification.md`](docs/agentic/protocols
 
 | You need | Go to |
 | :--- | :--- |
+| **All documentation, indexed** | [`docs/README.md`](docs/README.md) |
 | The rules, in full | [`docs/agentic/README.md`](docs/agentic/README.md) |
 | A known trap | [`docs/agentic/traps/register.md`](docs/agentic/traps/register.md) |
 | Fourthwall API behaviour | [`docs/agentic/stack/fourthwall.md`](docs/agentic/stack/fourthwall.md) |
@@ -100,6 +101,7 @@ Full protocol: [`docs/agentic/protocols/verification.md`](docs/agentic/protocols
 | Agent extensions & their blast radius | [`docs/agentic/plugins/registry.md`](docs/agentic/plugins/registry.md) |
 | What happened in a past session | [`docs/agentic/sessions/`](docs/agentic/sessions/) |
 | The current release plan | [`docs/releases/plans/`](docs/releases/plans/) |
+| **The consolidated client brief** (estate, accounts, IP, handover) | [`docs/master-brief/overview.md`](docs/master-brief/overview.md) |
 | A retrospective / process report | [`docs/reports/`](docs/reports/README.md) — dated, may be superseded, **not** a rule source |
 
 ## 5. Conventions
@@ -113,6 +115,10 @@ Full protocol: [`docs/agentic/protocols/verification.md`](docs/agentic/protocols
 - **Plans** live at `docs/releases/plans/<name>_DRAFT.md`, open as a draft PR, and cite claims against
   `file:line`. Do not write a plan outside that idiom.
 - **Generated or derived documents** must ship with a `--check` mode that can actually fail.
+- **The Master Brief is authored in Markdown, not TS.** `docs/master-brief/*.md` is the source of truth and
+  renders directly on GitHub. `lib/docs-brief.generated.ts` is **generated** from it by
+  `scripts/build-master-brief.ts` — never hand-edit that file. Rebuild with `npm run docs:brief:build`;
+  `npm run docs:brief:check` fails when the two drift.
 - **Measure, then write.** Every number in a document must be re-derived from a real command. Numbers in
   this repo's docs have drifted before — a documented test count has been 67, then 97, then 137, then 163,
   while the real one is **224 passed / 15 files**. → T41
@@ -178,4 +184,5 @@ AGENTS.md                      ← you are here
 lib/fourthwall/AGENTS.md       Fourthwall integration rules
 scripts/AGENTS.md              one-shot script rules (these WRITE to production systems)
 docs/agentic/                  the knowledge base
+docs/master-brief/             the consolidated client brief (source of truth — see below)
 ```
