@@ -10,6 +10,8 @@
     "lint": "tsc --noEmit",
     "import:fourthwall": "tsx scripts/import-artworks-to-fourthwall.ts",
     "publish:merch": "tsx scripts/publish-merch-to-fourthwall.ts",
+    "docs:brief:build": "tsx scripts/build-master-brief.ts",
+    "docs:brief:check": "tsx scripts/build-master-brief.ts --check",
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown .",
     "test": "vitest run",

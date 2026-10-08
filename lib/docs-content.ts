@@ -1,4 +1,4 @@
-import { BRIEF_PAGES } from './docs-brief';
+import { BRIEF_PAGES } from './docs-brief.generated';
 
 export interface DocSection {
   title: string;
@@ -126,71 +126,12 @@ export const DEV_DOCS_STRUCTURE: DocCategory[] = [
 /**
  * The Master Brief scope — `/docs/brief`.
  *
- * This is the consolidated client IP / project / reference brief for the whole
- * Rory Skagen engagement: the shop (this repo) plus the sibling studio repo.
- * It is a *reference* scope: it documents what exists and what is worth passing
- * to the client — it is not a public marketing surface and not a dev runbook.
+ * The brief is **authored as markdown** in `docs/master-brief/*.md` so it renders
+ * on GitHub, and generated into `lib/docs-brief.generated.ts` by
+ * `scripts/build-master-brief.ts`. Both the page content and this sidebar
+ * structure are derived from those files — do not hand-edit them here.
  */
-export const BRIEF_DOCS_STRUCTURE: DocCategory[] = [
-  {
-    title: 'Master Brief',
-    items: [
-      {
-        title: 'Brief Home & Index',
-        slug: 'overview',
-        badge: 'Start here',
-        description: 'What this brief is, how to read it, and a visual map of the whole engagement.'
-      },
-      {
-        title: 'The Two Sites',
-        slug: 'estate',
-        badge: '2 properties',
-        description: 'Studio archive site vs merch storefront — how they differ, what each is for.'
-      },
-      {
-        title: 'Origins & Version History',
-        slug: 'origins',
-        badge: '1998 → 2026',
-        description: 'Predecessor sites, every iteration, and the full release ledger for both repos.'
-      },
-      {
-        title: 'Accounts, Services & Stack',
-        slug: 'accounts',
-        badge: 'Reference',
-        description: 'Every account, vendor, project id, domain, and credential owner.'
-      },
-      {
-        title: 'Visual Map',
-        slug: 'visual-map',
-        badge: 'Screens',
-        description: 'Screenshots and app screens across both properties, with WIP placeholders.'
-      }
-    ]
-  },
-  {
-    title: 'Assessment',
-    items: [
-      {
-        title: 'Client IP Register',
-        slug: 'client-ip',
-        badge: 'Handover',
-        description: 'What is Rory\'s creative IP vs internal engineering scaffolding, and what passes on.'
-      },
-      {
-        title: 'Value & Handover Flags',
-        slug: 'handover',
-        badge: 'Decisions',
-        description: 'Each item flagged: pass to client, retain internally, or retire.'
-      },
-      {
-        title: 'Open Items & Risks',
-        slug: 'open-items',
-        badge: 'Live',
-        description: 'Unfinished work, known defects, and open questions with recommendations.'
-      }
-    ]
-  }
-];
+export { BRIEF_DOCS_STRUCTURE } from './docs-brief.generated';
 
 export const DOCS_PAGES: Record<string, DocPageContent> = {
   // Public Docs
@@ -1265,7 +1206,7 @@ For upcoming releases beyond the basic visual propagation scope, the following c
   },
 
   // ── Master Brief scope (/docs/brief) ────────────────────────────────────────
-  // Content lives in lib/docs-brief.ts to keep this file storefront-focused.
+  // Brief content is generated from docs/master-brief/*.md — see docs-brief.generated.ts.
   ...BRIEF_PAGES
 };
 

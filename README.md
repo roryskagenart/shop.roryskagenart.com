@@ -151,6 +151,15 @@ These environment variables are only used if:
 - The fetch to `/platform/analytics.json` fails
 - A specific provider returns `null` in the response
 
+## Documentation
+
+- **[Master Brief](docs/master-brief/overview.md)** — the consolidated client brief covering the property
+  estate, accounts and services, origins, brand & IP, handover, and open items. Also served on the live
+  site at [`/docs/brief`](https://shop.roryskagenart.com/docs/brief).
+- **[`docs/agentic/`](docs/agentic/README.md)** — the engineering knowledge base: rules, known traps,
+  stack notes, and repeatable procedures.
+- **[`docs/releases/RELEASES.md`](docs/releases/RELEASES.md)** — the release ledger.
+
 ## Resources
 
 * How to get your [collection handle](https://docs.fourthwall.com/storefront/collection).
