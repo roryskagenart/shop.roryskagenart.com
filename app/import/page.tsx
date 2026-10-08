@@ -154,8 +154,6 @@ export default function ImportPage() {
             </a>
             <a
               href="/api/import/fourthwall?format=fourthwall-json"
-              target="_blank"
-              rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-md bg-neutral-800 px-3.5 py-2 text-xs font-medium text-white hover:bg-neutral-700 transition"
             >
               📋 Intended Payload
@@ -286,8 +284,6 @@ export default function ImportPage() {
               <span className="text-neutral-500">Verified against:</span>{' '}
               <a
                 href={writePath?.verifiedAgainst}
-                target="_blank"
-                rel="noreferrer"
                 className="text-emerald-400 hover:underline"
               >
                 {writePath?.verifiedAgainst || 'Fourthwall API reference'}

@@ -26,6 +26,40 @@ export const BRAND_CONFIG = {
     manifest: '/site.webmanifest'
   },
 
+  /**
+   * Studio social accounts, rendered in the header by `components/layout/social-links.tsx`.
+   *
+   * ⚠️ The X handle is `roryskagen`, NOT `roryskagenart`. Verified 2026-10-07: `x.com/roryskagenart`
+   * answers **404** while `x.com/roryskagen` answers **200** and resolves to *"Rory Skagen Art
+   * (@roryskagen)"* (`profile:username=roryskagen`). The X probe is meaningful — its controls were
+   * `elonmusk` → 200 and a nonsense handle → 404. The account was created Oct 2026 and had 0
+   * followers when measured — new, not wrong.
+   *
+   * ⚠️ Facebook is a `profile.php?id=…` URL, not a vanity path — the page has no username yet, so
+   * the obvious `/roryskagenart` guess 404s. Supplied by the owner 2026-10-08. Do not "tidy" it into
+   * a username form.
+   *
+   * Instagram and Facebook cannot be probed for existence: a nonsense Instagram handle also returns
+   * 200, and `facebook.com/meta` returns 400 just like a dead page. Both are recorded as given.
+   */
+  socials: [
+    {
+      id: 'instagram',
+      label: 'Instagram',
+      url: 'https://www.instagram.com/roryskagenart/'
+    },
+    {
+      id: 'facebook',
+      label: 'Facebook',
+      url: 'https://www.facebook.com/profile.php?id=61595115680897'
+    },
+    {
+      id: 'x',
+      label: 'X',
+      url: 'https://x.com/roryskagen'
+    }
+  ],
+
   theme: {
     /*
      * Skagen Light (live on roryskagenart.com design panel).

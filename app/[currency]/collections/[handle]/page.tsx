@@ -63,8 +63,8 @@ export default async function CategoryPage({
   return (
     <Wrapper currency={currency} shop={shop}>
       {/* Collection Hero Header */}
-      <div className="border-b border-neutral-200 bg-neutral-50/70 py-8 px-4 dark:border-neutral-800 dark:bg-neutral-900/40">
-        <div className="mx-auto max-w-screen-2xl">
+      <div className="border-b border-brand-border bg-brand-surface">
+        <div className="page-shell py-10 sm:py-12 lg:py-14">
           <div className="flex flex-wrap items-center gap-3">
             <span className="text-xs uppercase tracking-widest text-neutral-500 font-mono">
               Collection Taxonomy
@@ -107,7 +107,7 @@ export default async function CategoryPage({
         </div>
       </div>
 
-      <div className="mx-auto flex max-w-screen-2xl flex-col gap-8 px-4 py-8 text-black dark:text-white md:flex-row">
+      <div className="page-shell flex flex-col gap-8 py-8 text-brand-fg sm:gap-10 sm:py-10 md:flex-row lg:gap-12 lg:py-14">
         {/* Left Sidebar Collections Navigation */}
         <div className="order-first w-full flex-none md:max-w-[220px]">
           <h3 className="text-xs font-bold uppercase tracking-wider text-neutral-400 mb-3 px-2">
@@ -133,7 +133,7 @@ export default async function CategoryPage({
         </div>
 
         {/* Product Grid Area */}
-        <div className="order-last min-h-screen w-full md:order-none flex-1">
+        <div className="order-last w-full flex-1 md:order-none">
           <section>
             {products.length > 0 ? (
               <div>

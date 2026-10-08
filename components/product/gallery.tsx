@@ -25,7 +25,13 @@ export function Gallery({ product }: { product: Product }) {
 
   return (
     <form>
-      <div className="relative aspect-square h-full max-h-[550px] w-full overflow-hidden">
+      {/*
+        The well is capped at 600px, not 550px, and the image column is now half the card rather
+        than two thirds. At 2/3 the square well was ~860px wide against a 550px cap, so a
+        `object-contain` image was letterboxed inside a box far wider than it was tall — the
+        "oversized image with dead space either side" on the product page.
+      */}
+      <div className="relative aspect-square h-full max-h-[600px] w-full overflow-hidden">
         {images[imageIndex] && (
           <ProductImage
             className="h-full w-full object-contain"
@@ -68,7 +74,7 @@ export function Gallery({ product }: { product: Product }) {
       </div>
 
       {images.length > 1 ? (
-        <ul className="my-12 flex items-center justify-center gap-2 overflow-auto py-1 lg:mb-0">
+        <ul className="mt-6 flex items-center justify-center gap-2 overflow-auto py-1 sm:mt-8 lg:mb-0">
           {images.map((image, index) => {
             const isActive = index === imageIndex;
 

@@ -37,23 +37,21 @@ export default async function HomePage({ params }: { params: Promise<{ currency:
   return (
     <Wrapper currency={currency} shop={shop}>
       {/* Hero */}
-      <section className="border-b border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900">
-        <div className="mx-auto max-w-screen-2xl px-4 py-14 sm:py-20">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-neutral-500">
-            {BRAND_CONFIG.tagline}
-          </p>
-          <h1 className="mt-3 max-w-3xl text-3xl font-black uppercase leading-[1.05] tracking-tight text-black dark:text-white sm:text-4xl lg:text-5xl">
+      <section className="border-b border-brand-border bg-brand-surface">
+        <div className="page-shell py-12 sm:py-16 lg:py-24">
+          <p className="eyebrow">{BRAND_CONFIG.tagline}</p>
+          <h1 className="heading-display mt-3 max-w-3xl">
             Original Art &amp; Studio Editions by Rory Skagen
           </h1>
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-neutral-600 dark:text-neutral-300 sm:text-base">
+          <p className="mt-5 max-w-2xl text-sm leading-relaxed text-brand-fg-muted sm:text-base">
             Museum-quality archival prints, gallery canvas, and studio merchandise, shipped worldwide
             from Austin, Texas.
           </p>
-          <div className="mt-8">
+          <div className="mt-8 sm:mt-10">
             <Link
               href={`/${currency}/collections/all`}
               prefetch={true}
-              className="inline-block rounded-md bg-neutral-900 px-5 py-3 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200"
+              className="inline-block rounded-md bg-brand-fg px-5 py-3 text-xs font-bold uppercase tracking-wider text-brand-bg transition hover:opacity-90"
             >
               Shop All Art
             </Link>

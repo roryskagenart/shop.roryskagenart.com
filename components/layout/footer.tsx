@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import LogoSquare from 'components/logo-square';
+import { SocialLinks } from 'components/layout/social-links';
 import { BRAND_CONFIG } from 'lib/brand-config';
 import { FooterCurrencySelector } from './footer-currency';
 
@@ -9,53 +10,55 @@ export default async function Footer() {
   const copyrightDate = 1985 + (currentYear > 1985 ? `-${currentYear}` : '');
 
   return (
-    <footer className="text-sm text-neutral-500 dark:text-neutral-400">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
+    <footer className="border-t border-brand-border text-sm text-brand-fg-muted">
+      <div className="page-shell flex flex-col gap-6 py-10 sm:py-12 md:flex-row md:items-center md:gap-12">
         <div>
-          <Link className="flex items-center gap-3 text-black md:pt-1 dark:text-white group" href="/">
+          <Link className="group flex items-center gap-3" href="/">
             <LogoSquare size="sm" />
             <div className="flex flex-col">
-              <span className="text-xs font-bold tracking-[0.16em] uppercase leading-tight group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+              <span className="text-xs font-bold uppercase leading-tight tracking-[0.16em] text-brand-fg transition-colors group-hover:text-brand-accent">
                 {BRAND_CONFIG.name}
               </span>
-              <span className="text-[9px] uppercase tracking-[0.2em] text-neutral-500 font-mono">
+              <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-brand-fg-muted">
                 {BRAND_CONFIG.tagline}
               </span>
             </div>
           </Link>
         </div>
-        <div className="md:ml-auto flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3 md:ml-auto">
+          <SocialLinks />
+          {/*
+            Same-tab on purpose: the studio site is the other half of this brand, not an external
+            resource, so it should not throw the visitor into a new tab.
+          */}
           <a
-            className="flex h-8 items-center gap-2 rounded-md border border-neutral-200 bg-white px-3 text-xs font-medium text-black hover:bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white dark:hover:bg-neutral-800 transition"
+            className="flex h-8 items-center gap-2 rounded-md border border-brand-border bg-brand-bg-card px-3 text-xs font-medium text-brand-fg transition hover:bg-brand-surface"
             href={BRAND_CONFIG.domains.portfolio}
-            target="_blank"
-            rel="noopener noreferrer"
           >
-            <span>roryskagenart.com Portfolio</span>
-            <span className="text-[10px] text-neutral-400">↗</span>
+            <span>roryskagenart.com</span>
           </a>
           <FooterCurrencySelector />
         </div>
       </div>
-      <div className="border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-4 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0">
+      <div className="border-t border-brand-border">
+        <div className="page-shell flex flex-col items-center gap-4 py-6 md:flex-row md:gap-0">
           <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-            <Link href="/pages/privacy-policy" className="hover:text-black dark:hover:text-white">
+            <Link href="/pages/privacy-policy" className="transition-colors hover:text-brand-fg">
               Privacy Policy
             </Link>
-            <Link href="/pages/terms-of-service" className="hover:text-black dark:hover:text-white">
+            <Link href="/pages/terms-of-service" className="transition-colors hover:text-brand-fg">
               Terms of Service
             </Link>
-            <Link href="/pages/returns-faq" className="hover:text-black dark:hover:text-white">
+            <Link href="/pages/returns-faq" className="transition-colors hover:text-brand-fg">
               Returns & FAQ
             </Link>
-            <Link href="/pages/contact" className="hover:text-black dark:hover:text-white">
+            <Link href="/pages/contact" className="transition-colors hover:text-brand-fg">
               Contact
             </Link>
-            <Link href="/docs" className="hover:text-black dark:hover:text-white">
+            <Link href="/docs" className="transition-colors hover:text-brand-fg">
               Public Docs
             </Link>
-            <Link href="/docs/dev" className="text-emerald-600 hover:text-emerald-500 dark:text-emerald-400">
+            <Link href="/docs/dev" className="text-brand-accent transition-colors hover:opacity-80">
               Dev/Build Docs
             </Link>
             {/*
@@ -65,22 +68,24 @@ export default async function Footer() {
               URL and has the credentials.
             */}
           </div>
-          <hr className="mx-4 hidden h-4 w-[1px] border-l border-neutral-400 md:inline-block" />
+          <hr className="mx-4 hidden h-4 w-[1px] border-l border-brand-border md:inline-block" />
           <p className="md:ml-auto">
-            <a href={BRAND_CONFIG.domains.shopCustomDomain} className="text-black dark:text-white">
+            <a href={BRAND_CONFIG.domains.shopCustomDomain} className="text-brand-fg">
               Rory Skagen Studio Archive
             </a>
           </p>
         </div>
       </div>
-      <div className="border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0">
+      <div className="border-t border-brand-border">
+        <div className="page-shell flex flex-col items-center gap-1 py-6 md:flex-row md:gap-0">
           <p>
             &copy; {copyrightDate} {BRAND_CONFIG.legalName}. All rights reserved.
           </p>
-          <hr className="mx-4 hidden h-4 w-[1px] border-l border-neutral-400 md:inline-block" />
+          <hr className="mx-4 hidden h-4 w-[1px] border-l border-brand-border md:inline-block" />
           <p>
-            <a href="https://github.com/FourthwallHQ/vercel-commerce">View the source</a>
+            <a href="https://github.com/FourthwallHQ/vercel-commerce" className="transition-colors hover:text-brand-fg">
+              View the source
+            </a>
           </p>
         </div>
       </div>

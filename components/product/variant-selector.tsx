@@ -19,8 +19,19 @@ export function VariantSelector({
 }) {
   const { state, updateOption } = useProduct();
   const updateURL = useUpdateURL();
+
+  /*
+   * Hide options that carry no values.
+   *
+   * Live Fourthwall products can declare an option with an empty `values` list (e.g. `COLOR` and
+   * `SIZE` on `gondeoleu`). The old guard only tested `options.length`, so those rendered a `<dt>`
+   * label with an empty `<dd>` — two headings floating above nothing, followed by a dead gap before
+   * Add To Cart. An option a shopper cannot choose is not an option.
+   */
+  const visibleOptions = options.filter((option) => option.values.length > 0);
   const hasNoOptionsOrJustOneOption =
-    !options.length || (options.length === 1 && options[0]?.values.length === 1);
+    !visibleOptions.length ||
+    (visibleOptions.length === 1 && visibleOptions[0]?.values.length === 1);
 
   if (hasNoOptionsOrJustOneOption) {
     return null;
@@ -35,7 +46,7 @@ export function VariantSelector({
     )
   }));
 
-  return options.map((option) => (
+  return visibleOptions.map((option) => (
     <form key={option.id}>
       <dl className="mb-8">
         <dt className="mb-4 text-sm uppercase tracking-wide">{option.name}</dt>
