@@ -2,6 +2,7 @@
 
 import { BRAND_CONFIG } from 'lib/brand-config';
 import {
+  BRIEF_DOCS_STRUCTURE,
   DEV_DOCS_STRUCTURE,
   DocCategory,
   DocPageContent,
@@ -11,8 +12,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
 
+type DocsScope = 'public' | 'dev' | 'brief';
+
 interface DocsLayoutProps {
-  currentScope: 'public' | 'dev';
+  currentScope: DocsScope;
   currentSlug: string;
   doc: DocPageContent | null;
   children?: React.ReactNode;
@@ -29,7 +32,11 @@ export function DocsLayout({
   const [searchQuery, setSearchQuery] = useState('');
 
   const structure: DocCategory[] =
-    currentScope === 'dev' ? DEV_DOCS_STRUCTURE : PUBLIC_DOCS_STRUCTURE;
+    currentScope === 'dev'
+      ? DEV_DOCS_STRUCTURE
+      : currentScope === 'brief'
+        ? BRIEF_DOCS_STRUCTURE
+        : PUBLIC_DOCS_STRUCTURE;
 
   // Filter sections by search query
   const filteredStructure = structure.map((category) => ({
@@ -51,7 +58,8 @@ export function DocsLayout({
       ? allItems[currentIndex + 1]
       : null;
 
-  const basePath = currentScope === 'dev' ? '/docs/dev' : '/docs';
+  const basePath =
+    currentScope === 'dev' ? '/docs/dev' : currentScope === 'brief' ? '/docs/brief' : '/docs';
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100 flex flex-col font-sans">
@@ -88,7 +96,7 @@ export function DocsLayout({
               </span>
             </Link>
 
-            {/* Scope Switcher: Public vs Dev */}
+            {/* Scope Switcher: Public / Dev / Brief */}
             <div className="flex items-center rounded-lg border border-neutral-800 bg-neutral-900/90 p-1 text-xs font-medium">
               <Link
                 href="/docs"
@@ -109,6 +117,16 @@ export function DocsLayout({
                 }`}
               >
                 ⚡ Dev & Build
+              </Link>
+              <Link
+                href="/docs/brief"
+                className={`rounded-md px-3 py-1.5 transition ${
+                  currentScope === 'brief'
+                    ? 'bg-amber-400 text-neutral-900 font-bold shadow-sm'
+                    : 'text-neutral-400 hover:text-neutral-200'
+                }`}
+              >
+                📐 Master Brief
               </Link>
             </div>
           </div>
@@ -137,7 +155,11 @@ export function DocsLayout({
           {/* Mobile close button */}
           <div className="flex items-center justify-between pb-4 md:hidden border-b border-neutral-800 mb-4">
             <span className="text-xs font-bold uppercase text-neutral-400 tracking-wider">
-              {currentScope === 'dev' ? 'Dev Documentation' : 'Public Documentation'}
+              {currentScope === 'dev'
+                ? 'Dev Documentation'
+                : currentScope === 'brief'
+                  ? 'Master Brief'
+                  : 'Public Documentation'}
             </span>
             <button
               onClick={() => setSidebarOpen(false)}
@@ -220,7 +242,9 @@ export function DocsLayout({
             <article className="max-w-3xl">
               {/* Breadcrumb */}
               <div className="flex items-center gap-2 text-xs text-neutral-500 mb-4">
-                <span>{currentScope === 'dev' ? 'Developer' : 'Public'}</span>
+                <span>
+                  {currentScope === 'dev' ? 'Developer' : currentScope === 'brief' ? 'Brief' : 'Public'}
+                </span>
                 <span>/</span>
                 <span>{doc.category}</span>
                 <span>/</span>
@@ -299,7 +323,12 @@ export function DocsLayout({
                 href={basePath}
                 className="mt-6 inline-block rounded-md bg-emerald-600 px-4 py-2 text-xs font-semibold text-white"
               >
-                Return to {currentScope === 'dev' ? 'Dev Overview' : 'Public Overview'}
+                Return to{' '}
+                {currentScope === 'dev'
+                  ? 'Dev Overview'
+                  : currentScope === 'brief'
+                    ? 'Brief Home'
+                    : 'Public Overview'}
               </Link>
             </div>
           )}
@@ -360,6 +389,10 @@ function FormattedMarkdown({ content }: { content: string }) {
   let inCodeBlock = false;
   let codeBuffer: string[] = [];
   let codeLang = '';
+  // A figure caption line beginning with `_` attaches to the image on the line above.
+  let figureBuffer: { src: string; alt: string; caption: string }[] = [];
+  // Blockquote lines (`> `) render as an amber callout — used for WIP / flagged items.
+  let calloutLines: string[] = [];
 
   const flushList = (key: number) => {
     if (currentList.length > 0) {
@@ -403,6 +436,41 @@ function FormattedMarkdown({ content }: { content: string }) {
       );
       tableRows = [];
     }
+  };
+
+  const flushFigures = (key: number) => {
+    if (figureBuffer.length === 0) return;
+    const fig = figureBuffer[0]!;
+    elements.push(
+      <figure key={`fig-${key}`} className="my-7 overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/40">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={fig.src}
+          alt={fig.alt}
+          loading="lazy"
+          className="block w-full h-auto max-h-[560px] object-cover object-top bg-neutral-950"
+        />
+        <figcaption className="border-t border-neutral-800 px-4 py-3 text-[11px] leading-relaxed text-neutral-400">
+          {fig.caption}
+        </figcaption>
+      </figure>
+    );
+    figureBuffer = [];
+  };
+
+  const flushCallout = (key: number) => {
+    if (calloutLines.length === 0) return;
+    elements.push(
+      <div
+        key={`callout-${key}`}
+        className="my-6 rounded-lg border border-amber-800/60 border-l-[3px] border-l-amber-500 bg-amber-950/20 px-4 py-3 text-xs leading-relaxed text-amber-100/90"
+      >
+        {calloutLines.map((cl, idx) => (
+          <p key={idx} className="my-1" dangerouslySetInnerHTML={{ __html: formatInline(cl) }} />
+        ))}
+      </div>
+    );
+    calloutLines = [];
   };
 
   for (let i = 0; i < lines.length; i++) {
@@ -449,12 +517,47 @@ function FormattedMarkdown({ content }: { content: string }) {
       flushTable(i);
     }
 
+    // Images: ![alt](/path.png) — use object-contain so tall storefront shots stay readable
+    const imgMatch = line.trim().match(/^!\[([^\]]*)\]\(([^)\s]+)\)\s*$/);
+    if (imgMatch) {
+      figureBuffer.push({ alt: imgMatch[1]!, src: imgMatch[2]!, caption: imgMatch[1]! });
+      continue;
+    }
+
+    // Caption line: `_Some text_` directly under an image becomes its figcaption.
+    const captionMatch = line.trim().match(/^_(.+)_$/);
+    if (captionMatch && figureBuffer.length > 0) {
+      figureBuffer[0]!.caption = captionMatch[1]!;
+      flushFigures(i);
+      continue;
+    }
+    if (figureBuffer.length > 0) flushFigures(i);
+
+    // Blockquote → amber callout (WIP markers, flagged items)
+    if (line.trim().startsWith('> ')) {
+      calloutLines.push(line.trim().slice(2));
+      continue;
+    } else if (calloutLines.length > 0) {
+      flushCallout(i);
+    }
+
     // Lists
     if (line.trim().startsWith('- ') || line.trim().startsWith('* ')) {
       currentList.push(line.trim().slice(2));
       continue;
     } else if (currentList.length > 0) {
       flushList(i);
+    }
+
+    // H1 (document title level inside content)
+    if (line.startsWith('# ')) {
+      const headingText = line.replace('# ', '').trim();
+      elements.push(
+        <h2 key={i} className="mt-12 mb-4 text-2xl font-extrabold tracking-tight text-white scroll-mt-20 border-b border-neutral-800 pb-2">
+          {headingText}
+        </h2>
+      );
+      continue;
     }
 
     // Headings
@@ -468,6 +571,16 @@ function FormattedMarkdown({ content }: { content: string }) {
         <h2 key={i} id={id} className="mt-8 mb-4 text-xl font-bold tracking-tight text-white scroll-mt-20">
           {headingText}
         </h2>
+      );
+      continue;
+    }
+
+    if (line.startsWith('#### ')) {
+      const headingText = line.replace('#### ', '').trim();
+      elements.push(
+        <h4 key={i} className="mt-5 mb-2 text-sm font-semibold uppercase tracking-wider text-emerald-400/90">
+          {headingText}
+        </h4>
       );
       continue;
     }
@@ -496,6 +609,8 @@ function FormattedMarkdown({ content }: { content: string }) {
 
   flushList(lines.length);
   flushTable(lines.length);
+  flushFigures(lines.length);
+  flushCallout(lines.length);
 
   return <>{elements}</>;
 }
@@ -504,5 +619,8 @@ function formatInline(str: string): string {
   return str
     .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
     .replace(/\*([^*]+)\*/g, '<em class="text-neutral-200">$1</em>')
-    .replace(/`([^`]+)`/g, '<code class="rounded bg-neutral-900 px-1.5 py-0.5 text-emerald-300 border border-neutral-800 font-mono text-[11px]">$1</code>');
+    .replace(
+      /`([^`]+)`/g,
+      '<code class="rounded bg-neutral-900 px-1.5 py-0.5 text-emerald-300 border border-neutral-800 font-mono text-[11px]">$1</code>'
+    );
 }
