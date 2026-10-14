@@ -5,11 +5,14 @@ const Label = ({
   title,
   amount,
   currencyCode,
+  from,
   position = 'bottom'
 }: {
   title: string;
   amount: string;
   currencyCode: string;
+  /** When true the figure is a starting price and is prefixed "From". */
+  from?: boolean;
   position?: 'bottom' | 'center';
 }) => {
   return (
@@ -24,6 +27,7 @@ const Label = ({
           className="flex-none rounded-full bg-brand-accent p-2 text-brand-accent-fg"
           amount={amount}
           currencyCode={currencyCode}
+          prefix={from ? 'From' : undefined}
           currencyCodeClassName="hidden @[275px]/label:inline"
         />
       </div>

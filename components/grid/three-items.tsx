@@ -1,5 +1,6 @@
 import { GridTileImage } from 'components/grid/tile';
 import { getCollectionProducts } from 'lib/fourthwall';
+import { listingPrice } from 'lib/product-price';
 import type { Product } from 'lib/types';
 import { cleanEnv } from 'lib/utils';
 import Link from 'next/link';
@@ -36,8 +37,7 @@ function ThreeItemGridItem({
           label={{
             position: size === 'full' ? 'center' : 'bottom',
             title: item.title as string,
-            amount: item.priceRange.maxVariantPrice.amount,
-            currencyCode: item.priceRange.maxVariantPrice.currencyCode
+            ...listingPrice(item)
           }}
         />
       </Link>

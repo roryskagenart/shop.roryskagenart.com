@@ -1,4 +1,5 @@
 import { getCollectionProducts } from 'lib/fourthwall';
+import { listingPrice } from 'lib/product-price';
 import { cleanEnv } from 'lib/utils';
 import Link from 'next/link';
 import { GridTileImage } from './grid/tile';
@@ -28,8 +29,7 @@ export async function Carousel({currency}: {currency: string}) {
                 alt={product.title}
                 label={{
                   title: product.title,
-                  amount: product.priceRange.maxVariantPrice.amount,
-                  currencyCode: product.priceRange.maxVariantPrice.currencyCode
+                  ...listingPrice(product)
                 }}
                 src={product.featuredImage?.url}
                 transformedSrc={product.featuredImage?.transformedUrl}

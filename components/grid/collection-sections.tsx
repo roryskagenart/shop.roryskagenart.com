@@ -1,5 +1,6 @@
 import { GridTileImage } from 'components/grid/tile';
 import { getCollectionProducts, getCollections } from 'lib/fourthwall';
+import { listingPrice } from 'lib/product-price';
 import { getCollectionNavLabel } from 'lib/taxonomy';
 import type { Product } from 'lib/types';
 import Link from 'next/link';
@@ -21,8 +22,7 @@ function ProductRow({ products, currency }: { products: Product[]; currency: str
               alt={product.title}
               label={{
                 title: product.title,
-                amount: product.priceRange.maxVariantPrice.amount,
-                currencyCode: product.priceRange.maxVariantPrice.currencyCode
+                ...listingPrice(product)
               }}
               src={product.featuredImage?.url}
               transformedSrc={product.featuredImage?.transformedUrl}
