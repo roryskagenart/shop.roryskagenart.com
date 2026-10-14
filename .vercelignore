@@ -12,5 +12,10 @@
 # every other worker's working state into this deployment, and they are large.
 .worktrees
 
+# Local working directory of the `design-taste-frontend` skill: dealt direction, browser
+# screenshots at three widths, and a measurement report. Regenerated on every run and never part
+# of the site. Listed here as well as in .gitignore because this file is the only one the CLI reads.
+.taste-skill
+
 # Incremental TypeScript build cache — regenerated during the build, no reason to ship it.
 tsconfig.tsbuildinfo
