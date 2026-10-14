@@ -1,5 +1,6 @@
 import { GridTileImage } from 'components/grid/tile';
 import { getCollectionProducts, getCollections } from 'lib/fourthwall';
+import { listingPrice } from 'lib/product-price';
 import { getCollectionNavLabel } from 'lib/taxonomy';
 import type { Product } from 'lib/types';
 import Link from 'next/link';
@@ -21,8 +22,7 @@ function ProductRow({ products, currency }: { products: Product[]; currency: str
               alt={product.title}
               label={{
                 title: product.title,
-                amount: product.priceRange.maxVariantPrice.amount,
-                currencyCode: product.priceRange.maxVariantPrice.currencyCode
+                ...listingPrice(product)
               }}
               src={product.featuredImage?.url}
               transformedSrc={product.featuredImage?.transformedUrl}
@@ -41,8 +41,9 @@ function ProductRow({ products, currency }: { products: Product[]; currency: str
  *
  * The groups come from `getCollections()`, so the home page and the header menu cannot disagree
  * about what the shop sells. `all` is excluded — it is a superset of every other group, so
- * rendering it would repeat every product a second time. A group with no products is dropped
- * rather than rendered as an empty heading.
+ * rendering it would repeat every product a second time. No product is rendered twice *across*
+ * groups either (see the de-duplication below). A group with no products is dropped rather than
+ * rendered as an empty heading.
  *
  * This replaces a single hardcoded grid + carousel that both read one collection handle from
  * `NEXT_PUBLIC_FW_COLLECTION`. That handle (`fine-art-originals`) does not exist in Fourthwall —
@@ -57,20 +58,45 @@ export async function CollectionSections({ currency }: { currency: string }) {
       .filter((collection) => collection.handle !== 'all')
       .map(async (collection) => ({
         collection,
-        // `.slice` rather than trusting `limit`: the storefront API ignores a `limit` query param
-        // on `/collections/{slug}/products` — measured 2026-10-07, `limit=2` still returns all 6 of
-        // `gifts-goodies`. `getCollectionProducts`'s `limit` only caps the local JSON fallback.
-        products: (
-          await getCollectionProducts({
-            collection: collection.handle,
-            currency,
-            limit: PER_GROUP
-          })
-        ).slice(0, PER_GROUP)
+        // No `.slice` here, deliberately. The storefront API ignores a `limit` query param on
+        // `/collections/{slug}/products` — measured 2026-10-07, `limit=2` still returns all 6 of
+        // `gifts-goodies` — so `getCollectionProducts` already hands back the whole collection and
+        // `limit` only caps the local JSON fallback. Keeping the full list lets the de-duplication
+        // below backfill a section that loses a repeat, rather than leaving it with a short row.
+        products: await getCollectionProducts({
+          collection: collection.handle,
+          currency,
+          limit: PER_GROUP
+        })
       }))
   );
 
-  const populated = groups.filter((group) => group.products.length > 0);
+  /*
+   * A product can sit in more than one collection, and Fourthwall stocks the Martian Alive water
+   * bottle in both *The Goods* and *Studio Editions* — so the home page rendered the identical tile
+   * twice (12 tiles, 11 products). Repeating a product spends a slot without showing the visitor
+   * anything new, and it reads as a bug.
+   *
+   * The first section that carries a product keeps it; later sections drop it and backfill from
+   * their own remaining stock. `getCollections()` returns a deterministic order (the curated
+   * taxonomy, then Fourthwall's own, with `all` last), so which section wins does not vary between
+   * builds. This runs *after* `Promise.all` on purpose — filtering inside the parallel map would
+   * make the winner depend on which fetch happened to resolve first.
+   */
+  const seen = new Set<string>();
+  const populated = groups
+    .map((group) => ({
+      ...group,
+      products: group.products
+        .filter((product) => {
+          if (seen.has(product.handle)) return false;
+          seen.add(product.handle);
+          return true;
+        })
+        .slice(0, PER_GROUP)
+    }))
+    // A section left with nothing is dropped rather than rendered as a heading over empty space.
+    .filter((group) => group.products.length > 0);
 
   if (!populated.length) return null;
 
@@ -82,7 +108,7 @@ export async function CollectionSections({ currency }: { currency: string }) {
             <div className="min-w-0">
               <h2 className="heading-section">{getCollectionNavLabel(collection.handle, collection.title)}</h2>
               {collection.description ? (
-                <p className="mt-1.5 line-clamp-1 max-w-2xl text-xs text-brand-fg-muted">
+                <p className="mt-1.5 line-clamp-2 max-w-2xl text-sm text-brand-fg-muted">
                   {collection.description}
                 </p>
               ) : null}

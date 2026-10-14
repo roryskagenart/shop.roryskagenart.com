@@ -1,10 +1,13 @@
 import { AddToCart } from 'components/cart/add-to-cart';
 import Price from 'components/price';
 import Prose from 'components/prose';
+import { listingPrice } from 'lib/product-price';
 import { Product } from 'lib/types';
 import { VariantSelector } from './variant-selector';
 
 export function ProductDescription({ product }: { product: Product }) {
+  const price = listingPrice(product);
+
   return (
     <div className="flex h-full flex-col">
       <div className="mb-6 flex flex-col gap-3 border-b border-brand-border pb-6">
@@ -15,8 +18,9 @@ export function ProductDescription({ product }: { product: Product }) {
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">{product.title}</h1>
         <div className="mr-auto w-auto rounded-full bg-brand-accent px-3.5 py-1.5 text-sm text-brand-accent-fg">
           <Price
-            amount={product.priceRange.maxVariantPrice.amount}
-            currencyCode={product.priceRange.maxVariantPrice.currencyCode}
+            amount={price.amount}
+            currencyCode={price.currencyCode}
+            prefix={price.from ? 'From' : undefined}
           />
         </div>
       </div>

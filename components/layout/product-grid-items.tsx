@@ -1,5 +1,6 @@
 import Grid from 'components/grid';
 import { GridTileImage } from 'components/grid/tile';
+import { listingPrice } from 'lib/product-price';
 import { Product } from 'lib/types';
 import Link from 'next/link';
 
@@ -17,8 +18,7 @@ export default function ProductGridItems({ products, currency }: { products: Pro
               alt={product.title}
               label={{
                 title: product.title,
-                amount: product.priceRange.maxVariantPrice.amount,
-                currencyCode: product.priceRange.maxVariantPrice.currencyCode
+                ...listingPrice(product)
               }}
               src={product.featuredImage?.url}
               transformedSrc={product.featuredImage?.transformedUrl}

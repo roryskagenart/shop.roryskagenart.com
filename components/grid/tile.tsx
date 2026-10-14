@@ -18,6 +18,8 @@ export function GridTileImage({
     title: string;
     amount: string;
     currencyCode: string;
+    /** When true the figure is a starting price and is prefixed "From". */
+    from?: boolean;
     position?: 'bottom' | 'center';
   };
   transformedSrc?: string;
@@ -59,6 +61,7 @@ export function GridTileImage({
           title={label.title}
           amount={label.amount}
           currencyCode={label.currencyCode}
+          from={label.from}
           position={label.position}
         />
       ) : null}

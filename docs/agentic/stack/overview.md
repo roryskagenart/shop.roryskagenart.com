@@ -107,15 +107,16 @@ they are still worded *"Release v1.2.0"* etc. That wording is a **residual ambig
 
 | | |
 | :--- | :--- |
-| Test files | **15** |
-| Tests | **224 passing** |
-| Baseline verified | 2026-10-06, `tsc --noEmit` 0 errors |
+| Test files | **16** |
+| Tests | **229 passing** |
+| Baseline verified | 2026-10-14, `tsc --noEmit` 0 errors |
 | Source of truth | [`../scripts/baseline.env`](../scripts/baseline.env) — `check-baseline.sh` asserts this table against it |
 
 Test files:
 
 - `app/api/webhooks/fourthwall/__tests__/route.test.ts`
 - `components/__tests__/public-surfaces.test.ts`
+- `lib/__tests__/product-price.test.ts`
 - `lib/fourthwall/__tests__/collections.test.ts`
 - `lib/fourthwall/__tests__/importer.test.ts`
 - `lib/fourthwall/__tests__/merch-catalog.test.ts`

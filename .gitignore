@@ -38,6 +38,11 @@ yarn-error.log*
 # parallel workers cannot collide on the same files. Never commit — the contents are other branches.
 .worktrees/
 
+# Local working directory of the `design-taste-frontend` skill (dealt direction, browser
+# screenshots, measurement report). Regenerated on every run, and it lands in the repo root
+# because the skill's scripts are run from there. Never commit.
+.taste-skill/
+
 # vercel
 .vercel
 
