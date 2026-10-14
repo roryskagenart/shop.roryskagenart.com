@@ -108,7 +108,7 @@ export async function CollectionSections({ currency }: { currency: string }) {
             <div className="min-w-0">
               <h2 className="heading-section">{getCollectionNavLabel(collection.handle, collection.title)}</h2>
               {collection.description ? (
-                <p className="mt-1.5 line-clamp-1 max-w-2xl text-xs text-brand-fg-muted">
+                <p className="mt-1.5 line-clamp-2 max-w-2xl text-sm text-brand-fg-muted">
                   {collection.description}
                 </p>
               ) : null}
