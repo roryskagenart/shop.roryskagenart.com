@@ -15,7 +15,6 @@ import Link from 'next/link';
  *
  * What was matched from the studio site (measured 2026-10-07 on its rendered DOM):
  *   - a 74px first row;
- *   - a **2px** bottom border (the shop used a 1px hairline);
  *   - brand lockup left: logo, letterspaced uppercase wordmark, tiny mono tagline;
  *   - nav labels in **mono**, uppercase, letterspaced — the studio's nav is monospace;
  *   - a right-side action cluster.
@@ -30,9 +29,20 @@ import Link from 'next/link';
  *
  * Every link here is same-tab on purpose — the shop and the studio are one destination to a visitor.
  *
- * ⚠️ The accent band is `.surface-accent-soft`, not `bg-brand-accent/20`. Tailwind emits **no CSS**
- * for an opacity modifier on a bare `var()` token, so the `/20` form would fail silently — which is
- * exactly what happened to the two classes this file used to carry. See `app/globals.css`, and
+ * ⚠️ SURFACE — deliberately NOT the studio's accent band. This header used to carry
+ * `.surface-accent-soft` (a light cyan, `#c4e9f1`) with a **2px** `border-brand-accent` rule and a
+ * resting `shadow-sm`, matching roryskagenart.com's own header. That combination made the header a
+ * tinted bar with a hard seam under it, and the seam landed immediately above the home hero, which
+ * was itself a full-bleed cyan band — so the top of the page read as three stacked strips.
+ *
+ * The storefront we are matching (roryskagenart-shop.fourthwall.com) instead runs its header and its
+ * hero on one continuous near-white canvas (`#eff1f4` and `#f0f2f5`, a one-step difference). This
+ * header now uses `.surface-canvas` to join that one field, so the border and the resting shadow are
+ * both gone. The accent still marks the Shop pill and hover states.
+ *
+ * ⚠️ Never express a surface here as `bg-brand-accent/20`. Tailwind emits **no CSS** for an opacity
+ * modifier on a bare `var()` token, so the `/20` form fails silently — which is exactly what happened
+ * to the two classes this file used to carry. See `app/globals.css`, and
  * `docs/agentic/traps/register.md#t49`.
  */
 export async function Navbar({ currency }: { currency: string }) {
@@ -48,7 +58,7 @@ export async function Navbar({ currency }: { currency: string }) {
   return (
     <nav
       aria-label="Main"
-      className="surface-accent-soft sticky top-0 z-30 border-b-2 border-brand-accent shadow-sm transition-colors"
+      className="surface-canvas sticky top-0 z-30 transition-colors"
     >
       <div className="page-shell">
         {/* Row 1 — brand left; menu, socials and cart right. */}

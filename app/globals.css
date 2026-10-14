@@ -204,6 +204,26 @@ button {
    * `.surface-accent` is the full-strength band (the hero). It also sets the paired foreground
    * token, which is what `--brand-accent-fg` exists for.
    */
+  /*
+   * The neutral canvas — the header and the home hero share this ONE surface, so the top of the
+   * page reads as a single continuous field instead of a tinted bar stacked on a coloured band.
+   *
+   * Why this replaced the accent band (measured 2026-10-14): the storefront we are matching
+   * (roryskagenart-shop.fourthwall.com) runs its header and hero on one near-white canvas —
+   * sampled `#eff1f4` for the header and `#f0f2f5` for the hero, a one-step difference — and keeps
+   * its mid grey (`#c3c9d1`) for the product field only. `--brand-bg-card` is `#edeff2`, a close
+   * match, and it flips with the theme, so dark mode gets a dark canvas for free.
+   *
+   * The saturated accent (`#22d3ee`) is still the brand colour and still marks the small things:
+   * the Shop pill, focus rings, hovers. It is no longer a full-bleed field, because a bright cyan
+   * wall competes with the artwork it is supposed to frame, and the artwork is where the colour in
+   * this shop belongs.
+   */
+  .surface-canvas {
+    background-color: var(--brand-bg-card);
+    color: var(--brand-fg);
+  }
+
   .surface-accent {
     background-color: var(--brand-accent);
     color: var(--brand-accent-fg);
